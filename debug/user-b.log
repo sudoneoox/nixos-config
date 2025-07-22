@@ -1,0 +1,15 @@
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Queued start job for default target Main User Target.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Created slice User Application Slice.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Reached target Paths.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Reached target Timers.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Starting D-Bus User Message Bus Socket...
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Listening on PipeWire PulseAudio.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Listening on PipeWire Multimedia System Sockets.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Listening on Speech Dispatcher Socket.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Listening on D-Bus User Message Bus Socket.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Reached target Sockets.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Reached target Basic System.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Starting Run user-specific NixOS activation...
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Finished Run user-specific NixOS activation.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Reached target Main User Target.
+Jul 21 19:07:48 X0NixOSLaptop systemd[1619]: Startup finished in 152ms.

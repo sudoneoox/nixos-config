@@ -1,0 +1,82 @@
+{
+  description = "Diego's Nix Flake";
+
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+
+
+    sawm = {
+      url = "github:sudoneoox/sawm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sfish = {
+      url = "github:sudoneoox/sfish";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    snvim = {
+      url = "github:sudoneoox/snvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    skitty = {
+      url = "github:sudoneoox/skitty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
+
+
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+  };
+
+
+  outputs = { self, nixpkgs, ... } @ inputs:
+    let
+      inherit (self) outputs;
+      inherit (nixpkgs.lib) nixosSystem;
+
+      username = "diego";
+      email = "diegoa2992@proton.me";
+
+
+      mkNixOSConfig = host: {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs outputs username email; };
+        modules = [ ./hosts/${host} ];
+      };
+
+    in
+    {
+      overlays = import ./overlays { inherit inputs; };
+
+      nixosConfigurations = {
+        X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
+        temp = nixosSystem (mkNixOSConfig "temp");
+      };
+    };
+
+
+}
