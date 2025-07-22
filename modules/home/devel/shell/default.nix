@@ -84,6 +84,7 @@
 
 
   home.packages = with pkgs; [
+    grc
     systemctl-tui
     ranger
     wget
@@ -101,7 +102,7 @@
     nodejs
     nodePackages.pnpm
     nodePackages.yarn
-    rustup
+    cargo
     nixpkgs-fmt
 
     ffmpeg

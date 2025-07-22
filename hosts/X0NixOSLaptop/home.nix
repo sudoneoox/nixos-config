@@ -1,13 +1,25 @@
 { pkgs, username, ... }:
 {
 
-  # imports = [
-  # ../../modules/home/desktop/awesome
-  # ];
+  imports = [
+  ../../modules/home/desktop/awesome
+  ];
 
-  gtk.enable = true;
+  gtk = {
+      enable = true;
+      theme = {
+        name = "Materia-dark";
+        package = pkgs.materia-theme;
+      };
+      iconTheme = {
+          package = pkgs.tela-icon-theme;
+          name = "Tela-black";
+        };
+  };
+
+
   qt.enable = true;
-  qt.platformTheme = "gtk";
+  qt.platformTheme.name = "gtk";
   qt.style.name = "adwaita-dark";
   qt.style.package = pkgs.adwaita-qt;
 

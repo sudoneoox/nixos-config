@@ -21,6 +21,15 @@
 
 
   home.packages = with pkgs; [
+    xclip
+    wl-clipboard
+
+
+    fd
+    texliveFull
+    ghostscript_headless
+    mermaid-cli
+
     gcc
     neovide
 

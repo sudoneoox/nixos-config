@@ -1,7 +1,7 @@
 { config, pkgs, username, email, ... }:
 {
   users = {
-    defaultUserShell = pkgs.zsh;
+    defaultUserShell = pkgs.fish;
     users.${username} = {
       isNormalUser = true;
       description = "${username}";

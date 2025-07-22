@@ -46,7 +46,11 @@
       wireplumber.enable = true;
     };
 
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      touchpad.disableWhileTyping = true;
+
+    };
     openssh.enable = true;
   };
 
