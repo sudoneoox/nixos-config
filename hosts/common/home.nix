@@ -28,6 +28,6 @@
 
   programs.home-manager.enable = true;
 
-  system.user.startServices = "sd-switch";
+  systemd.user.startServices = "sd-switch";
 
 }

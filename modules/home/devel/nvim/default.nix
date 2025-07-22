@@ -38,6 +38,5 @@
     gdu
     ripgrep
 
-    cargo
   ];
 }
