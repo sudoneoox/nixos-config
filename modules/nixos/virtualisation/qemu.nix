@@ -1,21 +1,21 @@
-{pkgs, username, ...}
+{ pkgs, username, ... }:
 {
 
-	services.spice-vdagentd.enable = true;
-	virtualisation = {
-	libvirtd = {
-		enable = true;
-		qemu = {
-			package = pkgs.qemu_kwm;
-			swtpm.enable = true;
-			ovmf.enable = true;
-			ovmf.packages = [pkgs.OVMFFull.fd];
-		};
-	};
-	spiceUSBRedirection.enable = true;
-	};
+  services.spice-vdagentd.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kwm;
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
 
- systemd.user.services.spice-vdagent-client = {
+  systemd.user.services.spice-vdagent-client = {
     description = "spice-vdagent client";
     wantedBy = [ "graphical-session.target" ];
     serviceConfig = {
@@ -28,16 +28,16 @@
   programs.virt-manager.enable = true;
   security.polkit.enable = true;
 
-	users.users.${username}.extraGroups = ["libvirtd"];
+  users.users.${username}.extraGroups = [ "libvirtd" ];
 
-	environment.systemPackages = with pkgs; [
-		qemu
-		virt-manager
-		virt-viewer
-		spice
-		spice-gtk
-		spice-protocol
-		spice-vdagent
-		swtmp
-	];
+  environment.systemPackages = with pkgs; [
+    qemu
+    virt-manager
+    virt-viewer
+    spice
+    spice-gtk
+    spice-protocol
+    spice-vdagent
+    swtmp
+  ];
 }

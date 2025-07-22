@@ -1,6 +1,5 @@
 {
-
-imports = [
-	./qemu.nix
-];
+  imports = [
+    ./qemu.nix
+  ];
 }
