@@ -1,14 +1,11 @@
-{ pkgs
-, username
-, ...
-}:
+{ pkgs, username, ...}:
 {
   nix = {
     package = pkgs.lix;
 
     gc = {
       automatic = true;
-      options = "--keep-generations 6";
+      options = "--delete-older-than 3d";
     };
 
     channel.enable = false;

@@ -12,9 +12,8 @@
 
   boot = {
     loader = {
-      grub.enable = true;
-      grub.device = "/dev/vda";
-      grub.useOSProber = true;
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
