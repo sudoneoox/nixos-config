@@ -1,23 +1,26 @@
-{ inputs, outputs, config, pkgs, lib, self, username, email, ... }:
+{ inputs, pkgs, lib, username, email, ... }:
 {
-
   imports = [
     ./hardware.nix
     #./graphics.nix
     ../common
     # ../../modules/nixos/desktop/awesome
     ../../modules/nixos/desktop/plasma
+    ../../modules/nixos/virtualisation
   ];
+
 
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      grub.enable = true;
+      grub.device = "/dev/vda";
+      grub.useOSProber = true;
     };
 
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
   };
+
 
   networking = {
     hostName = "X0NixOSLaptop";
@@ -25,7 +28,6 @@
     firewall.enable = true;
   };
 
- 
 
   hardware.bluetooth = {
     enable = true;
@@ -33,9 +35,9 @@
   };
 
   security.rtkit.enable = true;
-  security.polkit.enable = true;
 
   services = {
+    xserver.enable = true;
     printing.enable = true;
     pipewire = {
       enable = true;
@@ -49,7 +51,7 @@
     openssh.enable = true;
   };
 
-   
+
 
 
   programs = {
