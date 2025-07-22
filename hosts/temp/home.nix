@@ -1,15 +1,11 @@
 { pkgs, username, ... }:
 {
 
-  imports = [
-    ../../modules/home/desktop/awesome
-    ../../modules/home/desktop/hyprland
-  ];
-
-
+  # imports = [
+    # ../../modules/home/desktop/awesome
+  # ];
 
   gtk.enable = true;
-
   qt.enable = true;
 
   services.flameshot = {
@@ -19,7 +15,6 @@
 
   home.packages = with pkgs; [
     proton-pass
-    tor-browser
   ];
 
   home.stateVersion = "25.05";

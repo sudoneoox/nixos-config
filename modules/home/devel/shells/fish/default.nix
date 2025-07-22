@@ -4,7 +4,7 @@
   home.file = {
     ".config/fish" = {
       recursive = true;
-      source = pkgs.sfish;
+      source = "${pkgs.sfish}";
     };
   };
 

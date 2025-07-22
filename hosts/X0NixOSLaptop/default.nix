@@ -1,5 +1,6 @@
 { inputs, outputs, config, pkgs, lib, self, username, email, ... }:
 {
+
   imports = [
     ./hardware.nix
     #./graphics.nix
@@ -7,12 +8,6 @@
     # ../../modules/nixos/desktop/awesome
     ../../modules/nixos/desktop/plasma
   ];
-
-  networking = {
-    hostName = "X0NixOSLaptop";
-    networkmanager.enable = true;
-    firewall.enable = true;
-  };
 
   boot = {
     loader = {
@@ -24,6 +19,13 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  networking = {
+    hostName = "X0NixOSLaptop";
+    networkmanager.enable = true;
+    firewall.enable = true;
+  };
+
+ 
 
   hardware.bluetooth = {
     enable = true;

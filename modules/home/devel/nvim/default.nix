@@ -4,7 +4,7 @@
   home.file = {
     ".config/nvim" = {
       recursive = true;
-      source = pkgs.snvim;
+      source = "${pkgs.snvim}";
     };
   };
 

@@ -1,6 +1,15 @@
+{pkgs, ...}:
 {
-  imports = [
-    ./bash
-    ./fish
-  ];
+	programs = {
+	bat.enable = true;
+	zsh = {
+	enable = true;
+	history = {
+	append = true;
+	share = true;
+
+	};
+	
+	};
+	};
 }
