@@ -2,8 +2,8 @@
   imports = [
     ./nix.nix
     ./nixpkgs.nix
+    ./nh.nix
     ./overlays.nix
     ./user.nix
-    ./pkgs.nix
   ];
 }

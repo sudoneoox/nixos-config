@@ -1,16 +1,12 @@
 { config, pkgs, username, email, ... }:
 {
-
-  programs.fish.enable = true;
-  environment.shells = [ pkgs.bashInteractive pkgs.fish ];
-
   users = {
-    defaultUserShell = pkgs.fish;
+    defaultUserShell = pkgs.zsh;
     users.${username} = {
       isNormalUser = true;
       description = "${username}";
-      extraGroups = [ "wheel" "video" "audio" "networkmanager" "storage" "input"];
-       shell = pkgs.fish;
+      extraGroups = [ "wheel" "video" "audio" "networkmanager" "storage" "input" ];
+      shell = pkgs.zsh;
     };
   };
 }

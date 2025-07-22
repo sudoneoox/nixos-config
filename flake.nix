@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.05";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     sawm = {
       url = "github:sudoneoox/sawm";
@@ -28,10 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
-
-
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,12 +39,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+    # hyprland.url = "github:hyprwm/Hyprland";
+    #
+    # hyprland-plugins = {
+    #   url = "github:hyprwm/hyprland-plugins";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
 
   };
 
@@ -60,6 +56,9 @@
 
       username = "diego";
       email = "diegoa2992@proton.me";
+      forallSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+      ];
 
 
       mkNixOSConfig = host: {
@@ -71,6 +70,7 @@
     in
     {
       overlays = import ./overlays { inherit inputs; };
+      formatter = forallSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
       nixosConfigurations = {
         X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");

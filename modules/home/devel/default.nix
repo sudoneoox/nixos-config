@@ -3,6 +3,6 @@
     ./git
     ./kitty
     ./nvim
-    ./shells
+    ./shell
   ];
 }

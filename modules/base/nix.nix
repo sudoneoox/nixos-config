@@ -11,8 +11,7 @@
       options = "--keep-generations 6";
     };
 
-    # channel.enable = false;
-    channel.enable = true;
+    channel.enable = false;
 
     settings = {
       auto-optimise-store = true;

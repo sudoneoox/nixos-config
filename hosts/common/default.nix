@@ -25,9 +25,13 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  programs = {
+    zsh.enable = true;
+    fish.enable = true;
+  };
+
   home-manager = {
     backupFileExtension = "hm-backup";
-    useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs outputs username email; };
     users.${username} = {

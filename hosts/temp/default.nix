@@ -1,4 +1,4 @@
-{ inputs, outputs, config, pkgs, lib, self, username, email, ... }:
+{ inputs, pkgs, lib, username, email, ... }:
 {
   imports = [
     ./hardware.nix
@@ -51,7 +51,7 @@
     openssh.enable = true;
   };
 
-   
+
 
 
   programs = {

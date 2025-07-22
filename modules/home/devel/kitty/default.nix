@@ -7,4 +7,9 @@
       recursive = true;
     };
   };
+
+  programs.kitty = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 }
