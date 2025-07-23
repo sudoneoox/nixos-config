@@ -12,6 +12,7 @@
     overlays = [
       outputs.overlays.modifications
       outputs.overlays.stable-packages
+      outputs.overlays.nur
     ];
 
     config = {
