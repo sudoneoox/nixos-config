@@ -14,7 +14,7 @@
     ../common
     # ../../modules/nixos/desktop/awesome
     ../../modules/nixos/desktop/plasma
-    ../../modules/nixos/virtualisation
+    ../../modules/nixos/virtualisation/qemu.nix
   ];
 
 
