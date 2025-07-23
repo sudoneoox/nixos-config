@@ -1,7 +1,9 @@
-{ pkgs, username, ...}:
+{inputs, pkgs, username, ...}:
 {
   nix = {
     package = pkgs.lix;
+
+    registry.nixpkgs.flake = inputs.nixpkgs;
 
     gc = {
       automatic = true;

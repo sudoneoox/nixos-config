@@ -6,7 +6,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.05";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware = {
+      url = "github:nixos/nixos-hardware";
+    };
+
 
     sawm = {
       url = "github:sudoneoox/sawm";
