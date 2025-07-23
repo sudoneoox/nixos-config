@@ -1,7 +1,7 @@
 { inputs, pkgs, lib, username, ... }:
 {
   imports = [
-      
+
     "${inputs.nixos-hardware}/common/cpu/intel/meteor-lake"
     "${inputs.nixos-hardware}/common/gpu/nvidia/ada-lovelace"
     "${inputs.nixos-hardware}/common/gpu/nvidia/prime.nix"
@@ -43,6 +43,12 @@
         nvidiaBusId = "PCI:1:0:0";
       };
       primeBatterySaverSpecialisation = true;
+    };
+    intelgpu = {
+      driver = "xe";
+      loadInInitrd = true;
+      vaapiDriver = "intel-media-driver";
+      enableHybridCodec = true;
     };
     bluetooth = {
       enable = true;
