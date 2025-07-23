@@ -1,4 +1,4 @@
-{ config, pkgs, username, email, ... }:
+{ pkgs, username,  ... }:
 {
   users = {
     defaultUserShell = pkgs.fish;

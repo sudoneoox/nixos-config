@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, username, email, ... }:
+{ inputs, pkgs, lib, username, ... }:
 {
   imports = [
       
@@ -10,10 +10,7 @@
     "${inputs.nixos-hardware}/common/hidpi.nix"
     "${inputs.nixos-hardware}/asus/battery.nix"
 
-
-
     ./hardware.nix
-    #./graphics.nix
     ../common
     # ../../modules/nixos/desktop/awesome
     ../../modules/nixos/desktop/plasma

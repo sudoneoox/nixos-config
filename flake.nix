@@ -77,7 +77,6 @@
 
       nixosConfigurations = {
         X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
-        temp = nixosSystem (mkNixOSConfig "temp");
       };
     };
 
