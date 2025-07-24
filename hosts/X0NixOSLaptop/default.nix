@@ -12,8 +12,10 @@
 
     ./hardware.nix
     ../common
-    # ../../modules/nixos/desktop/awesome
-    ../../modules/nixos/desktop/plasma
+
+    ../../modules/nixos/desktop/awesome
+    # ../../modules/nixos/desktop/plasma
+    # ../../modules/nixos/desktop/hyprland
     ../../modules/nixos/virtualisation/qemu.nix
   ];
 
@@ -67,7 +69,6 @@
   services = {
     fstrim.enable = lib.mkDefault true;
 
-    xserver.enable = true;
     printing.enable = true;
     pipewire = {
       enable = true;
@@ -80,7 +81,6 @@
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
-
     };
     openssh.enable = true;
   };

@@ -5,11 +5,9 @@
       defaultSession = "none+awesome";
     };
 
+    displayManager.sddm.enable = true;
     xserver = {
-      libinput.enable = true;
       enable = true;
-      autorun = false;
-      displayManager.sddm.enable = true;
       windowManager.awesome = {
         enable = true;
         package = pkgs.awesome;
@@ -34,6 +32,7 @@
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
+    rofi
     luajit
     luajitPackages.lgi
     acpi

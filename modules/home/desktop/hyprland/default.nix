@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  wayland.windowManager.hyprlnad = {
+  wayland.windowManager.hyprland = {
     enable = true;
     package = null;
     portalPackage = null;

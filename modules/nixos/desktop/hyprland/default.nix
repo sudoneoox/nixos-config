@@ -2,7 +2,6 @@
 {
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
     xwayland.enable = true;
     package = pkgs.hyprland-git.hyprland;
     portalPackage = pkgs.hyprland-git.xdg-desktop-portal-hyprland;
