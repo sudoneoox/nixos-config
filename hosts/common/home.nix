@@ -13,6 +13,7 @@
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.nur
+      outputs.overlays.additions
     ];
 
     config = {

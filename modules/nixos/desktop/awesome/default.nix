@@ -32,6 +32,7 @@
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
+    arc-icon-theme
     rofi
     luajit
     luajitPackages.lgi
