@@ -2,20 +2,20 @@
 {
 
   imports = [
-  # ../../modules/home/desktop/awesome
-  # ../../modules/home/desktop/hyprland
+    # ../../modules/home/desktop/awesome
+    ../../modules/home/desktop/hyprland
   ];
 
   gtk = {
-      enable = true;
-      theme = {
-        name = "Materia-dark";
-        package = pkgs.materia-theme;
-      };
-      iconTheme = {
-          package = pkgs.tela-icon-theme;
-          name = "Tela-black";
-        };
+    enable = true;
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+    };
+    iconTheme = {
+      package = pkgs.tela-icon-theme;
+      name = "Tela-black";
+    };
   };
 
 

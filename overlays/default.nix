@@ -2,7 +2,7 @@
 
 {
 
-  additions = final: _prev: import ../pkgs {pkgs = final;};
+  additions = final: _prev: import ../pkgs { pkgs = final; };
 
   modifications = final: prev: {
     awesome = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
@@ -10,6 +10,8 @@
     sfish = inputs.sfish.packages.${prev.system}.default;
     snvim = inputs.snvim.packages.${prev.system}.default;
     skitty = inputs.skitty.packages.${prev.system}.default;
+    shypr = inputs.shypr.packages.${prev.system}.default;
+
     hyprland-git = inputs.hyprland.packages.${prev.system};
     hyprland-plugins = inputs.hyprland-pluugins.packages.${prev.system};
   };
