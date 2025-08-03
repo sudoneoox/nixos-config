@@ -1,5 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        user = "${username}";
+      };
+    };
+  };
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -15,13 +26,19 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   environment.systemPackages = with pkgs; [
-    eww
+    dunst
+    rofi-wayland
+    quickshell
+    hyprpaper
+    copyq
   ];
 
+  environment.variables = {
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    XDG_SESSION_TYPE = "wayland";
+  };
 }

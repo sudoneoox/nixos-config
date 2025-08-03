@@ -1,15 +1,15 @@
+
 { lib
-, stdenvNoCC
+, stdenv
 , fetchFromGitHub
 , autoreconfHook
 , pkg-config
 , libxml2
 , gtk3
-, makeWrapper
 , hicolor-icon-theme
 }:
 
-stdenvNoCC.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "arc-icon-theme";
   version = "20161122";
 
@@ -24,11 +24,7 @@ stdenvNoCC.mkDerivation rec {
     autoreconfHook
     pkg-config
     libxml2
-  ];
-
-  buildInputs = [
     gtk3
-    makeWrapper
   ];
 
   propagatedBuildInputs = [
@@ -36,11 +32,6 @@ stdenvNoCC.mkDerivation rec {
   ];
 
   dontDropIconThemeCache = true;
-
-  # These fixup steps are slow and unnecessary for this package.
-  # Package may install almost 400 000 small files.
-  dontPatchELF = true;
-  dontRewriteSymlinks = true;
 
   postPatch = ''
     patchShebangs autogen.sh
@@ -52,9 +43,6 @@ stdenvNoCC.mkDerivation rec {
     ./autogen.sh --prefix=$out
     make install
 
-    mkdir -p $out/usr/share/icons
-    cp -r $out/share/icons/* $out/usr/share/icons/
-
     runHook postInstall
   '';
 
@@ -65,3 +53,4 @@ stdenvNoCC.mkDerivation rec {
     platforms = platforms.unix;
   };
 }
+

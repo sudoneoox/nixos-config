@@ -1,4 +1,9 @@
-{ outputs, username, inputs, ... }:
+{
+  outputs,
+  username,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -6,7 +11,7 @@
     ../../modules/home/devel
   ];
 
-
+  fonts.fontconfig.enable = true;
 
   nixpkgs = {
     overlays = [
@@ -21,7 +26,6 @@
       allowUnfreePredicate = _: true;
     };
   };
-
 
   home = {
     username = "${username}";

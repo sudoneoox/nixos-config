@@ -13,9 +13,9 @@
     ./hardware.nix
     ../common
 
-    ../../modules/nixos/desktop/awesome
+    # ../../modules/nixos/desktop/awesome
     # ../../modules/nixos/desktop/plasma
-    # ../../modules/nixos/desktop/hyprland
+    ../../modules/nixos/desktop/hyprland
     ../../modules/nixos/virtualisation/qemu.nix
   ];
 
