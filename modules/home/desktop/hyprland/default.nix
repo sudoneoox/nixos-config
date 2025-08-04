@@ -5,6 +5,7 @@
     ./waybar
     ./hyprlock
     ./hyprpaper
+    ./dunst
     ../rofi
   ];
 
@@ -234,7 +235,6 @@
           "SUPER, T, togglefloating"
           "SUPER, F, fullscreen"
           "SUPER, R, exec, rofi -show drun"
-          "SUPER, P, pseudo"
           "SUPER, J, togglesplit"
 
           # Hardware keys
@@ -244,8 +244,6 @@
           ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-          ", XF86WLAN, exec, nmcli radio wifi toggle"
-          ", XF86Refresh, exec, xdotool key F5"
 
           # Workspace switching
           "SUPER, 1, workspace, 1"
@@ -322,6 +320,9 @@
 
           # HYPRLOCk
           "SUPER, L, exec, hyprlock"
+
+          # HYPRPAPER
+          "SUPER SHIFT, W, exec, pkill hyprpaper && sleep 1 && hyprpaper &"
 
           # SCREENSHOT
           "SUPER, S, exec, flameshot gui"
