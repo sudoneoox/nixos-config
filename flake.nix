@@ -29,11 +29,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    shypr = {
-      url = "github:sudoneoox/shypr";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,6 +54,11 @@
     hy3 = {
       url = "github:outfoxxed/hy3";
       inputs.hyprland.follows = "hyprland";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nur.url = "github:nix-community/nur";

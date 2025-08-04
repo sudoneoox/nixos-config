@@ -1,6 +1,14 @@
-{ inputs, pkgs, lib, username, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  username,
+  config,
+  ...
+}:
 {
   imports = [
+    inputs.sops-nix.nixosModules.sops
 
     "${inputs.nixos-hardware}/common/cpu/intel/meteor-lake"
     "${inputs.nixos-hardware}/common/gpu/nvidia/ada-lovelace"
@@ -13,12 +21,9 @@
     ./hardware.nix
     ../common
 
-    # ../../modules/nixos/desktop/awesome
-    # ../../modules/nixos/desktop/plasma
     ../../modules/nixos/desktop/hyprland
     ../../modules/nixos/virtualisation/qemu.nix
   ];
-
 
   boot = {
     loader = {
@@ -30,10 +35,33 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  sops.defaultSopsFile = ../common/common.secrets.enc.yaml;
+  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  sops.secrets = {
+    "wifi-password" = {
+      owner = "root";
+      mode = "0400";
+    };
+  };
 
   networking = {
     hostName = "X0NixOSLaptop";
     networkmanager.enable = true;
+    networkmanager.connections = {
+      "HomeWiFi" = {
+        type = "wifi";
+        ssid = "ATTRpV6p4h";
+        uuid = "bea8b595-75a5-43ed-991a-4728cdfb8762";
+        id = "HomeWiFi";
+        interface-name = "wlo1";
+
+        wifi-security = {
+          key-mgmt = "wpa-psk";
+          psk = config.sops.secrets."wifi-password".path;
+        };
+
+      };
+    };
     firewall.enable = true;
   };
 
@@ -62,8 +90,6 @@
     };
   };
 
-
-
   security.rtkit.enable = true;
 
   services = {
@@ -85,14 +111,14 @@
     openssh.enable = true;
   };
 
-
-
-
   programs = {
     firefox.enable = true;
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
     };
     nm-applet.enable = true;
   };
@@ -105,4 +131,3 @@
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-

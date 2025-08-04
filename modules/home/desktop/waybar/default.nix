@@ -21,7 +21,6 @@
         spacing = 0;
         modules-left = [
           "hyprland/workspaces"
-          "tray"
           "custom/lock"
           "custom/reboot"
           "custom/power"
@@ -180,26 +179,29 @@
           tooltip-format = "{:L%Y-%m-%d, %A}";
         };
 
-        tray = {
-          icon-size = 17;
-          spacing = 6;
-        };
       }
       {
         name = "dock";
         layer = "top";
         position = "bottom";
-        height = 30;
+        height = 20;
         modules-center = [ "wlr/taskbar" ];
+        modules-right = [ "tray" ];
         "wlr/taskbar" = {
           format = "{icon} {app_name}";
           tooltip-format = "{app_name}";
           on-click = "activate";
-          icon-size = 22;
+          icon-size = 20;
           all-outputs = true;
           ignore-list = [ ];
           show-special = true;
         };
+
+        tray = {
+          icon-size = 17;
+          spacing = 6;
+        };
+
       }
     ];
   };

@@ -10,7 +10,6 @@
     sfish = inputs.sfish.packages.${prev.system}.default;
     snvim = inputs.snvim.packages.${prev.system}.default;
     skitty = inputs.skitty.packages.${prev.system}.default;
-    shypr = inputs.shypr.packages.${prev.system}.default;
     hyprspace = inputs.Hyprspace.packages.${prev.system}.default;
     hyprland-git = inputs.hyprland.packages.${prev.system};
     hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system};
