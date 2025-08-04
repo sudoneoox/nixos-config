@@ -40,8 +40,8 @@
     hyprpaper
     hyprlock
     hyprpicker
+    hyprshade-git
     copyq
-    hyprshade
   ];
 
   environment.variables = {

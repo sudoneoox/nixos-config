@@ -4,12 +4,8 @@ let
   tomlConfigFile = ./config.toml;
 in
 {
-  home.packages = with pkgs; [
-    hyprshade
-  ];
 
-  home.file.".config/hypr/shaders".source = shaderDirPath;
-  home.file.".config/hypr/shaders".recursive = true;
-  home.file.".config/hypr/hyprshade.toml" = tomlConfigFile;
-
+  # home.file.".config/hypr/shaders".source = shaderDirPath;
+  # home.file.".config/hypr/shaders".recursive = true;
+  home.file.".config/hypr/hyprshade.toml".source = tomlConfigFile;
 }
