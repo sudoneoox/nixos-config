@@ -1,13 +1,22 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    lm_sensors
+    bluez
+    procps
+    upower
+    brightnessctl
+  ];
+
   programs.waybar = {
     enable = true;
     style = builtins.readFile ./style.css;
     settings = [
       {
+        mod = "dock";
         layer = "top";
         position = "top";
-        height = 45;
+        height = 17;
         spacing = 0;
         modules-left = [
           "hyprland/workspaces"
@@ -39,19 +48,13 @@
             2
             3
             4
-            5
-            6
-            7
           ];
           format-icons = {
-            "1" = "󰣇";
-            "2" = "";
+            "1" = "";
+            "2" = "";
             "3" = "";
-            "4" = "󰇮";
-            "5" = "";
-            "6" = "";
-            "7" = "";
-            "active" = "󱓻";
+            "4" = "";
+            "active" = "󱙧";
           };
         };
 
@@ -77,8 +80,8 @@
         };
 
         network = {
-          format-wifi = " 󰤨 {essid} ";
-          format-ethernet = " Wired ";
+          format-wifi = "󰤨 {essid}";
+          format-ethernet = "  Wired";
           tooltip-format = "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}";
           format-linked = " 󱘖 {ifname} (No IP) ";
           format-disconnected = "  Disconnected ";
@@ -151,14 +154,14 @@
 
         "custom/temperature" = {
           exec = "sensors | awk '/^Package id 0:/ {print int($4)}'";
-          format = " {}°C ";
+          format = "  {}°C ";
           interval = 5;
           tooltip = true;
           tooltip-format = "CPU temperature: {}°C";
         };
 
         memory = {
-          format = "  {used:0.1f}G/{total:0.1f}G ";
+          format = "   {used:0.1f}G/{total:0.1f}G ";
           tooltip = true;
           tooltip-format = "Memory usage: {used:0.2f}G/{total:0.2f}G";
         };

@@ -3,6 +3,7 @@
 
   imports = [
     ../waybar
+    ../hyprlock
   ];
 
   wayland.windowManager.hyprland = {
@@ -327,6 +328,12 @@
 
           # Make groups ephemeral
           "SUPER, E, hy3:setephemeral, true"
+
+          # WAYBAR
+          "SUPER + B, exec, sh -c 'pkill -USR1 waybar'"
+
+          # HYPRLOCK
+          "SUPER + L, exec, hyprlock"
         ];
 
         bindm = [
@@ -349,6 +356,7 @@
           "copyq"
           "hyprlock || hyprctl dispatch exit"
           "sleep 1 && hyprctl dispatch layoutmsg hy3"
+          "waybar"
         ];
 
         env = [
