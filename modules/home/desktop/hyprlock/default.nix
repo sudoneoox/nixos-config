@@ -13,7 +13,7 @@
           monitor = "";
           blur_passes = 1;
           blur_size = 7;
-          noise = 1.17e-2;
+          noise = 0.0117;
         }
       ];
 
@@ -97,16 +97,22 @@
           dots_size = 0.2;
           dots_spacing = 0.2;
           dots_center = true;
+
           outer_color = "#cba6f7"; # mauve
           inner_color = "#313244"; # surface0
           font_color = "#cdd6f4"; # text
+
           fade_on_empty = false;
+
           placeholder_text = ''<span foreground="#cdd6f4"><i>󰌾 Logged in as </i><span foreground="#cba6f7">$USER</span></span>'';
+
           hide_input = false;
-          check_color = "#cba6f7"; # accent check
+
+          check_color = "#a6e3a1"; # green
           fail_color = "#f38ba8"; # red
           fail_text = ''<i>$FAIL <b>($ATTEMPTS)</b></i>'';
           capslock_color = "#f9e2af"; # yellow
+
           position = {
             x = 0;
             y = -47;
