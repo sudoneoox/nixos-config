@@ -13,6 +13,7 @@
     style = builtins.readFile ./style.css;
     settings = [
       {
+        name = "bar";
         mod = "dock";
         layer = "top";
         position = "top";
@@ -193,7 +194,11 @@
         "wlr/taskbar" = {
           icon-size = 22;
           tooltip-format = "{app_name}";
-          format = "{app_name}";
+          format = "{icon} {app_name}";
+          on-click = "activate";
+          all-outputs = true;
+          ignore-list = [ ];
+          show-special = false;
         };
       }
     ];
