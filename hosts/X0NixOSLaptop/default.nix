@@ -38,7 +38,7 @@
   sops.defaultSopsFile = ../common/common.secrets.enc.yaml;
   sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
   sops.secrets = {
-    "wifi-password" = {
+    "wifi-psk" = {
       owner = "root";
       mode = "0400";
     };
@@ -47,19 +47,42 @@
   networking = {
     hostName = "X0NixOSLaptop";
     networkmanager.enable = true;
-    networkmanager.connections = {
-      "HomeWiFi" = {
-        type = "wifi";
-        ssid = "ATTRpV6p4h";
-        uuid = "bea8b595-75a5-43ed-991a-4728cdfb8762";
-        id = "HomeWiFi";
-        interface-name = "wlo1";
+    networkmanager.ensureProfiles = {
+      secrets.entries = [
+        {
+          matchId = "ATTRpV6p4h"; # SSID
+          matchSetting = "802-11-wireless-security";
+          key = "psk";
+          file = config.sops.secrets."wifi-psk".path;
+        }
+      ];
 
-        wifi-security = {
-          key-mgmt = "wpa-psk";
-          psk = config.sops.secrets."wifi-password".path;
+      profiles."HomeWiFi" = {
+        connection = {
+          id = "HomeWiFi";
+          type = "802-11-wireless";
+          interface-name = "wlo1";
+          uuid = "bea8b595-75a5-43ed-991a-4728cdfb8762";
         };
 
+        "802-11-wireless" = {
+          ssid = "ATTRpV6p4h";
+          mode = "infrastructure";
+          security = "802-11-wireless-security";
+        };
+
+        "802-11-wireless-security" = {
+          key-mgmt = "wpa-psk";
+          # no 'psk' field here; it's injected via secrets
+        };
+
+        ipv4 = {
+          method = "auto";
+        };
+
+        ipv6 = {
+          method = "auto";
+        };
       };
     };
     firewall.enable = true;
