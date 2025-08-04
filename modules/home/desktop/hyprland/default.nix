@@ -2,6 +2,7 @@
 {
 
   imports = [
+    ../waybar/dock
     ../waybar
     ../hyprlock
     ../rofi
@@ -335,6 +336,9 @@
 
           # HYPRLOCk
           "SUPER, L, exec, hyprlock"
+
+          # SCREENSHOT
+          "SUPER, S, exec, flameshot gui"
         ];
 
         bindm = [
