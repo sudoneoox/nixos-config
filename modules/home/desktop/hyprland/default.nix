@@ -7,6 +7,7 @@
     ./hyprlock
     ./hyprpaper
     ./hypridle
+    ./hyprshade
     ./dunst
     ../rofi
   ];
@@ -353,6 +354,10 @@
           "waybar"
           "hyprctl setcursor macOS 26"
           "hypridle"
+        ];
+
+        exec = [
+          "hyprshade auto"
         ];
 
         env = [

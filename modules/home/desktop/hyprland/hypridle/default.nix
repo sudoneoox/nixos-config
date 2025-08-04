@@ -1,5 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
+
   services.hypridle = {
     enable = true;
     settings = {
@@ -17,9 +18,9 @@
           on-resume = "brightnessctl -rd asus::kbd_backlight";
         }
 
-        # 4 min - Dim screen brightness
+        # 3 min - Dim screen brightness
         {
-          timeout = 240;
+          timeout = 180;
           on-timeout = "brightnessctl -s set 3";
           on-resume = "brightnessctl -r"; # restore
         }
@@ -29,13 +30,6 @@
           timeout = 360;
           on-timeout = "pidof hyprlock || hyprlock";
         }
-
-        # TODO: 10 min - Start idle shader or screen
-        # {
-        #   timeout = 600;
-        #   on-timeout = "exec glslidle";
-        #   on-resume = "pkill glslidle";
-        # }
 
         # 30 min - Suspend
         {
