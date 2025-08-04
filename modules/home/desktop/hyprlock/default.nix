@@ -5,14 +5,15 @@
     settings = {
       general = {
         hide_cursor = true;
+        ignore_empty_input = true;
       };
 
       background = [
         {
           monitor = "";
-          path = "${./cat.svg}";
-          blur_passes = 0;
-          color = "#1e1e2e"; # base
+          blur_passes = 1;
+          blur_size = 7;
+          noise = 1.17e-2;
         }
       ];
 
@@ -74,7 +75,6 @@
       images = [
         {
           monitor = "";
-          path = "${./cover-lock.jpg}";
           size = 100;
           border_color = "#cba6f7"; # mauve
           position = {

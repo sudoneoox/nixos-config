@@ -152,7 +152,7 @@
             bar_padding = 6;
             hyprbars-button = [
               "rgb(ff5f56), 18, 󰅙, hyprctl dispatch killactive" # fa-times (close)
-              "rgb(ffbd2e), 18, , hyprctl dispatch movetoworkspace special:minimized" # fa-minus (minimize)
+              # "rgb(ffbd2e), 18, , hyprctl dispatch movetoworkspace special:minimized" # fa-minus (minimize)
               "rgb(27c93f), 18, , hyprctl dispatch fullscreen" # fa-window-maximize
             ];
           };
@@ -340,8 +340,6 @@
           # SCREENSHOT
           "SUPER, S, exec, flameshot gui"
 
-          # MINIMIZE
-          "SUPER, M, exec, ~/config/hypr/assets/scripts/toggle-minimize.sh"
         ];
 
         bindm = [
