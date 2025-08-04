@@ -18,12 +18,9 @@
     };
   };
 
-
-
   home.packages = with pkgs; [
     xclip
     wl-clipboard
-
 
     fd
     texliveFull
@@ -47,5 +44,6 @@
     gdu
     ripgrep
 
+    dwt1-shell-color-scripts
   ];
 }

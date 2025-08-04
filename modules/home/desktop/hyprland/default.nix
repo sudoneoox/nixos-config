@@ -4,6 +4,7 @@
   imports = [
     ../waybar
     ../hyprlock
+    ../rofi
   ];
 
   wayland.windowManager.hyprland = {
@@ -330,10 +331,10 @@
           "SUPER, E, hy3:setephemeral, true"
 
           # WAYBAR
-          "SUPER+B, exec, sh -c 'pkill -USR1 waybar'"
+          "SUPER, B, exec, pkill -SIGUSR1 waybar || waybar"
 
           # HYPRLOCk
-          "SUPER+L, exec, sh -c 'hyprlock'"
+          "SUPER, L, exec, hyprlock"
         ];
 
         bindm = [
