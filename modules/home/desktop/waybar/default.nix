@@ -192,13 +192,13 @@
         height = 30;
         modules-center = [ "wlr/taskbar" ];
         "wlr/taskbar" = {
-          icon-size = 22;
-          tooltip-format = "{app_name}";
           format = "{icon} {app_name}";
+          tooltip-format = "{app_name}";
           on-click = "activate";
+          icon-size = 22;
           all-outputs = true;
           ignore-list = [ ];
-          show-special = false;
+          show-special = true;
         };
       }
     ];
