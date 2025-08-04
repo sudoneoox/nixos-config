@@ -11,7 +11,7 @@
       background = [
         {
           monitor = "";
-          path = builtins.readFile ./cover-lock.jpg;
+          path = "${./cat.svg}";
           blur_passes = 0;
           color = "#1e1e2e"; # base
         }
@@ -75,7 +75,7 @@
       images = [
         {
           monitor = "";
-          path = builtins.readFile ./cover-lock.jpg;
+          path = "${./cover-lock.jpg}";
           size = 100;
           border_color = "#cba6f7"; # mauve
           position = {

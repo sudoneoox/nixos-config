@@ -330,10 +330,10 @@
           "SUPER, E, hy3:setephemeral, true"
 
           # WAYBAR
-          "SUPER + B, exec, sh -c 'pkill -USR1 waybar'"
+          "SUPER+B, exec, sh -c 'pkill -USR1 waybar'"
 
-          # HYPRLOCK
-          "SUPER + L, exec, hyprlock"
+          # HYPRLOCk
+          "SUPER+L, exec, sh -c 'hyprlock'"
         ];
 
         bindm = [
