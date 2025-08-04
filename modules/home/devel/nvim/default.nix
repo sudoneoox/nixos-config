@@ -42,11 +42,5 @@
     typescript
 
     gdu
-    ripgrep
-
-    dwt1-shell-color-scripts
-    repomix
-    age
-    sops
   ];
 }

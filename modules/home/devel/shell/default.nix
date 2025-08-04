@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
 
   home.file = {
     ".config/fish" = {
@@ -11,14 +12,38 @@
     fish = {
       enable = true;
       plugins = [
-        { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-        { name = "z"; src = pkgs.fishPlugins.z; }
-        { name = "nvm"; src = pkgs.fishPlugins.nvm; }
-        { name = "fzf"; src = pkgs.fishPlugins.fzf; }
-        { name = "sponge"; src = pkgs.fishPlugins.sponge; }
-        { name = "puffer"; src = pkgs.fishPlugins.puffer; }
-        { name = "tide"; src = pkgs.fishPlugins.tide; }
-        { name = "autopair"; src = pkgs.fishPlugins.autopair; }
+        {
+          name = "grc";
+          src = pkgs.fishPlugins.grc.src;
+        }
+        {
+          name = "z";
+          src = pkgs.fishPlugins.z;
+        }
+        {
+          name = "nvm";
+          src = pkgs.fishPlugins.nvm;
+        }
+        {
+          name = "fzf";
+          src = pkgs.fishPlugins.fzf;
+        }
+        {
+          name = "sponge";
+          src = pkgs.fishPlugins.sponge;
+        }
+        {
+          name = "puffer";
+          src = pkgs.fishPlugins.puffer;
+        }
+        {
+          name = "tide";
+          src = pkgs.fishPlugins.tide;
+        }
+        {
+          name = "autopair";
+          src = pkgs.fishPlugins.autopair;
+        }
       ];
     };
     bat.enable = true;
@@ -81,8 +106,6 @@
     };
   };
 
-
-
   home.packages = with pkgs; [
     grc
     systemctl-tui
@@ -106,16 +129,10 @@
     nixpkgs-fmt
 
     ffmpeg
+    repomix
+    age
+    dwt1-shell-color-scripts
+    neofetch
+    sops
   ];
 }
-
-
-
-
-
-
-
-
-
-
-

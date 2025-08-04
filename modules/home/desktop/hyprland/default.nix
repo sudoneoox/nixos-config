@@ -350,6 +350,7 @@
           "hyprlock || hyprctl dispatch exit"
           "sleep 1 && hyprctl dispatch layoutmsg hy3"
           "waybar"
+          "hyprctl setcursor macOS 26"
         ];
 
         env = [
@@ -357,7 +358,6 @@
           "XDG_SESSION_TYPE,wayland"
           "GBM_BACKEND,nvidia-drm"
           "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "XCURSOR_SIZE,24"
         ];
 
         cursor = {
