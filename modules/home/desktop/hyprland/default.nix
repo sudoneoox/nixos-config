@@ -2,8 +2,9 @@
 {
 
   imports = [
-    ../waybar
-    ../hyprlock
+    ./waybar
+    ./hyprlock
+    ./hyprpaper
     ../rofi
   ];
 
@@ -120,19 +121,6 @@
           ];
         };
 
-        #-- Layout : Master
-        # See https://wiki.hyprland.org/Configuring/Master-Layout
-        # master = {
-        #   allow_small_split = false;
-        #   special_scale_factor = 0.80;
-        #   mfact = 0.5;
-        #   new_on_top = false;
-        #   orientation = "left";
-        #   inherit_fullscreen = true;
-        #   smart_resizing = true;
-        #   drop_at_cursor = true;
-        # };
-
         windowrulev2 = [
           "float, class:com.github.hluk.copyq"
           "size 800 600, class:com.github.hluk.copyq"
@@ -248,8 +236,6 @@
           "SUPER, R, exec, rofi -show drun"
           "SUPER, P, pseudo"
           "SUPER, J, togglesplit"
-          "SUPER SHIFT, B, exec, ~/.config/hypr/assets/scripts/reload-waybar.sh"
-          "SUPER SHIFT, W, exec, ~/.config/hypr/assets/scripts/reload-hyprpaper.sh"
 
           # Hardware keys
           ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
@@ -357,7 +343,6 @@
         };
 
         "exec-once" = [
-          "hyprpaper"
           "dunst"
           "copyq"
           "hyprlock || hyprctl dispatch exit"
