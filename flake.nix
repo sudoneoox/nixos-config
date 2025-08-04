@@ -1,7 +1,6 @@
 {
   description = "Diego's Nix Flake";
 
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-25.05";
@@ -9,7 +8,6 @@
     nixos-hardware = {
       url = "github:nixos/nixos-hardware";
     };
-
 
     sawm = {
       url = "github:sudoneoox/sawm";
@@ -41,7 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,12 +56,16 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    nur.url = "github:nix-community/nur";
+    hy3 = {
+      url = "github:outfoxxed/hy3";
+      inputs.hyprland.follows = "hyprland";
+    };
 
+    nur.url = "github:nix-community/nur";
   };
 
-
-  outputs = { self, nixpkgs, ... } @ inputs:
+  outputs =
+    { self, nixpkgs, ... }@inputs:
     let
       inherit (self) outputs;
       inherit (nixpkgs.lib) nixosSystem;
@@ -75,10 +76,16 @@
         "x86_64-linux"
       ];
 
-
       mkNixOSConfig = host: {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs outputs username email; };
+        specialArgs = {
+          inherit
+            inputs
+            outputs
+            username
+            email
+            ;
+        };
         modules = [ ./hosts/${host} ];
       };
 
@@ -91,6 +98,5 @@
         X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
       };
     };
-
 
 }

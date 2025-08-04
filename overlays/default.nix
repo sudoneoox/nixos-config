@@ -14,8 +14,8 @@
     hyprspace = inputs.Hyprspace.packages.${prev.system}.default;
     hyprland-git = inputs.hyprland.packages.${prev.system};
     hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system};
+    hy3 = inputs.hy3.packages.${prev.system}.hy3;
   };
-
 
   stable-packages = final: _prev: {
     stable = import inputs.nixpkgs-stable {

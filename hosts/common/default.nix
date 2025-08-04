@@ -1,4 +1,11 @@
-{ username, outputs, inputs, email, ... }:
+{
+  username,
+  outputs,
+  inputs,
+  email,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -24,6 +31,14 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    source-code-pro
+  ];
+
+  fonts.enableDefaultPackages = true;
+
   programs = {
     zsh.enable = true;
     fish.enable = true;
@@ -32,13 +47,19 @@
   home-manager = {
     backupFileExtension = "hm-backup";
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs username email; };
+    extraSpecialArgs = {
+      inherit
+        inputs
+        outputs
+        username
+        email
+        ;
+    };
     users.${username} = {
       imports = [
         ./home.nix
       ];
     };
   };
-
 
 }

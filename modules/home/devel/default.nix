@@ -4,5 +4,6 @@
     ./kitty
     ./nvim
     ./shell
+    ./starship
   ];
 }

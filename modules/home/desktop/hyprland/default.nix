@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
 
   wayland.windowManager.hyprland = {
@@ -8,15 +8,15 @@
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
 
-    plugins = with pkgs; [
-      hyprland-plugins.hyprbars
-      hyprspace
+    plugins = [
+      pkgs.hyprland-plugins.hyprbars
+      pkgs.hyprspace
+      pkgs.hy3
     ];
 
     settings =
       let
         terminal = "kitty";
-
         active_border = "rgba(0,190,150,1) rgba(0,0,0,0) rgba(100,190,255,1) rgba(0,0,0,0) rgba(0,190,150,1) 35deg";
         inactive_border = "rgba(515251ff)";
         shadow_color = "rgba(1a1a1aee)";
@@ -44,7 +44,7 @@
           float_gaps = 0;
           "col.active_border" = active_border;
           "col.inactive_border" = inactive_border;
-          layout = "master";
+          layout = "hy3";
           resize_on_border = false;
           snap = {
             enabled = true;
@@ -58,9 +58,9 @@
         };
 
         decoration = {
-          rounding = 5;
+          rounding = 8;
           active_opacity = 1.00;
-          inactive_opacity = 0.95;
+          inactive_opacity = 0.97;
           fullscreen_opacity = 1.00;
           dim_inactive = true;
           dim_strength = 0.15;
@@ -115,16 +115,16 @@
 
         #-- Layout : Master
         # See https://wiki.hyprland.org/Configuring/Master-Layout
-        master = {
-          allow_small_split = false;
-          special_scale_factor = 0.80;
-          mfact = 0.5;
-          new_on_top = false;
-          orientation = "left";
-          inherit_fullscreen = true;
-          smart_resizing = true;
-          drop_at_cursor = true;
-        };
+        # master = {
+        #   allow_small_split = false;
+        #   special_scale_factor = 0.80;
+        #   mfact = 0.5;
+        #   new_on_top = false;
+        #   orientation = "left";
+        #   inherit_fullscreen = true;
+        #   smart_resizing = true;
+        #   drop_at_cursor = true;
+        # };
 
         windowrulev2 = [
           "float, class:com.github.hluk.copyq"
@@ -136,7 +136,6 @@
         plugin = {
           hyprbars = {
             bar_height = 30;
-            # bar_color = "rgb(1e1e1e)";
             bar_color = "rgba(000000cc)"; # or match your window bg
             bar_precedence_over_border = true;
             col.text = "rgb(dedede)";
@@ -144,30 +143,91 @@
             bar_text_font = "JetBrainsMono Nerd Font Mono";
             bar_button_padding = 10;
             bar_padding = 6;
-            # bar_precedence_over_border = false;
             hyprbars-button = [
-              "rgb(ff5f56), 18, \uf00d, hyprctl dispatch killactive" # fa-times (close)
-              "rgb(ffbd2e), 18, \uf068, hyprctl dispatch minimize" # fa-minus (minimize)
-              "rgb(27c93f), 18, \uf2d0, hyprctl dispatch fullscreen" # fa-window-maximize
+              "rgb(ff5f56), 18, 󰅙, hyprctl dispatch killactive" # fa-times (close)
+              "rgb(ffbd2e), 18, , hyprctl dispatch minimize" # fa-minus (minimize)
+              "rgb(27c93f), 18, , hyprctl dispatch fullscreen" # fa-window-maximize
             ];
           };
 
           overview = {
-            panelHeight = 80;
-            panelColor = "rgba(1e1e1ecc)";
-            workspaceActiveBackground = "rgba(ffffff15)";
-            workspaceInactiveBackground = "rgba(00000008)";
+            panelHeight = 100;
+            panelColor = "rgba(101010aa)";
+            panelBorderColor = "rgba(ffffff33)";
+            panelBorderWidth = 1;
+
+            workspaceActiveBackground = "rgba(ffffff18)";
+            workspaceInactiveBackground = "rgba(ffffff05)";
             workspaceActiveBorder = "rgba(33aaffcc)";
-            workspaceInactiveBorder = "rgba(ffffff22)";
-            workspaceMargin = 10;
-            workspaceBorderSize = 2;
+            workspaceInactiveBorder = "rgba(aaaaaa22)";
+            workspaceMargin = 14;
+            workspaceBorderSize = 3;
+
+            dragAlpha = 0.9;
             centerAligned = true;
-            showEmptyWorkspace = true;
-            showNewWorkspace = true;
-            dragAlpha = 1.0;
-            disableBlur = true;
+            reservedArea = 0;
+
+            hideBackgroundLayers = true; # setting this to false bugs it out
+            hideOverlayLayers = true;
+            hideTopLayers = true;
+            hideRealLayers = false;
+            drawActiveWorkspace = true;
+            disableBlur = false;
+            overrideAnimSpeed = 0.8;
+
+            overrideGaps = true;
+            gapsIn = 6;
+            gapsOut = 12;
+            affectStrut = false;
+
+            autoDrag = true;
+            autoScroll = true;
             exitOnClick = true;
+            switchOnDrop = true;
+            exitOnSwitch = true;
+            showNewWorkspace = false;
+            showEmptyWorkspace = false;
+            showSpecialWorkspace = true;
+            disableGestures = false;
+            reverseSwipe = false;
             exitKey = "Escape";
+          };
+
+          hy3 = {
+            no_gaps_when_only = 1;
+            node_collapse_policy = 2;
+            group_inset = 6;
+            tab_first_window = false;
+            autotile = {
+              enable = true;
+              ephemeral_groups = true;
+              trigger_width = 800;
+              trigger_height = 0;
+              workspaces = "all";
+            };
+            tabs = {
+              height = 22;
+              padding = 6;
+              from_top = false;
+              radius = 6;
+              border_width = 2;
+              render_text = true;
+              text_center = true;
+              text_font = "JetBrainsMono Nerd Font";
+              text_height = 8;
+              text_padding = 3;
+              "col.active" = "rgba(33ccff40)";
+              "col.active.border" = "rgba(33ccffee)";
+              "col.active.text" = "rgba(ffffffff)";
+              "col.focused" = "rgba(60606040)";
+              "col.focused.border" = "rgba(808080ee)";
+              "col.focused.text" = "rgba(ffffffff)";
+              "col.inactive" = "rgba(30303020)";
+              "col.inactive.border" = "rgba(606060aa)";
+              "col.inactive.text" = "rgba(ffffffff)";
+              blur = true;
+              opacity = 0.9;
+            };
           };
 
         };
@@ -175,7 +235,6 @@
         bind = [
           # Application binds
           "SUPER, SPACE, exec, ${terminal}"
-          "SUPER, Q, killactive"
           "SUPER, D, exec, ~/.config/hypr/assets/scripts/filemanager.sh"
           "SUPER, T, togglefloating"
           "SUPER, F, fullscreen"
@@ -195,12 +254,6 @@
           ", XF86WLAN, exec, nmcli radio wifi toggle"
           ", XF86Refresh, exec, xdotool key F5"
 
-          # Focus movement
-          "SUPER, left, movefocus, l"
-          "SUPER, right, movefocus, r"
-          "SUPER, up, movefocus, u"
-          "SUPER, down, movefocus, d"
-
           # Workspace switching
           "SUPER, 1, workspace, 1"
           "SUPER, 2, workspace, 2"
@@ -212,6 +265,10 @@
           "SUPER, 8, workspace, 8"
           "SUPER, 9, workspace, 9"
           "SUPER, 0, workspace, 10"
+
+          # (CTRL + ALT + ARROWS)
+          "CTRL ALT, right, workspace, e+1"
+          "CTRL ALT, left, workspace, e-1"
 
           # Move windows to workspaces
           "SUPER SHIFT, 1, movetoworkspace, 1"
@@ -231,6 +288,41 @@
 
           # HYPRSPACE
           "SUPER, 0, overview:toggle"
+
+          # HY3
+          # Split into groups
+          "SUPER, H, hy3:makegroup, h"
+          "SUPER, V, hy3:makegroup, v"
+          "SUPER CTRL, T, hy3:makegroup, tab"
+
+          # Move between windows
+          "SUPER, left, hy3:movefocus, left"
+          "SUPER, right, hy3:movefocus, right"
+          "SUPER, up, hy3:movefocus, up"
+          "SUPER, down, hy3:movefocus, down"
+
+          # Move windows
+          "SUPER SHIFT, left, hy3:movewindow, left"
+          "SUPER SHIFT, right, hy3:movewindow, right"
+          "SUPER SHIFT, up, hy3:movewindow, up"
+          "SUPER SHIFT, down, hy3:movewindow, down"
+
+          # Kill focused node
+          "SUPER, Q, hy3:killactive"
+
+          # Tab switching
+          "SUPER, TAB, hy3:focustab, right"
+          "SUPER SHIFT, TAB, hy3:focustab, left"
+
+          # Focus top/bottom container
+          "SUPER, A, hy3:changefocus, raise"
+          "SUPER, Z, hy3:changefocus, lower"
+
+          # Toggle tiled/floating layer focus
+          "SUPER, grave, hy3:togglefocuslayer"
+
+          # Make groups ephemeral
+          "SUPER, E, hy3:setephemeral, true"
         ];
 
         bindm = [
@@ -251,6 +343,8 @@
           "hyprpaper"
           "dunst"
           "copyq"
+          "hyprlock || hyprctl dispatch exit"
+          "sleep 1 && hyprctl dispatch layoutmsg hy3"
         ];
 
         env = [
@@ -268,9 +362,5 @@
       };
 
   };
-
-  home.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
 
 }

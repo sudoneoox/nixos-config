@@ -14,6 +14,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    withUWSM = true;
     package = pkgs.hyprland-git.hyprland;
     portalPackage = pkgs.hyprland-git.xdg-desktop-portal-hyprland;
   };
@@ -31,7 +32,10 @@
     rofi-wayland
     quickshell
     hyprpaper
+    hyprlock
+    hyprpicker
     copyq
+    hyprshade
   ];
 
   environment.variables = {
@@ -41,4 +45,5 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     XDG_SESSION_TYPE = "wayland";
   };
+
 }
