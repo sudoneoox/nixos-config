@@ -1,6 +1,10 @@
 { pkgs, username, ... }:
 {
 
+  imports = [
+    ../../quickshell
+  ];
+
   services.greetd = {
     enable = true;
     settings = {
@@ -25,12 +29,14 @@
 
     # Hint electron apps to use wauland
     NIXOS_OZONE_WL = "1";
+
+    # For Hyprland QT Support
+    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
   };
 
   environment.systemPackages = with pkgs; [
     dunst
     rofi-wayland
-    quickshell
     hyprpaper
     hyprlock
     hyprpicker

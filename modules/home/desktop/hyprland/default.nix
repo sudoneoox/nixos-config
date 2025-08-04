@@ -1,5 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
+
+  imports = [
+    ../waybar
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
