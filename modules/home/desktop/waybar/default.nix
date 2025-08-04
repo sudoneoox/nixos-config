@@ -184,6 +184,18 @@
           spacing = 6;
         };
       }
+      {
+        name = "dock";
+        layer = "top";
+        position = "bottom";
+        height = 30;
+        modules-center = [ "wlr/taskbar" ];
+        "wlr/taskbar" = {
+          icon-size = 22;
+          tooltip-format = "{app_name}";
+          format = "{app_name}";
+        };
+      }
     ];
   };
 }

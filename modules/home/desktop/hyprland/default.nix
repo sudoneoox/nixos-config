@@ -2,7 +2,6 @@
 {
 
   imports = [
-    ../waybar/dock
     ../waybar
     ../hyprlock
     ../rofi
