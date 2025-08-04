@@ -14,7 +14,7 @@ let
   relativeWallpaperDir = "Pictures/Wallpapers";
   fullWallpaperDir = "/home/${username}/${relativeWallpaperDir}";
 
-  catppuccin = "wallpaper4_smoothed_catppuccin.png";
+  wp = "wallpaper4_smoothed_catppuccin.png";
 
   wallpaperMappings = lib.genAttrs wallpaperFiles (name: {
     source = "${srcWallpapersDir}/${name}";
@@ -29,8 +29,8 @@ in
     enable = true;
     settings = {
       splash = false;
-      preload = "${fullWallpaperDir}/${catppuccin}";
-      wallpaper = ",${fullWallpaperDir}/${catppuccin}";
+      preload = "${fullWallpaperDir}/${wp}";
+      wallpaper = ",${fullWallpaperDir}/${wp}";
     };
   };
 }
