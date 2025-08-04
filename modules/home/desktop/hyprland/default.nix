@@ -6,6 +6,7 @@
     ./waybar
     ./hyprlock
     ./hyprpaper
+    ./hypridle
     ./dunst
     ../rofi
   ];
@@ -351,6 +352,7 @@
           "sleep 1 && hyprctl dispatch layoutmsg hy3"
           "waybar"
           "hyprctl setcursor macOS 26"
+          "hypridle"
         ];
 
         env = [

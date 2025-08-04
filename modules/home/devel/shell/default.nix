@@ -134,5 +134,6 @@
     dwt1-shell-color-scripts
     neofetch
     sops
+    tldr
   ];
 }
