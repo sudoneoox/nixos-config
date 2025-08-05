@@ -143,3 +143,10 @@ tooltip label {
   background-color: #131822;
   color: #C0C0C0;
 }
+
+#wlr-taskbar button.minimized {
+  background-color: #1e1e2e;
+  color: #f38ba8;
+  box-shadow: inset 0 -2px #f38ba8;
+  border: 1px solid #f38ba8;
+}

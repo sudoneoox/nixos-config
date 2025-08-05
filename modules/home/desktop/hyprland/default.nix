@@ -14,7 +14,6 @@
 
   home.file.".config/hypr/assets/scripts".source = ./scripts;
   home.file.".config/hypr/assets/scripts".recursive = true;
-  home.file.".config/hypr/assets/scripts/hypr-restore-window.sh".executable = true;
 
 
   services.gnome-keyring = {
@@ -167,7 +166,7 @@
             bar_padding = 6;
             hyprbars-button = [
               "rgb(ff5f56), 18, 󰅙, hyprctl dispatch killactive" # fa-times (close)
-              # "rgb(ffbd2e), 18, , hyprctl dispatch movetoworkspace special:minimized" # fa-minus (minimize)
+              "rgb(ffbd2e), 18, , hyprctl dispatch tag active:minimized && hyprctl dispatch movetoworkspacesilent +10"
               "rgb(27c93f), 18, , hyprctl dispatch fullscreen" # fa-window-maximize
             ];
           };
@@ -297,7 +296,6 @@
           "SUPER SHIFT, 7, movetoworkspace, 7"
           "SUPER SHIFT, 8, movetoworkspace, 8"
           "SUPER SHIFT, 9, movetoworkspace, 9"
-          "SUPER SHIFT, 0, movetoworkspace, 10"
 
           # Scroll through workspaces
           "SUPER, mouse_down, workspace, e+1"
@@ -360,9 +358,9 @@
           "SUPER, V, exec, copyq --start-server show"
 
           # MINIMIZE WINDOW
-          "SUPER, N, movetoworkspacesilent, +10"
+          "SUPER, N, exec, hyprctl dispatch tag active:minimized && hyprctl dispatch movetoworkspacesilent +10"
 
-          "SUPER, M, exec, kitty --class fzfrestore -e /usr/bin/env bash /home/${username}/.config/hypr/assets/scripts/hypr-restore-window.sh"
+          "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/.config/hypr/assets/scripts/hypr-restore-window.sh"
 
         ];
 

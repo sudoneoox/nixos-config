@@ -137,5 +137,6 @@
     tldr
     devenv
     jq
+    grim
   ];
 }

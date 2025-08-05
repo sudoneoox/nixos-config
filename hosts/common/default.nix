@@ -15,6 +15,7 @@
     inputs.sops-nix.nixosModules.sops
     inputs.nix-index-database.nixosModules.nix-index
     ../../modules/base
+    ../../modules/nixos/qbittorrent
   ];
 
   sops.defaultSopsFile = ./common.secrets.enc.yaml;
