@@ -17,7 +17,7 @@
         blur_passes = 1;
         blur_size = 7;
         noise = 0.02;
-        color = "#1e1e2e"; # fallback base color
+        color = "rgb(1e1e2e)";
       };
 
       label = [
