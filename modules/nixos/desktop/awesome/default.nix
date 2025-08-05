@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
 
   services = {
     displayManager = {
@@ -12,8 +13,7 @@
         enable = true;
         package = pkgs.awesome;
         luaModules = lib.attrValues {
-          inherit
-            (pkgs.luajitPackages)
+          inherit (pkgs.luajitPackages)
             lgi
             ldbus
             luadbi-mysql
@@ -32,7 +32,6 @@
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
-    arc-icon-theme
     rofi
     luajit
     luajitPackages.lgi
@@ -50,9 +49,5 @@
     xorg.xauth
     xorg.xinit
   ];
-
-
- 
-
 
 }

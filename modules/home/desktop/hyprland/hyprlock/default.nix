@@ -1,126 +1,109 @@
-{ ... }:
+{ username, ... }:
 {
+  home.file.".config/hypr/hyprlock/background.png".source = ./background.png;
+  home.file.".config/hypr/hyprlock/face.jpg".source = ./face.jpg;
+  home.file.".config/hypr/mocha.conf".source = ./mocha.conf;
+
   programs.hyprlock = {
     enable = true;
+
     settings = {
       general = {
         hide_cursor = true;
         ignore_empty_input = true;
       };
 
-      background = [
-        {
-          monitor = "";
-          blur_passes = 1;
-          blur_size = 7;
-          noise = 0.0117;
-        }
-      ];
+      background = {
+        monitor = "";
+        path = "/home/${username}/.config/hypr/hyprlock/background";
+        blur_passes = 0;
+        color = "$base";
+      };
 
-      labels = [
+      label = [
         {
           monitor = "";
           text = "Layout: $LAYOUT";
-          color = "#cdd6f4"; # text
+          color = "$text";
           font_size = 25;
-          font_family = "JetBrainsMono Nerd Font";
-          position = {
-            x = 30;
-            y = -30;
-          };
+          font_family = "$font";
+          position = "30, -30";
           halign = "left";
           valign = "top";
         }
+
         {
           monitor = "";
           text = "$TIME";
-          color = "#cdd6f4"; # text
+          color = "$text";
           font_size = 90;
-          font_family = "JetBrainsMono Nerd Font";
-          position = {
-            x = -30;
-            y = 0;
-          };
+          font_family = "$font";
+          position = "-30, 0";
           halign = "right";
           valign = "top";
         }
+
         {
           monitor = "";
           text = ''cmd[update:43200000] date +"%A, %d %B %Y"'';
-          color = "#cdd6f4"; # text
+          color = "$text";
           font_size = 25;
-          font_family = "JetBrainsMono Nerd Font";
-          position = {
-            x = -30;
-            y = -150;
-          };
+          font_family = "$font";
+          position = "-30, -150";
           halign = "right";
           valign = "top";
         }
+
         {
           monitor = "";
           text = "$FPRINTPROMPT";
-          color = "#cdd6f4"; # text
+          color = "$text";
           font_size = 14;
-          font_family = "JetBrainsMono Nerd Font";
-          position = {
-            x = 0;
-            y = -107;
-          };
+          font_family = "$font";
+          position = "0, -107";
           halign = "center";
           valign = "center";
         }
       ];
 
-      images = [
-        {
-          monitor = "";
-          size = 100;
-          border_color = "#cba6f7"; # mauve
-          position = {
-            x = 0;
-            y = 75;
-          };
-          halign = "center";
-          valign = "center";
-        }
-      ];
+      image = {
+        monitor = "";
+        path = "/home/${username}/hypr/hyprlock/face";
+        size = 100;
+        border_color = "$accent";
+        position = "0, 75";
+        halign = "center";
+        valign = "center";
+      };
 
-      input-fields = [
-        {
-          monitor = "";
-          size = {
-            width = 300;
-            height = 60;
-          };
-          outline_thickness = 4;
-          dots_size = 0.2;
-          dots_spacing = 0.2;
-          dots_center = true;
-
-          outer_color = "#cba6f7"; # mauve
-          inner_color = "#313244"; # surface0
-          font_color = "#cdd6f4"; # text
-
-          fade_on_empty = false;
-
-          placeholder_text = ''<span foreground="#cdd6f4"><i>󰌾 Logged in as </i><span foreground="#cba6f7">$USER</span></span>'';
-
-          hide_input = false;
-
-          check_color = "#a6e3a1"; # green
-          fail_color = "#f38ba8"; # red
-          fail_text = ''<i>$FAIL <b>($ATTEMPTS)</b></i>'';
-          capslock_color = "#f9e2af"; # yellow
-
-          position = {
-            x = 0;
-            y = -47;
-          };
-          halign = "center";
-          valign = "center";
-        }
-      ];
+      input-field = {
+        monitor = "";
+        size = "300, 60";
+        outline_thickness = 4;
+        dots_size = 0.2;
+        dots_spacing = 0.2;
+        dots_center = true;
+        outer_color = "$accent";
+        inner_color = "$surface0";
+        font_color = "$text";
+        fade_on_empty = false;
+        placeholder_text = ''<span foreground="#$textAlpha"><i>󰌾 Logged in as </i><span foreground="#$accentAlpha">$USER</span></span>'';
+        hide_input = false;
+        check_color = "$accent";
+        fail_color = "$red";
+        fail_text = ''<i>$FAIL <b>($ATTEMPTS)</b></i>'';
+        capslock_color = "$yellow";
+        position = "0, -47";
+        halign = "center";
+        valign = "center";
+      };
     };
+
+    extraConfig = ''
+      source = /home/${username}/.config/hypr/mocha.conf
+      $accent = $mauve
+      $accentAlpha = $mauveAlpha
+      $font = JetBrainsMono Nerd Font
+    '';
   };
 }

@@ -330,6 +330,12 @@
           # SCREENSHOT
           "SUPER, S, exec, flameshot gui"
 
+          # COLOR PICKER
+          "SUPER SHIFT, C, exec, hyprpicker -a -f hex -l"
+
+          # CLIPBOARD
+          "SUPER, V, exec, copyq --start-server show"
+
         ];
 
         bindm = [
@@ -348,7 +354,7 @@
 
         "exec-once" = [
           "dunst"
-          "copyq"
+          "copyq --start-server"
           "hyprlock || hyprctl dispatch exit"
           "sleep 1 && hyprctl dispatch layoutmsg hy3"
           "waybar"
@@ -357,7 +363,7 @@
         ];
 
         exec = [
-          "hyprshade auto"
+          "hyprshade on vibrance"
         ];
 
         env = [
