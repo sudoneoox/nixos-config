@@ -4,7 +4,6 @@
   imports = [
     # ../../modules/home/desktop/awesome
     ../../modules/home/desktop/hyprland
-    ../../modules/home/desktop/wine
   ];
 
   gtk = {
