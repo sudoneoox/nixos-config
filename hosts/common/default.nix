@@ -20,49 +20,35 @@
   sops.defaultSopsFile = ./common.secrets.enc.yaml;
   sops.age.keyFile = "/home/${username}/Assets/nixos-config/sops/age/common-keys.txt";
   sops.secrets = {
-    "wifi-psk" = {
-      owner = "root";
-      mode = "0400";
-    };
+    "wireless.env".sopsFile = ./common.secrets.enc.yaml;
   };
 
   networking = {
     hostName = "X0NixOSLaptop";
     networkmanager.enable = true;
+    nameservers = [
+      "1.1.1.2"
+      "1.0.0.2"
+    ];
     networkmanager.ensureProfiles = {
-      secrets.entries = [
-        {
-          matchId = "ATTRpV6p4h"; # SSID
-          matchSetting = "802-11-wireless-security";
-          key = "psk";
-          file = config.sops.secrets."wifi-psk".path;
-        }
-      ];
+      environmentFiles = [ config.sops.secrets."wireless.env".path ];
 
-      profiles."HomeWiFi" = {
-        connection = {
-          id = "HomeWiFi";
-          type = "802-11-wireless";
-          interface-name = "wlo1";
-          uuid = "bea8b595-75a5-43ed-991a-4728cdfb8762";
-        };
+      profiles = {
+        HomeWiFi = {
+          connection = {
+            id = "HomeWiFi";
+            type = "wifi";
+          };
 
-        "802-11-wireless" = {
-          ssid = "ATTRpV6p4h";
-          mode = "infrastructure";
-          security = "802-11-wireless-security";
-        };
+          wifi = {
+            ssid = "$HOME_WIFI_SSID";
+          };
 
-        "802-11-wireless-security" = {
-          key-mgmt = "wpa-psk";
-        };
-
-        ipv4 = {
-          method = "auto";
-        };
-
-        ipv6 = {
-          method = "auto";
+          wifi-security = {
+            key-mgmt = "wpa-psk";
+            auth-alg = "open";
+            psk = "$HOME_WIFI_PASSWORD";
+          };
         };
       };
     };

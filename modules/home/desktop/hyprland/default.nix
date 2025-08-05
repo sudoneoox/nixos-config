@@ -12,6 +12,20 @@
     ../rofi
   ];
 
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "secrets" ];
+  };
+
+  services.network-manager-applet.enable = true;
+
+  xdg.autostart.enable = true;
+
+  home.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
