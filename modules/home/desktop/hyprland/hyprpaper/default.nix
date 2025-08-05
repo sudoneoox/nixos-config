@@ -11,7 +11,7 @@ let
   srcWallpapersDir = ./wallpapers;
   wallpaperFiles = builtins.attrNames (builtins.readDir srcWallpapersDir);
 
-  relativeWallpaperDir = "Pictures/Wallpapers";
+  relativeWallpaperDir = "Assets/nixos-config/Wallpapers";
   fullWallpaperDir = "/home/${username}/${relativeWallpaperDir}";
 
   wp = "wallpaper4_smoothed_catppuccin.png";

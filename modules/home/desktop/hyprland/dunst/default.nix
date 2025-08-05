@@ -46,7 +46,7 @@ in
         foreground = "#a6e3a1";
         frame_color = "#a6e3a1";
         progress_bar_color = "#a6e3a1";
-        default_icon = "/home/${username}/Pictures/Icons/dunst/bell-badge-low.svg";
+        default_icon = "/home/${username}/Assets/nixos-config/Icons/dunst/bell-badge-low.svg";
         timeout = 2;
       };
 
@@ -54,7 +54,7 @@ in
         foreground = "#74c7ec";
         frame_color = "#74c7ec";
         progress_bar_color = "#74c7ec";
-        default_icon = "/home/${username}/Pictures/Icons/dunst/bell-badge.svg";
+        default_icon = "/home/${username}/Assets/nixos-config/Icons/dunst/bell-badge.svg";
         timeout = 4;
       };
 
@@ -62,11 +62,11 @@ in
         foreground = "#f38ba8";
         frame_color = "#f38ba8";
         progress_bar_color = "#f38ba8";
-        default_icon = "/home/${username}/Pictures/Icons/dunst/alert-decagram.svg";
+        default_icon = "/home/${username}/Assets/nixos-config/Icons/dunst/alert-decagram.svg";
         timeout = 6;
       };
     };
   };
-  home.file."Pictures/Icons/dunst".source = iconSourcePath;
-  home.file."Pictures/Icons/dunst".recursive = true;
+  home.file."Assets/nixos-config/Icons/dunst".source = iconSourcePath;
+  home.file."Assets/nixos-config/Icons/dunst".recursive = true;
 }

@@ -18,7 +18,7 @@
   ];
 
   sops.defaultSopsFile = ./common.secrets.enc.yaml;
-  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+  sops.age.keyFile = "/home/${username}/Assets/nixos-config/sops/age/common-keys.txt";
   sops.secrets = {
     "wifi-psk" = {
       owner = "root";

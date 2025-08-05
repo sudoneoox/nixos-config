@@ -1,6 +1,6 @@
 { username, ... }:
 {
-  home.file.".config/hypr/hyprlock/face.jpg".source = ./face.jpg;
+  home.file."Assets/nixos-config/hyprlock/face.jpg".source = ./face.jpg;
 
   programs.hyprlock = {
     enable = true;
@@ -68,7 +68,7 @@
 
       image = {
         monitor = "";
-        path = "/home/${username}/.config/hypr/hyprlock/face.jpg";
+        path = "/home/${username}/Assets/nixos-config/hyprlock/face.jpg";
         size = 100;
         border_color = "rgb(cba6f7)";
         position = "0, 75";
