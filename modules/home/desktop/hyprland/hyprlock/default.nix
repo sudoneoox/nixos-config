@@ -1,9 +1,5 @@
 { username, ... }:
-
 {
-  home.file.".config/hypr/mocha.conf".source = ./mocha.conf;
-  home.file.".config/hypr/hyprlock/background.png".source = ./background.png;
-  home.file.".config/hypr/hyprlock/background.svg".source = ./background.svg;
   home.file.".config/hypr/hyprlock/face.jpg".source = ./face.jpg;
 
   programs.hyprlock = {
@@ -17,16 +13,18 @@
 
       background = {
         monitor = "";
-        path = "/home/${username}/.config/hypr/hyprlock/background.svg";
-        blur_passes = 0;
-        color = "1e1e2e";
+        path = "";
+        blur_passes = 1;
+        blur_size = 7;
+        noise = 0.02;
+        color = "#1e1e2e"; # fallback base color
       };
 
       label = [
         {
           monitor = "";
           text = "Layout: $LAYOUT";
-          color = "cdd6f4";
+          color = "rgb(cdd6f4)";
           font_size = 25;
           font_family = "JetBrainsMono Nerd Font";
           position = "30, -30";
@@ -37,7 +35,7 @@
         {
           monitor = "";
           text = "$TIME";
-          color = "cdd6f4";
+          color = "rgb(cdd6f4)";
           font_size = 90;
           font_family = "JetBrainsMono Nerd Font";
           position = "-30, 0";
@@ -48,7 +46,7 @@
         {
           monitor = "";
           text = ''cmd[update:43200000] date +"%A, %d %B %Y"'';
-          color = "cdd6f4";
+          color = "rgb(cdd6f4)";
           font_size = 25;
           font_family = "JetBrainsMono Nerd Font";
           position = "-30, -150";
@@ -59,7 +57,7 @@
         {
           monitor = "";
           text = "$FPRINTPROMPT";
-          color = "cdd6f4";
+          color = "rgb(cdd6f4)";
           font_size = 14;
           font_family = "JetBrainsMono Nerd Font";
           position = "0, -107";
@@ -72,7 +70,7 @@
         monitor = "";
         path = "/home/${username}/.config/hypr/hyprlock/face.jpg";
         size = 100;
-        border_color = "[cba6f7]";
+        border_color = "rgb(cba6f7)";
         position = "0, 75";
         halign = "center";
         valign = "center";
@@ -85,16 +83,17 @@
         dots_size = 0.2;
         dots_spacing = 0.2;
         dots_center = true;
-        outer_color = "cba6f7";
-        inner_color = "313244";
-        font_color = "cdd6f4";
+        outer_color = "rgb(cba6f7)";
+        inner_color = "rgb(313244)";
+        font_color = "rgb(cdd6f4)";
         fade_on_empty = false;
-        placeholder_text = ''<span foreground="#cdd6f4"><i>󰌾 Logged in as </i><span foreground="#cba6f7">$USER</span></span>'';
+
+        placeholder_text = ''"<span><i>󰌾 Logged in as </i><span>$USER</span></span>"'';
         hide_input = false;
-        check_color = "cba6f7";
-        fail_color = "f38ba8";
-        fail_text = ''<i>$FAIL <b>($ATTEMPTS)</b></i>'';
-        capslock_color = "f9e2af";
+        check_color = "rgb(cba6f7)";
+        fail_color = "rgb(f38ba8)";
+        fail_text = ''"<i>$FAIL <b>($ATTEMPTS)</b></i>"'';
+        capslock_color = "rgb(f9e2af)";
         position = "0, -47";
         halign = "center";
         valign = "center";
