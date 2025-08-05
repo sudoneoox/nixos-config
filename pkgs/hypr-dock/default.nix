@@ -1,35 +1,53 @@
 
-{ lib, stdenv, fetchFromGitHub, go, gtk3, pkg-config, gtk-layer-shell }:
+{ lib, buildGoModule, fetchFromGitHub, gtk3, gtk-layer-shell, pkg-config }:
 
-stdenv.mkDerivation rec {
+buildGoModule rec {
   pname = "hypr-dock";
-  version = "unstable-2025-08-05";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "lotos-linux";
     repo = "hypr-dock";
-    rev = "f45f22f5fef291b2c0a924af0c54477412d29f7a"; # or latest
-    hash = "sha256-0000000000000000000000000000000000000000000="; # fill in after first build
+    rev = "6848b2a30212561350532550e4891ff7e8454d05";
+    hash = "sha256-sTFR/eVln5YPuNjFTGudMPnFsQGgwU8dtPQSJPAmTTo=";
   };
 
-  nativeBuildInputs = [ go pkg-config ];
+  vendorHash = "sha256-X/0dJzJQ9xaS+oXOqltvMXh8eSS7MAkINBxf22+jUDg=";
+
+  nativeBuildInputs = [ pkg-config ];
   buildInputs = [ gtk3 gtk-layer-shell ];
 
+  # Remove subPackages to avoid it defaulting to ./main
+  # We'll manually cd in buildPhase
+  subPackages = [ ];
+
+  # Verbose, controlled build
   buildPhase = ''
-    make get
-    make build
+    set -x
+    runHook preBuild
+    cd main
+    go build -x -v -o ../hypr-dock .
+    runHook postBuild
   '';
 
   installPhase = ''
-    mkdir -p $out/bin
-    cp hypr-dock $out/bin/
+    set -x
+    runHook preInstall
+    install -Dm755 hypr-dock $out/bin/hypr-dock
+    runHook postInstall
+  '';
+
+  postInstall = ''
+    mkdir -p $out/share/hypr-dock
+    cp -r configs/* $out/share/hypr-dock/
   '';
 
   meta = with lib; {
-    description = "Interactive dock panel for Hyprland";
+    description = "Interactive Dock Panel for Hyprland";
     homepage = "https://github.com/lotos-linux/hypr-dock";
     license = licenses.mit;
     platforms = platforms.linux;
     mainProgram = "hypr-dock";
   };
 }
+

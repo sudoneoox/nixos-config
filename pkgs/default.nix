@@ -17,6 +17,4 @@ in
     makeWrapper = pkgs.makeWrapper;
   };
 
-  hypr-dock = pkgs.callPackage ./hypr-dock {};
-
 }

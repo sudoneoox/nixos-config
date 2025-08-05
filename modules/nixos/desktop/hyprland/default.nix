@@ -40,8 +40,8 @@
     hyprpaper
     hyprlock
     hyprpicker
-    hyprshade-git
-    hypr-dock
+    # hyprshade-git
+    hyprshade
     copyq
   ];
 
