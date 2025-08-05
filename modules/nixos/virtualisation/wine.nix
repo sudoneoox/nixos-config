@@ -3,6 +3,7 @@
     environment.systemPackages = with pkgs;[
       wineWowPackages.staging
       winetricks
-      bottles
     ];
+
+    services.flatpak.enable = true;
   }

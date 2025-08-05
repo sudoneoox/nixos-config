@@ -136,5 +136,6 @@
     sops
     tldr
     devenv
+    jq
   ];
 }

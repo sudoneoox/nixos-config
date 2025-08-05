@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username,... }:
 {
 
   imports = [
@@ -11,6 +11,11 @@
     ./dunst
     ../rofi
   ];
+
+  home.file.".config/hypr/assets/scripts".source = ./scripts;
+  home.file.".config/hypr/assets/scripts".recursive = true;
+  home.file.".config/hypr/assets/scripts/hypr-restore-window.sh".executable = true;
+
 
   services.gnome-keyring = {
     enable = true;
@@ -144,6 +149,10 @@
           "size 800 600, class:com.github.hluk.copyq"
           "float, class:org.pulseaudio.pavucontrol"
           "size 800, 600, class:com.pulseaudio.pavucontrol"
+          "float, class:fzfrestore"
+          "size 1700 900, class:fzfrestore"
+          "center, class:fzfrestore"
+          "stayfocused, class:fzfrestore" 
         ];
 
         plugin = {
@@ -350,6 +359,11 @@
           # CLIPBOARD
           "SUPER, V, exec, copyq --start-server show"
 
+          # MINIMIZE WINDOW
+          "SUPER, N, movetoworkspacesilent, +10"
+
+          "SUPER, M, exec, kitty --class fzfrestore -e /usr/bin/env bash /home/${username}/.config/hypr/assets/scripts/hypr-restore-window.sh"
+
         ];
 
         bindm = [
@@ -379,6 +393,7 @@
         exec = [
           "hyprshade on vibrance"
         ];
+
 
         env = [
           "LIBVA_DRIVER_NAME, nvidia"
