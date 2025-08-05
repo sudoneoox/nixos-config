@@ -1,8 +1,10 @@
 { username, ... }:
+
 {
-  home.file.".config/hypr/hyprlock/background.png".source = ./background.png;
-  home.file.".config/hypr/hyprlock/face.jpg".source = ./face.jpg;
   home.file.".config/hypr/mocha.conf".source = ./mocha.conf;
+  home.file.".config/hypr/hyprlock/background.png".source = ./background.png;
+  home.file.".config/hypr/hyprlock/background.svg".source = ./background.svg;
+  home.file.".config/hypr/hyprlock/face.jpg".source = ./face.jpg;
 
   programs.hyprlock = {
     enable = true;
@@ -15,18 +17,18 @@
 
       background = {
         monitor = "";
-        path = "/home/${username}/.config/hypr/hyprlock/background";
+        path = "/home/${username}/.config/hypr/hyprlock/background.svg";
         blur_passes = 0;
-        color = "$base";
+        color = "1e1e2e";
       };
 
       label = [
         {
           monitor = "";
           text = "Layout: $LAYOUT";
-          color = "$text";
+          color = "cdd6f4";
           font_size = 25;
-          font_family = "$font";
+          font_family = "JetBrainsMono Nerd Font";
           position = "30, -30";
           halign = "left";
           valign = "top";
@@ -35,9 +37,9 @@
         {
           monitor = "";
           text = "$TIME";
-          color = "$text";
+          color = "cdd6f4";
           font_size = 90;
-          font_family = "$font";
+          font_family = "JetBrainsMono Nerd Font";
           position = "-30, 0";
           halign = "right";
           valign = "top";
@@ -46,9 +48,9 @@
         {
           monitor = "";
           text = ''cmd[update:43200000] date +"%A, %d %B %Y"'';
-          color = "$text";
+          color = "cdd6f4";
           font_size = 25;
-          font_family = "$font";
+          font_family = "JetBrainsMono Nerd Font";
           position = "-30, -150";
           halign = "right";
           valign = "top";
@@ -57,9 +59,9 @@
         {
           monitor = "";
           text = "$FPRINTPROMPT";
-          color = "$text";
+          color = "cdd6f4";
           font_size = 14;
-          font_family = "$font";
+          font_family = "JetBrainsMono Nerd Font";
           position = "0, -107";
           halign = "center";
           valign = "center";
@@ -68,9 +70,9 @@
 
       image = {
         monitor = "";
-        path = "/home/${username}/hypr/hyprlock/face";
+        path = "/home/${username}/.config/hypr/hyprlock/face.jpg";
         size = 100;
-        border_color = "$accent";
+        border_color = "[cba6f7]";
         position = "0, 75";
         halign = "center";
         valign = "center";
@@ -83,27 +85,20 @@
         dots_size = 0.2;
         dots_spacing = 0.2;
         dots_center = true;
-        outer_color = "$accent";
-        inner_color = "$surface0";
-        font_color = "$text";
+        outer_color = "cba6f7";
+        inner_color = "313244";
+        font_color = "cdd6f4";
         fade_on_empty = false;
-        placeholder_text = ''<span foreground="#$textAlpha"><i>󰌾 Logged in as </i><span foreground="#$accentAlpha">$USER</span></span>'';
+        placeholder_text = ''<span foreground="#cdd6f4"><i>󰌾 Logged in as </i><span foreground="#cba6f7">$USER</span></span>'';
         hide_input = false;
-        check_color = "$accent";
-        fail_color = "$red";
+        check_color = "cba6f7";
+        fail_color = "f38ba8";
         fail_text = ''<i>$FAIL <b>($ATTEMPTS)</b></i>'';
-        capslock_color = "$yellow";
+        capslock_color = "f9e2af";
         position = "0, -47";
         halign = "center";
         valign = "center";
       };
     };
-
-    extraConfig = ''
-      source = /home/${username}/.config/hypr/mocha.conf
-      $accent = $mauve
-      $accentAlpha = $mauveAlpha
-      $font = JetBrainsMono Nerd Font
-    '';
   };
 }
