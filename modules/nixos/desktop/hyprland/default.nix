@@ -41,6 +41,7 @@
     hyprlock
     hyprpicker
     hyprshade-git
+    hypr-dock
     copyq
   ];
 

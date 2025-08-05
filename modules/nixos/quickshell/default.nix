@@ -10,6 +10,9 @@
     qt6.qtdeclarative
     qt6.qtsvg
     libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtimageformats
+    libsForQt5.qt5.qtmultimedia
+
   ];
 
   environment.variables = {

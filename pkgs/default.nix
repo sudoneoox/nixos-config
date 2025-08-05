@@ -16,4 +16,7 @@ in
     hyprland = pkgs.hyprland;
     makeWrapper = pkgs.makeWrapper;
   };
+
+  hypr-dock = pkgs.callPackage ./hypr-dock {};
+
 }
