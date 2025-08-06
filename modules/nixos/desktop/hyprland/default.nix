@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ pkgs, username, lib, host,... }:
 {
 
   imports = [
@@ -43,6 +43,10 @@
     # hyprshade-git
     hyprshade
     copyq
+
+    lib.mkIf (host == "X0NixOSDesktop") [
+      split-monitor-workspaces
+    ];
   ];
 
   environment.variables = {

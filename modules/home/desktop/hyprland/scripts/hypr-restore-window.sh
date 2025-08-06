@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+monitor-type=$1
+
 active_ws=$(hyprctl activeworkspace -j | jq ".id")
 target_ws=$((10 + active_ws))
 
@@ -13,6 +15,6 @@ address=$(hyprctl -j clients | jq -r --argjson target_ws "$target_ws" '
 
 if [ -n "$address" ]; then
   hyprctl dispatch untag address:$address minimized
-  hyprctl dispatch movetoworkspacesilent "$active_ws,address:$address"
+  hyprctl dispatch $1movetoworkspacesilent "$active_ws,address:$address"
   hyprctl dispatch focuswindow "address:$address"
 fi

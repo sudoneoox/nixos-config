@@ -36,7 +36,7 @@
 
         "hyprland/workspaces" = {
           disable-scroll = false;
-          all-outputs = true;
+          all-outputs = false;
           format = "{icon}";
           on-click = "activate";
           persistent-workspaces."*" = [
@@ -129,7 +129,7 @@
           tooltip-format = "{app_name}";
           on-click = "activate";
           icon-size = 19;
-          all-outputs = true;
+          all-outputs = false;
           ignore-list = [ ];
           show-special = true;
         };
