@@ -96,7 +96,7 @@
 
         disk = {
           interval = 60;
-          format = "{specific_used:0.2} GB";
+          format = "  {specific_used:0.2} GB ";
           path = "/";
           tooltip = true;
           tooltip-format = "{specific_free:0.2f} GB out of {specific_total:0.2f} GB";
