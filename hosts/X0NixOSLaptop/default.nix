@@ -55,6 +55,8 @@
     };
   };
 
+  networking.hostName = "X0NixOSLaptop";
+
   security.rtkit.enable = true;
 
   services = {

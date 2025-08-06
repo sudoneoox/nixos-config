@@ -15,7 +15,7 @@
 
     "${inputs.nixos-hardware}/common/gpu/nvidia/ada-lovelace"
 
-    "${inputs.nixos-hardware}/common/pc/sdd"
+    "${inputs.nixos-hardware}/common/pc/ssd"
     "${inputs.nixos-hardware}/common/hidpi.nix"
 
     ./hardware.nix
@@ -41,6 +41,8 @@
       powerOnBoot = true;
     };
   };
+
+  networking.hostName = "X0NixOSDesktop";
 
   security.rtkit.enable = true;
 

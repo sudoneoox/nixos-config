@@ -84,6 +84,7 @@
             outputs
             username
             email
+            host
             ;
         };
         modules = [ ./hosts/${host} ];

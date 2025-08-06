@@ -5,6 +5,7 @@
   email,
   pkgs,
   config,
+  host,
   ...
 }:
 
@@ -25,7 +26,6 @@
   };
 
   networking = {
-    hostName = "X0NixOSLaptop";
     networkmanager.enable = true;
     nameservers = [
       "1.1.1.2"
@@ -94,6 +94,7 @@
         outputs
         username
         email
+        host
         ;
     };
     users.${username} = {

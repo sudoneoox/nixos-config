@@ -1,4 +1,4 @@
-{ pkgs, username,... }:
+{ pkgs, username, host, lib, ... }:
 {
 
   imports = [
@@ -53,8 +53,15 @@
 
       in
       {
-
-        monitor = ",preferred,auto,1";
+        monitor = lib.mkMerge [
+          (lib.mkIf (host == "X0NixOSDesktop") [
+            "DP-6,preferred,0x0,1"
+            "DP-4,preferred,1920x0,1"
+          ])
+          (lib.mkIf (host == "X0NixOSLaptop") [
+            ",preferred,auto,1"
+          ])
+        ];
 
         input = {
           follow_mouse = 1;
