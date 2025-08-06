@@ -37,8 +37,8 @@
     nvidia = {
       prime.intelBusId = "PCI:0:2:0";
       prime.nvidiaBusId = "PCI:1:0:0";
+      primeBatterySaverSpecialisation = true;
     };
-    primeBatterySaverSpecialisation = true;
     intelgpu = {
       driver = "xe";
       loadInInitrd = true;
@@ -75,7 +75,7 @@
     tlp = {
       enable = true;
       settings.CPU_SCALING_GOVERNER_ON_AC = "performance";
-      settigns.CPU_SCALING_GOVERNER_ON_BAT = "powersave";
+      settings.CPU_SCALING_GOVERNER_ON_BAT = "powersave";
       settings.CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       settings.CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       settings.CPU_MIN_PERF_ON_AC = 0;
