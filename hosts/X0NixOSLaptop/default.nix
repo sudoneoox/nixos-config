@@ -22,6 +22,7 @@
     ../../modules/nixos/desktop/hyprland
     ../../modules/nixos/virtualisation/qemu.nix
     ../../modules/nixos/virtualisation/wine.nix
+    ../../modules/nixos/discord
   ];
 
   boot = {
