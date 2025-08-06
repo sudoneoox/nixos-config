@@ -41,6 +41,7 @@
 #memory,
 #cpu,
 #network,
+#disk,
 #custom-lock {
   border-radius: 4px;
   margin: 6px 3px;
@@ -51,6 +52,10 @@
 
 #clock {
   background-color: #89b4fa;
+}
+
+#disk {
+  background-color: #c096f1
 }
 
 #custom-power {
