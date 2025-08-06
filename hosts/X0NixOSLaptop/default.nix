@@ -26,11 +26,8 @@
   ];
 
   boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
     supportedFilesystems = [ "ntfs" ];
   };
@@ -38,12 +35,10 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
     nvidia = {
-      prime = {
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-      primeBatterySaverSpecialisation = true;
+      prime.intelBusId = "PCI:0:2:0";
+      prime.nvidiaBusId = "PCI:1:0:0";
     };
+    primeBatterySaverSpecialisation = true;
     intelgpu = {
       driver = "xe";
       loadInInitrd = true;
@@ -55,7 +50,7 @@
       powerOnBoot = true;
     };
     asus.battery = {
-      chargeUpto = 80;
+      chargeUpto = 75;
       enableChargeUptoScript = true;
     };
   };
@@ -64,7 +59,6 @@
 
   services = {
     fstrim.enable = lib.mkDefault true;
-
     printing.enable = true;
     pipewire = {
       enable = true;
@@ -73,12 +67,24 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
     };
     openssh.enable = true;
+    tlp = {
+      enable = true;
+      settings.CPU_SCALING_GOVERNER_ON_AC = "performance";
+      settigns.CPU_SCALING_GOVERNER_ON_BAT = "powersave";
+      settings.CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      settings.CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      settings.CPU_MIN_PERF_ON_AC = 0;
+      settings.CPU_MAX_PERF_ON_AC  = 100;
+      settings.CPU_MIN_PERF_ON_BAT = 0;
+      settings.CPU_MAX_PERF_ON_BAT = 20;
+      settings.START_CHARGE_THRESH_BAT0 = 40;
+    };
+    thermald.enable = true;
   };
 
   programs = {
