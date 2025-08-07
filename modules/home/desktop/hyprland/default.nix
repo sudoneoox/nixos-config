@@ -24,7 +24,7 @@
   home.file."Assets/nixos-config/Icons/dunst".recursive = true;
   home.file."Assets/nixos-config/Wallpapers".source = ./hyprpaper/wallpapers;
   home.file."Assets/nixos-config/Wallpapers".recursive = true;
-  home.file."Assets/nixos-config/wallust/wallust.toml".source ./wallust/wallust.toml;
+  home.file."Assets/nixos-config/wallust/wallust.toml".source = ./wallust/wallust.toml;
 
   services.gnome-keyring = {
     enable = true;
