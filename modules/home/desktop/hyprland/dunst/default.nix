@@ -1,8 +1,5 @@
 { username, ... }:
 
-let
-  iconSourcePath = ./icons;
-in
 {
   services.dunst = {
     enable = true;
@@ -67,6 +64,4 @@ in
       };
     };
   };
-  home.file."Assets/nixos-config/Icons/dunst".source = iconSourcePath;
-  home.file."Assets/nixos-config/Icons/dunst".recursive = true;
 }

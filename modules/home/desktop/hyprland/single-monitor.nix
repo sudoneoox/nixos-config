@@ -2,40 +2,10 @@
 {
 
   imports = [
-    ./cursor
-    ./waybar
-    ./hyprlock
-    ./hyprpaper
     ./hypridle
-    ./hyprshade
-    ./dunst
-    ../rofi
   ];
 
-  home.file."Assets/nixos-config/scripts".source = ./scripts;
-  home.file."Assets/nixos-config/scripts".recursive = true;
-
-
-  services.gnome-keyring = {
-    enable = true;
-    components = [ "secrets" ];
-  };
-
-  services.network-manager-applet.enable = true;
-
-  xdg.autostart.enable = true;
-
-  home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
-  };
-
   wayland.windowManager.hyprland = {
-    enable = true;
-    package = null;
-    portalPackage = null;
-    xwayland.enable = true;
-    systemd.variables = [ "--all" ];
 
     plugins = [
       pkgs.hyprland-plugins.hyprbars

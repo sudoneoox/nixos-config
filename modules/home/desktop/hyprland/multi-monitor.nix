@@ -1,43 +1,8 @@
 { pkgs, username, host, lib, ... }:
 
 {
-  imports = [
-    ./cursor
-    ./waybar
-    ./hyprlock
-    ./hyprpaper
-    ./hyprshade
-    ./dunst
-    ../rofi
-  ] ++ lib.optionals  (host == "X0NixOSLaptop") [
-    ./hypridle
-  ];
-
-  home.file."Assets/nixos-config/scripts".source = ./scripts;
-  home.file."Assets/nixos-config/scripts".recursive = true;
-
-
-  services.gnome-keyring = {
-    enable = true;
-    components = [ "secrets" ];
-  };
-
-  services.network-manager-applet.enable = true;
-
-  xdg.autostart.enable = true;
-
-  home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
-  };
-
+  
   wayland.windowManager.hyprland = {
-    enable = true;
-    package = null;
-    portalPackage = null;
-    xwayland.enable = true;
-    systemd.variables = [ "--all" ];
-
     plugins = with pkgs; [
       hyprland-plugins.hyprbars
       hyprspace
@@ -368,11 +333,7 @@
           "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/Assets/nixos-config/scripts/hypr-restore-window.sh split-" 
 
           # SPLIT MONITOR WORKSPACES
-          "SUPER, O, exec, hyprctl dispatch split-changemonitorsilent 1"
-
-
-
-
+          "SUPER, O, exec, hyprctl dispatch split-changemonitor 1"
 
         ];
 

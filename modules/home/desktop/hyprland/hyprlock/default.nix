@@ -1,6 +1,5 @@
 { username, ... }:
 {
-  home.file."Assets/nixos-config/hyprlock/face.jpg".source = ./face.jpg;
 
   programs.hyprlock = {
     enable = true;
