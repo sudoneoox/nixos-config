@@ -60,16 +60,6 @@
     thermald.enable = true;
   };
 
-  programs = {
-    firefox.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
-  };
 
   home-manager.users.${username} = {
     imports = [
