@@ -57,14 +57,15 @@
     };
 
     split-monitor-workspaces = {
-        url = "github:Duckonaut/split-monitor-workspaces";
-        inputs.hyprland.follows = "hyprland";
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland"; 
     };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
 
     nur.url = "github:nix-community/nur";
   };

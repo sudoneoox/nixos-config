@@ -44,7 +44,7 @@
     copyq
 
    ] ++ lib.optionals (host == "X0NixOSDesktop") [
-    hyprsplit-stable
+    hyprland-smw
   ];
 
 

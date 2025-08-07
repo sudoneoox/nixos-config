@@ -39,12 +39,12 @@
           all-outputs = false;
           format = "{icon}";
           on-click = "activate";
-          persistent-workspaces."*" = [
-            1
-            2
-            3
-            4
-          ];
+          # # persistent-workspaces."*" = [
+          #   1
+          #   2
+          #   3
+          #   4
+          # ];
           format-icons = {
             "1" = "";
             "2" = "";
