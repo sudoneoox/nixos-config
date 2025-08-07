@@ -1,6 +1,6 @@
-{ pkgs, username, host, lib, ... }:
-{
+{ pkgs, username, host, ... }:
 
+{
   imports = [
     ./cursor
     ./waybar
@@ -37,10 +37,10 @@
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
 
-    plugins = [
-      pkgs.hyprland-plugins.hyprbars
-      pkgs.hyprspace
-      pkgs.hy3
+    plugins = with pkgs; [
+      hyprland-plugins.hyprbars
+      hyprspace
+      hy3
       split-monitor-workspaces
     ];
 

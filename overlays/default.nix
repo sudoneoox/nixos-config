@@ -14,7 +14,7 @@
     hyprland-git = inputs.hyprland.packages.${prev.system};
     hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system};
     hy3 = inputs.hy3.packages.${prev.system}.hy3;
-    split-monitor-workspaces = inputs.split-monitor-workspace.packages.${prev.system}.split-monitor-workspaces
+    split-monitor-workspaces = inputs.split-monitor-workspaces.packages.${prev.system}.split-monitor-workspaces;
   };
 
   stable-packages = final: _prev: {

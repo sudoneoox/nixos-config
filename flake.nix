@@ -102,7 +102,7 @@
 
       nixosConfigurations = {
         X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
-	X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
+        X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
       };
     };
 

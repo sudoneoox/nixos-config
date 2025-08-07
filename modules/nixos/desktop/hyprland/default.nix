@@ -40,14 +40,13 @@
     hyprpaper
     hyprlock
     hyprpicker
-    # hyprshade-git
     hyprshade
     copyq
 
-    lib.mkIf (host == "X0NixOSDesktop") [
-      split-monitor-workspaces
-    ];
+   ] ++ lib.optionals (host == "X0NixOSDesktop") [
+    split-monitor-workspaces
   ];
+
 
   environment.variables = {
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
