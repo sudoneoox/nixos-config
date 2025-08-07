@@ -41,7 +41,7 @@
       hyprland-plugins.hyprbars
       hyprspace
       hy3
-      split-monitor-workspaces
+      hyprsplit-stable
     ];
 
     settings =
@@ -217,11 +217,9 @@
             exitKey = "Escape";
           };
 
-          split-monitor-workspaces = {
-            count = 4;
-            keep_focused = true;
-            enable_notifications = false;
-            enable_persistent_workspaces = true;
+          hyprsplit = {
+            num_of_workspace = 4;
+            persistent_workspaces = true;
           };
 
           hy3 = {
