@@ -5,7 +5,7 @@ let
 in
 {
 
-  home.file.".config/hypr/shaders".source = shaderDirPath;
-  home.file.".config/hypr/shaders".recursive = true;
-  home.file.".config/hypr/hyprshade.toml".source = tomlConfigFile;
+  home.file."Assets/nixos-config/shaders".source = shaderDirPath;
+  home.file."Assets/nixos-config/shaders".recursive = true;
+  home.file."Assets/nixos-config/shaders/hyprshade.toml".source = tomlConfigFile;
 }

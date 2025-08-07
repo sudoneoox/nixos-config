@@ -1,4 +1,4 @@
-{ pkgs, username, host, ... }:
+{ pkgs, username, host, lib, ... }:
 
 {
   imports = [
@@ -6,14 +6,15 @@
     ./waybar
     ./hyprlock
     ./hyprpaper
-    ./hypridle
     ./hyprshade
     ./dunst
     ../rofi
+  ] ++ lib.optionals  (host == "X0NixOSLaptop") [
+    ./hypridle
   ];
 
-  home.file.".config/hypr/assets/scripts".source = ./scripts;
-  home.file.".config/hypr/assets/scripts".recursive = true;
+  home.file."Assets/nixos-config/scripts".source = ./scripts;
+  home.file."Assets/nixos-config/scripts".recursive = true;
 
 
   services.gnome-keyring = {
@@ -273,13 +274,17 @@
           "SUPER, R, exec, rofi -show drun"
           "SUPER, J, togglesplit"
 
-          # Hardware keys
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
-          ", XF86MonBrightnessUp, exec, brightnessctl set 10%+"
-          ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          # Volume Keybinds
+          # Volume Up: Super + Ctrl + Up Arrow
+          "SUPER CTRL, UP, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
+
+          # Volume Down: Super + Ctrl + Down Arrow
+          "SUPER CTRL, DOWN, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+
+          # Mute: Super + Ctrl + M
+          "SUPER  CTRL, M, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+
 
           # split-workspace switching
           "SUPER, 1, split-workspace, 1"
@@ -360,7 +365,7 @@
           # MINIMIZE WINDOW
           "SUPER, N, exec, hyprctl dispatch tag active:minimized && hyprctl dispatch split-movetoworkspacesilent +10"
 
-          "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/.config/hypr/assets/scripts/hypr-restore-window.sh split-" 
+          "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/Assets/nixos-config/scripts/hypr-restore-window.sh split-" 
 
           # SPLIT MONITOR WORKSPACES
           "SUPER, O, exec, hyprctl dispatch split-changemonitorsilent 1"
@@ -396,7 +401,7 @@
         ];
 
         exec = [
-          "hyprshade on vibrance"
+          "hyprshade on /home/${username}/Assets/nixos-config/shaders/vibrance"
         ];
 
 
