@@ -138,5 +138,6 @@
     devenv
     jq
     grim
+    comma
   ];
 }

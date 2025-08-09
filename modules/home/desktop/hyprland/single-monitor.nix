@@ -1,4 +1,4 @@
-{ pkgs, username, host, lib, ... }:
+{ pkgs, username, ... }:
 {
 
   imports = [
@@ -13,7 +13,7 @@
       pkgs.hy3
     ];
 
-    settings =
+    settings = 
       let
         terminal = "kitty";
         filemanager = "thunar";
@@ -22,7 +22,7 @@
         shadow_color = "rgba(1a1a1aee)";
       in
       {
-        monitor = ",preferred,auto,1"
+        monitor = ",preferred,auto,1";
 
         input = {
           follow_mouse = 1;

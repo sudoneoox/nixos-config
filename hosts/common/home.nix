@@ -2,15 +2,14 @@
   outputs,
   username,
   inputs,
-  pkgs,
   ...
 }:
 
 {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
-    inputs.zen-browser.homeModules.twilight
     ../../modules/home/devel
+    ../../modules/home/zen-browser
   ];
 
   fonts.fontconfig.enable = true;
@@ -35,28 +34,6 @@
 
 
   programs = {
-    zen-browser = {
-      enable = true;
-      nativeMessagingHosts = [pkgs.firefoxpwa];
-      policies = {
-        AutofillAddressEnabled = true;
-        AutofillCreditCardEnabled = false;
-        DisableAppUpdate = true;
-        DisableFeedbackCommands = true;
-        DisableFirefoxStudies = true;
-        DisablePocket = true;
-        DisableTelemetry = true;
-        DontCheckDefaultBrowser = true;
-        NoDefaultBookmarks = true;
-        OfferToSaveLogins = false;
-        EnableTrackingProtection = {
-          Value = true;
-          Locked = true;
-          Cryptomining = true;
-          Fingerprinting = true;
-        };        
-      };
-    };
     home-manager.enable = true;
   };
   systemd.user.startServices = "sd-switch";

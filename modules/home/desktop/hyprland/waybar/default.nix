@@ -39,6 +39,7 @@
           all-outputs = false;
           format = "{icon}";
           on-click = "activate";
+          # TODO: lib.mkIf or lib.optionals keep these persistent for single-monitors
           # # persistent-workspaces."*" = [
           #   1
           #   2
