@@ -87,8 +87,10 @@
       settings.START_CHARGE_THRESH_BAT0 = 40;
     };
     thermald.enable = true;
-    asusd.enable = true;
-    asusd.enableUserService = true;
+    asusd = {
+      enable = true;
+      enableUserService = true;
+    };
   };
 
   home-manager.users.${username} = {

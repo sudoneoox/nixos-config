@@ -2,7 +2,6 @@
 {
 
   imports = [
-    # ../../modules/home/desktop/awesome
     ../../modules/home/desktop/hyprland
   ];
 

@@ -1,8 +1,9 @@
 { pkgs, username, lib, host,... }:
 {
-
+  
   imports = [
-    ../../quickshell
+  # Currently not using and don't have the time to learn
+  # ../../quickshell
   ];
 
   services.greetd = {
@@ -44,6 +45,7 @@
     copyq
 
    ] ++ lib.optionals (host == "X0NixOSDesktop") [
+    # In overlays/default.nix
     hyprland-smw
   ];
 
