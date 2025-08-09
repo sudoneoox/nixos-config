@@ -1,5 +1,9 @@
-{ pkgs, ... }:
-{
+{ pkgs, lib, host, ... }:
+{ 
+ imports = [] ++ lib.optionals (host == "X0NixOSLaptop") [
+  ./single-montor.nix
+ ];
+
   home.packages = with pkgs; [
     lm_sensors
     bluez
@@ -39,13 +43,6 @@
           all-outputs = false;
           format = "{icon}";
           on-click = "activate";
-          # TODO: lib.mkIf or lib.optionals keep these persistent for single-monitors
-          # # persistent-workspaces."*" = [
-          #   1
-          #   2
-          #   3
-          #   4
-          # ];
           format-icons = {
             "1" = "";
             "2" = "";

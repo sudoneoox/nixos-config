@@ -2,7 +2,7 @@
 {
   
   imports = [
-  # Currently not using and don't have the time to learn
+  # TODO: Currently not using and don't have the time to learn
   # ../../quickshell
   ];
 
