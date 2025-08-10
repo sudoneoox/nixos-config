@@ -2,7 +2,7 @@
   imports = [
     ./git
     ./kitty
-    ./nvim
+    ./nixvim
     ./shell
     ./starship
   ];

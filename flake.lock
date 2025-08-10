@@ -870,7 +870,6 @@
         "sawm": "sawm",
         "sfish": "sfish",
         "skitty": "skitty",
-        "snvim": "snvim",
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "zen-browser": "zen-browser"
@@ -950,26 +949,6 @@
       "original": {
         "owner": "sudoneoox",
         "repo": "skitty",
-        "type": "github"
-      }
-    },
-    "snvim": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1752968051,
-        "narHash": "sha256-asYiQGewlUQM4f1A5L+9yK60MkAEOdPkkrG023LItAc=",
-        "owner": "sudoneoox",
-        "repo": "snvim",
-        "rev": "472c837082c54c46c8edb8c6af289cf01aa118f1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sudoneoox",
-        "repo": "snvim",
         "type": "github"
       }
     },
