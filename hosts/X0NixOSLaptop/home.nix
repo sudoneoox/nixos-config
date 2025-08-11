@@ -27,10 +27,6 @@
     package = pkgs.flameshot.override { enableWlrSupport = true; };
   };
 
-  programs.coolercontrol = {
-    enable = true;
-    nvidiaSupport = true;
-  };
 
   home.packages = with pkgs; [
     proton-pass

@@ -89,6 +89,11 @@
     thermald.enable = true;
   };
 
+  programs.coolercontrol = {
+    enable = true;
+    nvidiaSupport = true;
+  };
+
   home-manager.users.${username} = {
     imports = [
       ./home.nix
