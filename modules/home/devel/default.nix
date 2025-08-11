@@ -1,9 +1,11 @@
+{inputs, ...}:
 {
   imports = [
     ./git
     ./kitty
-    ./nixvim
     ./shell
     ./starship
+    ./nvim
+    inputs.nixcats-local.homeModules.default
   ];
 }

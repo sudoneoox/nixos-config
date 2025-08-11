@@ -19,13 +19,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    snvim = {
+      url = "github:sudoneoox/snvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     skitty = {
       url = "github:sudoneoox/skitty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixCats-local = {
+      url = "path:./modules/home/devel/nixCats";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -58,7 +63,7 @@
 
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland"; 
+      inputs.hyprland.follows = "hyprland";
     };
 
     sops-nix = {
