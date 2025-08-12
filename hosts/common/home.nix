@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.nix-index-database.homeModules.nix-index
+    inputs.nvf.homeManagerModules.default
     ../../modules/home/devel
     ../../modules/home/zen-browser
   ];

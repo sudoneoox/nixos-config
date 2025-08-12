@@ -1,4 +1,3 @@
-{inputs, pkgs, ...}:
 {
 
   imports = [
@@ -6,6 +5,6 @@
     ./kitty
     ./shell
     ./starship
-    ./nvim
+    ./nvf
   ];
 }

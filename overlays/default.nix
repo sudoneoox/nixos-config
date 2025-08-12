@@ -1,14 +1,9 @@
-{ inputs, ... }:
-
-{
-
-  additions = final: _prev: import ../pkgs { pkgs = final; };
+{inputs, ...}: {
+  additions = final: _prev: import ../pkgs {pkgs = final;};
 
   modifications = final: prev: {
     awesome = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
-    sawm = inputs.sawm.packages.${prev.system}.default;
     sfish = inputs.sfish.packages.${prev.system}.default;
-    snvim = inputs.snvim.packages.${prev.system}.default;
     skitty = inputs.skitty.packages.${prev.system}.default;
     hyprspace = inputs.Hyprspace.packages.${prev.system}.default;
     hyprland-git = inputs.hyprland.packages.${prev.system};
@@ -24,7 +19,4 @@
       config.allowUnfree = true;
     };
   };
-
-  # nur = inputs.nur.overlays.default;
-
 }

@@ -1,16 +1,22 @@
-{ pkgs, username, lib, host,... }:
 {
-  
+  pkgs,
+  username,
+  lib,
+  host,
+  ...
+}:
+{
+
   imports = [
-  # TODO: Currently not using and don't have the time to learn
-  # ../../quickshell
+    # TODO: Currently not using and don't have the time to learn
+    # ../../quickshell
   ];
 
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
         user = "${username}";
       };
     };
@@ -35,20 +41,22 @@
     QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
   };
 
-  environment.systemPackages = with pkgs; [
-    dunst
-    rofi-wayland
-    hyprpaper
-    hyprlock
-    hyprpicker
-    hyprshade
-    copyq
+  environment.systemPackages =
+    with pkgs;
+    [
+      dunst
+      rofi-wayland
+      hyprpaper
+      hyprlock
+      hyprpicker
+      hyprshade
+      copyq
 
-   ] ++ lib.optionals (host == "X0NixOSDesktop") [
-    # In overlays/default.nix
-    hyprland-smw
-  ];
-
+    ]
+    ++ lib.optionals (host == "X0NixOSDesktop") [
+      # In overlays/default.nix
+      hyprland-smw
+    ];
 
   environment.variables = {
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";

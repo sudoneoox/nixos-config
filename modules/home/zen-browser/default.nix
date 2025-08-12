@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}:
+{ pkgs, inputs, ... }:
 {
   imports = [
     inputs.zen-browser.homeModules.twilight
@@ -6,7 +6,7 @@
 
   programs.zen-browser = {
     enable = true;
-    nativeMessagingHosts = [pkgs.firefoxpwa];
+    nativeMessagingHosts = [ pkgs.firefoxpwa ];
     policies = {
       AutofillAddressEnabled = true;
       AutofillCreditCardEnabled = false;
@@ -23,7 +23,7 @@
         Locked = true;
         Cryptomining = true;
         Fingerprinting = true;
-      };        
+      };
     };
   };
 }

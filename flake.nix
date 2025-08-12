@@ -9,18 +9,17 @@
       url = "github:nixos/nixos-hardware";
     };
 
-    sawm = {
-      url = "github:sudoneoox/sawm";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sfish = {
       url = "github:sudoneoox/sfish";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    snvim = {
-      url = "github:sudoneoox/snvim";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+    };
+
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -73,41 +72,40 @@
     };
   };
 
-  outputs =
-    { self, nixpkgs, ... }@inputs:
-    let
-      inherit (self) outputs;
-      inherit (nixpkgs.lib) nixosSystem;
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    inherit (self) outputs;
+    inherit (nixpkgs.lib) nixosSystem;
 
-      username = "diego";
-      email = "diegoa2992@proton.me";
-      forallSystems = nixpkgs.lib.genAttrs [
-        "x86_64-linux"
-      ];
+    username = "diego";
+    email = "diegoa2992@proton.me";
+    forallSystems = nixpkgs.lib.genAttrs [
+      "x86_64-linux"
+    ];
 
-      mkNixOSConfig = host: {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit
-            inputs
-            outputs
-            username
-            email
-            host
-            ;
-        };
-        modules = [ ./hosts/${host} ];
+    mkNixOSConfig = host: {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit
+          inputs
+          outputs
+          username
+          email
+          host
+          ;
       };
-
-    in
-    {
-      overlays = import ./overlays { inherit inputs; };
-      formatter = forallSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-
-      nixosConfigurations = {
-        X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
-        X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
-      };
+      modules = [./hosts/${host}];
     };
+  in {
+    overlays = import ./overlays {inherit inputs;};
+    formatter = forallSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
+    nixosConfigurations = {
+      X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
+      X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
+    };
+  };
 }
