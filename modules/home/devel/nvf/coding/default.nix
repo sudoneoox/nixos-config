@@ -7,5 +7,6 @@
     ./telescope.nix
     ./treesitter.nix
     ./snippets.nix
+    ./autocomplete.nix
   ];
 }

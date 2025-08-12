@@ -7,6 +7,14 @@
     trouble.enable = true; # diagnostics list (Trouble)
     lspSignature.enable = false; # conflics with Blink
     otter-nvim.enable = true; # literate/code chunks support (otter.nvim)
-    nvim-docs-view.enable = true; # side pane for docs (nvim-docs-view)
+    # side pane for docs (nvim-docs-view)
+    nvim-docs-view = {
+      enable = true;
+      setupOpts = {
+        position = "right";
+        width = 60;
+        update_mode = "auto";
+      };
+    };
   };
 }
