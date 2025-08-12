@@ -162,6 +162,15 @@
       desc = "Toggle Terminal [Toggle Term]";
     }
 
+    # NOTE: UI
+
+    # {
+    #   key = "<Leader>us";
+    #   mode = ["n"];
+    #   action = "<cmd>lua Snacks.toggle.option('spell', { name = 'Spelling' })()<CR>";
+    #   desc = "Toggle Spelling [Snacks]";
+    # }
+
     # NOTE: Extra
 
     # Exit insert mode quick cmd

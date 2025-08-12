@@ -1,5 +1,12 @@
 {
   programs.nvf.settings.vim.luaConfigPost = ''
+    -- TODO:
+    -- Helper functions commands
+
+    local map = vim.keymap.set
+
+    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+
     -- Auto-update programming wordlist on first startup
     vim.api.nvim_create_autocmd("VimEnter", {
       callback = function()

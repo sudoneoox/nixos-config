@@ -13,6 +13,7 @@
         "<leader>gS" = "GitSigns";
         "<leader>t" = "Trouble";
         "<leader>x" = null;
+        "<leader>u" = "ui";
       };
     };
   };

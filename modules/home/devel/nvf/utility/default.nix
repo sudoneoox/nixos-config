@@ -7,5 +7,6 @@
     ./notes.nix
     ./sessions.nix
     ./spellcheck.nix
+    ./snacks.nix
   ];
 }
