@@ -1,0 +1,9 @@
+{pkgs, ...}: {
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+    package = pkgs.yazi-unwrapped;
+  };
+}
