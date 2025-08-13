@@ -1,44 +1,120 @@
 {
+  programs.nvf.settings.vim = {
+    telescope.mappings = {
+      findFiles = "<leader>ff";
+      liveGrep = "<leader>fg";
+      buffers = "<leader>fb";
+      helpTags = "<leader>fh";
+      resume = null;
+      findProjects = "<leader>fp";
+      diagnostics = "<leader>fld";
+      gitBranches = "<leader>fvb";
+      gitBufferCommits = null;
+      gitCommits = "<leader>fvc";
+      gitStash = "<leader>fvx";
+      gitStatus = "<leader>fvs";
+      lspDefinitions = "<leader>flD";
+      lspDocumentSymbols = "<leader>flsb";
+      lspImplementations = "<leader>fli";
+      lspReferences = "<leader>flr";
+      lspTypeDefinitions = "<leader>flt";
+      lspWorkspaceSymbols = "<leader>flsw";
+      open = "<leader>ft";
+      treesitter = "<leader>fs";
+    };
+
+    "lsp".nvim-docs-view.mappings = {
+      viewToggle = "<leader>cd";
+      viewUpdate = null;
+    };
+
+    "lsp".otter-nvim.mappings = {
+      toggle = null;
+    };
+
+    "lsp".mappings = {
+      codeAction = "<leader>ca";
+      documentHighlight = "<leader>cH";
+      format = "<leader>cf";
+      hover = "<leader>ch";
+      listDocumentSymbols = "<leader>cS";
+      openDiagnosticFloat = "<leader>ce";
+      renameSymbol = "<leader>cn";
+      signatureHelp = "<leader>cs";
+
+      # +Code -> +Workspaces
+      listWorkspaceFolders = "<leader>cwl";
+      addWorkspaceFolder = "<leader>cwa";
+      removeWorkspaceFolder = "<leader>cwr";
+      listWorkspaceSymbols = "<leader>cws";
+      listImplementations = "<leader>cgi";
+
+      # +Code -> +Git
+      listReferences = "<leader>cgr";
+      goToType = "<leader>cgt";
+      previousDiagnostic = "<leader>cgp";
+      nextDiagnostic = "<leader>cgn";
+      goToDefinition = "<leader>cgd";
+      goToDeclaration = "<leader>cgD";
+      toggleFormatOnSave = null;
+    };
+
+    minimap.codewindow.mappings = {
+      toggle = "<leader>umt";
+      toggleFocus = "<leader>umf";
+      close = null;
+      open = null;
+    };
+
+    visuals.cellular-automaton.mappings = {
+      makeItRain = null;
+    };
+
+    utility.motion.hop.mappings = {
+      hop = "<leader>h";
+    };
+
+    "git".git-conflict.mappings = {
+      none = "<leader>cG0";
+      both = "<leader>cGb";
+      ours = "<leader>cGo";
+      theirs = "<leader>cGt";
+    };
+
+    "git".gitsigns.mappings = {
+      previousHunk = "[c";
+      nextHunk = "]c";
+      stageHunk = "<leader>gSs";
+      resetHunk = "<leader>gSr";
+      previewHunk = "<leader>gSp";
+      blameLine = "<leader>gSb";
+      diffThis = "<leader>gSd";
+      undoStageHunk = "<leader>gSu";
+      toggleBlame = "<leader>gSt";
+      diffProject = null;
+      resetBuffer = null;
+      stageBuffer = null;
+      toggleDeleted = "<leader>gSD";
+    };
+
+    "lsp".trouble.mappings = {
+      locList = "<leader>tl";
+      documentDiagnostics = "<leader>td";
+      quickfix = "<leader>tq";
+      symbols = "<leader>ts";
+      lspReferences = "<leader>tr";
+      workspaceDiagnostics = null;
+    };
+
+    terminal.toggleterm.mappings = {
+      open = "<leader>/";
+    };
+  };
+
   programs.nvf.settings.vim.keymaps = [
-    # NOTE: General
-    {
-      key = "<leader>w";
-      mode = ["n"];
-      action = ":w<CR>";
-      desc = "Save File";
-    }
-    {
-      key = "<leader>q";
-      mode = ["n"];
-      action = ":wq<CR>";
-      desc = "Quit and Save File";
-    }
+    # INFO: for keybinds not provided by the nvf api and for custom keybinds
 
     # NOTE: Telescope
-    {
-      key = "<leader>ff";
-      mode = ["n"];
-      action = ":Telescope find_files<CR>";
-      desc = "Find files [Telescope]";
-    }
-    {
-      key = "<Leader>fg";
-      mode = ["n"];
-      action = ":Telescope live_grep<CR>";
-      desc = "Live grep [Telescope]";
-    }
-    {
-      key = "<Leader>fb";
-      mode = ["n"];
-      action = ":Telescope buffers<CR>";
-      desc = "List buffers [Telescope]";
-    }
-    {
-      key = "<Leader>fh";
-      mode = ["n"];
-      action = ":Telescope help_tags<CR>";
-      desc = "Help tags [Telescope]";
-    }
     {
       key = "<Leader>fr";
       mode = ["n"];
@@ -53,123 +129,6 @@
       action = ":Neotree toggle<CR>";
       desc = "Toggle file tree [Neotree]";
     }
-    {
-      key = "<Leader>fE";
-      mode = ["n"];
-      action = ":Neotree float<CR>";
-      desc = "Open file tree in float [Neotree]";
-    }
-
-    # NOTE: Gitsigns
-    {
-      key = "[c";
-      mode = ["n"];
-      action = ":Gitsigns prev_hunk<CR>";
-      desc = "Prev hunk";
-    }
-    {
-      key = "]c";
-      mode = ["n"];
-      action = ":Gitsigns next_hunk<CR>";
-      desc = "Next hunk";
-    }
-    {
-      key = "<Leader>gSs";
-      mode = ["n"];
-      action = ":Gitsigns stage_hunk<CR>";
-      desc = "Stage hunk [GitSigns]";
-    }
-    {
-      key = "<Leader>gSr";
-      mode = ["n"];
-      action = ":Gitsigns reset_hunk<CR>";
-      desc = "Reset hunk [GitSigns]";
-    }
-    {
-      key = "<Leader>gSp";
-      mode = ["n"];
-      action = ":Gitsigns preview_hunk<CR>";
-      desc = "Preview hunk [GitSigns]";
-    }
-    {
-      key = "<Leader>gSb";
-      mode = ["n"];
-      action = ":Gitsigns blame_line<CR>";
-      desc = "Blame line [GitSigns]";
-    }
-    {
-      key = "<Leader>gSd";
-      mode = ["n"];
-      action = ":Gitsigns diffthis<CR>";
-      desc = "Diff this [GitSigns]";
-    }
-    {
-      key = "<Leader>gSu";
-      mode = ["n"];
-      action = ":Gitsigns undo_stage_hunk<CR>";
-      desc = "Undo Stage Hunk [GitSigns]";
-    }
-    {
-      key = "<Leader>gSt";
-      mode = ["n"];
-      action = ":Gitsigns toggle_current_line_blame<CR>";
-      desc = "Toggle Current Line Blame[GitSigns]";
-    }
-
-    # NOTE: Trouble
-    {
-      key = "<Leader>tx";
-      mode = ["n"];
-      action = ":Trouble<CR>";
-      desc = " Trouble Cmd List [Trouble]";
-    }
-    {
-      key = "<Leader>tD";
-      mode = ["n"];
-      action = ":Trouble diagnostics<CR>";
-      desc = "Document diagnostics [Trouble]";
-    }
-    {
-      key = "<Leader>tl";
-      mode = ["n"];
-      action = ":Trouble loclist<CR>";
-      desc = "LOC List [Trouble]";
-    }
-    {
-      key = "<Leader>tq";
-      mode = ["n"];
-      action = ":Trouble quickfix<CR>";
-      desc = "Quickfix list [Trouble]";
-    }
-    {
-      key = "<Leader>ts";
-      mode = ["n"];
-      action = ":Trouble symbols<CR>";
-      desc = "Symbols List [Trouble]";
-    }
-
-    # NOTE: Toggle Term
-    {
-      key = "<Leader>/";
-      mode = ["n"];
-      action = ":ToggleTerm<CR>";
-      desc = "Toggle Terminal [Toggle Term]";
-    }
-    {
-      key = "<Leader>/";
-      mode = ["t"];
-      action = "<C-\\><C-n>:ToggleTerm<CR>";
-      desc = "Toggle Terminal [Toggle Term]";
-    }
-
-    # NOTE: UI
-
-    # {
-    #   key = "<Leader>us";
-    #   mode = ["n"];
-    #   action = "<cmd>lua Snacks.toggle.option('spell', { name = 'Spelling' })()<CR>";
-    #   desc = "Toggle Spelling [Snacks]";
-    # }
 
     # NOTE: Extra
 

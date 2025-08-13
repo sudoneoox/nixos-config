@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.file = {
     ".config/kitty" = {
       source = "${pkgs.skitty}";

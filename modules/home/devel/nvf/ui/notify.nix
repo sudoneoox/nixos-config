@@ -1,3 +1,5 @@
 {
-  programs.nvf.settings.vim.mini.notify.enable = true;
+  programs.nvf.settings.vim.mini.notify = {
+    enable = true;
+  };
 }

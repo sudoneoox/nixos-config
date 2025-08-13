@@ -3,11 +3,10 @@
   pkgs,
   lib,
   username,
+  host,
   ...
-}:
-{
+}: {
   imports = [
-
     "${inputs.nixos-hardware}/common/cpu/intel/meteor-lake"
     "${inputs.nixos-hardware}/common/gpu/nvidia/ada-lovelace"
     "${inputs.nixos-hardware}/common/gpu/nvidia/prime.nix"
@@ -29,7 +28,7 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = ["ntfs"];
   };
 
   hardware = {
@@ -45,17 +44,14 @@
       vaapiDriver = "intel-media-driver";
       enableHybridCodec = true;
     };
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
+
     asus.battery = {
       chargeUpto = 75;
       enableChargeUptoScript = true;
     };
   };
 
-  networking.hostName = "X0NixOSLaptop";
+  networking.hostName = host;
 
   security.rtkit.enable = true;
 
@@ -76,15 +72,15 @@
     openssh.enable = true;
     tlp = {
       enable = true;
-      settings.CPU_SCALING_GOVERNER_ON_AC = "performance";
-      settings.CPU_SCALING_GOVERNER_ON_BAT = "powersave";
-      settings.CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      settings.CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      settings.CPU_MIN_PERF_ON_AC = 0;
-      settings.CPU_MAX_PERF_ON_AC  = 100;
-      settings.CPU_MIN_PERF_ON_BAT = 0;
-      settings.CPU_MAX_PERF_ON_BAT = 20;
-      settings.START_CHARGE_THRESH_BAT0 = 40;
+      "settings".CPU_SCALING_GOVERNER_ON_AC = "performance";
+      "settings".CPU_SCALING_GOVERNER_ON_BAT = "powersave";
+      "settings".CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      "settings".CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      "settings".CPU_MIN_PERF_ON_AC = 0;
+      "settings".CPU_MAX_PERF_ON_AC = 100;
+      "settings".CPU_MIN_PERF_ON_BAT = 0;
+      "settings".CPU_MAX_PERF_ON_BAT = 20;
+      "settings".START_CHARGE_THRESH_BAT0 = 40;
     };
     thermald.enable = true;
   };

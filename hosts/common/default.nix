@@ -7,10 +7,7 @@
   config,
   host,
   ...
-}:
-
-{
-
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
@@ -32,7 +29,7 @@
       "1.0.0.2"
     ];
     networkmanager.ensureProfiles = {
-      environmentFiles = [ config.sops.secrets."wireless.env".path ];
+      environmentFiles = [config.sops.secrets."wireless.env".path];
 
       profiles = {
         HomeWiFi = {
@@ -54,6 +51,12 @@
       };
     };
     firewall.enable = true;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings.General.Experimental = true;
   };
 
   time.timeZone = "America/Chicago";
@@ -114,5 +117,4 @@
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
   ];
-
 }

@@ -3,11 +3,10 @@
   pkgs,
   lib,
   username,
+  host,
   ...
-}:
-{
+}: {
   imports = [
-
     "${inputs.nixos-hardware}/common/cpu/amd/zenpower.nix"
     "${inputs.nixos-hardware}/common/cpu/amd/pstate.nix"
     "${inputs.nixos-hardware}/common/cpu/amd"
@@ -31,18 +30,14 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = ["ntfs"];
   };
 
   hardware = {
     cpu.amd.updateMicrocode = true;
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
   };
 
-  networking.hostName = "X0NixOSDesktop";
+  networking.hostName = host;
 
   security.rtkit.enable = true;
 
@@ -59,7 +54,6 @@
     openssh.enable = true;
     thermald.enable = true;
   };
-
 
   home-manager.users.${username} = {
     imports = [

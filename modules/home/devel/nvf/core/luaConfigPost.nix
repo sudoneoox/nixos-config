@@ -13,6 +13,18 @@
     Snacks.toggle.scroll({name = "Scroll"}):map("<leader>uS")
 
     Snacks.toggle
+    .new({
+
+      name = "Format Save",
+      get = function()
+        return not vim.b.disableFormatSave
+      end,
+      set = function(state)
+        vim.b.disableFormatSave = not state
+      end,
+    }):map("<leader>uf")
+
+    Snacks.toggle
       .new({
         id = "git_blame",
         name = " Git Blame",
@@ -66,6 +78,20 @@
     }):map("<leader>ui")
 
 
+    -- blink-cmp toggle configuration
+    vim.b.completion = false -- completion off by default
+
+    Snacks.toggle
+      .new({
+        name = "Completion",
+        get = function()
+          return vim.b.completion
+        end,
+        set = function(state)
+          vim.b.completion = state
+        end,
+      }):map("<leader>uC")
+
 
 
     -- Auto-update programming wordlist on first startup
@@ -81,29 +107,6 @@
         end
       end,
     })
-
-    -- Remove keybinds that we rebinded so that they dont show up in which-key
-    -- No clue?
-    vim.keymap.del("n", "<leader>fm")
-
-    -- Gitsigns
-    vim.keymap.del("n", "<leader>h")
-    vim.keymap.del("n", "<leader>hb")
-    vim.keymap.del("n", "<leader>hd")
-    vim.keymap.del("n", "<leader>hD")
-    vim.keymap.del("n", "<leader>hP")
-    vim.keymap.del("n", "<leader>hr")
-    vim.keymap.del("n", "<leader>hR")
-    vim.keymap.del("n", "<leader>hs")
-    vim.keymap.del("n", "<leader>hS")
-    vim.keymap.del("n", "<leader>hu")
-    vim.keymap.del("n", "<leader>tb")
-    vim.keymap.del("n", "<leader>td")
-
-    -- Trouble
-    vim.keymap.del("n", "<leader>xl")
-    vim.keymap.del("n", "<leader>xq")
-    vim.keymap.del("n", "<leader>xs")
 
   '';
 }

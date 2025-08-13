@@ -1,8 +1,15 @@
-{ pkgs, lib, host, ... }:
-let
+{
+  pkgs,
+  lib,
+  host,
+  ...
+}: let
   isLaptop = host == "X0NixOSLaptop";
-in
-{ 
+
+  # WARN: obviously not a good conditional but i'm not passing anything to distinct
+  # different CPU manufacturers. I only have two systems so this isn't an issue for me
+  isIntelCPU = host == "X0NixOSLaptop";
+in {
   home.packages = with pkgs; [
     lm_sensors
     bluez
@@ -17,7 +24,7 @@ in
     settings = [
       {
         name = "bar";
-        mod = "dock";
+        mode = "dock";
         layer = "top";
         position = "top";
         height = 17;
@@ -28,7 +35,7 @@ in
           "custom/reboot"
           "custom/power"
         ];
-        modules-center = [ "hyprland/window" ];
+        modules-center = ["hyprland/window"];
         modules-right = [
           "disk"
           "bluetooth"
@@ -42,7 +49,7 @@ in
           all-outputs = false;
           format = "{icon}";
           on-click = "activate";
-          persistent-workspaces."*" = lib.mkIf (isLaptop) [1 2 3 4 ];
+          persistent-workspaces."*" = lib.mkIf isLaptop [1 2 3 4];
           format-icons = {
             "1" = "";
             "2" = "";
@@ -74,7 +81,11 @@ in
         };
 
         "custom/temperature" = {
-          exec = "sensors | awk '/^Package id 0:/ {print int($4)}'";
+          exec =
+            if isIntelCPU
+            then "sensors | awk '/^Package id 0:/ {print int($4)}'"
+            else "sensors | awk '/^Tctl:/ {print int($2)}' || sensors | awk '/^Tdie:/ {print int($2)}'";
+
           format = "  {}°C ";
           interval = 5;
           tooltip = true;
@@ -111,24 +122,23 @@ in
           tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}\t{device_battery_percentage}%";
           on-click = "kitty -e bluetoothctl";
         };
-
       }
       {
         name = "dock";
         layer = "top";
         position = "bottom";
         height = 17;
-        modules-center = [ "wlr/taskbar" ];
-        modules-right = [ "network" "pulseaudio" "backlight" "tray" ];
-        modules-left = [ "clock" "battery" ];
+        modules-center = ["wlr/taskbar"];
+        modules-right = ["network" "pulseaudio" "backlight" "tray"];
+        modules-left = ["clock" "battery"];
 
         "wlr/taskbar" = {
-          format = "{icon} {app_name}";
-          tooltip-format = "{app_name}";
+          format = "{icon} {name}";
+          tooltip-format = "{title}";
           on-click = "activate";
           icon-size = 19;
           all-outputs = false;
-          ignore-list = [ ];
+          ignore-list = [];
           show-special = true;
         };
 
@@ -182,7 +192,6 @@ in
           tooltip-format = "Current volume: {volume}%";
         };
 
-
         backlight = {
           device = "intel_backlight";
           format = "{icon}{percent}% ";
@@ -198,7 +207,7 @@ in
 
         clock = {
           interval = 1;
-          timezone = "Asia/Chengdu";
+          timezone = "US/Central";
           format = "  {:%I:%M %p}";
           tooltip = true;
           tooltip-format = "<tt><small>{calendar}</small></tt>";
@@ -222,7 +231,6 @@ in
             on-click-right = "shift_reset";
           };
         };
-
 
         tray = {
           icon-size = 17;
