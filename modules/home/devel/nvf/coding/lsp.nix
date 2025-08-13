@@ -9,6 +9,7 @@
         virtual_text.enabled = false;
         status_text.enabled = false;
         sign.enabled = true;
+        ignore.clients = ["null-ls"];
       };
     };
     trouble.enable = true; # diagnostics list (Trouble)

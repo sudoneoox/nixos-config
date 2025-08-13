@@ -1,5 +1,6 @@
 {
   programs.nvf.settings.vim = {
+    # NOTE: Telescope [f -> *]
     telescope.mappings = {
       findFiles = "<leader>ff";
       liveGrep = "<leader>fg";
@@ -144,32 +145,51 @@
       key = "J";
       mode = ["v"];
       action = ":m '>+1<CR>gv=gv";
-      desc = "";
     }
     {
       key = "K";
       mode = ["v"];
       action = ":m '<-2<cr>gv=gv";
-      desc = "";
     }
+    # Delete selected text without registering it in your buffer
     {
       key = "<leader>p";
       mode = ["x"];
       action = "'_dP";
-      desc = "";
     }
     # Stay in visual mode whenever indenting selected text
     {
       key = "<";
       mode = ["v"];
       action = "<gv";
-      desc = "";
     }
     {
       key = ">";
       mode = ["v"];
       action = ">gv";
-      desc = "";
+    }
+    # Make PgUp and PgDown Keys do nothing. I don't like when I accidentally press them and
+    # get taken to the bottom of the file
+    {
+      key = "<PageUp>";
+      mode = ["n" "i" "v"];
+      action = "<Nop>";
+    }
+    {
+      key = "<PageDown>";
+      mode = ["n" "i" "v"];
+      action = "<Nop>";
+    }
+    # Remap '$' and '^' to more ergonomic keys
+    {
+      key = "L";
+      mode = ["n" "v"];
+      action = "$";
+    }
+    {
+      key = "H";
+      mode = ["n" "v"];
+      action = "^";
     }
   ];
 }
