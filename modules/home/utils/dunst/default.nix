@@ -1,6 +1,6 @@
-{ username, ... }:
-
-{
+{username, ...}: let
+  dunstIconPath = "/home/${username}/Assets/nixos-config/Icons/dunst";
+in {
   services.dunst = {
     enable = true;
     settings = {
@@ -43,7 +43,7 @@
         foreground = "#a6e3a1";
         frame_color = "#a6e3a1";
         progress_bar_color = "#a6e3a1";
-        default_icon = "/home/${username}/Assets/nixos-config/Icons/dunst/bell-badge-low.svg";
+        default_icon = "${dunstIconPath}/bell-badge-low.svg";
         timeout = 2;
       };
 
@@ -51,7 +51,7 @@
         foreground = "#74c7ec";
         frame_color = "#74c7ec";
         progress_bar_color = "#74c7ec";
-        default_icon = "/home/${username}/Assets/nixos-config/Icons/dunst/bell-badge.svg";
+        default_icon = "${dunstIconPath}/bell-badge.svg";
         timeout = 4;
       };
 
@@ -59,7 +59,7 @@
         foreground = "#f38ba8";
         frame_color = "#f38ba8";
         progress_bar_color = "#f38ba8";
-        default_icon = "/home/${username}/Assets/nixos-config/Icons/dunst/alert-decagram.svg";
+        default_icon = "${dunstIconPath}/alert-decagram.svg";
         timeout = 6;
       };
     };

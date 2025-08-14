@@ -11,11 +11,11 @@
   ];
 
   sops = {
-    defaultSopsFile = ../../../hosts/common/common.secrets.enc.yaml;
+    defaultSopsFile = ../../../hosts/common/secrets.enc.yaml;
 
     age.keyFile = "/home/${username}/Assets/nixos-config/sops/age/common-keys.txt";
     secrets = {
-      "wireless.env".sopsFile = ../../../hosts/common/common.secrets.enc.yaml;
+      "wireless.env".sopsFile = ../../../hosts/common/secrets.enc.yaml;
     };
   };
 

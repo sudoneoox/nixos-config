@@ -1,6 +1,6 @@
-{ username, ... }:
-{
-
+{username, ...}: let
+  iconPath = "/home/${username}/Assets/nixos-config/Icons/hyprlock";
+in {
   programs.hyprlock = {
     enable = true;
 
@@ -67,7 +67,7 @@
 
       image = {
         monitor = "";
-        path = "/home/${username}/Assets/nixos-config/hyprlock/face.jpg";
+        path = "${iconPath}/face.jpg";
         size = 100;
         border_color = "rgb(cba6f7)";
         position = "0, 75";

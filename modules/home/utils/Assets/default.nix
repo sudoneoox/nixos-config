@@ -5,17 +5,7 @@
       recursive = true;
     };
 
-    "Assets/nixos-config/shaders" = {
-      source = ./shaders;
-      recursive = true;
-    };
-    "Assets/nixos-config/shaders/hyprshade.toml" = {
-      source = ../../desktop/hyprland/hyprshade/hyprshade.toml;
-    };
-    "Assets/nixos-config/hyprlock/face.jpg" = {
-      source = ./hyprlock/face.jpg;
-    };
-    "Assets/nixos-config/Icons/dunst" = {
+    "Assets/nixos-config/Icons" = {
       source = ./icons;
       recursive = true;
     };

@@ -327,7 +327,7 @@
       ];
 
       exec = [
-        "hyprshade on /home/${username}/Assets/shaders/vibrance"
+        "hyprshade on /home/${username}/.config/hypr/shaders/vibrance"
       ];
 
       env = [
@@ -350,6 +350,6 @@
       ./hyprpaper
       ./hyprshade
     ]
-    ++ lib.optional (host == "X0NixOSLaptop") ./single-monitor.nix
-    ++ lib.optional (host == "X0NixOSDesktop") ./multi-monitor.nix;
+    ++ lib.optional (host == "X0NixOSLaptop") ./monitors/single.nix
+    ++ lib.optional (host == "X0NixOSDesktop") ./monitors/multi.nix;
 }

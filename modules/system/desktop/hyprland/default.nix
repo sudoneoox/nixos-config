@@ -61,9 +61,4 @@
     XDG_SESSION_TYPE = "wayland";
     XDG_CURRENT_DESKTOP = "Hyprland";
   };
-
-  # TODO: Currently not using and don't have the time to learn
-  # imports = [
-  # ../../quickshell
-  # ];
 }
