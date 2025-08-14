@@ -10,17 +10,17 @@
       recursive = true;
     };
     "Assets/nixos-config/shaders/hyprshade.toml" = {
-      source = ./hyprshade/hyprshade.toml;
+      source = ../../desktop/hyprland/hyprshade/hyprshade.toml;
     };
     "Assets/nixos-config/hyprlock/face.jpg" = {
       source = ./hyprlock/face.jpg;
     };
     "Assets/nixos-config/Icons/dunst" = {
-      source = ./dunst/icons;
+      source = ./icons;
       recursive = true;
     };
     "Assets/nixos-config/Wallpapers" = {
-      source = ./hyprpaper/wallpapers;
+      source = ./wallpapers;
       recursive = true;
     };
   };

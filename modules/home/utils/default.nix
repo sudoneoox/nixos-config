@@ -3,5 +3,6 @@
     ./Assets
     ./wallust
     ./rofi
+    ./dunst
   ];
 }

@@ -56,7 +56,7 @@ else
 fi
 
 # INFO: Reload Waybar (USR2 makes it re-read css)
-if pgrep -x waybar >/dev/null 2>&1 && have pkill; then
+if pgrep -f waybar >/dev/null 2>&1 && have pkill; then
   pkill -USR2 waybar || true
 fi
 
