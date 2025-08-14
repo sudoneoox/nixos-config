@@ -3,7 +3,6 @@
   pkgs,
   lib,
   username,
-  host,
   ...
 }: {
   imports = [
@@ -11,19 +10,12 @@
     "${inputs.nixos-hardware}/common/cpu/amd/pstate.nix"
     "${inputs.nixos-hardware}/common/cpu/amd"
     "${inputs.nixos-hardware}/common/cpu/amd/raphael/igpu.nix"
-
     "${inputs.nixos-hardware}/common/gpu/nvidia/ada-lovelace"
-
     "${inputs.nixos-hardware}/common/pc/ssd"
     "${inputs.nixos-hardware}/common/hidpi.nix"
 
     ./hardware.nix
     ../common
-
-    ../../modules/nixos/desktop/hyprland
-    ../../modules/nixos/virtualisation/qemu.nix
-    ../../modules/nixos/virtualisation/wine.nix
-    ../../modules/nixos/discord
   ];
 
   boot = {

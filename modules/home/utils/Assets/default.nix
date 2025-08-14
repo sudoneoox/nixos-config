@@ -6,11 +6,15 @@
     };
 
     "Assets/nixos-config/shaders" = {
-      source = ./hyprshade/shaders;
+      source = ./shaders;
       recursive = true;
     };
-    "Assets/nixos-config/shaders/hyprshade.toml".source = ./hyprshade/hyprshade.toml;
-    "Assets/nixos-config/hyprlock/face.jpg".source = ./hyprlock/face.jpg;
+    "Assets/nixos-config/shaders/hyprshade.toml" = {
+      source = ./hyprshade/hyprshade.toml;
+    };
+    "Assets/nixos-config/hyprlock/face.jpg" = {
+      source = ./hyprlock/face.jpg;
+    };
     "Assets/nixos-config/Icons/dunst" = {
       source = ./dunst/icons;
       recursive = true;

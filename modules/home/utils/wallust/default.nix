@@ -11,11 +11,9 @@
       source = ./templates;
       recursive = true;
     };
-    "Assets/scripts" = {
-      source = ./scripts;
-      recursive = true;
+    ".config/wallust/wallust.toml" = {
+      source = ./wallust.toml;
     };
-    ".config/wallust/wallust.toml".source = ./wallust.toml;
   };
 
   programs.wallust.enable = true;

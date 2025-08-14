@@ -1,9 +1,4 @@
 {pkgs, ...}: {
-  imports = [
-    ../../modules/home/desktop/hyprland
-    ../../modules/home/desktop/wallust
-  ];
-
   gtk = {
     enable = true;
     theme = {

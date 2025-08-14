@@ -119,12 +119,19 @@
       windowrulev2 = [
         "float, class:com.github.hluk.copyq"
         "size 800 600, class:com.github.hluk.copyq"
+
         "float, class:org.pulseaudio.pavucontrol"
         "size 800, 600, class:com.pulseaudio.pavucontrol"
+
         "float, class:fzfrestore"
         "size 1700 900, class:fzfrestore"
         "center, class:fzfrestore"
         "stayfocused, class:fzfrestore"
+
+        "float, class:fzfwallpicker"
+        "size 1700 900, class:fzfwallpicker"
+        "center, class:fzfwallpicker"
+        "stayfocused, class:fzfwallpicker"
       ];
 
       plugin = {
@@ -292,7 +299,7 @@
         "SUPER, V, exec, copyq --start-server show"
 
         # Wallust Wallpaper Changes
-        "SUPER, W, exec, kitty --class wallust-pick --title 'Pick Wallpaper' --override background_opacity=0.92 -e bash /home/${username}/Assets/nixos-config/scripts/wallust-pick.sh"
+        "SUPER, W, exec, kitty --class fzfwallpicker --title 'Pick Wallpaper' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/Assets/nixos-config/scripts/wallust-pick.sh"
       ];
 
       bindm = [
@@ -338,7 +345,6 @@
 
   imports =
     [
-      ./asset-files.nix
       ./cursor
       ./waybar
       ./hyprlock

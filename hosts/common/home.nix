@@ -7,7 +7,10 @@
   imports = [
     inputs.nvf.homeManagerModules.default
     ../../modules/home/devel
-    ../../modules/home/zen-browser
+    ../../modules/home/desktop/zen-browser
+    ../../modules/home/desktop/hyprland
+    ../../modules/home/desktop/cursors
+    ../../modules/home/utils
   ];
 
   fonts.fontconfig.enable = true;
