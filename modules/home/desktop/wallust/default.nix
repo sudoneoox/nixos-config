@@ -1,13 +1,13 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    chafa
-    jq
+    grc # fzf needs this?
+    chafa # for wallpaper preview
     procps
-    libnotify
+    libnotify # to send notifications
   ];
 
   home.file = {
-    "Assets/nixos-config/wallust/templates" = {
+    ".config/wallust/templates" = {
       source = ./templates;
       recursive = true;
     };
@@ -15,7 +15,7 @@
       source = ./scripts;
       recursive = true;
     };
-    ".config/wallust/config.toml".source = ./config.toml;
+    ".config/wallust/wallust.toml".source = ./wallust.toml;
   };
 
   programs.wallust.enable = true;

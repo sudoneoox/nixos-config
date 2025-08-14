@@ -1,26 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# CONFIG — change to your wallpapers dir
 WALL_DIR="${HOME}/Assets/nixos-config/Wallpapers"
+CFG_DIR="${HOME}/.config/wallust"
+WAYBAR_CSS="${HOME}/.cache/wallust/colors-waybar.css"
 
-# Deps we try to use
 have() { command -v "$1" >/dev/null 2>&1; }
 
-if ! have fzf; then
-  echo "[wallust-pick] error: fzf is required" >&2
-  exit 1
-fi
-
-# Build the fzf command with optional image preview (chafa) if available.
-FZF_PREVIEW=''
-if have chafa; then
-  # Render a preview (fits terminal size automatically)
-  FZF_PREVIEW="--preview 'chafa --fill=block --symbols=block --size=${FZF_PREVIEW_SIZE:-80x40} {}'"
-fi
-
-# Collect candidate images (common extensions)
-mapfile -t files < <(find "$WALL_DIR" -type f \( \
+# INFO: build list, FOLLOW symlinks
+mapfile -t files < <(find -L "$WALL_DIR" -type f \( \
   -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.bmp' \
   \) | sort)
 
@@ -29,49 +17,48 @@ if [[ ${#files[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# Picker
-SEL="$(printf '%s\n' "${files[@]}" | fzf --height=90% --layout=reverse \
-  --prompt='Pick wallpaper ❯ ' --border=rounded --ansi ${FZF_PREVIEW})"
+# INFO: image preview (needs chafa)
+FZF_PREVIEW_OPTS=(--preview "chafa --fill=block --symbols=block --size=${FZF_PREVIEW_SIZE:-80x40} {}")
 
-if [[ -z "${SEL}" ]]; then
-  echo "[wallust-pick] cancelled."
-  exit 0
-fi
+SEL="$(printf '%s\n' "${files[@]}" | fzf --height=90% --layout=reverse \
+  --prompt='Pick wallpaper ❯ ' --border=rounded --ansi "${FZF_PREVIEW_OPTS[@]}")"
+
+[[ -z "${SEL}" ]] && exit 0
 
 echo "[wallust-pick] selected: ${SEL}"
 
-# 1) Try to set it via hyprpaper (if running)
-if pgrep -x hyprpaper >/dev/null 2>&1 && have hyprpaper && have jq && have hyprctl; then
+# INFO: hyprpaper apply (if running)
+if pgrep -x hyprpaper >/dev/null 2>&1 && have hyprpaper; then
   echo "[wallust-pick] applying via hyprpaper…"
-  # Preload once (safe to call repeatedly)
-  hyprpaper preload "${SEL}" || true
-
-  # Set on all monitors
-  mapfile -t mons < <(hyprctl -j monitors | jq -r '.[].name')
-  for m in "${mons[@]}"; do
-    hyprpaper wallpaper "$m,${SEL}" || true
-  done
-else
-  echo "[wallust-pick] hyprpaper not detected (or jq/hyprctl missing); skipping wallpaper apply."
+  hyprctl hyprpaper reload ",${SEL}" || true
 fi
 
-# 2) Regenerate palette from the chosen file
-if have wallust; then
-  echo "[wallust-pick] regenerating wallust palette…"
-  wallust -f "${SEL}"
-else
-  echo "[wallust-pick] wallust not found; skipping palette generation."
+# INFO: ensure template exists
+TEMPL_DIR="${CFG_DIR}/templates"
+mkdir -p "${TEMPL_DIR}" "${HOME}/.cache/wallust"
+
+if [[ ! -f "${TEMPL_DIR}/colors-waybar.css.hbs" ]]; then
+  echo "[wallust-pick] missing ${TEMPL_DIR}/colors-waybar.css.hbs"
+  exit 1
 fi
 
-# 3) Reload waybar so CSS picks up ~/.cache/wallust/colors-waybar.css
+# INFO: Render with Wallust v3 using your CONFIG DIR (no --templates-dir; use -d)
+
+echo "[wallust-pick] rendering wallust templates…"
+wallust -d "${CFG_DIR}" run "${SEL}"
+
+# Verify the configured target exists (WAYBAR_CSS must match wallust.toml)
+if [[ -f "${WAYBAR_CSS}" ]]; then
+  echo "[wallust-pick] rendered: ${WAYBAR_CSS}"
+else
+  echo "[wallust-pick] warning: expected rendered ${WAYBAR_CSS} not found"
+  exit 2
+fi
+
+# INFO: Reload Waybar (USR2 makes it re-read css)
 if pgrep -x waybar >/dev/null 2>&1 && have pkill; then
-  echo "[wallust-pick] reloading waybar…"
   pkill -USR2 waybar || true
 fi
 
-# Optional desktop notification
-if have notify-send; then
-  notify-send "Wallpaper updated" "$(basename "${SEL}")" || true
-fi
-
-echo "[wallust-pick] done."
+# Notify
+have notify-send && notify-send "Wallpaper updated" "$(basename "${SEL}")" || true

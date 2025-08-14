@@ -1,5 +1,8 @@
 
-@import url("file://home/${USER}/.cache/wallust/colors-waybar.css");
+/* NOTE: Not expandable so we have to use home.file instead 
+ * we are keeping this just for syntax highlighting and quick debugging
+ * */
+@import url("file:///home/${USER}/.cache/wallust/colors-waybar.css");
 
 * {
   font-family: "JetBrainsMono Nerd Font";

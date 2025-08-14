@@ -18,9 +18,12 @@ in {
     brightnessctl
   ];
 
+  imports = [
+    ./waybar-style.nix
+  ];
+
   programs.waybar = {
     enable = true;
-    style = builtins.readFile ./style.css;
     settings = [
       {
         name = "bar";

@@ -1,0 +1,19 @@
+
+[wallust]
+backend = "fastresize"
+palette = "dark16"          # v3 name (formerly filter)
+check_contrast = true
+alpha = 100
+
+# --- Templates (v3 short form) ---
+[templates]
+# Waybar colors: render from .hbs to your desired .css output path
+colors-waybar = { template = "colors-waybar.css.hbs", target = "~/.cache/wallust/colors-waybar.css", new_engine = true}
+
+# Example extras 
+# zathura = { template = "zathurarc", target = "~/.config/zathura/zathurarc" }
+# dunst   = { template = "dunstrc.monitor", target = "~/.config/dunst/dunstrc" }
+
+# If you want Handlebars/“new engine” for a specific template, add new_engine = true:
+# test = { template = "test.json", target = "~/.config/complicated.json", new_engine = true }
+
