@@ -1,8 +1,7 @@
-{ username, ... }:
-{
+{username, ...}: {
   # Imports specific to single-monitor setups (usually laptops)
   imports = [
-    ./hypridle
+    ../hypridle
   ];
 
   wayland.windowManager.hyprland = {

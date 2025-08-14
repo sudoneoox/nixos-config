@@ -2,32 +2,8 @@
   host,
   pkgs,
   config,
-  username,
-  inputs,
   ...
 }: {
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
-
-  sops = {
-    defaultSopsFile = ../../../hosts/common/secrets.enc.yaml;
-
-    age.keyFile = "/home/${username}/Assets/nixos-config/sops/age/common-keys.txt";
-    secrets = {
-      "wireless.env".sopsFile = ../../../hosts/common/secrets.enc.yaml;
-    };
-  };
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
-      X11Forwarding = false;
-    };
-  };
   networking = {
     networkmanager = {
       enable = true;

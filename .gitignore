@@ -2,3 +2,4 @@ dotfiles
 result
 .stylua.toml
 debug
+**/*secrets.yaml

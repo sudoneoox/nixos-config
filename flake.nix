@@ -9,11 +9,6 @@
       url = "github:nixos/nixos-hardware";
     };
 
-    sfish = {
-      url = "github:sudoneoox/sfish";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };

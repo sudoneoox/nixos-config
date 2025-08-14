@@ -1,10 +1,12 @@
 {
   imports = [
+    ./nh.nix
     ./nix.nix
     ./nixpkgs.nix
-    ./nh.nix
     ./overlays.nix
-    ./user.nix
+    ./sops.nix
+    ./substituters.nix
     ./system.nix
+    ./user.nix
   ];
 }

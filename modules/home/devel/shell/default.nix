@@ -1,8 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./bash.nix
-    ./fish.nix
-    ./zsh.nix
+    ./shells
     ./commands
     ./languages
   ];

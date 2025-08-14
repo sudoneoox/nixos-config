@@ -10,13 +10,9 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ../../modules/base
-    ../../modules/nixos/networking
-    ../../modules/nixos/virtualisation/qemu.nix
-    ../../modules/nixos/virtualisation/wine.nix
-
-    ../../modules/nixos/desktop/hyprland
-    ../../modules/nixos/desktop/qbittorrent
-    ../../modules/nixos/desktop/discord
+    ../../modules/system/network
+    ../../modules/system/desktop/hyprland
+    ../../modules/system/desktop/qbittorrent
   ];
 
   hardware.bluetooth = {
