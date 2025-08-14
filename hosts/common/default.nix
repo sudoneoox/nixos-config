@@ -4,54 +4,15 @@
   inputs,
   email,
   pkgs,
-  config,
   host,
   ...
 }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.sops-nix.nixosModules.sops
-    inputs.nix-index-database.nixosModules.nix-index
     ../../modules/base
+    ../../modules/nixos/networking
     ../../modules/nixos/qbittorrent
   ];
-
-  sops.defaultSopsFile = ./common.secrets.enc.yaml;
-  sops.age.keyFile = "/home/${username}/Assets/nixos-config/sops/age/common-keys.txt";
-  sops.secrets = {
-    "wireless.env".sopsFile = ./common.secrets.enc.yaml;
-  };
-
-  networking = {
-    networkmanager.enable = true;
-    nameservers = [
-      "1.1.1.2"
-      "1.0.0.2"
-    ];
-    networkmanager.ensureProfiles = {
-      environmentFiles = [config.sops.secrets."wireless.env".path];
-
-      profiles = {
-        HomeWiFi = {
-          connection = {
-            id = "HomeWiFi";
-            type = "wifi";
-          };
-
-          wifi = {
-            ssid = "$HOME_WIFI_SSID";
-          };
-
-          wifi-security = {
-            key-mgmt = "wpa-psk";
-            auth-alg = "open";
-            psk = "$HOME_WIFI_PASSWORD";
-          };
-        };
-      };
-    };
-    firewall.enable = true;
-  };
 
   hardware.bluetooth = {
     enable = true;
@@ -113,8 +74,4 @@
       ];
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    networkmanagerapplet
-  ];
 }

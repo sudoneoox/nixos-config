@@ -5,5 +5,6 @@
     ./nh.nix
     ./overlays.nix
     ./user.nix
+    ./system.nix
   ];
 }

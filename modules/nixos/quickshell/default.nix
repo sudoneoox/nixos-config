@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     quickshell
     qt6.qt5compat
@@ -12,7 +10,6 @@
     libsForQt5.qt5.qtgraphicaleffects
     libsForQt5.qt5.qtimageformats
     libsForQt5.qt5.qtmultimedia
-
   ];
 
   environment.variables = {
@@ -23,5 +20,4 @@
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
   };
-
 }

@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   imports = [
     ../../modules/home/desktop/hyprland
+    ../../modules/home/desktop/wallust
   ];
 
   gtk = {
@@ -17,16 +16,17 @@
     };
   };
 
-  qt.enable = true;
-  qt.platformTheme.name = "gtk";
-  qt.style.name = "adwaita-dark";
-  qt.style.package = pkgs.adwaita-qt;
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+    style.package = pkgs.adwaita-qt;
+  };
 
   services.flameshot = {
     enable = true;
-    package = pkgs.flameshot.override { enableWlrSupport = true; };
+    package = pkgs.flameshot.override {enableWlrSupport = true;};
   };
-
 
   home.packages = with pkgs; [
     proton-pass

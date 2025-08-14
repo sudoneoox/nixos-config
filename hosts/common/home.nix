@@ -3,11 +3,8 @@
   username,
   inputs,
   ...
-}:
-
-{
+}: {
   imports = [
-    inputs.nix-index-database.homeModules.nix-index
     inputs.nvf.homeManagerModules.default
     ../../modules/home/devel
     ../../modules/home/zen-browser
@@ -32,7 +29,6 @@
     username = "${username}";
     homeDirectory = "/home/${username}";
   };
-
 
   programs = {
     home-manager.enable = true;

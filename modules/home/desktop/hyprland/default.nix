@@ -1,37 +1,20 @@
-{host, lib, username, pkgs, ...}:
 {
-
-
-
+  host,
+  lib,
+  username,
+  pkgs,
+  ...
+}: {
   # Assets that plugins or scripts use
-  home.file."Assets/nixos-config/scripts".source = ./scripts;
-  home.file."Assets/nixos-config/scripts".recursive = true;
-  home.file."Assets/nixos-config/shaders".source = ./hyprshade/shaders;
-  home.file."Assets/nixos-config/shaders".recursive = true;
-  home.file."Assets/nixos-config/shaders/hyprshade.toml".source = ./hyprshade/hyprshade.toml;
-  home.file."Assets/nixos-config/hyprlock/face.jpg".source = ./hyprlock/face.jpg;
-  home.file."Assets/nixos-config/Icons/dunst".source = ./dunst/icons;
-  home.file."Assets/nixos-config/Icons/dunst".recursive = true;
-  home.file."Assets/nixos-config/Wallpapers".source = ./hyprpaper/wallpapers;
-  home.file."Assets/nixos-config/Wallpapers".recursive = true;
-  home.file."Assets/nixos-config/wallust/wallust.toml".source = ./wallust/wallust.toml;
-
-  services.gnome-keyring = {
-    enable = true;
-    components = [ "secrets" ];
-  };
-
-  services.network-manager-applet.enable = true;
-
-  xdg.autostart.enable = true;
-
-  home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
+  services = {
+    gnome-keyring = {
+      enable = true;
+      components = ["secrets"];
+    };
+    network-manager-applet.enable = true;
   };
 
   wayland.windowManager.hyprland = {
-
     plugins = [
       pkgs.hyprland-plugins.hyprbars
       pkgs.hyprspace
@@ -42,17 +25,15 @@
     package = null;
     portalPackage = null;
     xwayland.enable = true;
-    systemd.variables = [ "--all" ];
+    systemd.variables = ["--all"];
 
-    settings = 
-    let 
-        terminal = "kitty";
-        filemanager = "thunar";
-        active_border = "rgba(0,190,150,1) rgba(0,0,0,0) rgba(100,190,255,1) rgba(0,0,0,0) rgba(0,190,150,1) 35deg";
-        inactive_border = "rgba(515251ff)";
-        shadow_color = "rgba(1a1a1aee)";     
-    in 
-    {
+    settings = let
+      terminal = "kitty";
+      filemanager = "thunar";
+      active_border = "rgba(0,190,150,1) rgba(0,0,0,0) rgba(100,190,255,1) rgba(0,0,0,0) rgba(0,190,150,1) 35deg";
+      inactive_border = "rgba(515251ff)";
+      shadow_color = "rgba(1a1a1aee)";
+    in {
       input = {
         follow_mouse = 1;
         kb_layout = "us";
@@ -143,13 +124,13 @@
         "float, class:fzfrestore"
         "size 1700 900, class:fzfrestore"
         "center, class:fzfrestore"
-        "stayfocused, class:fzfrestore" 
+        "stayfocused, class:fzfrestore"
       ];
 
       plugin = {
         hyprbars = {
           bar_height = 30;
-          bar_color = "rgba(000000cc)"; 
+          bar_color = "rgba(000000cc)";
           bar_precedence_over_border = true;
           col.text = "rgb(dedede)";
           bar_text_size = 10;
@@ -157,9 +138,9 @@
           bar_button_padding = 10;
           bar_padding = 6;
           hyprbars-button = [
-            "rgb(ff5f56), 18, 󰅙, hyprctl dispatch killactive" 
+            "rgb(ff5f56), 18, 󰅙, hyprctl dispatch killactive"
             "rgb(ffbd2e), 18, , hyprctl dispatch tag active:minimized && hyprctl dispatch movetoworkspacesilent +10"
-            "rgb(27c93f), 18, , hyprctl dispatch fullscreen" 
+            "rgb(27c93f), 18, , hyprctl dispatch fullscreen"
           ];
         };
 
@@ -218,7 +199,7 @@
             trigger_height = 0;
             workspaces = "all";
           };
-          
+
           tabs = {
             height = 22;
             padding = 6;
@@ -310,8 +291,10 @@
         # CLIPBOARD
         "SUPER, V, exec, copyq --start-server show"
 
+        # Wallust Wallpaper Changes
+        "SUPER, W, exec, kitty --class wallust-pick --title 'Pick Wallpaper' --override background_opacity=0.92 -e bash /home/${username}/Assets/nixos-config/scripts/wallust-pick.sh"
       ];
-      
+
       bindm = [
         "SUPER, mouse:272, movewindow"
         "SUPER, mouse:273, resizewindow"
@@ -353,16 +336,17 @@
     };
   };
 
-  imports = [
-    ./cursor
-    ./waybar
-    ./hyprlock
-    ./hyprpaper
-    ./hyprshade
-    ./dunst
-    ./wallust
-    ../rofi
-  ]
+  imports =
+    [
+      ./asset-files.nix
+      ./cursor
+      ./waybar
+      ./hyprlock
+      ./hyprpaper
+      ./hyprshade
+      ./dunst
+      ../rofi
+    ]
     ++ lib.optional (host == "X0NixOSLaptop") ./single-monitor.nix
     ++ lib.optional (host == "X0NixOSDesktop") ./multi-monitor.nix;
 }

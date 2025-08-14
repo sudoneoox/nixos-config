@@ -51,8 +51,6 @@
     };
   };
 
-  networking.hostName = host;
-
   security.rtkit.enable = true;
 
   services = {
@@ -69,7 +67,6 @@
       enable = true;
       touchpad.disableWhileTyping = true;
     };
-    openssh.enable = true;
     tlp = {
       enable = true;
       "settings".CPU_SCALING_GOVERNER_ON_AC = "performance";

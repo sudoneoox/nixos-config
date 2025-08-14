@@ -1,10 +1,13 @@
-{username, pkgs, ...}:
 {
+  username,
+  pkgs,
+  ...
+}: {
   virtualisation = {
-      oci-containers.backend = true;
-      docker.enable = true;
-    };
+    docker.enable = true;
+    oci-containers.backend = "docker";
+  };
   environment.systemPackages = with pkgs; [lazydocker];
 
   users.users.${username}.extraGroups = ["docker"];
-} 
+}

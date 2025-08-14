@@ -37,8 +37,6 @@
     cpu.amd.updateMicrocode = true;
   };
 
-  networking.hostName = host;
-
   security.rtkit.enable = true;
 
   services = {
@@ -51,7 +49,6 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-    openssh.enable = true;
     thermald.enable = true;
   };
 

@@ -4,14 +4,7 @@
   lib,
   host,
   ...
-}:
-{
-
-  imports = [
-    # TODO: Currently not using and don't have the time to learn
-    # ../../quickshell
-  ];
-
+}: {
   services.greetd = {
     enable = true;
     settings = {
@@ -30,19 +23,15 @@
     portalPackage = pkgs.hyprland-git.xdg-desktop-portal-hyprland;
   };
 
-  environment.sessionVariables = {
-    # If your cursor becomes invisble
-    WLR_NO_HARDWARE_CURSORS = "1";
-
-    # Hint electron apps to use wauland
-    NIXOS_OZONE_WL = "1";
-
-    # For Hyprland QT Support
-    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
+  xdg = {
+    autostart.enable = true;
+    portal = {
+      enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    };
   };
 
-  environment.systemPackages =
-    with pkgs;
+  environment.systemPackages = with pkgs;
     [
       dunst
       rofi-wayland
@@ -51,7 +40,6 @@
       hyprpicker
       hyprshade
       copyq
-
     ]
     ++ lib.optionals (host == "X0NixOSDesktop") [
       # In overlays/default.nix
@@ -62,8 +50,20 @@
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
+    # If your cursor becomes invisble
+
     WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wauland
+    NIXOS_OZONE_WL = "1";
+    # For Hyprland QT Support
+    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
+
     XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "Hyprland";
   };
 
+  # TODO: Currently not using and don't have the time to learn
+  # imports = [
+  # ../../quickshell
+  # ];
 }

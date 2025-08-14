@@ -1,0 +1,10 @@
+
+[wallust]
+backend = "fastresize"
+palette = "dark16"
+check_contrast = true
+alpha = 100
+
+[templates.colors-waybar]
+source = "~/Assets/nixos-config/wallust/templates/colors-waybar.css.hbs"
+target = "~/.cache/wallust/colors-waybar.css"
