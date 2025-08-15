@@ -1,10 +1,13 @@
-{pkgs, ...}: {
-  home.file = {
-    ".config/kitty" = {
-      source = "${pkgs.skitty}";
-      recursive = true;
-    };
-  };
+{
+  imports = [
+    ./fonts.nix
+    ./settings.nix
+    ./bindings.nix
+    ./extra.nix
+    ./integration.nix
+    ./theme.nix
+    ./files.nix
+  ];
 
   programs.kitty = {
     enable = true;
