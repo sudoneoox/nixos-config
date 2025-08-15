@@ -1028,7 +1028,6 @@
         "nixpkgs-f2k": "nixpkgs-f2k",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nvf": "nvf",
-        "skitty": "skitty",
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
         "zen-browser": "zen-browser"
@@ -1048,26 +1047,6 @@
         "owner": "rust-analyzer",
         "ref": "nightly",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "skitty": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1754205654,
-        "narHash": "sha256-ie9wCpO3oWrxFrQitnZzV1ZdR3HJySitaGp+Dgtz4N8=",
-        "owner": "sudoneoox",
-        "repo": "skitty",
-        "rev": "a362be08e86d8775d696b77d5d68ebf6b6ecbd49",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sudoneoox",
-        "repo": "skitty",
         "type": "github"
       }
     },
