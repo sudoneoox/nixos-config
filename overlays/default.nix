@@ -3,7 +3,6 @@
 
   modifications = final: prev: {
     awesome = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
-    skitty = inputs.skitty.packages.${prev.system}.default;
     hyprspace = inputs.Hyprspace.packages.${prev.system}.default;
     hyprland-git = inputs.hyprland.packages.${prev.system};
     hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system};
