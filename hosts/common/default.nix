@@ -19,13 +19,17 @@
     blacklistedModules.enable = true;
     bluetooth.enable = true;
     boot.enable = true;
+    cups.enable = true;
     doas.enable = true;
     fail2ban.enable = true;
     kernel.enable = true;
+    network-manager.enable = true;
+    network-manager-dispatcher.enable = true;
     ssh.enable = true;
     systemd.enable = true;
     tor.enable = true;
     usbguard.enable = true;
+    wpa-supplicant.enable = true;
   };
 
   hardware.bluetooth = {

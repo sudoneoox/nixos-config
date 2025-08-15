@@ -5,13 +5,17 @@
     ./blacklistedModules.nix
     ./bluetooth.nix
     ./boot.nix
+    ./cups.nix
     ./doas.nix
     ./fail2ban.nix
     ./kernel-security.nix
+    ./network-manager.nix
+    ./network-manager-dispatcher.nix
     ./packages.nix
     ./ssh.nix
     ./systemd.nix
     ./tor.nix
     ./usb-protection.nix
+    ./wpa_supplicant.nix
   ];
 }
