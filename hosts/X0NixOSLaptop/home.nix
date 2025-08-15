@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  imports = [
+    ../../modules/home/desktop/vesktop
+  ];
+
   gtk = {
     enable = true;
     theme = {

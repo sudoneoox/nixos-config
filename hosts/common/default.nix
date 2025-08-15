@@ -13,7 +13,6 @@
     ../../modules/security
     ../../modules/system/network
     ../../modules/system/desktop/hyprland
-    ../../modules/system/desktop/qbittorrent
   ];
 
   X0.security = {
@@ -60,15 +59,10 @@
   fonts.enableDefaultPackages = true;
 
   programs = {
+    # System wide
     zsh.enable = true;
+    git.enable = true;
     fish.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
   };
 
   home-manager = {

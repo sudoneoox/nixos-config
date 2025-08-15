@@ -16,6 +16,9 @@
 
     ./hardware.nix
     ../common
+
+    ../../modules/system/desktop/file-manager
+    ../../modules/system/desktop/qbittorrent
   ];
 
   boot = {

@@ -13,7 +13,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     # Disable sudo
-    security.sudo.enable = false;
+    # I had issues with disabling this you might have better luck
+    security.sudo.enable = true;
 
     # enable and configure doas
     security.doas = {
@@ -28,14 +29,15 @@ in {
           # noPass = true  # Convenient but even less secure
           keepEnv = true; # often necessary
           # Optional; you can also specify which commands they can run, e.g.:
-          cmd = "ALL"; # allows running all commands (default if not specified)
+          # cmd = "ALL"; # allows running all commands (default if not specified)
           # cmd = "/run/current-system/sw/bin/nixos-rebuild; # Only allow specific commands
         }
       ];
     };
 
-    environment.shellAliases = {
-      sudo = "doas";
-    };
+    # Only enable this if doas works as a standalone replacement for sudo for you
+    # environment.shellAliases = {
+    #   sudo = "doas";
+    # };
   };
 }
