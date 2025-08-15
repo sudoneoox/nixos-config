@@ -1,6 +1,6 @@
 
 [wallust]
-backend = "fastresize"
+backend = "wal"
 palette = "dark16"          # v3 name (formerly filter)
 check_contrast = true
 alpha = 100
