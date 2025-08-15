@@ -6,6 +6,7 @@
     local map = vim.keymap.set
 
     Snacks.toggle.option("spell", { name = "Spell Checking" }):map("<leader>us")
+
     Snacks.toggle.option("wrap", { name = "Wrap Lines" }):map("<leader>uw")
     Snacks.toggle.option("list", { name = "List (Visible Whitespaces)" }):map("<leader>ul")
     Snacks.toggle.diagnostics({ name = "Toggle Diagnostics" }):map("<leader>uD")
@@ -95,18 +96,18 @@
 
 
     -- Auto-update programming wordlist on first startup
-    vim.api.nvim_create_autocmd("VimEnter", {
-      callback = function()
-        -- Check if dirtytalk dict file exists
-        local dict_path = vim.fn.stdpath('data') .. '/site/spell/programming.utf-8.add'
-        if vim.fn.filereadable(dict_path) == 0 then
-          -- Only run if file doesn't exist to avoid repeated downloads
-          vim.schedule(function()
-            vim.cmd('DirtytalkUpdate')
-          end)
-        end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("VimEnter", {
+    --   callback = function()
+    --     -- Check if dirtytalk dict file exists
+    --       local dict_path = vim.fn.stdpath('data') .. '/site/spell/programming.utf-8.add'
+    --       if vim.fn.filereadable(dict_path) == 0 then
+    --         -- Only run if file doesn't exist to avoid repeated downloads
+    --         vim.schedule(function()
+    --           vim.cmd('DirtytalkUpdate')
+    --         end)
+    --       end
+    --   end,
+    -- })
 
   '';
 }

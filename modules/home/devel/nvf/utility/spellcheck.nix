@@ -1,7 +1,8 @@
 {
   programs.nvf.settings.vim.spellcheck = {
-    enable = true;
+    # Default start off
+    enable = false;
     languages = ["en"];
-    programmingWordlist.enable = true;
+    programmingWordlist.enable = false;
   };
 }
