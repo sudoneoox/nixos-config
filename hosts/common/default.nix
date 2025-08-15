@@ -10,10 +10,24 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ../../modules/base
+    ../../modules/security
     ../../modules/system/network
     ../../modules/system/desktop/hyprland
     ../../modules/system/desktop/qbittorrent
   ];
+
+  X0.security = {
+    blacklistedModules.enable = true;
+    bluetooth.enable = true;
+    boot.enable = true;
+    doas.enable = true;
+    fail2ban.enable = true;
+    kernel.enable = true;
+    ssh.enable = true;
+    systemd.enable = true;
+    tor.enable = true;
+    usbguard.enable = true;
+  };
 
   hardware.bluetooth = {
     enable = true;

@@ -6,6 +6,7 @@
 }: {
   users = {
     defaultUserShell = pkgs.fish;
+    mutableUsers = false;
     users.${username} = {
       hashedPasswordFile = config.sops.secrets."system-password".path;
       isNormalUser = true;
