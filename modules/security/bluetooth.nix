@@ -12,8 +12,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     systemd.services.bluetooth.serviceConfig = {
-      ProtectKernelTunables = true;
-      ProtectKernelModules = true;
+      ProtectKernelTunables = lib.mkForce true;
+      ProtectKernelModules = lib.mkForce true;
       ProtectKernelLogs = true;
       ProtectHostname = true;
       ProtectControlGroups = true;

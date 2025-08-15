@@ -13,6 +13,5 @@
     ./systemd.nix
     ./tor.nix
     ./usb-protection.nix
-    ./tor-browser.nix
   ];
 }

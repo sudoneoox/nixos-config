@@ -32,6 +32,6 @@ in {
       '';
     };
 
-    environemnt.systemPackages = [pkgs.usbguard];
+    environment.systemPackages = [pkgs.usbguard];
   };
 }
