@@ -10,10 +10,16 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ../../modules/base
+
+    #INFO: Defines X0.security options
     ../../modules/security
 
+    #INFO: For scripts used throughout configuration files and systemd-units
     ../../modules/system/utils
+
+    #INFO: Network conf
     ../../modules/system/network
+
     ../../modules/system/desktop/hyprland
   ];
 

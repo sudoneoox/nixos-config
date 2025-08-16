@@ -17,6 +17,7 @@
       description = "Make file executable, then run it";
       body = ''
         chmod +x "$argv"
+        shellcheck "./$argv"
         eval "./$argv"
       '';
     };

@@ -9,5 +9,6 @@
     ./nix-index.nix
     ./fzf.nix
     ./lsd.nix
+    ./shellcheck.nix
   ];
 }

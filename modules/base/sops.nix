@@ -29,8 +29,12 @@ in {
     # defaultSopsFile = ../../hosts/common/secrets.enc.yaml;
     defaultSopsFile = "${SOPS_SECRETS_PATH}/secrets.enc.yaml";
     secrets = {
-      "wireless.env" = {};
+      # NOTE: These both use the defaultSopsFile
+      "wireless.env" = {
+        owner = "root";
+      };
       "system-password" = {
+        owner = "root";
         neededForUsers = true;
       };
     };

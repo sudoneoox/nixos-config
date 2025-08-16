@@ -3,6 +3,7 @@
   #NOTE: This defines units for all users; they'll be available when the user session starts.
 
   systemd.user.services.low-battery-notifier = {
+    enable = true;
     description = "Low Battery Notifier";
     unitConfig = {
       #INFO: Only start on machines that actually have a battery.
@@ -17,6 +18,7 @@
     description = "Run low-battery-notifier periodically";
     timerConfig = {
       OnBootSec = "1min";
+      # INFO: Run every 3 minutes
       OnUnitActiveSec = "3min";
       Persistent = true;
     };

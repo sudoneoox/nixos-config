@@ -1,7 +1,7 @@
 #WARN: Make sure to create a root-only deploy key to your private github repo holding your sops secrets
 # sudo -i
-# mkdir -p /root/.ssh && chmod 700 /root/.ssh/id_ed25519 -C "secrets-sync deploy key" -N ""
-# chmod 600 /root/.ssh/id_ed25519 # (put the pub key as a github deploy key)
+# install -d -m 700 /root/.ssh
+# ssh-keygen -t ed25519 -C "secrets-sync deploy key" -f /root/.ssh/id_ed25519 -N ""  # (put the pub key as a github deploy key)
 # ssh-keyscan github.com >> /root/.ssh/known_hosts # pre-trust githubs host-key
 # chomd 644 /root/.ssh/known_hosts
 # ssh -T git@github.com # Optionally you can test as root
@@ -25,8 +25,12 @@ in {
       Type = "oneshot";
       User = "root";
       Group = "root";
+      Environment = [
+        "$HOME=/root"
+        "GIT_SSH_COMMAND=${pkgs.openssh}/bin/ssh -oBatchMode=yes -oStrictHostKeyChecking=yes"
+      ];
     };
-    path = [pkgs.git pkgs.coreutils];
+    path = [pkgs.git pkgs.coreutils pkgs.openssh];
     script = ''
       install -d -m 700 ${SOPS_SECRETS_PATH}
       if [ -d ${SOPS_SECRETS_PATH}/.git ]; then
