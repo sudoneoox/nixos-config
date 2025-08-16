@@ -1,9 +1,7 @@
 
 [wallust]
-backend = "wal"
+backend = "full"
 palette = "dark16"          # v3 name (formerly filter)
-check_contrast = true
-alpha = 100
 
 # --- Templates (v3 short form) ---
 [templates]

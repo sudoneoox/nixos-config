@@ -9,7 +9,6 @@
       enable = true;
       ensureProfiles = {
         environmentFiles = [config.sops.secrets."wireless.env".path];
-
         profiles = {
           HomeWiFi = {
             connection = {
