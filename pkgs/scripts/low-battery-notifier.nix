@@ -1,5 +1,13 @@
-{pkgs, ...}: let
-  lowBatteryNotifier = pkgs.writeShellScript "low-battery-notifier" ''
+{pkgs, ...}:
+pkgs.writeShellApplication {
+  name = "low-battery-notifier";
+  runtimeInputs = [
+    pkgs.acpi
+    pkgs.gnugrep
+    pkgs.libnotify
+    pkgs.coreutils
+  ];
+  text = ''
     set -euo pipefail
 
     #INFO: acpi prints lines like: "Battery 0: Discharging, 14%, 00:20:11 remaining"
@@ -25,30 +33,4 @@
       fi
     fi
   '';
-in {
-  #NOTE:: Per-user systemd unit so notifications hit the session bus.
-  #NOTE: This defines units for all users; they'll be available when the user session starts.
-  systemd.user.services.low-battery-notifier = {
-    description = "Low Battery Notifier";
-    #INFO: Run only on machines that actually have a battery.
-    unitConfig.ConditionPathExistsGlob = "/sys/class/power_supply/BAT*/uevent";
-    serviceConfig = {
-      Type = "oneshot";
-    };
-    #WARN: Put required tools in PATH for the service
-    path = [pkgs.acpi pkgs.gnugrep pkgs.libnotify pkgs.coreutils];
-    #INFO: Just run the script we built above
-    script = "${lowBatteryNotifier}";
-  };
-
-  systemd.user.timers.low-battery-notifier = {
-    description = "Run low-battery-notifier periodically";
-    wantedBy = ["timers.target"];
-    timerConfig = {
-      #INFO: Start a little after login/boot, then repeat every 3 minutes
-      OnBootSec = "1min";
-      OnUnitActiveSec = "3min";
-      Persistent = true; #INFO: catch up after suspend
-    };
-  };
 }

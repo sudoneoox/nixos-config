@@ -1,6 +1,4 @@
 {inputs, ...}: {
-  additions = final: _prev: import ../pkgs {pkgs = final;};
-
   modifications = final: prev: {
     awesome = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
     hyprspace = inputs.Hyprspace.packages.${prev.system}.default;
@@ -11,6 +9,10 @@
     zen-browser-twilight = inputs.zen-browser.packages.${prev.system}.specific.twilight;
   };
 
+  additions = final: _prev: import ../pkgs {pkgs = final;};
+
+  #INFO: When applied, the stable nixpkgs set (declared in the flake inputs) will
+  # be accessible through 'pkgs.stable'
   stable-packages = final: _prev: {
     stable = import inputs.nixpkgs-stable {
       system = final.system;

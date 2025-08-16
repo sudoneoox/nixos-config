@@ -1,15 +1,15 @@
-{ username, pkgs, ... }:
-
 {
+  username,
+  pkgs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
-
     # Specific Plugins to multi monitor setup
     plugins = with pkgs; [
       hyprland-smw
     ];
 
     settings = {
-      
       monitor = [
         "DP-6,preferred,0x0,1"
         "DP-4,preferred,1920x0,1"
@@ -24,7 +24,7 @@
           enable_wrapping = false;
         };
       };
-      
+
       bind = [
         # Volume Keybinds
         # Volume Up: Super + Ctrl + Up Arrow
@@ -57,11 +57,10 @@
         # MINIMIZE WINDOW
         "SUPER, N, exec, hyprctl dispatch tag active:minimized && hyprctl dispatch split-movetoworkspacesilent +10"
 
-        "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/Assets/nixos-config/scripts/hypr-restore-window.sh split-" 
+        "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.hyprRestoreWindow}/bin/hypr-restore-window"
 
         # toggle move workspace to other monitor
         "SUPER, O, exec, hyprctl dispatch split-changemonitor 1"
-
       ];
     };
   };

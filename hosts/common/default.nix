@@ -11,6 +11,8 @@
     inputs.home-manager.nixosModules.home-manager
     ../../modules/base
     ../../modules/security
+
+    ../../modules/system/utils
     ../../modules/system/network
     ../../modules/system/desktop/hyprland
   ];

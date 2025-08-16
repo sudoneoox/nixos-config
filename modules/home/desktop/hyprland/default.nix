@@ -299,7 +299,7 @@
         "SUPER, V, exec, copyq --start-server show"
 
         # Wallust Wallpaper Changes
-        "SUPER, W, exec, kitty --class fzfwallpicker --title 'Pick Wallpaper' --override background_opacity=0.92 -e /usr/bin/env bash /home/${username}/Assets/nixos-config/scripts/wallust-pick.sh"
+        "SUPER, W, exec, kitty --class fzfwallpicker --title 'Pick Wallpaper' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.wallustPick}/bin/wallust-pick"
       ];
 
       bindm = [
