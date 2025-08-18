@@ -33,7 +33,6 @@ in {
         height = 17;
         spacing = 0;
         modules-left = [
-          "custom/nix-updates"
           "hyprland/workspaces"
           "custom/lock"
           "custom/reboot"
@@ -41,6 +40,7 @@ in {
         ];
         modules-center = ["hyprland/window"];
         modules-right = [
+          "custom/nix-updates"
           "disk"
           "bluetooth"
           "custom/temperature"
@@ -64,9 +64,10 @@ in {
         };
 
         "custom/nix-updates" = {
-          "exec" = "${pkgs.nixUpdateChecker}/bin/nix-update-checker";
+          # Defined in pkgs/scripts
+          "exec" = "nix-update-checker";
           "signal" = 12;
-          "on-click" = ""; # refresh on click
+          "on-click" = "pkill -x -RTMIN+12 .waybar-wrapped"; # refresh on click
           "on-click-right" = "rm ~/.cache/nix-update-last-run"; # force an update
           "interval" = 3600; # refresh every hour
           "tooltip" = true;

@@ -70,8 +70,10 @@
     inherit (self) outputs;
     inherit (nixpkgs.lib) nixosSystem;
 
-    username = "diego";
-    email = "diegoa2992@proton.me";
+    custom_vars = import ./custom_vars.nix;
+    username = custom_vars.USERNAME;
+    email = custom_vars.EMAIL;
+
     forallSystems = nixpkgs.lib.genAttrs [
       "x86_64-linux"
     ];
@@ -85,12 +87,13 @@
           username
           email
           host
+          custom_vars
           ;
       };
       modules = [./hosts/${host}];
     };
   in {
-    overlays = import ./overlays {inherit inputs;};
+    overlays = import ./overlays {inherit inputs custom_vars;};
     formatter = forallSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosConfigurations = {

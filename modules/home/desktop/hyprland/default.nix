@@ -286,9 +286,6 @@
         # HYPRLOCk
         "SUPER, L, exec, hyprlock"
 
-        # HYPRPAPER
-        "SUPER SHIFT, W, exec, pkill hyprpaper && sleep 1 && hyprpaper &"
-
         # SCREENSHOT
         "SUPER, S, exec, flameshot gui"
 

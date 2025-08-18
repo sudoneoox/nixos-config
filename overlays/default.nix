@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  custom_vars,
+  ...
+}: {
   modifications = final: prev: {
     awesome = inputs.nixpkgs-f2k.packages.${prev.system}.awesome-luajit-git;
     hyprspace = inputs.Hyprspace.packages.${prev.system}.default;
@@ -9,7 +13,11 @@
     zen-browser-twilight = inputs.zen-browser.packages.${prev.system}.specific.twilight;
   };
 
-  additions = final: _prev: import ../pkgs {pkgs = final;};
+  additions = final: _prev:
+    import ../pkgs {
+      pkgs = final;
+      inherit custom_vars;
+    };
 
   #INFO: When applied, the stable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.stable'

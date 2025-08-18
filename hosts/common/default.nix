@@ -5,6 +5,7 @@
   email,
   pkgs,
   host,
+  custom_vars,
   ...
 }: {
   imports = [
@@ -87,6 +88,7 @@
         username
         email
         host
+        custom_vars
         ;
     };
     users.${username} = {

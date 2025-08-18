@@ -1,10 +1,14 @@
 #NOTE: Converted from: https://github.com/guttermonk/waybar-nixos-updates
 # Utilized by waybar
-{pkgs}: let
+{
+  pkgs,
+  custom_vars,
+}: let
   UPDATE_INTERVAL_SECONDS = 1800;
-  NIXOS_CONFIG_PATH = "$HOME/Projects/nixos-config";
-  CACHE_DIR = "$HOME/.cache";
-  ICON_PATH = "$HOME/Assets/nixos-config/Icons/waybar/nixos-updates";
+  NIXOS_CONFIG_PATH = custom_vars.NIXOS_CONF_PATH;
+  CACHE_DIR = custom_vars.CACHE_DIR;
+
+  ICON_PATH = "${custom_vars.NIXOS_ASSETS_PATH}/Icons/waybar/nixos-updates";
 
   #INFO: The grace period prevents the update checker from running immediately after:
   # 1. First boot - when the system has just started up
@@ -23,6 +27,7 @@ in
 
     #NOTE: Tools used in the script
     runtimeInputs = [
+      pkgs.nix
       pkgs.nvd # nvd diff
       pkgs.coreutils # date, mktemp, etc.
       pkgs.gnused # sed
@@ -106,7 +111,7 @@ in
           else
             notify-send "$@" -i "${ICON_PATH}/$icon.png" "$title" "$message"
           fi
-       }
+      }
 
       function check_boot_resume() {
               # This function detects if the system has recently booted or resumed from hibernation/sleep
@@ -233,7 +238,7 @@ in
 
           tempdir=$(mktemp -d)
           # Ensure cleanup happens when script exits
-          trap 'rm -rf "$tempdir"' EXIT
+          trap 'if [ -n "''${tempdir:-}" ]; then rm -rf -- "$tempdir"; fi' EXIT
 
           send_notification "updates-checking" "Checking for Updates" "Please be patient"
 
@@ -243,7 +248,7 @@ in
           if [ "$UPDATE_LOCK_FILE" = "true" ]; then
               # Use the config directory directly
               cd "$NIXOS_CONFIG_PATH" || return 1
-              nix flake update
+              nix flake update >/dev/null 2>&1k
               # Capture stderr and extract the error line
               if build_output=$(nix build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" 2>&1); then
                   updates=$(nvd diff /run/current-system ./result | grep -c '\[U')
@@ -258,7 +263,7 @@ in
               # Use a temp directory to avoid modifying lock file
               cp -a "$NIXOS_CONFIG_PATH"/. "$tempdir"/
               cd "$tempdir" || return 1
-              nix flake update
+              nix flake update >/dev/null 2>&1
               # Capture stderr and extract the error line
               if build_output=$(nix build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" 2>&1); then
                   updates=$(nvd diff /run/current-system ./result | grep -c '\[U' )
