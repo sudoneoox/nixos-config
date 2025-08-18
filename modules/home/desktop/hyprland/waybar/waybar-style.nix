@@ -14,21 +14,21 @@
     }
 
     #workspaces {
-      background-color: @w_surface;
+     background-color: @color0;
       border: none;
       box-shadow: none;
     }
 
     #tray {
       margin: 6px 3px;
-      background-color: @w_surface;
+      background-color: @color0;
       padding: 6px 12px;
       border-radius: 6px;
       border-width: 0px;
     }
 
     #waybar {
-      background-color: @w_base;
+      background-color: @background;
       transition-property: background-color;
       transition-duration: 0.5s;
     }
@@ -46,28 +46,31 @@
     #cpu,
     #network,
     #disk,
-    #custom-lock {
+    #custom-lock,
+    #custom-nix-updates {
       border-radius: 4px;
       margin: 6px 3px;
       padding: 6px 12px;
-      background-color: @w_surface;
-      color: @w_base;
+      background-color: @color0;
+      color: @background;
     }
 
-    #clock {               background-color: @w_prim;   }
-    #disk {                background-color: @w_magenta;}
-    #custom-power {        background-color: @w_alert;  }
-    #custom-reboot {       background-color: @w_ok;     }
-    #bluetooth {           background-color: @w_warn;   }
-    #battery {             background-color: @w_magenta;}
-    #pulseaudio {          background-color: @w_sec;    }
-    #backlight {           background-color: @w_muted;  }
-    #custom-temperature {  background-color: @w_sec;    }
-    #memory {              background-color: @w_alert;  }
-    #cpu {                 background-color: @w_alert;  }
-    #network {             background-color: @w_orange; }
-    #custom-lock {         background-color: @w_cyan;   }
-    #window {              background-color: @w_sec;    }
+    /* accents mapped straight to palette */
+    #clock {               background-color: @color4;  }
+    #disk {                background-color: @color13; }
+    #custom-power {        background-color: @color1;  }
+    #custom-reboot {       background-color: @color2;  }
+    #bluetooth {           background-color: @color3;  }
+    #battery {             background-color: @color13; }
+    #pulseaudio {          background-color: @color12; }
+    #backlight {           background-color: @color8;  }
+    #custom-temperature {  background-color: @color12; }
+    #memory {              background-color: @color1;  }
+    #cpu {                 background-color: @color1;  }
+    #network {             background-color: @color11; }
+    #custom-lock {         background-color: @color14; }
+    #window {              background-color: @color12; }
+    #custom-nix-updates {  background-color: @color4;  }
 
     #workspaces button {
       all: initial;
@@ -77,34 +80,32 @@
       margin: 6px 3px;
       border-radius: 4px;
       background-color: rgba(36, 36, 52, 1.0);
-      color: @w_text;
+      color: @foreground;
     }
 
-
     #workspaces button.active {
-      color: @w_surface;
-      background-color: @w_text; /* light chip on dark bar */
+      color: @color0;
+      background-color: @foreground; /* light chip on dark bar */
     }
 
     #workspaces button:hover {
       box-shadow: inherit;
       text-shadow: inherit;
-      color: @w_surface;
-      background-color: @w_text;
+      color: @color0;
+      background-color: @foreground;
     }
 
     tooltip {
       border-radius: 8px;
       padding: 16px;
-      background-color: mix(@w_base, @w_surface, 0.5);
-      color: @w_text;
+      background-color: mix(@background, @color0, 0.5);
+      color: @foreground;
     }
 
     tooltip label {
       padding: 5px;
-      background-color: mix(@w_base, @w_surface, 0.5);
-      color: @w_text;
+      background-color: mix(@background, @color0, 0.5);
+      color: @foreground;
     }
-
   '';
 }

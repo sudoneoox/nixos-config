@@ -4,5 +4,6 @@
     lowBatteryNotifier
     wallustPick
     hyprRestoreWindow
+    nixUpdateChecker
   ];
 }

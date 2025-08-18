@@ -33,6 +33,7 @@ in {
         height = 17;
         spacing = 0;
         modules-left = [
+          "custom/nix-updates"
           "hyprland/workspaces"
           "custom/lock"
           "custom/reboot"
@@ -59,6 +60,23 @@ in {
             "3" = "";
             "4" = "";
             "active" = "󱙧";
+          };
+        };
+
+        "custom/nix-updates" = {
+          "exec" = "${pkgs.nixUpdateChecker}/bin/nix-update-checker";
+          "signal" = 12;
+          "on-click" = ""; # refresh on click
+          "on-click-right" = "rm ~/.cache/nix-update-last-run"; # force an update
+          "interval" = 3600; # refresh every hour
+          "tooltip" = true;
+          "return-type" = "json";
+          "format" = "{} {icon}";
+          "format-icons" = {
+            "has-updates" = "󰚰"; # icon when updates needed
+            "updating" = ""; # icon when updating
+            "updated" = ""; # icon when all packages updated
+            "error" = ""; # icon when errot occurs
           };
         };
 
