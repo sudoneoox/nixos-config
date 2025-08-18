@@ -11,6 +11,6 @@
 
     # layout details + theme include
     include splits.conf
-    include current-theme.conf
+    include colors.conf
   '';
 }

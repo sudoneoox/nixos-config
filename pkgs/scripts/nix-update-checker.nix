@@ -4,7 +4,7 @@
   pkgs,
   custom_vars,
 }: let
-  UPDATE_INTERVAL_SECONDS = 1800;
+  UPDATE_INTERVAL_SECONDS = 3600; # 1 hour
   NIXOS_CONFIG_PATH = custom_vars.NIXOS_CONF_PATH;
   CACHE_DIR = custom_vars.CACHE_PATH;
   ICON_PATH = "${custom_vars.NIXOS_ASSETS_PATH}/Icons/waybar/nixos-updates";

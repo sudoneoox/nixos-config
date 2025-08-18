@@ -25,11 +25,9 @@ in
       set -euo pipefail
 
       WALL_DIR="${WALLPAPER_DIR}"
-      WAYBAR_CSS="${CACHE_DIR}/wallust/colors-waybar.css"
       CFG_DIR="$HOME/.config/wallust"
 
       # WARN: make sure to add your rendered outputs that you want to reload after walllust runs
-      WAYBAR_CSS="${CACHE_DIR}/wallust/colors-waybar.css"
       KITTY_COLORS="$HOME/.config/kitty/current-theme.conf"
 
 
@@ -68,8 +66,8 @@ in
       #INFO: post-apply reloads (only when correspoding files actually exist)
       reloaded=()
 
-      #INFO: waybar: if css exists and waybar runs, ask it to re-read CSS (USR2)
-      if [[ ! -f "''${WAYBAR_CSS}" ]] && pgrep -f waybar >/dev/null 2>&1; then
+      #INFO: waybar: if waybar runs, ask it to re-read CSS (USR2)
+      if pgrep -f waybar >/dev/null 2>&1; then
         pkill -USR2 waybar || true
         reloaded+=("waybar")
       fi
