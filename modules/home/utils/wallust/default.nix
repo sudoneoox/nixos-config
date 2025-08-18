@@ -1,19 +1,11 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    grc # fzf needs this?
-    chafa # for wallpaper preview
-    procps
-    libnotify # to send notifications
-  ];
-
-  home.file = {
-    ".config/wallust/templates" = {
+{
+  xdg.configFile = {
+    "wallust/templates" = {
       source = ./templates;
       recursive = true;
     };
-    ".config/wallust/wallust.toml" = {
-      source = ./wallust.toml;
-    };
+
+    "wallust/wallust.toml".source = ./wallust.toml;
   };
 
   programs.wallust.enable = true;

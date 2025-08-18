@@ -1,6 +1,8 @@
 {
-  home.file.".config/kitty" = {
-    source = ./files;
-    recursive = true;
+  xdg.configFile = {
+    "kitty" = {
+      source = ./files;
+      recursive = true;
+    };
   };
 }

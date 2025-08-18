@@ -7,7 +7,7 @@ palette = "dark16"          # v3 name (formerly filter)
 [templates]
 # Waybar colors: render from .hbs to your desired .css output path
 colors-waybar = { template = "colors-waybar.css.hbs", target = "~/.cache/wallust/colors-waybar.css", new_engine = true}
-kitty = { template="kitty.conf.hbs", target='~/.config/kitty/current-theme.conf', new_engine = true}
+kitty = { template="kitty.conf.hbs", target='~/.config/kitty/kitty-colors.conf', new_engine = true}
 
 
 # Example extras 
