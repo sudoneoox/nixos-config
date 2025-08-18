@@ -1030,6 +1030,7 @@
         "nvf": "nvf",
         "sops-nix": "sops-nix",
         "split-monitor-workspaces": "split-monitor-workspaces",
+        "vimPlugins-neopywal": "vimPlugins-neopywal",
         "zen-browser": "zen-browser"
       }
     },
@@ -1154,6 +1155,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vimPlugins-neopywal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1744501005,
+        "narHash": "sha256-RLwxyGRmU1B8r6xO1YObF8qlNEj7qitNUArUlw092V8=",
+        "owner": "RedsXDD",
+        "repo": "neopywal.nvim",
+        "rev": "09188d79b45694141ec779d05cbcc75f994639d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RedsXDD",
+        "repo": "neopywal.nvim",
         "type": "github"
       }
     },

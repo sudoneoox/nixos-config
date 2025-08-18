@@ -51,7 +51,8 @@ in
 
       SKIP_AFTER_BOOT=${toString SKIP_AFTER_BOOT}
       GRACE_PERIOD=${toString GRACE_PERIOD}
-      UPDATE_LOCK_FILE="${toString UPDATE_LOCK_FILE}"
+      # WARN: uncomment if new check_for_updates function does not function correctly
+      # UPDATE_LOCK_FILE="${toString UPDATE_LOCK_FILE}"
 
       UPDATE_FLAG="$CACHE_DIR/nix-update-update-flag"
       REBUILD_FLAG="$CACHE_DIR/nix-update-rebuild-flag"
@@ -150,50 +151,113 @@ in
         fi
       }
 
+      # WARN: uncomment this whole block if the new check_for_updates function does not function correctly
+
+      # check_for_updates() {
+      #   local tempdir updates tooltip
+      #   tempdir=$(mktemp -d)
+      #   trap 'if [ -n "''${tempdir:-}" ]; then rm -rf -- "$tempdir"; fi' EXIT
+      #
+      #   send_notification "updates-checking" "Checking for Updates" "Please be patient" -t 2000
+      #   updates=0; tooltip=""
+      #
+      #   if [ "$UPDATE_LOCK_FILE" = "true" ]; then
+      #     cd "$NIXOS_CONFIG_PATH" || return 1
+      #     nix flake update >/dev/null 2>&1
+      #     if build_output=$(nix build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" 2>&1); then
+      #       updates=$(nvd diff /run/current-system ./result | grep -c '\[U')
+      #       tooltip=$(nvd diff /run/current-system ./result | grep -e '\[U' | awk '{ for (i=3; i<NF; i++) printf $i " "; if (NF >= 3) print $NF; }' ORS='\n' | sed 's/\n$//')
+      #     else
+      #       error_line=$(echo "$build_output" | grep "^       error:" | head -1 | sed 's/^[[:space:]]*//')
+      #       echo "$error_line" > "$LAST_RUN_TOOLTIP"; return 1
+      #     fi
+      #   else
+      #     cp -a "$NIXOS_CONFIG_PATH"/. "$tempdir"/
+      #     cd "$tempdir" || return 1
+      #     nix flake update >/dev/null 2>&1
+      #     if build_output=$(nix build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" 2>&1); then
+      #       updates=$(nvd diff /run/current-system ./result | grep -c '\[U')
+      #       tooltip=$(nvd diff /run/current-system ./result | grep -e '\[U' | awk '{ for (i=3; i<NF; i++) printf $i " "; if (NF >= 3) print $NF; }' ORS='\n' | sed 's/\n$//')
+      #     else
+      #       error_line=$(echo "$build_output" | grep "^       error:" | head -1 | sed 's/^[[:space:]]*//')
+      #       echo "$error_line" > "$LAST_RUN_TOOLTIP"; return 1
+      #     fi
+      #   fi
+      #
+      #   echo "$updates" > "$STATE_FILE"
+      #   date +%s > "$LAST_RUN_FILE"
+      #
+      #   if [ "$updates" -eq 0 ]; then
+      #     echo "System updated" > "$LAST_RUN_TOOLTIP"
+      #     send_notification "updates-complete" "Update Check Complete" "No updates available" -t 2000
+      #   elif [ "$updates" -eq 1 ]; then
+      #     echo "$tooltip" > "$LAST_RUN_TOOLTIP"
+      #     send_notification "updates-pending" "Update Check Complete" "Found 1 update" -t 2000
+      #   else
+      #     echo "$tooltip" > "$LAST_RUN_TOOLTIP"
+      #     send_notification "updates-pending" "Update Check Complete" "Found $updates updates" -t 2000
+      #   fi
+      #   return 0
+      # }
+
+
       check_for_updates() {
-        local tempdir updates tooltip
+        local tempdir updates tooltip before after
         tempdir=$(mktemp -d)
-        trap 'if [ -n "''${tempdir:-}" ]; then rm -rf -- "$tempdir"; fi' EXIT
+        trap 'rm -rf -- "$tempdir"' EXIT
 
         send_notification "updates-checking" "Checking for Updates" "Please be patient" -t 2000
         updates=0; tooltip=""
 
-        if [ "$UPDATE_LOCK_FILE" = "true" ]; then
-          cd "$NIXOS_CONFIG_PATH" || return 1
-          nix flake update >/dev/null 2>&1
-          if build_output=$(nix build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" 2>&1); then
-            updates=$(nvd diff /run/current-system ./result | grep -c '\[U')
-            tooltip=$(nvd diff /run/current-system ./result | grep -e '\[U' | awk '{ for (i=3; i<NF; i++) printf $i " "; if (NF >= 3) print $NF; }' ORS='\n' | sed 's/\n$//')
-          else
-            error_line=$(echo "$build_output" | grep "^       error:" | head -1 | sed 's/^[[:space:]]*//')
-            echo "$error_line" > "$LAST_RUN_TOOLTIP"; return 1
-          fi
+        # Work in a throwaway copy; never touch your repo
+        cp -a "$NIXOS_CONFIG_PATH"/. "$tempdir"/
+        cd "$tempdir" || return 1
+
+        # Snapshot the current lock (input@rev or lastModified)
+        before=$(jq -r '
+          .nodes
+          | to_entries
+          | map(select(.value.locked and (.value.locked.rev or .value.locked.lastModified)))
+          | map("\(.key)@\(.value.locked.rev//.value.locked.lastModified)")
+          | .[]
+        ' flake.lock 2>/dev/null)
+
+        # Update only the temp lockfile to see what *would* change
+        if ! nix flake update --accept-flake-config >/dev/null 2>&1; then
+          echo "flake update failed" > "$LAST_RUN_TOOLTIP"
+          return 1
+        fi
+
+        after=$(jq -r '
+          .nodes
+          | to_entries
+          | map(select(.value.locked and (.value.locked.rev or .value.locked.lastModified)))
+          | map("\(.key)@\(.value.locked.rev//.value.locked.lastModified)")
+          | .[]
+        ' flake.lock 2>/dev/null)
+
+        # Compute changed input names
+        # (lines that differ between before and after by name or rev)
+        changed=$(diff -u <(printf "%s\n" "$before" | sort) <(printf "%s\n" "$after" | sort) \
+                  | grep -E '^[+-][^+-]' | sed 's/^[+-]//' | cut -d'@' -f1 | sort -u)
+
+        if [ -z "$changed" ]; then
+          updates=0
+          tooltip="System updated"
+          send_notification "updates-complete" "Update Check Complete" "No updates available" -t 2000
         else
-          cp -a "$NIXOS_CONFIG_PATH"/. "$tempdir"/
-          cd "$tempdir" || return 1
-          nix flake update >/dev/null 2>&1
-          if build_output=$(nix build ".#nixosConfigurations.$(hostname).config.system.build.toplevel" 2>&1); then
-            updates=$(nvd diff /run/current-system ./result | grep -c '\[U')
-            tooltip=$(nvd diff /run/current-system ./result | grep -e '\[U' | awk '{ for (i=3; i<NF; i++) printf $i " "; if (NF >= 3) print $NF; }' ORS='\n' | sed 's/\n$//')
+          updates=$(printf "%s\n" "$changed" | wc -l | awk '{print $1}')
+          tooltip=$(printf "%s\n" "$changed")
+          if [ "$updates" -eq 1 ]; then
+            send_notification "updates-pending" "Update Check Complete" "Found 1 input update" -t 2000
           else
-            error_line=$(echo "$build_output" | grep "^       error:" | head -1 | sed 's/^[[:space:]]*//')
-            echo "$error_line" > "$LAST_RUN_TOOLTIP"; return 1
+            send_notification "updates-pending" "Update Check Complete" "Found $updates input updates" -t 2000
           fi
         fi
 
         echo "$updates" > "$STATE_FILE"
         date +%s > "$LAST_RUN_FILE"
-
-        if [ "$updates" -eq 0 ]; then
-          echo "System updated" > "$LAST_RUN_TOOLTIP"
-          send_notification "updates-complete" "Update Check Complete" "No updates available" -t 2000
-        elif [ "$updates" -eq 1 ]; then
-          echo "$tooltip" > "$LAST_RUN_TOOLTIP"
-          send_notification "updates-pending" "Update Check Complete" "Found 1 update" -t 2000
-        else
-          echo "$tooltip" > "$LAST_RUN_TOOLTIP"
-          send_notification "updates-pending" "Update Check Complete" "Found $updates updates" -t 2000
-        fi
+        echo "$tooltip" > "$LAST_RUN_TOOLTIP"
         return 0
       }
 
