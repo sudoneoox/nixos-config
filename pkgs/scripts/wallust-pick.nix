@@ -1,80 +1,99 @@
-{pkgs}:
-pkgs.writeShellApplication {
-  name = "wallust-pick";
+{
+  pkgs,
+  custom_vars,
+}: let
+  WALLPAPER_DIR = "${custom_vars.NIXOS_ASSETS_PATH}/Wallpapers";
+  CACHE_DIR = "${custom_vars.CACHE_PATH}";
+in
+  pkgs.writeShellApplication {
+    name = "wallust-pick";
 
-  #NOTE: Tools used in the script (ensures they're on PATH when it runs)
-  runtimeInputs = [
-    pkgs.findutils #NOTE: find
-    pkgs.coreutils #NOTE: sort, mkdir, basename, etc.
-    pkgs.fzf
-    pkgs.chafa
-    pkgs.wallust
-    pkgs.hyprland-git.hyprland #NOTE: hyprctl
-    pkgs.hyprpaper
-    pkgs.procps #NOTE: pgrep, pkill
-    pkgs.libnotify #NOTE: notify-send
-  ];
+    #NOTE: Tools used in the script (ensures they're on PATH when it runs)
+    runtimeInputs = [
+      pkgs.findutils #NOTE: find
+      pkgs.coreutils #NOTE: sort, mkdir, basename, etc.
+      pkgs.fzf
+      pkgs.chafa
+      pkgs.wallust
+      pkgs.hyprland-git.hyprland #NOTE: hyprctl
+      pkgs.hyprpaper
+      pkgs.procps #NOTE: pgrep, pkill
+      pkgs.libnotify #NOTE: notify-send
+    ];
 
-  text = ''
-    set -euo pipefail
+    text = ''
+      set -euo pipefail
 
-    WALL_DIR="$HOME/Assets/nixos-config/Wallpapers"
-    CFG_DIR="$HOME/.config/wallust"
-    WAYBAR_CSS="$HOME/.cache/wallust/colors-waybar.css"
+      WALL_DIR="${WALLPAPER_DIR}"
+      WAYBAR_CSS="${CACHE_DIR}/wallust/colors-waybar.css"
+      CFG_DIR="$HOME/.config/wallust"
+
+      # WARN: make sure to add your rendered outputs that you want to reload after walllust runs
+      WAYBAR_CSS="${CACHE_DIR}/wallust/colors-waybar.css"
+      KITTY_COLORS="$HOME/.config/kitty/current-theme.conf"
 
 
-    #NOTE: Build list (follow symlinks)
-    mapfile -t files < <(find -L "$WALL_DIR" -type f \( \
-      -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.bmp' \
-    \) | sort)
+      #NOTE: Build list (follow symlinks)
+      mapfile -t files < <(find -L "$WALL_DIR" -type f \( \
+        -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.bmp' \
+      \) | sort)
 
-    if [[ ''${#files[@]} -eq 0 ]]; then
-      echo "[wallust-pick] no images found in $WALL_DIR" >&2
-      exit 1
-    fi
-    #INFO: Image preview with chafa
-    FZF_PREVIEW_OPTS=(--preview "chafa --fill=block --symbols=block --size=80x40 {}")
+      if [[ ''${#files[@]} -eq 0 ]]; then
+        echo "[wallust-pick] no images found in $WALL_DIR" >&2
+        exit 1
+      fi
+      #INFO: Image preview with chafa
+      FZF_PREVIEW_OPTS=(--preview "chafa --fill=block --symbols=block --size=80x40 {}")
 
-    SEL="$(printf '%s\n' "''${files[@]}" | fzf --height=90% --layout=reverse \
-      --prompt='Pick wallpaper ❯ ' --border=rounded --ansi "''${FZF_PREVIEW_OPTS[@]}")"
+      SEL="$(printf '%s\n' "''${files[@]}" | fzf --height=90% --layout=reverse \
+        --prompt='Pick wallpaper ❯ ' --border=rounded --ansi "''${FZF_PREVIEW_OPTS[@]}")"
 
-    [[ -z "''${SEL}" ]] && exit 0
+      [[ -z "''${SEL}" ]] && exit 0
 
-    echo "[wallust-pick] selected: ''${SEL}"
+      echo "[wallust-pick] selected: ''${SEL}"
 
-    #INFO: Apply via hyprpaper if running
-    if pgrep -x hyprpaper >/dev/null 2>&1; then
-      echo "[wallust-pick] applying via hyprpaper…"
-      hyprctl hyprpaper reload ",''${SEL}" || true
-    fi
+      #INFO: Apply via hyprpaper if running
+      if pgrep -x hyprpaper >/dev/null 2>&1; then
+        echo "[wallust-pick] applying via hyprpaper…"
+        #INFO: Reload current config and set new image (best-effor, ignore error)
+        hyprctl hyprpaper reload ",''${SEL}" || true
+      fi
 
-    #INFO: Ensure template exists
-    TEMPL_DIR="''${CFG_DIR}/templates"
-    mkdir -p "''${TEMPL_DIR}" "''${HOME}/.cache/wallust"
+      #INFO: render ALL templates declared in wallust.toml
+      TEMPL_DIR="''${CFG_DIR}/templates"
+      mkdir -p "''${TEMPL_DIR}" "''${HOME}/.cache/wallust"
+      echo "[wallust-pick] rendering wallust templates"
+      wallust -d "''${CFG_DIR}" run "''${SEL}"
 
-    if [[ ! -f "''${TEMPL_DIR}/colors-waybar.css.hbs" ]]; then
-      echo "[wallust-pick] missing ''${TEMPL_DIR}/colors-waybar.css.hbs"
-      exit 1
-    fi
+      #INFO: post-apply reloads (only when correspoding files actually exist)
+      reloaded=()
 
-    #INFO: Render with Wallust v3 using config dir
-    echo "[wallust-pick] rendering wallust templates…"
-    wallust -d "''${CFG_DIR}" run "''${SEL}"
+      #INFO: waybar: if css exists and waybar runs, ask it to re-read CSS (USR2)
+      if [[ ! -f "''${WAYBAR_CSS}" ]] && pgrep -f waybar >/dev/null 2>&1; then
+        pkill -USR2 waybar || true
+        reloaded+=("waybar")
+      fi
 
-    #INFO: Verify target exists
-    if [[ -f "''${WAYBAR_CSS}" ]]; then
-      echo "[wallust-pick] rendered: ''${WAYBAR_CSS}"
-    else
-      echo "[wallust-pick] warning: expected rendered ''${WAYBAR_CSS} not found"
-      exit 2
-    fi
+      #INFO: Kitty: if target exists and kitty is running, try live color reload
+      if [[ -f "''${KITTY_COLORS}" ]] && pgrep -x kitty >/dev/null 2>&1; then
+        #INFO: Prefer remote control (works if your kitty has a control socket; otherwise this no-ops)
+        if kitty @ set-colors --all "''${KITTY_COLORS}" >/dev/null 2>&1; then
+          reloaded+=("kitty")
+        else
+          #INFO: Optional: try a well-known socket name if you use one:
+          # kitty @ --to unix:/tmp/kitty set-colors --all "''${KITTY_COLORS}" >/dev/null 2>&1 || true
+          # If remote control isn't enabled, you'll need to restart kitty or enable:
+          #   allow_remote_control yes
+          #   listen_on unix:/tmp/kitty
+          reloaded+=("kitty (restart needed)")
+        fi
+      fi
 
-    #INFO: Reload Waybar (USR2 makes it re-read CSS)
-    if pgrep -f waybar >/dev/null 2>&1; then
-      pkill -USR2 waybar || true
-    fi
-
-    #INFO: Notify
-    notify-send "Wallpaper updated" "$(basename "''${SEL}")" || true
-  '';
-}
+      #INFO: Notify
+      if [[ ''${#reloaded[@]} -gt 0 ]]; then
+        notify-send "Wallust applied" "$(basename "''${SEL}") → ''${reloaded[*]}"
+      else
+        notify-send "Wallust applied" "$(basename "''${SEL}")"
+      fi
+    '';
+  }

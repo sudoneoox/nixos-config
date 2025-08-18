@@ -3,5 +3,5 @@
   NIXOS_ASSETS_PATH = "$HOME/Assets/nixos-config";
   USERNAME = "diego";
   EMAIL = "diegoa2992@proton.me";
-  CACHE_DIR = "$HOME/.cache";
+  CACHE_PATH = "$HOME/.cache";
 }

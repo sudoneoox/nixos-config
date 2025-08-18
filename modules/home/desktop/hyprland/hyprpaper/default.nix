@@ -3,8 +3,7 @@
 # https://github.com/arrowpc/palettum
 let
   wallpaperDir = "${custom_vars.NIXOS_ASSETS_PATH}/Wallpapers";
-
-  wp = "cat_spectrum3.png";
+  wp = "nixos.png";
 in {
   services.hyprpaper = {
     enable = true;
