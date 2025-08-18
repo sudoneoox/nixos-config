@@ -1,5 +1,6 @@
 
-#version 100
+#version 300 es
+
 precision highp float;
 varying highp vec2 v_texcoord;
 varying highp vec3 v_pos;

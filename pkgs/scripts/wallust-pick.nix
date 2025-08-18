@@ -30,7 +30,6 @@ in
       # WARN: make sure to add your rendered outputs that you want to reload after walllust runs
       KITTY_COLORS="$HOME/.config/kitty/current-theme.conf"
 
-
       #NOTE: Build list (follow symlinks)
       mapfile -t files < <(find -L "$WALL_DIR" -type f \( \
         -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.bmp' \
@@ -59,7 +58,7 @@ in
 
       #INFO: render ALL templates declared in wallust.toml
       TEMPL_DIR="''${CFG_DIR}/templates"
-      mkdir -p "''${TEMPL_DIR}" "''${HOME}/.cache/wallust"
+      mkdir -p "''${TEMPL_DIR}" "${CACHE_DIR}/wallust"
       echo "[wallust-pick] rendering wallust templates"
       wallust -d "''${CFG_DIR}" run "''${SEL}"
 
@@ -70,6 +69,12 @@ in
       if pgrep -f waybar >/dev/null 2>&1; then
         pkill -USR2 waybar || true
         reloaded+=("waybar")
+      fi
+
+      # INFO: Reload hyprland
+      if pgrep -f hyprland >/dev/null 2>&1; then
+        hyprctl reload || true
+        reloaded+=("hyprland")
       fi
 
       #INFO: Kitty: if target exists and kitty is running, try live color reload

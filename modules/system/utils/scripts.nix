@@ -5,5 +5,6 @@
     wallustPick
     hyprRestoreWindow
     nixUpdateChecker
+    wallustApplyCurrent
   ];
 }

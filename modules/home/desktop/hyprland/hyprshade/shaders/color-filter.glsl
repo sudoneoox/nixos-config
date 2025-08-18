@@ -20,7 +20,7 @@ out vec4 fragColor;
  * @min 0.0
  * @max 1.0
  */
-const float Strength = float({{#nc}}{{strength}} ? 0.2{{/nc}});
+const float Strength = 0.2;
 
 // Enum for color correction type
 const int PROTANOPIA = 0;
@@ -36,7 +36,7 @@ const int BLUEYELLOW = TRITANOPIA;
 /**
  * Type of color correction.
  */
-const int Type = {{#nc}}{{type}} ? PROTANOPIA{{/nc}};
+const int Type = PROTANOPIA;
 
 void main() {
     vec4 pixColor = texture(tex, v_texcoord);

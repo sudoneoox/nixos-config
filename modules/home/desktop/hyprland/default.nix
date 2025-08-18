@@ -27,11 +27,15 @@
     xwayland.enable = true;
     systemd.variables = ["--all"];
 
+    extraConfig = ''
+      source = ~/.config/hypr/colors.conf
+    '';
+
     settings = let
       terminal = "kitty";
       filemanager = "thunar";
-      active_border = "rgba(0,190,150,1) rgba(0,0,0,0) rgba(100,190,255,1) rgba(0,0,0,0) rgba(0,190,150,1) 35deg";
-      inactive_border = "rgba(515251ff)";
+      # active_border = "rgba(0,190,150,1) rgba(0,0,0,0) rgba(100,190,255,1) rgba(0,0,0,0) rgba(0,190,150,1) 35deg";
+      # inactive_border = "rgba(515251ff)";
       shadow_color = "rgba(1a1a1aee)";
     in {
       input = {
@@ -45,8 +49,9 @@
         gaps_in = 2;
         gaps_out = 6;
         float_gaps = 0;
-        "col.active_border" = active_border;
-        "col.inactive_border" = inactive_border;
+        # WARN: Were generating colored borders using wallust
+        # "col.active_border" = active_border;
+        # "col.inactive_border" = inactive_border;
         layout = "hy3";
         resize_on_border = false;
         snap = {
@@ -234,7 +239,9 @@
       };
 
       bind = [
-        # Application binds
+        #INFO: Hyprland Reload
+        "SUPER SHIFT, R, exec,  hyprctl reload"
+        #INFO: Application binds
         "SUPER, SPACE, exec, ${terminal}"
         "SUPER, D, exec, ${filemanager}"
         "SUPER, T, togglefloating"
@@ -242,60 +249,60 @@
         "SUPER, R, exec, rofi -show drun"
         "SUPER, J, togglesplit"
 
-        # HYPRSPACE
+        #INFO: HYPRSPACE
         "SUPER, 0, overview:toggle"
 
-        # HY3
-        # Split into groups
+        #INFO: HY3
+        #INFO: Split into groups
         "SUPER, H, hy3:makegroup, h"
         "SUPER, V, hy3:makegroup, v"
         "SUPER CTRL, T, hy3:makegroup, tab"
 
-        # Move between windows
+        #INFO: Move between windows
         "SUPER, left, hy3:movefocus, left"
         "SUPER, right, hy3:movefocus, right"
         "SUPER, up, hy3:movefocus, up"
         "SUPER, down, hy3:movefocus, down"
 
-        # Move windows
+        #INFO: Move windows
         "SUPER SHIFT, left, hy3:movewindow, left"
         "SUPER SHIFT, right, hy3:movewindow, right"
         "SUPER SHIFT, up, hy3:movewindow, up"
         "SUPER SHIFT, down, hy3:movewindow, down"
 
-        # Kill focused node
+        #INFO: Kill focused node
         "SUPER, Q, hy3:killactive"
 
-        # Tab switching
+        #INFO: Tab switching
         "SUPER, TAB, hy3:focustab, right"
         "SUPER SHIFT, TAB, hy3:focustab, left"
 
-        # Focus top/bottom container
+        #INFO: Focus top/bottom container
         "SUPER, A, hy3:changefocus, raise"
         "SUPER, Z, hy3:changefocus, lower"
 
-        # Toggle tiled/floating layer focus
+        #INFO: Toggle tiled/floating layer focus
         "SUPER, grave, hy3:togglefocuslayer"
 
-        # Make groups ephemeral
+        #INFO: Make groups ephemeral
         "SUPER, E, hy3:setephemeral, true"
 
-        # WAYBAR
+        #INFO: WAYBAR
         "SUPER, B, exec, pkill -SIGUSR1 waybar || waybar"
 
-        # HYPRLOCk
+        #INFO: HYPRLOCk
         "SUPER, L, exec, hyprlock"
 
-        # SCREENSHOT
+        #INFO: SCREENSHOT
         "SUPER, S, exec, flameshot gui"
 
-        # COLOR PICKER
+        #INFO: COLOR PICKER
         "SUPER SHIFT, C, exec, hyprpicker -a -f hex -l"
 
-        # CLIPBOARD
+        #INFO: CLIPBOARD
         "SUPER, V, exec, copyq --start-server show"
 
-        # Wallust Wallpaper Changes
+        #INFO: Wallust Wallpaper Changes
         "SUPER, W, exec, kitty --class fzfwallpicker --title 'Pick Wallpaper' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.wallustPick}/bin/wallust-pick"
       ];
 
