@@ -6,5 +6,6 @@
     hyprRestoreWindow
     nixUpdateChecker
     wallustApplyCurrent
+    playerctlLock
   ];
 }

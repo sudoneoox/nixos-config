@@ -21,6 +21,12 @@
     ../../modules/system/desktop/qbittorrent
   ];
 
+  # stock NixOS powermanagement tool which allows for managing hibernate and suspend states
+  # other power management tools may overwrite this setting
+  powerManagement = {
+    enable = true;
+  };
+
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;

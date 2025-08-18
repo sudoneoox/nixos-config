@@ -6,4 +6,6 @@
   CACHE_PATH = "$HOME/.cache";
   # NOTE: See modules/home/utils/Assets/wallpapers for options
   WALLPAPER = "glitch.png";
+  IsLaptop = true;
+  FONT = "JetbrainsMono Nerd Font";
 }

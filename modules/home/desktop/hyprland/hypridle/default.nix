@@ -1,6 +1,4 @@
-{ pkgs, ... }:
 {
-
   services.hypridle = {
     enable = true;
     settings = {
@@ -18,10 +16,10 @@
           on-resume = "brightnessctl -rd asus::kbd_backlight";
         }
 
-        # 3 min - Dim screen brightness
+        # 5 min - Dim screen brightness
         {
-          timeout = 180;
-          on-timeout = "brightnessctl -s set 3";
+          timeout = 300;
+          on-timeout = "brightnessctl -s set 1";
           on-resume = "brightnessctl -r"; # restore
         }
 
@@ -31,10 +29,10 @@
           on-timeout = "pidof hyprlock || hyprlock";
         }
 
-        # 30 min - Suspend
+        # 30 min - sleep
         {
           timeout = 1800;
-          on-timeout = "systemctl suspend";
+          on-timeout = "systemctl sleep";
         }
       ];
     };

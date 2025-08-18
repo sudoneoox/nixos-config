@@ -1,4 +1,5 @@
 dotfiles
 result
 debug
+pkgs/*.AppImage
 **/*secrets.yaml

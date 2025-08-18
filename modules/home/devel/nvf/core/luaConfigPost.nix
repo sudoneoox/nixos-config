@@ -93,21 +93,18 @@
         end,
       }):map("<leader>uC")
 
+    -- neopywal lualine setup
+    local has_lualine, lualine = pcall(require, "lualine")
+    if not has_lualine then
+      return
+    end
 
+    local has_neopywal, neopywal_lualine = pcall(require, "neopywal.theme.plugins.lualine")
+    if not has_neopywal then
+      return
+    end
 
-    -- Auto-update programming wordlist on first startup
-    -- vim.api.nvim_create_autocmd("VimEnter", {
-    --   callback = function()
-    --     -- Check if dirtytalk dict file exists
-    --       local dict_path = vim.fn.stdpath('data') .. '/site/spell/programming.utf-8.add'
-    --       if vim.fn.filereadable(dict_path) == 0 then
-    --         -- Only run if file doesn't exist to avoid repeated downloads
-    --         vim.schedule(function()
-    --           vim.cmd('DirtytalkUpdate')
-    --         end)
-    --       end
-    --   end,
-    -- })
+    neopywal_lualine.setup()
 
   '';
 }

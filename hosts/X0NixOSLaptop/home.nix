@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../../modules/home/desktop/vesktop
+    ../../modules/home/desktop/cider
   ];
 
   gtk = {

@@ -323,7 +323,6 @@
       "exec-once" = [
         "dunst"
         "copyq --start-server"
-        "hyprlock || hyprctl dispatch exit"
         "sleep 1 && hyprctl dispatch layoutmsg hy3"
         "waybar"
         "hyprctl setcursor macOS 26"
