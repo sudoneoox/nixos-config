@@ -9,5 +9,5 @@
   nixUpdateChecker = pkgs.callPackage ./scripts/nix-update-checker.nix {inherit custom_vars;};
   wallustApplyCurrent = pkgs.callPackage ./scripts/wallust-apply-current.nix {inherit custom_vars;};
   playerctlLock = pkgs.callPackage ./scripts/playerctl-lock.nix {};
-  ciderLatest = pkgs.callPackage ./cider-latest.nix {inherit custom_vars;};
+  ciderLatest = pkgs.callPackage ./applications/cider-latest.nix {inherit custom_vars;};
 }

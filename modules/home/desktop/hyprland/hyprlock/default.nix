@@ -1,7 +1,5 @@
 {
   programs.hyprlock.enable = true;
-  xdg.configFile."hyprlock/colors.conf".source = ./colors.conf;
-  imports = [
-    ./hyprlock-conf.nix
-  ];
+  # Configuration File
+  imports = [./hyprlock-conf.nix];
 }

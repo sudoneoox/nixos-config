@@ -14,17 +14,9 @@ in {
     text = ''
       $hyprlockDir = ${hyprlock_conf_path}
 
-      # Source the colors from wallbash
-      # See the file first to see the equivalent colors
-      source = $hyprlockDir/colors.conf
-
       # Script Path
       # defined in pkgs/scripts
       $music = ${pkgs.playerctlLock}/bin/playerctl-lock
-      # $album = $hyprlockDir/scripts/hlock_mpris.sh
-      # $battery = $hyprlockDir/scripts/battery.sh
-      # $location = $hyprlockDir/scripts/location.sh
-      # $weather = $hyprlockDir/scripts/weather.sh
 
       $mpris_art = /tmp/hyde-mpris.png
       $wall = ${wp_path}
@@ -74,7 +66,7 @@ in {
       #INFO: Day-Month-Date
       label {
           monitor =
-          text = Sunday, September 29
+          text = cmd[update:1000000] echo "<span>$(date "+%A, %B %-d")</span>"
           color = rgba(205, 214, 224, .75)
           font_size = 20
           text_align = left
