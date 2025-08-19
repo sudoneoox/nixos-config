@@ -1,8 +1,7 @@
 {
   inputs,
   pkgs,
-  lib,
-  username,
+  custom_vars,
   ...
 }: {
   imports = [
@@ -29,22 +28,7 @@
     cpu.amd.updateMicrocode = true;
   };
 
-  security.rtkit.enable = true;
-
-  services = {
-    fstrim.enable = lib.mkDefault true;
-    printing.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
-    thermald.enable = true;
-  };
-
-  home-manager.users.${username} = {
+  home-manager.users.${custom_vars.USERNAME} = {
     imports = [
       ./home.nix
     ];

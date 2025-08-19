@@ -4,6 +4,7 @@
     ./btop.nix
     ./lazygit.nix
     ./ripgrep.nix
+    ./repomix
     ./zoxide.nix
     ./yazi.nix
     ./nix-index.nix

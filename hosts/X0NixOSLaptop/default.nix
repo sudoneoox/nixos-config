@@ -1,11 +1,11 @@
 {
   inputs,
   pkgs,
-  lib,
-  username,
+  custom_vars,
   ...
 }: {
   imports = [
+    #INFO: NixOS-hardware input
     "${inputs.nixos-hardware}/common/cpu/intel/meteor-lake"
     "${inputs.nixos-hardware}/common/gpu/nvidia/ada-lovelace"
     "${inputs.nixos-hardware}/common/gpu/nvidia/prime.nix"
@@ -20,12 +20,6 @@
     ../../modules/system/desktop/file-manager
     ../../modules/system/desktop/qbittorrent
   ];
-
-  # stock NixOS powermanagement tool which allows for managing hibernate and suspend states
-  # other power management tools may overwrite this setting
-  powerManagement = {
-    enable = true;
-  };
 
   boot = {
     loader.systemd-boot.enable = true;
@@ -54,43 +48,7 @@
     };
   };
 
-  security.rtkit.enable = true;
-
-  services = {
-    fstrim.enable = lib.mkDefault true;
-    printing.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
-    libinput = {
-      enable = true;
-      touchpad.disableWhileTyping = true;
-    };
-    tlp = {
-      enable = true;
-      settings = {
-        CPU_SCALING_GOVERNER_ON_AC = "performance";
-        CPU_SCALING_GOVERNER_ON_BAT = "powersave";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        PLATFORM_PROFILE_ON_AC = "performance";
-        PLATFORM_PROFILE_ON_BAT = "balance_power";
-        CPU_BOOST_ON_AC = 1;
-        CPU_HWP_DYN_BOOST_ON_AC = 1;
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 100;
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 20;
-      };
-    };
-    thermald.enable = true;
-  };
-
-  home-manager.users.${username} = {
+  home-manager.users.${custom_vars.USERNAME} = {
     imports = [
       ./home.nix
     ];

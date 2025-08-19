@@ -2,6 +2,8 @@
 {
   inputs,
   pkgs,
+  lib,
+  custom_vars,
   ...
 }: let
   SOPS_PUBLIC_KEY = "age1cm02yeux0zpgryunwdsf2dya0penm30vj3vcftf698nqsey7yqzsdnt6v2";
@@ -29,13 +31,18 @@ in {
     # defaultSopsFile = ../../hosts/common/secrets.enc.yaml;
     defaultSopsFile = "${SOPS_SECRETS_PATH}/secrets.enc.yaml";
     secrets = {
-      # NOTE: These both use the defaultSopsFile
+      # NOTE: These use the defaultSopsFile
       "wireless.env" = {
         owner = "root";
       };
       "system-password" = {
         owner = "root";
         neededForUsers = true;
+      };
+      "resilio-truenas-key" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
+        owner = "rslsync";
+        mode = "0400";
+        restartUnits = ["resilio.service"];
       };
     };
   };
@@ -49,7 +56,7 @@ in {
     SOPS_AGE_RECIPIENTS = SOPS_PUBLIC_KEY;
   };
 
-  programs.ssh.knownHosts.github = {
+  programs.ssh.knownHosts.github = lib.mkIf custom_vars.ENABLE_SSH {
     hostNames = ["github.com"];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
   };

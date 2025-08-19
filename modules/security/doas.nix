@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  username,
+  custom_vars,
   ...
 }: let
   cfg = config.X0.security.doas;
@@ -22,7 +22,7 @@ in {
       extraRules = [
         {
           # Grant doas access specifically to your user
-          users = ["${username}"];
+          users = ["${custom_vars.USERNAME}"];
           # Convenient but less secure 'if true' do not ask for a password again for some time after th euser succesfully authenticates
 
           persist = true;

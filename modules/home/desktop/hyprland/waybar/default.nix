@@ -1,14 +1,14 @@
 {
   pkgs,
   lib,
-  host,
+  custom_vars,
   ...
 }: let
-  isLaptop = host == "X0NixOSLaptop";
+  isLaptop = custom_vars.HOST_PROFILE == "laptop";
 
   # WARN: obviously not a good conditional but i'm not passing anything to distinct
   # different CPU manufacturers. I only have two systems so this isn't an issue for me
-  isIntelCPU = host == "X0NixOSLaptop";
+  isIntelCPU = custom_vars.CPU_VENDOR == "intel";
 in {
   home.packages = with pkgs; [
     lm_sensors
@@ -155,10 +155,10 @@ in {
         modules-left = ["clock" "battery"];
 
         "custom/wl-gammarelay-temperature" = {
-          "format" = "{} ";
+          "format" = "{}K ";
           "exec" = "wl-gammarelay-rs watch {t}";
-          "on-scroll-up" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100";
-          "on-scroll-down" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
+          "on-scroll-up" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +50";
+          "on-scroll-down" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -50";
           "on-click" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500";
         };
 

@@ -15,7 +15,6 @@
     cargo
 
     ffmpeg
-    repomix
     age
     neofetch
     sops

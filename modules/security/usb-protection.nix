@@ -2,7 +2,7 @@
   config,
   pkgs,
   lib,
-  username,
+  custom_vars,
   ...
 }: let
   cfg = config.X0.security.usbguard;
@@ -14,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     services.usbguard = {
       enable = true;
-      IPCAllowedUsers = ["root" "${username}"];
+      IPCAllowedUsers = ["root" "${custom_vars.USERNAME}"];
       # presentDevicePolicy refers to how to treat USB devices that are already connected when the daemon starts
       presentDevicePolicy = "allow";
 

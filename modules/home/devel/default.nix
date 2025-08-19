@@ -5,5 +5,6 @@
     ./shell
     ./starship
     ./nvf
+    ./direnv.nix
   ];
 }

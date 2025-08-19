@@ -1,7 +1,6 @@
 {
-  host,
   lib,
-  username,
+  custom_vars,
   pkgs,
   ...
 }: {
@@ -34,8 +33,6 @@
     settings = let
       terminal = "kitty";
       filemanager = "thunar";
-      # active_border = "rgba(0,190,150,1) rgba(0,0,0,0) rgba(100,190,255,1) rgba(0,0,0,0) rgba(0,190,150,1) 35deg";
-      # inactive_border = "rgba(515251ff)";
       shadow_color = "rgba(1a1a1aee)";
     in {
       input = {
@@ -44,14 +41,12 @@
       };
 
       general = {
+        #WARN: Border colors are generated with wallust
         border_size = 2;
         no_border_on_floating = false;
         gaps_in = 2;
         gaps_out = 6;
         float_gaps = 0;
-        # WARN: Were generating colored borders using wallust
-        # "col.active_border" = active_border;
-        # "col.inactive_border" = inactive_border;
         layout = "hy3";
         resize_on_border = false;
         snap = {
@@ -335,7 +330,7 @@
       ];
 
       exec = [
-        "hyprshade on /home/${username}/.config/hypr/shaders/vibrance"
+        "hyprshade on /home/${custom_vars.USERNAME}/.config/hypr/shaders/vibrance"
       ];
 
       env = [
@@ -358,6 +353,6 @@
       ./hyprpaper
       ./hyprshade
     ]
-    ++ lib.optional (host == "X0NixOSLaptop") ./monitors/single.nix
-    ++ lib.optional (host == "X0NixOSDesktop") ./monitors/multi.nix;
+    ++ lib.optional (custom_vars.MONITORS == "single") ./monitors/single.nix
+    ++ lib.optional (custom_vars.MONITORS == "multi") ./monitors/multi.nix;
 }

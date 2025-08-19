@@ -3,32 +3,38 @@
   lib,
   ...
 }: let
-  cfg = config.X0.security.ssh;
+  cfg = config.X0.security.systemd-ask-password-console;
 in {
-  options.X0.security.ssh = {
-    enable = lib.mkEnableOption "ssh";
+  options.X0.security.systemd-ask-password-console = {
+    enable = lib.mkEnableOption "systemd-ask-password-console";
   };
+
   config = lib.mkIf cfg.enable {
-    systemd.services.sshd.serviceConfig = {
+    systemd.services.systemd-ask-password-console.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";
-      ProtectHome = "read-only";
+      ProtectHome = true;
       ProtectClock = true;
       ProtectHostname = true;
       ProtectKernelTunables = true;
       ProtectKernelModules = true;
       ProtectKernelLogs = true;
-      ProtectControlGroups = true;
       ProtectProc = "invisible";
       PrivateTmp = true;
       PrivateMounts = true;
+      PrivateNetwork = true;
       PrivateDevices = true;
       RestrictNamespaces = true;
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
+      RestrictAddressFamilies = [
+        "~AF_INET6"
+        "~AF_INET"
+        "~AF_PACKET"
+      ];
       MemoryDenyWriteExecute = true;
-      LockPersonality = true;
       DevicePolicy = "closed";
+      LockPersonality = true;
       SystemCallFilter = [
         "~@keyring"
         "~@swap"
@@ -37,7 +43,6 @@ in {
         "~@obsolete"
         "~@cpu-emulation"
       ];
-      SystemCallArchitectures = "native";
     };
   };
 }

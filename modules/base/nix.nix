@@ -1,10 +1,11 @@
 {
   inputs,
   pkgs,
-  username,
+  custom_vars,
   ...
 }: {
   nix = {
+    optimise.automatic = true;
     package = pkgs.lixPackageSets.latest.lix;
     registry.nixpkgs.flake = inputs.nixpkgs;
 
@@ -17,8 +18,8 @@
 
     settings = {
       auto-optimise-store = true;
-      allowed-users = ["${username}"];
-      trusted-users = ["${username}"];
+      allowed-users = ["${custom_vars.USERNAME}"];
+      trusted-users = ["${custom_vars.USERNAME}"];
       experimental-features = "nix-command flakes";
       keep-going = true;
       warn-dirty = false;

@@ -1,8 +1,4 @@
-{
-  username,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     # Specific Plugins to multi monitor setup
     plugins = with pkgs; [

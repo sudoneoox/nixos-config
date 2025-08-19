@@ -3,36 +3,36 @@
   lib,
   ...
 }: let
-  cfg = config.X0.security.ssh;
+  cfg = config.X0.security.user;
 in {
-  options.X0.security.ssh = {
-    enable = lib.mkEnableOption "ssh";
+  options.X0.security.user = {
+    enable = lib.mkEnableOption "user";
   };
+
   config = lib.mkIf cfg.enable {
-    systemd.services.sshd.serviceConfig = {
-      NoNewPrivileges = true;
+    systemd.services."user@".serviceConfig = {
       ProtectSystem = "strict";
-      ProtectHome = "read-only";
       ProtectClock = true;
       ProtectHostname = true;
       ProtectKernelTunables = true;
       ProtectKernelModules = true;
       ProtectKernelLogs = true;
-      ProtectControlGroups = true;
       ProtectProc = "invisible";
       PrivateTmp = true;
-      PrivateMounts = true;
-      PrivateDevices = true;
+      PrivateNetwork = true;
+      MemoryDenyWriteExecute = true;
+      RestrictAddressFamilies = [
+        "AF_UNIX"
+        "AF_NETLINK"
+        "AF_BLUETOOTH"
+      ];
       RestrictNamespaces = true;
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
-      MemoryDenyWriteExecute = true;
-      LockPersonality = true;
-      DevicePolicy = "closed";
       SystemCallFilter = [
         "~@keyring"
         "~@swap"
-        "~@clock"
+        "~@debug"
         "~@module"
         "~@obsolete"
         "~@cpu-emulation"

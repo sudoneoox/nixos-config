@@ -3,17 +3,17 @@
   lib,
   ...
 }: let
-  cfg = config.X0.security.ssh;
+  cfg = config.X0.security.acipd;
 in {
-  options.X0.security.ssh = {
-    enable = lib.mkEnableOption "ssh";
+  options.X0.security.acipd = {
+    enable = lib.mkEnableOption "acipd";
   };
+
   config = lib.mkIf cfg.enable {
-    systemd.services.sshd.serviceConfig = {
+    systemd.services.acpid.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";
-      ProtectHome = "read-only";
-      ProtectClock = true;
+      ProtectHome = true;
       ProtectHostname = true;
       ProtectKernelTunables = true;
       ProtectKernelModules = true;
@@ -21,23 +21,30 @@ in {
       ProtectControlGroups = true;
       ProtectProc = "invisible";
       PrivateTmp = true;
+      PrivateNetwork = true;
       PrivateMounts = true;
-      PrivateDevices = true;
       RestrictNamespaces = true;
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
+      RestrictAddressFamilies = [
+        "~AF_INET6"
+        "~AF_INET"
+        "~AF_PACKET"
+      ];
       MemoryDenyWriteExecute = true;
       LockPersonality = true;
-      DevicePolicy = "closed";
       SystemCallFilter = [
-        "~@keyring"
+        "~@mount"
         "~@swap"
-        "~@clock"
-        "~@module"
         "~@obsolete"
         "~@cpu-emulation"
       ];
       SystemCallArchitectures = "native";
+      CapabilityBoundingSet = [
+        "~CAP_CHOWN"
+        "~CAP_FSETID"
+        "~CAP_SETFCAP"
+      ];
     };
   };
 }

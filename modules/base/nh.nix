@@ -1,6 +1,6 @@
 {
   config,
-  username,
+  custom_vars,
   ...
 }: {
   programs.nh = {
@@ -11,6 +11,6 @@
       extraArgs = "--keep 10";
     };
 
-    flake = "/home/${username}/Projects/nixos-config";
+    flake = custom_vars.NIXOS_CONF_PATH;
   };
 }

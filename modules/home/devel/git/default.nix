@@ -1,12 +1,8 @@
-{
-  email,
-  username,
-  ...
-}: {
+{custom_vars, ...}: {
   programs.git = {
     enable = true;
-    userName = "${username}";
-    userEmail = "${email}";
+    userName = "${custom_vars.USERNAME}";
+    userEmail = "${custom_vars.EMAIL}";
     signing = {
       key = "~/.ssh/id_ed25519.pub";
       signByDefault = true;

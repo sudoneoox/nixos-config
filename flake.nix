@@ -76,8 +76,6 @@
     inherit (nixpkgs.lib) nixosSystem;
 
     custom_vars = import ./custom_vars.nix;
-    username = custom_vars.USERNAME;
-    email = custom_vars.EMAIL;
 
     forallSystems = nixpkgs.lib.genAttrs [
       "x86_64-linux"
@@ -89,8 +87,6 @@
         inherit
           inputs
           outputs
-          username
-          email
           host
           custom_vars
           ;

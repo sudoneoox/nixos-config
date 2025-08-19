@@ -1,5 +1,5 @@
-{username, ...}: let
-  dunstIconPath = "/home/${username}/Assets/nixos-config/Icons/dunst";
+{custom_vars, ...}: let
+  dunstIconPath = "${custom_vars.NIXOS_ASSETS_PATH}/Icons/dunst";
 in {
   services.dunst = {
     enable = true;

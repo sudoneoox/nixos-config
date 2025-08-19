@@ -1,75 +1,56 @@
 {
-  username,
   outputs,
   inputs,
-  email,
-  pkgs,
-  host,
   custom_vars,
+  lib,
   ...
 }: {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    ../../modules/base
+  imports =
+    [
+      inputs.home-manager.nixosModules.home-manager
+      #INFO: Base System and Nix configurations
+      ../../modules/base
 
-    #INFO: Defines X0.security options
-    ../../modules/security
+      #INFO: Defines X0.security options
+      ../../modules/security
 
-    #INFO: For scripts used throughout configuration files and systemd-units
-    ../../modules/system/utils
+      #INFO: For scripts used throughout configuration files and systemd-units
+      ../../modules/system/utils
 
-    #INFO: Network conf
-    ../../modules/system/network
+      #INFO: Network conf
+      ../../modules/system/network
 
-    ../../modules/system/desktop/hyprland
-  ];
+      ../../modules/system/desktop/hyprland
+      ../../modules/system/virtualisation
+    ]
+    ++ lib.optionals custom_vars.ENABLE_GAMING [
+      ../../modules/system/gaming
+    ];
 
   X0.security = {
+    acipd.enable = true;
     blacklistedModules.enable = true;
-    bluetooth.enable = true;
+    bluetooth.enable = custom_vars.ENABLE_BLUETOOTH;
     boot.enable = true;
-    cups.enable = true;
+    cups.enable = custom_vars.ENABLE_PRINTING;
+    dbus.enable = true;
     doas.enable = true;
-    fail2ban.enable = true;
+    fail2ban.enable = custom_vars.ENABLE_SSH;
+    getty.enable = true;
     kernel.enable = true;
     network-manager.enable = true;
     network-manager-dispatcher.enable = true;
-    ssh.enable = true;
+    nix-daemon.enable = true;
+    reload-systemd-vconsole-setup.enable = true;
+    rtkit.enable = true;
+    ssh.enable = custom_vars.ENABLE_SSH;
+    systemd-ask-password-console.enable = true;
     systemd.enable = true;
     tor.enable = true;
     usbguard.enable = true;
+    user.enable = true;
     wpa-supplicant.enable = true;
   };
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings.General.Experimental = true;
-  };
-
-  time.timeZone = "America/Chicago";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.fira-code
-    source-code-pro
-  ];
-
-  fonts.enableDefaultPackages = true;
 
   programs = {
     # System wide
@@ -85,13 +66,10 @@
       inherit
         inputs
         outputs
-        username
-        email
-        host
         custom_vars
         ;
     };
-    users.${username} = {
+    users.${custom_vars.USERNAME} = {
       imports = [
         ./home.nix
       ];

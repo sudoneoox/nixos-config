@@ -1,8 +1,7 @@
 {
   pkgs,
-  username,
+  custom_vars,
   lib,
-  host,
   ...
 }: {
   services.greetd = {
@@ -10,7 +9,7 @@
     settings = {
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "${username}";
+        user = "${custom_vars.USERNAME}";
       };
     };
   };
@@ -42,7 +41,7 @@
       hyprshade
       copyq
     ]
-    ++ lib.optionals (host == "X0NixOSDesktop") [
+    ++ lib.optionals (custom_vars.MONITORS == "multi") [
       # In overlays/default.nix
       hyprland-smw
     ];
