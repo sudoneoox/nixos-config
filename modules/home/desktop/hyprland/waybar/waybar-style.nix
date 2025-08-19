@@ -14,7 +14,7 @@
     }
 
     #workspaces {
-     background-color: @color0;
+      background-color: @background;
       border: none;
       box-shadow: none;
     }
