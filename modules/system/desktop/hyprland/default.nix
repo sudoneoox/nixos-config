@@ -33,6 +33,7 @@
 
   environment.systemPackages = with pkgs;
     [
+      wl-gammarelay-rs
       dunst
       rofi-wayland
       hyprpaper

@@ -151,8 +151,16 @@ in {
         position = "bottom";
         height = 17;
         modules-center = ["wlr/taskbar"];
-        modules-right = ["network" "pulseaudio" "backlight" "tray"];
+        modules-right = ["network" "pulseaudio" "backlight" "custom/wl-gammarelay-temperature" "tray"];
         modules-left = ["clock" "battery"];
+
+        "custom/wl-gammarelay-temperature" = {
+          "format" = "{} ";
+          "exec" = "wl-gammarelay-rs watch {t}";
+          "on-scroll-up" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100";
+          "on-scroll-down" = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
+          "on-click" = "busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500";
+        };
 
         "wlr/taskbar" = {
           format = "{icon} {name}";

@@ -47,7 +47,7 @@
     #network,
     #disk,
     #custom-lock,
-    #custom-nix-updates {
+    #custom-wl-gammarelay-temperature {
       border-radius: 4px;
       margin: 6px 3px;
       padding: 6px 12px;
@@ -70,7 +70,7 @@
     #network {             background-color: @color11; }
     #custom-lock {         background-color: @color14; }
     #window {              background-color: @color12; }
-    #custom-nix-updates {  background-color: @color4;  }
+    #custom-wl-gammarelay-temperature {  background-color: @color4;  }
 
     #workspaces button {
       all: initial;
