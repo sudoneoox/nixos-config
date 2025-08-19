@@ -31,7 +31,7 @@ rec {
   ENABLE_PRINTING = false;
   ENABLE_BLUETOOTH = true;
   ENABLE_FLATPAK = false;
-  ENABLE_RESILIO_SYNC = true;
+  ENABLE_RESILIO_SYNC = false;
   ENABLE_UDISKIE = true;
   ENABLE_AUDIO = true;
   ENABLE_SSH = true;

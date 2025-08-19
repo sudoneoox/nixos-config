@@ -41,8 +41,19 @@ in {
       };
       "resilio-truenas-key" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
         owner = "rslsync";
+        group = "rslsync";
         mode = "0400";
         restartUnits = ["resilio.service"];
+      };
+      "truenas-ip" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
+        owner = "rslsync";
+        group = "rslsync";
+        mode = "0400";
+      };
+      "truenas-url-resilio" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
+        owner = "rslsync";
+        group = "rslsync";
+        mode = "0400";
       };
     };
   };
