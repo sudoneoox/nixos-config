@@ -3,8 +3,7 @@
   pkgs,
   ...
 }: let
-  assets_path = custom_vars.NIXOS_ASSETS_PATH;
-  wp_path = "${assets_path}/Wallpapers/${custom_vars.WALLPAPER}";
+  wp_path = "${custom_vars.CACHE_PATH}/current_wallpaper";
   font = custom_vars.FONT;
   profile_photo = "${custom_vars.NIXOS_ASSETS_PATH}/Icons/hyprlock/face.jpg";
   greeting_text = "Welcome!";

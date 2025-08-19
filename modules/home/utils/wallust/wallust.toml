@@ -10,6 +10,12 @@ colors-waybar = { template = "colors-waybar.css.hbs", target = "~/.cache/wallust
 kitty = { template="kitty.conf.hbs", target='~/.config/kitty/colors.conf', new_engine = true}
 neopywal = { template = "colors_neopywal.vim.hbs", target = "~/.cache/wallust/colors_neopywal.vim", new_engine = true }
 hypr = { template = "hyprland-colors.conf.hbs", target = "~/.config/hypr/colors.conf", new_engine = true}
+rofi = { template = "rofi-colors.rasi.hbs", target = "~/.config/rofi/rofi-colors.rasi", new_engine = true}
+rofi-transparent = { template = "rofi-colors-transparent.rasi.hbs", target = "~/.config/rofi/rofi-colors-transparent.rasi", new_engine = true}
+rofi-transparent-extra = { template = "rofi-colors-transparent-extra.rasi.hbs", target = "~/.config/rofi/rofi-colors-transparent-extra.rasi", new_engine = true}
+pywal-fox = { template = "pywalfox.json.hbs", target = "~/.cache/wal/colors.json", new_engine=true }
+
+
 
 
 # Example extras 

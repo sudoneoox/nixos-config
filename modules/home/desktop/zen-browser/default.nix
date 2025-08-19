@@ -1,12 +1,19 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
 
+  home.packages = [
+    pkgs.pywalfox-native
+  ];
+
   programs.zen-browser = {
     enable = true;
-    nativeMessagingHosts = [ pkgs.firefoxpwa ];
+    nativeMessagingHosts = [pkgs.firefoxpwa];
     policies = {
       AutofillAddressEnabled = true;
       AutofillCreditCardEnabled = false;

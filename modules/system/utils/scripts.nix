@@ -4,7 +4,6 @@
     lowBatteryNotifier
     wallustPick
     hyprRestoreWindow
-    nixUpdateChecker
     wallustApplyCurrent
     playerctlLock
   ];

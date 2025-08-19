@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   imports = [
     ./binds.nix
     ./fishFunctions.nix
@@ -12,4 +12,5 @@
     enable = true;
     generateCompletions = true;
   };
+  home.packages = [pkgs.grc];
 }

@@ -24,7 +24,7 @@ in
     text = ''
       set -euo pipefail
 
-      WALL_DIR="${WALLPAPER_DIR}"
+      WALL_DIR=${WALLPAPER_DIR}
       CFG_DIR="$HOME/.config/wallust"
 
       # WARN: make sure to add your rendered outputs that you want to reload after walllust runs
@@ -49,6 +49,11 @@ in
 
       echo "[wallust-pick] selected: ''${SEL}"
 
+      #INFO: Make it dynamic and noticeable of our current_wp for our other configurations
+      echo "''${SEL}" > ${CACHE_DIR}/current_wp_path
+      install -m 0644 -T -- "''${SEL}" ${CACHE_DIR}/current_wallpaper
+
+
       #INFO: Apply via hyprpaper if running
       if pgrep -x hyprpaper >/dev/null 2>&1; then
         echo "[wallust-pick] applying via hyprpaper…"
@@ -58,7 +63,7 @@ in
 
       #INFO: render ALL templates declared in wallust.toml
       TEMPL_DIR="''${CFG_DIR}/templates"
-      mkdir -p "''${TEMPL_DIR}" "${CACHE_DIR}/wallust"
+      mkdir -p "''${TEMPL_DIR}" ${CACHE_DIR}/wallust ${CACHE_DIR}/wal
       echo "[wallust-pick] rendering wallust templates"
       wallust -d "''${CFG_DIR}" run "''${SEL}"
 

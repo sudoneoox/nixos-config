@@ -79,6 +79,7 @@
           brightness = 0.80;
           xray = true;
           special = true;
+          new_optimizations = true;
         };
         shadow = {
           enabled = true;
@@ -137,6 +138,10 @@
         "size 1700 900, class:fzfwallpicker"
         "center, class:fzfwallpicker"
         "stayfocused, class:fzfwallpicker"
+
+        "dimaround, class:^(rofi)$" # dim background around rofi
+        "noanim, class:^(rofi)$" # snappier open/close
+        "opacity 0.96 0.92, class:^(rofi)$" # active/inactive opacity
       ];
 
       plugin = {

@@ -3,6 +3,7 @@
   custom_vars,
 }: let
   WALLPAPER_PATH = "${custom_vars.NIXOS_ASSETS_PATH}/Wallpapers/${custom_vars.WALLPAPER}";
+  CACHE_DIR = "${custom_vars.CACHE_PATH}";
 in
   pkgs.writeShellApplication {
     name = "wallust-apply-current";
@@ -20,7 +21,7 @@ in
       CFG_DIR="$HOME/.config/wallust"
       TEMPL_DIR="$CFG_DIR/templates"
       KITTY_COLORS="$HOME/.config/kitty/current-theme.conf"
-      WP="${WALLPAPER_PATH}"
+      WP=${WALLPAPER_PATH}
 
       mkdir -p "$TEMPL_DIR" "$HOME/.cache/wallust"
 
@@ -28,6 +29,10 @@ in
         echo "[wallust-apply-current] wallpaper not found: $WP" >&2
         exit 0
       fi
+
+      #INFO: Make it dynamic and noticeable of our current_wp for our other configurations
+      echo ${WALLPAPER_PATH} > ${CACHE_DIR}/current_wp_path
+      install -m 0644 -T -- ${WALLPAPER_PATH} ${CACHE_DIR}/current_wallpaper
 
       echo "[wallust-apply-current] running wallust on $WP"
       wallust -d "$CFG_DIR" run "$WP"
