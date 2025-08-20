@@ -53,7 +53,7 @@ rec {
   ICON_THEME = "Tela-black";
   QT_STYLE = "adwaita-dark";
   #NOTE: See modules/home/utils/Assets/wallpapers for options
-  WALLPAPER = "glitch.png";
+  WALLPAPER = "nordic.png";
   # only option
   COLOR_SCHEME = "wallust";
 
