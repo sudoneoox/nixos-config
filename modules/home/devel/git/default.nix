@@ -4,7 +4,7 @@
     userName = "${custom_vars.USERNAME}";
     userEmail = "${custom_vars.EMAIL}";
     signing = {
-      key = "~/.ssh/id_ed25519.pub";
+      key = "${custom_vars.SSH_KEY_PATH}";
       signByDefault = true;
     };
     extraConfig = {

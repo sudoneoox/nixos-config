@@ -31,8 +31,8 @@
     '';
 
     settings = let
-      terminal = "kitty";
-      filemanager = "thunar";
+      terminal = custom_vars.TERMINAL;
+      filemanager = custom_vars.FILE_MANAGER;
       shadow_color = "rgba(1a1a1aee)";
     in {
       input = {

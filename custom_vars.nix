@@ -4,7 +4,7 @@ rec {
   FULL_NAME = "Diego Coronado";
   EMAIL = "diegoa2992@proton.me";
   GITHUB = "sudoneoox";
-  SSH_KEY_PATH = "~/.ssh/id_ed25519.pub";
+  SSH_KEY_PATH = "/home/${USERNAME}/.ssh/id_ed25519.pub";
 
   #NOTE: Derive once, reuse everywhere (don't use "~" — Nix won't expand it)
   HOME_DIR = "/home/${USERNAME}";
