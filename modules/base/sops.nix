@@ -6,15 +6,15 @@
   custom_vars,
   ...
 }: let
-  SOPS_PUBLIC_KEY = "age1cm02yeux0zpgryunwdsf2dya0penm30vj3vcftf698nqsey7yqzsdnt6v2";
-  SOPS_KEY_FILE = "/var/lib/sops-nix/key.txt";
-  SOPS_SECRETS_PATH = "/var/lib/sops-nix/secrets";
+  SOPS_PUBLIC_KEY = custom_vars.SOPS_PUBLIC_KEY;
+  SOPS_KEY_FILE = "${custom_vars.SOPS_PATH}/key.txt";
+  SOPS_SECRETS_PATH = "${custom_vars.SOPS_PATH}/secrets";
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   #INFO: Ensure the secrets dir exists with strict perms
   systemd.tmpfiles.rules = [
-    "d /var/lib/sops-nix 0700 root root -"
+    "d ${custom_vars.SOPS_PATH} 0700 root root -"
     "d ${SOPS_SECRETS_PATH} 0700 root root -"
   ];
 
@@ -38,22 +38,6 @@ in {
       "system-password" = {
         owner = "root";
         neededForUsers = true;
-      };
-      "resilio-truenas-key" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
-        owner = "rslsync";
-        group = "rslsync";
-        mode = "0400";
-        restartUnits = ["resilio.service"];
-      };
-      "truenas-ip" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
-        owner = "rslsync";
-        group = "rslsync";
-        mode = "0400";
-      };
-      "truenas-url-resilio" = lib.mkIf custom_vars.ENABLE_RESILIO_SYNC {
-        owner = "rslsync";
-        group = "rslsync";
-        mode = "0400";
       };
     };
   };

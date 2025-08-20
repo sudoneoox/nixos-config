@@ -1,7 +1,7 @@
-{
+{custom_vars, ...}: {
   programs.fish.shellInit = ''
-    set -gx SOPS_AGE_KEY_FILE /var/lib/sops-nix/key.txt
-    set -gx SOPS_AGE_RECIPIENTS age1cm02yeux0zpgryunwdsf2dya0penm30vj3vcftf698nqsey7yqzsdnt6v2
+    set -gx SOPS_AGE_KEY_FILE ${custom_vars.SOPS_PATH}/key.txt
+    set -gx SOPS_AGE_RECIPIENTS ${custom_vars.SOPS_PUBLIC_KEY}
 
     set -x FZF_DEFAULT_OPTS --prompt="⌕ "
 

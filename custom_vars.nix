@@ -32,7 +32,7 @@ rec {
   ENABLE_PRINTING = false;
   ENABLE_BLUETOOTH = true;
   ENABLE_FLATPAK = false;
-  ENABLE_RESILIO_SYNC = false;
+  ENABLE_RESILIO_SYNC = true;
   ENABLE_UDISKIE = true;
   ENABLE_AUDIO = true;
   ENABLE_SSH = true;
@@ -54,12 +54,15 @@ rec {
   QT_STYLE = "adwaita-dark";
   #NOTE: See modules/home/utils/Assets/wallpapers for options
   WALLPAPER = "glitch.png";
+  # only option
   COLOR_SCHEME = "wallust";
 
-  #INFO: --- Paths for repo & assets --- #
+  #INFO: --- Paths and keys for repo & assets --- #
   NIXOS_CONF_PATH = "${HOME_DIR}/Projects/nixos-config";
   NIXOS_ASSETS_PATH = "${HOME_DIR}/Assets/nixos-config";
   CACHE_PATH = "${HOME_DIR}/.cache";
+  SOPS_PATH = "/var/lib/sops-nix";
+  SOPS_PUBLIC_KEY = "age1cm02yeux0zpgryunwdsf2dya0penm30vj3vcftf698nqsey7yqzsdnt6v2";
 
   #INFO: --- Default Apps --- #
   TERMINAL = "kitty";

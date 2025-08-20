@@ -40,8 +40,8 @@
     kernel.enable = true;
     network-manager.enable = true;
     network-manager-dispatcher.enable = true;
-    #WARN:
-    # Gives issues with:
+    #WARN: nix-daemon.enable = true
+    # Gives issues with: (you might have better luck)
     # nh os switch
     # nix run
     nix-daemon.enable = false;

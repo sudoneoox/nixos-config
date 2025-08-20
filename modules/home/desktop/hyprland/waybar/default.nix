@@ -106,6 +106,7 @@ in {
           exec =
             if isIntelCPU
             then "sensors | awk '/^Package id 0:/ {print int($4)}'"
+            # way to fetch amd cpu temp
             else "sensors | awk '/^Tctl:/ {print int($2)}' || sensors | awk '/^Tdie:/ {print int($2)}'";
 
           format = "  {}°C ";
@@ -152,7 +153,10 @@ in {
         height = 17;
         modules-center = ["wlr/taskbar"];
         modules-right = ["network" "pulseaudio" "backlight" "custom/wl-gammarelay-temperature" "tray"];
-        modules-left = ["clock" "battery"];
+        modules-left =
+          if isLaptop
+          then ["clock" "battery"]
+          else ["clock"];
 
         "custom/wl-gammarelay-temperature" = {
           "format" = "{}K ";
