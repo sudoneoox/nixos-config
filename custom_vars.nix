@@ -24,6 +24,7 @@ rec {
   PRIMARY_MONITOR = "eDP-1";
 
   #INFO: --- Feature flags (System Toggles) --- #
+  ENABLE_CACHIX = true;
   ENABLE_DOCKER = false;
   ENABLE_WINE = false;
   ENABLE_LIBVIRT = false;

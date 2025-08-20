@@ -16,7 +16,6 @@
   wayland.windowManager.hyprland = {
     plugins = [
       pkgs.hyprland-plugins.hyprbars
-      pkgs.hyprspace
       pkgs.hy3
     ];
 
@@ -37,7 +36,7 @@
     in {
       input = {
         follow_mouse = 1;
-        kb_layout = "us";
+        kb_layout = custom_vars.KEYBOARD_LAYOUT;
       };
 
       general = {
@@ -156,49 +155,6 @@
           ];
         };
 
-        overview = {
-          panelHeight = 100;
-          panelColor = "rgba(101010aa)";
-          panelBorderColor = "rgba(ffffff33)";
-          panelBorderWidth = 1;
-
-          workspaceActiveBackground = "rgba(ffffff18)";
-          workspaceInactiveBackground = "rgba(ffffff05)";
-          workspaceActiveBorder = "rgba(33aaffcc)";
-          workspaceInactiveBorder = "rgba(aaaaaa22)";
-          workspaceMargin = 14;
-          workspaceBorderSize = 3;
-
-          dragAlpha = 0.9;
-          centerAligned = true;
-          reservedArea = 0;
-
-          hideBackgroundLayers = true; # setting this to false bugs it out
-          hideOverlayLayers = true;
-          hideTopLayers = true;
-          hideRealLayers = false;
-          drawActiveWorkspace = true;
-          disableBlur = false;
-          overrideAnimSpeed = 0.8;
-
-          overrideGaps = true;
-          gapsIn = 6;
-          gapsOut = 12;
-          affectStrut = false;
-
-          autoDrag = true;
-          autoScroll = true;
-          exitOnClick = true;
-          switchOnDrop = true;
-          exitOnSwitch = true;
-          showNewWorkspace = false;
-          showEmptyWorkspace = false;
-          showSpecialWorkspace = true;
-          disableGestures = false;
-          reverseSwipe = false;
-          exitKey = "Escape";
-        };
-
         hy3 = {
           no_gaps_when_only = 1;
           node_collapse_policy = 2;
@@ -248,9 +204,6 @@
         "SUPER, F, fullscreen"
         "SUPER, R, exec, rofi -show drun"
         "SUPER, J, togglesplit"
-
-        #INFO: HYPRSPACE
-        "SUPER, 0, overview:toggle"
 
         #INFO: HY3
         #INFO: Split into groups

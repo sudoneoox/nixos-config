@@ -40,7 +40,11 @@
     kernel.enable = true;
     network-manager.enable = true;
     network-manager-dispatcher.enable = true;
-    nix-daemon.enable = true;
+    #WARN:
+    # Gives issues with:
+    # nh os switch
+    # nix run
+    nix-daemon.enable = false;
     reload-systemd-vconsole-setup.enable = true;
     rtkit.enable = true;
     ssh.enable = custom_vars.ENABLE_SSH;
