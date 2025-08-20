@@ -28,7 +28,7 @@ in {
       display-run = " ";
       display-filebrowser = " ";
       display-window = " ";
-      display-emoji = " EMOJI";
+      display-emoji = " ";
       drun-display-format = "{name}";
       window-format = "{w} · {c} · {t}";
     };
