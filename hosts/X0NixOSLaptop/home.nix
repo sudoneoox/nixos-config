@@ -2,6 +2,7 @@
   imports = [
     ../../modules/home/desktop/vesktop
     ../../modules/home/desktop/cider
+    ../../modules/home/desktop/mpv
   ];
 
   gtk = {

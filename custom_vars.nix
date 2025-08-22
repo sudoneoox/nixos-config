@@ -20,22 +20,28 @@ rec {
   CPU_VENDOR = "intel";
   # single | multi
   MONITORS = "single";
-  SCALE = 1.0;
+  SCALE = "1.00";
   PRIMARY_MONITOR = "eDP-1";
 
   #INFO: --- Feature flags (System Toggles) --- #
-  ENABLE_CACHIX = true;
-  ENABLE_DOCKER = false;
-  ENABLE_WINE = false;
-  ENABLE_LIBVIRT = false;
-  ENABLE_GAMING = false;
-  ENABLE_PRINTING = false;
-  ENABLE_BLUETOOTH = true;
-  ENABLE_FLATPAK = false;
-  ENABLE_RESILIO_SYNC = true;
-  ENABLE_UDISKIE = true;
-  ENABLE_AUDIO = true;
-  ENABLE_SSH = true;
+  FEATURES = {
+    ENABLE_CACHIX = true;
+    ENABLE_DOCKER = false;
+    ENABLE_WINE = false;
+    ENABLE_LIBVIRT = false;
+    ENABLE_GAMING = false;
+    ENABLE_PRINTING = false;
+    ENABLE_BLUETOOTH = true;
+    ENABLE_FLATPAK = false;
+    ENABLE_RESILIO_SYNC = true;
+    ENABLE_UDISKIE = true;
+    ENABLE_AUDIO = true;
+    ENABLE_SSH = true;
+    ENABLE_TOR = false;
+    ENABLE_QBITTORRENT = false;
+    # specifically for wayland->hyprland
+    ENABLE_HDR = false;
+  };
 
   #INFO: --- Theming / UX --- #
   FONT = "JetbrainsMono Nerd Font";

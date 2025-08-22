@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  custom_vars,
+  ...
+}: {
   # Imports specific to single-monitor setups (usually laptops)
   imports = [
     ../hypridle
@@ -6,7 +10,17 @@
 
   wayland.windowManager.hyprland = {
     settings = {
-      monitor = ",preferred,auto,1";
+      monitor = let
+        scale = toString custom_vars.SCALE;
+        base = ",preferred,auto,${scale}";
+        hdr =
+          if (custom_vars.FEATURES.ENABLE_HDR or false)
+          then ",bitdepth,10,cm,hdr"
+          else "";
+      in [
+        "${base}${hdr}"
+      ];
+
       input = {
         touchpad = {
           disable_while_typing = true;

@@ -23,19 +23,19 @@
       ../../modules/system/desktop/hyprland
       ../../modules/system/virtualisation
     ]
-    ++ lib.optionals custom_vars.ENABLE_GAMING [
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_GAMING [
       ../../modules/system/gaming
     ];
 
   X0.security = {
     acipd.enable = true;
     blacklistedModules.enable = true;
-    bluetooth.enable = custom_vars.ENABLE_BLUETOOTH;
+    bluetooth.enable = custom_vars.FEATURES.FEATURES.ENABLE_BLUETOOTH;
     boot.enable = true;
-    cups.enable = custom_vars.ENABLE_PRINTING;
+    cups.enable = custom_vars.FEATURES.ENABLE_PRINTING;
     dbus.enable = true;
     doas.enable = true;
-    fail2ban.enable = custom_vars.ENABLE_SSH;
+    fail2ban.enable = custom_vars.FEATURES.ENABLE_SSH;
     getty.enable = true;
     kernel.enable = true;
     network-manager.enable = true;
@@ -47,10 +47,10 @@
     nix-daemon.enable = false;
     reload-systemd-vconsole-setup.enable = true;
     rtkit.enable = true;
-    ssh.enable = custom_vars.ENABLE_SSH;
+    ssh.enable = custom_vars.FEATURES.ENABLE_SSH;
     systemd-ask-password-console.enable = true;
     systemd.enable = true;
-    tor.enable = true;
+    tor.enable = custom_vars.FEATURES.ENABLE_TOR;
     usbguard.enable = true;
     user.enable = true;
     wpa-supplicant.enable = true;
@@ -70,10 +70,10 @@
       inherit
         inputs
         outputs
-        custom_vars
+        custom_vars.FEATURES
         ;
     };
-    users.${custom_vars.USERNAME} = {
+    users.${custom_vars.FEATURES.USERNAME} = {
       imports = [
         ./home.nix
       ];

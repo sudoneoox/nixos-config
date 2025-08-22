@@ -4,7 +4,7 @@
   custom_vars,
   ...
 }: {
-  config = lib.mkIf custom_vars.ENABLE_CACHIX {
+  config = lib.mkIf custom_vars.FEATURES.ENABLE_CACHIX {
     environment.systemPackages = with pkgs; [cachix];
     nix.settings = {
       substituters = [

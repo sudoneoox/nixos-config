@@ -54,6 +54,10 @@
         };
       };
 
+      experimental = {
+        xx_color_management_v4 = custom_vars.FEATURES.ENABLE_HDR;
+      };
+
       ecosystem = {
         no_update_news = true;
         no_donation_nag = true;

@@ -5,7 +5,7 @@
 }: {
   services = {
     openssh = {
-      enable = custom_vars.ENABLE_SSH;
+      enable = custom_vars.FEATURES.ENABLE_SSH;
       settings = {
         PasswordAuthentication = false;
         PermitEmptyPasswords = false;

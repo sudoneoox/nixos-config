@@ -18,27 +18,27 @@
       ./hardware/thermald.nix
       ./hardware/locale.nix
     ]
-    ++ lib.optionals custom_vars.ENABLE_BLUETOOTH [
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_BLUETOOTH [
       ./hardware/bluetooth.nix
     ]
-    ++ lib.optionals custom_vars.ENABLE_UDISKIE [
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_UDISKIE [
       ./hardware/udisks.nix
     ]
-    ++ lib.optionals custom_vars.ENABLE_AUDIO [
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_AUDIO [
       ./hardware/audio.nix
     ]
-    ++ lib.optionals custom_vars.ENABLE_PRINTING
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_PRINTING
     [
       ./hardware/printing.nix
     ]
-    ++ lib.optionals (custom_vars.HOST_PROFILE == "laptop") [
+    ++ lib.optionals (custom_vars.FEATURES.HOST_PROFILE == "laptop") [
       ./hardware/libinput.nix
       ./hardware/powerManagement.nix
     ]
-    ++ lib.optionals custom_vars.ENABLE_RESILIO_SYNC [
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_RESILIO_SYNC [
       ./resilio.nix
     ]
-    ++ lib.optionals custom_vars.ENABLE_SSH [
+    ++ lib.optionals custom_vars.FEATURES.ENABLE_SSH [
       ./hardware/ssh.nix
     ];
 }

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  custom_vars,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     # Specific Plugins to multi monitor setup
     plugins = with pkgs; [
@@ -7,8 +11,9 @@
 
     settings = {
       monitor = [
-        "DP-6,preferred,0x0,1"
-        "DP-4,preferred,1920x0,1"
+        "DP-6,preferred,0x0,${custom_vars.SCALE}"
+
+        "DP-4,preferred,1920x0,${custom_vars.SCALE}"
       ];
 
       plugin = {
