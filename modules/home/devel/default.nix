@@ -3,7 +3,7 @@
     ./git
     ./kitty
     ./shell
-    ./starship
+    ./oh-my-posh
     ./nvf
     ./direnv.nix
   ];

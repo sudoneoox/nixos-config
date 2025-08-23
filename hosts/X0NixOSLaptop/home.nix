@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  custom_vars,
+  lib,
+  ...
+}: {
   imports = [
     ../../modules/home/desktop/vesktop
     ../../modules/home/desktop/cider
@@ -27,6 +32,16 @@
   services.flameshot = {
     enable = true;
     package = pkgs.flameshot.override {enableWlrSupport = true;};
+    settings = {
+      General = {
+        useGrimAdapter = lib.mkIf (custom_vars.DE == "hyprland") true;
+        startupLaunch = false;
+        autoCloseIdleDaemon = true;
+        allowMultipleGuiInstances = false;
+        uploadWithoutConfirmation = false;
+        copyPathAfterSave = true;
+      };
+    };
   };
 
   home.stateVersion = "25.05";

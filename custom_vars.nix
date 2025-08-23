@@ -62,6 +62,7 @@ rec {
   WALLPAPER = "nordic.png";
   # only option
   COLOR_SCHEME = "wallust";
+  DE = "hyprland";
 
   #INFO: --- Paths and keys for repo & assets --- #
   NIXOS_CONF_PATH = "${HOME_DIR}/Projects/nixos-config";
