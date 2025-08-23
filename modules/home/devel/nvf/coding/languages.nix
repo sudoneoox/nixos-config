@@ -6,9 +6,16 @@
     enableTreesitter = true;
     enableExtraDiagnostics = true;
     nix.enable = true;
-    python.enable = true;
+    python = {
+      enable = true;
+      dap.enable = true;
+      format.enable = true;
+      lsp.enable = true;
+      treesitter.enable = true;
+    };
     clang = {
       enable = true;
+      dap.enable = true;
       lsp.enable = true;
       treesitter.enable = true;
     };

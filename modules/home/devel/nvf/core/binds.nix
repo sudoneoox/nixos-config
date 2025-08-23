@@ -11,6 +11,7 @@
       };
       register = {
         # remove groups that have no keybinds
+        "<leader>d" = "debugger";
         "<leader>h" = null;
         "<leader>g" = "git";
         "<leader>um" = "Minimap";

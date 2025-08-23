@@ -1,7 +1,13 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     python312
-    uv
   ];
+  programs.uv = {
+    enable = true;
+    settings = {
+      python-downloads = "never";
+      python-preference = "only-system";
+    };
+  };
   # makes uv install binaries in ~/.local/bin
 }

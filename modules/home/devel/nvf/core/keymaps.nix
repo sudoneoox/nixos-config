@@ -60,6 +60,24 @@
       toggleFormatOnSave = null;
     };
 
+    # +Debugger
+    debugger.nvim-dap.mappings = {
+      continue = "<leader>dc";
+      goDown = "<leader>dvi";
+      goUp = "<leader>dvo";
+      hover = "<leader>dh";
+      restart = "<leader>dR";
+      runLast = "<leader>d.";
+      runToCursor = "<leader>dgc";
+      stepBack = "<leader>dgk";
+      stepInto = "<leader>dgi";
+      stepOut = "<leader>dgo";
+      terminate = "<leader>dq";
+      toggleBreakpoint = "<leader>db";
+      toggleDapUI = "<leader>du";
+      toggleRepl = "<leader>dr";
+    };
+
     minimap.codewindow.mappings = {
       toggle = "<leader>umt";
       toggleFocus = "<leader>umf";
