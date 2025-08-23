@@ -31,7 +31,7 @@
     [
       ./hardware/printing.nix
     ]
-    ++ lib.optionals (custom_vars.FEATURES.HOST_PROFILE == "laptop") [
+    ++ lib.optionals (custom_vars.HOST_PROFILE == "laptop") [
       ./hardware/libinput.nix
       ./hardware/powerManagement.nix
     ]

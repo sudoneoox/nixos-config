@@ -12,7 +12,6 @@
     "${inputs.nixos-hardware}/common/pc/laptop/hdd"
     "${inputs.nixos-hardware}/common/pc/laptop"
     "${inputs.nixos-hardware}/common/hidpi.nix"
-    "${inputs.nixos-hardware}/asus/battery.nix"
 
     ./hardware.nix
     ../common
@@ -40,11 +39,6 @@
       loadInInitrd = true;
       vaapiDriver = "intel-media-driver";
       enableHybridCodec = true;
-    };
-
-    asus.battery = {
-      chargeUpto = 75;
-      enableChargeUptoScript = true;
     };
   };
 

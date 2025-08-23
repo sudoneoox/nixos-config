@@ -30,7 +30,7 @@
   X0.security = {
     acipd.enable = true;
     blacklistedModules.enable = true;
-    bluetooth.enable = custom_vars.FEATURES.FEATURES.ENABLE_BLUETOOTH;
+    bluetooth.enable = custom_vars.FEATURES.ENABLE_BLUETOOTH;
     boot.enable = true;
     cups.enable = custom_vars.FEATURES.ENABLE_PRINTING;
     dbus.enable = true;
@@ -70,10 +70,10 @@
       inherit
         inputs
         outputs
-        custom_vars.FEATURES
+        custom_vars
         ;
     };
-    users.${custom_vars.FEATURES.USERNAME} = {
+    users.${custom_vars.USERNAME} = {
       imports = [
         ./home.nix
       ];
