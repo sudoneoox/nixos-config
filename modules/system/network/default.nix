@@ -2,6 +2,7 @@
   host,
   pkgs,
   config,
+  custom_vars,
   ...
 }: {
   networking = {
@@ -74,6 +75,8 @@
     ];
     firewall.enable = true;
   };
+
+  users.users.${custom_vars.USERNAME}.extraGroups = ["networkmanager"];
 
   environment.systemPackages = with pkgs; [networkmanagerapplet];
 }

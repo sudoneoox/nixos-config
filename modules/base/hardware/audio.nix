@@ -6,4 +6,5 @@
     pulse.enable = custom_vars.FEATURES.ENABLE_AUDIO;
     wireplumber.enable = custom_vars.FEATURES.ENABLE_AUDIO;
   };
+  users.users.${custom_vars.USERNAME}.extraGroups = ["audio"];
 }

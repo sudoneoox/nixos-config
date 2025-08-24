@@ -5,6 +5,5 @@
     ./shell
     ./oh-my-posh
     ./nvf
-    ./direnv.nix
   ];
 }

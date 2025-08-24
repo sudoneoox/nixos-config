@@ -29,10 +29,10 @@
           on-timeout = "pidof hyprlock || hyprlock";
         }
 
-        # 30 min - sleep
+        # 45 min - poweroff
         {
-          timeout = 1800;
-          on-timeout = "systemctl sleep";
+          timeout = 2700;
+          on-timeout = "poweroff";
         }
       ];
     };

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./direnv.nix
     ./editing.nix
     ./images.nix
     ./integrations.nix

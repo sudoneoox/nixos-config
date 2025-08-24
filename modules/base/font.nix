@@ -1,3 +1,4 @@
+# Installs the packages within custom_vars.FONT
 {
   lib,
   custom_vars,

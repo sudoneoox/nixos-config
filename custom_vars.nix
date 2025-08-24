@@ -28,7 +28,7 @@ rec {
     ENABLE_CACHIX = true;
     ENABLE_DOCKER = false;
     ENABLE_WINE = false;
-    ENABLE_LIBVIRT = false;
+    ENABLE_LIBVIRT = true;
     ENABLE_GAMING = false;
     ENABLE_PRINTING = false;
     ENABLE_BLUETOOTH = true;

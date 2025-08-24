@@ -2,7 +2,6 @@
   imports = [
     ./shells
     ./commands
-    ./languages
   ];
 
   home.packages = with pkgs; [

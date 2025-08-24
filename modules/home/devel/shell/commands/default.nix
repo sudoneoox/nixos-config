@@ -2,6 +2,7 @@
   imports = [
     ./bat.nix
     ./btop.nix
+    ./direnv.nix
     ./lazygit.nix
     ./ripgrep.nix
     ./repomix

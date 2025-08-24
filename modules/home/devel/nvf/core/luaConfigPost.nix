@@ -68,6 +68,9 @@
       }):map("<leader>uN")
 
 
+
+    vim.lsp.inlay_hint.enable(true) -- on by default
+
     Snacks.toggle
       .new({
         id = "inline_hints",
@@ -80,7 +83,7 @@
 
 
     -- blink-cmp toggle configuration
-    vim.b.completion = false -- completion off by default
+    vim.b.completion = true -- completion on by default
 
     Snacks.toggle
       .new({

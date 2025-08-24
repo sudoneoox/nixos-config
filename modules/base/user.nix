@@ -14,8 +14,6 @@
       extraGroups = [
         "wheel"
         "video"
-        "audio"
-        "networkmanager"
         "storage"
         "input"
       ];
