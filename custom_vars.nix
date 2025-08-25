@@ -73,6 +73,7 @@ rec {
 
   #INFO: --- Default Apps --- #
   TERMINAL = "kitty";
+  IDE = "zed";
   BROWSER = "zen-browser-twilight";
   FILE_MANAGER = "thunar";
   EDITOR = "nvim";

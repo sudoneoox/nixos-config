@@ -5,5 +5,6 @@
     ./shell
     ./oh-my-posh
     ./nvf
+    ./zed
   ];
 }
