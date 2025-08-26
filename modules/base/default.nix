@@ -17,6 +17,7 @@
       ./hardware/fstrim.nix
       ./hardware/thermald.nix
       ./hardware/locale.nix
+      ./hardware/zram.nix
     ]
     ++ lib.optionals custom_vars.FEATURES.ENABLE_BLUETOOTH [
       ./hardware/bluetooth.nix

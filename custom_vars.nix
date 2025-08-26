@@ -61,6 +61,7 @@ rec {
     # specifically for wayland->hyprland
     ENABLE_HDR = false;
     ENABLE_CIDER = false;
+    ENABLE_ZRAM = true;
   };
 
   #INFO: --- Theming / UX --- #
