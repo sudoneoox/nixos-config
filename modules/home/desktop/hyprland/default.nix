@@ -310,6 +310,6 @@
       ./hyprpaper
       ./hyprshade
     ]
-    ++ lib.optional (custom_vars.MONITORS == "single") ./monitors/single.nix
-    ++ lib.optional (custom_vars.MONITORS == "multi") ./monitors/multi.nix;
+    ++ lib.optional (custom_vars.SYSTEM.MONITORS == "single") ./monitors/single.nix
+    ++ lib.optional (custom_vars.SYSTEM.MONITORS == "multi") ./monitors/multi.nix;
 }

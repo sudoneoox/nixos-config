@@ -11,9 +11,9 @@
 
     settings = {
       monitor = [
-        "DP-6,preferred,0x0,${custom_vars.SCALE}"
+        "DP-6,preferred,0x0,${custom_vars.SYSTEM.SCALE}"
 
-        "DP-4,preferred,1920x0,${custom_vars.SCALE}"
+        "DP-4,preferred,1920x0,${custom_vars.SYSTEM.SCALE}"
       ];
 
       plugin = {

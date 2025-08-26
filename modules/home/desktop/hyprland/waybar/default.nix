@@ -4,11 +4,11 @@
   custom_vars,
   ...
 }: let
-  isLaptop = custom_vars.HOST_PROFILE == "laptop";
+  isLaptop = custom_vars.SYSTEM.HOST_PROFILE == "laptop";
 
   # WARN: obviously not a good conditional but i'm not passing anything to distinct
   # different CPU manufacturers. I only have two systems so this isn't an issue for me
-  isIntelCPU = custom_vars.CPU_VENDOR == "intel";
+  isIntelCPU = custom_vars.SYSTEM.CPU_VENDOR == "intel";
 in {
   home.packages = with pkgs; [
     lm_sensors

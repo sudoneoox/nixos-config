@@ -10,7 +10,7 @@
     ++ lib.optionals (custom_vars.COLOR_SCHEME == "wallust") [
       ./wallust-apply-current.nix
     ]
-    ++ lib.optionals (custom_vars.HOST_PROFILE == "laptop") [
+    ++ lib.optionals (custom_vars.SYSTEM.HOST_PROFILE == "laptop") [
       ./low-battery-notifier.nix
     ];
 }

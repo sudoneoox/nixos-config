@@ -10,28 +10,47 @@ rec {
   HOME_DIR = "/home/${USERNAME}";
 
   #--#INFO: --- Host / Profile --- #
+  SYSTEM = {
+    # laptop | desktop
+    HOST_PROFILE = "laptop";
+    # nvidia
+    GPU_VENDOR = "nvidia";
 
-  # laptop | desktop
-  HOST_PROFILE = "desktop";
-  # nvidia
-  GPU_VENDOR = "nvidia";
+    # intel | amd
+    CPU_VENDOR =
+      if (SYSTEM.HOST_PROFILE == "laptop")
+      then "intel"
+      else "amd";
 
-  # intel | amd
-  CPU_VENDOR = "amd";
-  # single | multi
-  MONITORS = "multi";
-  SCALE = "1.00";
-  PRIMARY_MONITOR = "eDP-1";
+    # single | multi
+    MONITORS =
+      if (SYSTEM.HOST_PROFILE == "laptop")
+      then "single"
+      else "multi";
+
+    SCALE = "1.00";
+
+    PRIMARY_MONITOR =
+      if (SYSTEM.HOST_PROFILE == "laptop")
+      then "eDP-1"
+      else null;
+  };
 
   #INFO: --- Feature flags (System Toggles) --- #
   FEATURES = {
     ENABLE_CACHIX = true;
     ENABLE_DOCKER = false;
     ENABLE_WINE = false;
-    ENABLE_LIBVIRT = true;
+    ENABLE_LIBVIRT = false;
     ENABLE_GAMING = false;
-    ENABLE_PRINTING = false;
-    ENABLE_BLUETOOTH = true;
+    ENABLE_PRINTING =
+      if (SYSTEM.HOST_PROFILE == "laptop")
+      then false
+      else true;
+    ENABLE_BLUETOOTH =
+      if (SYSTEM.HOST_PROFILE == "laptop")
+      then false
+      else true;
     ENABLE_FLATPAK = false;
     ENABLE_RESILIO_SYNC = true;
     ENABLE_UDISKIE = true;

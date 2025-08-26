@@ -11,8 +11,8 @@
   wayland.windowManager.hyprland = {
     settings = {
       monitor = let
-        scale = toString custom_vars.SCALE;
-        base = ",preferred,auto,${scale}";
+        scale = toString custom_vars.SYSTEM.SCALE;
+        base = "${custom_vars.SYSTEM.PRIMARY_MONITOR},preferred,auto,${scale}";
         hdr =
           if (custom_vars.FEATURES.ENABLE_HDR or false)
           then ",bitdepth,10,cm,hdr"
