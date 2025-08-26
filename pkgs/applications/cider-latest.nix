@@ -10,11 +10,11 @@
 in
   pkgs.appimageTools.wrapType2 rec {
     pname = "cider";
-    version = "3.0.2";
+    version = "3.1.0";
 
     src = builtins.fetchurl {
       url = "file://${ciderAppImageDir}/${pname}-v${version}-linux-x64.AppImage";
-      sha256 = "sha256-XVBhMgSNJAYTRpx5GGroteeOx0APIzuHCbf+kINT2eU=";
+      sha256 = "sha256-vjwfpKm02f8jePWMnhlPN/OIhB3UUjnon8LUjBWMX0Q=";
     };
 
     extraInstallCommands = let

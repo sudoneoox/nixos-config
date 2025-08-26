@@ -12,14 +12,14 @@ rec {
   #--#INFO: --- Host / Profile --- #
 
   # laptop | desktop
-  HOST_PROFILE = "laptop";
+  HOST_PROFILE = "desktop";
   # nvidia
   GPU_VENDOR = "nvidia";
 
   # intel | amd
-  CPU_VENDOR = "intel";
+  CPU_VENDOR = "amd";
   # single | multi
-  MONITORS = "single";
+  MONITORS = "multi";
   SCALE = "1.00";
   PRIMARY_MONITOR = "eDP-1";
 
@@ -31,7 +31,7 @@ rec {
     ENABLE_LIBVIRT = true;
     ENABLE_GAMING = false;
     ENABLE_PRINTING = false;
-    ENABLE_BLUETOOTH = false;
+    ENABLE_BLUETOOTH = true;
     ENABLE_FLATPAK = false;
     ENABLE_RESILIO_SYNC = true;
     ENABLE_UDISKIE = true;

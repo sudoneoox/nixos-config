@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, custom_vars, ... }:
 {
 
   imports = [
-    # ../../modules/home/desktop/awesome
-    ../../modules/home/desktop/hyprland
+    ../../modules/home/desktop/vesktop
+    ../../modules/home/desktop/cider
+    ../../modules/home/desktop/mpv
   ];
 
   gtk = {
@@ -25,7 +26,17 @@
 
   services.flameshot = {
     enable = true;
-    package = pkgs.flameshot.override { enableWlrSupport = true; };
+    package = pkgs.flameshot.override {enableWlrSupport = true;};
+    settings = {
+      General = {
+        useGrimAdapter = lib.mkIf (custom_vars.DE == "hyprland") true;
+        startupLaunch = false;
+        autoCloseIdleDaemon = true;
+        allowMultipleGuiInstances = false;
+        uploadWithoutConfirmation = false;
+        copyPathAfterSave = true;
+      };
+    };
   };
 
   home.packages = with pkgs; [

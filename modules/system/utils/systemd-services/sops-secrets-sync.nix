@@ -3,7 +3,7 @@
 # install -d -m 700 /root/.ssh
 # ssh-keygen -t ed25519 -C "secrets-sync deploy key" -f /root/.ssh/id_ed25519 -N ""  # (put the pub key as a github deploy key)
 # ssh-keyscan github.com >> /root/.ssh/known_hosts # pre-trust githubs host-key
-# chomd 644 /root/.ssh/known_hosts
+# chmod 644 /root/.ssh/known_hosts
 # ssh -T git@github.com # Optionally you can test as root
 #WARN: Sops needs the initial secrets before it can run so...
 # sudo -i
