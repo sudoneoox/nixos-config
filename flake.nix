@@ -8,6 +8,13 @@
       url = "github:nixos/nixos-hardware";
     };
 
+    #NOTE: For LUKS encryption
+    #TODO: Set up LUKS Encryption
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };
