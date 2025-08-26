@@ -1,6 +1,9 @@
-{ pkgs, lib, custom_vars, ... }:
 {
-
+  pkgs,
+  lib,
+  custom_vars,
+  ...
+}: {
   imports = [
     ../../modules/home/desktop/vesktop
     ../../modules/home/desktop/cider
@@ -19,10 +22,12 @@
     };
   };
 
-  qt.enable = true;
-  qt.platformTheme.name = "gtk";
-  qt.style.name = "adwaita-dark";
-  qt.style.package = pkgs.adwaita-qt;
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+    style.package = pkgs.adwaita-qt;
+  };
 
   services.flameshot = {
     enable = true;
@@ -38,10 +43,6 @@
       };
     };
   };
-
-  home.packages = with pkgs; [
-    proton-pass
-  ];
 
   home.stateVersion = "25.05";
 }
