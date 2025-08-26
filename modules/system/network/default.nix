@@ -64,6 +64,40 @@
             ipv4.method = "auto";
             ipv6.method = "auto";
           };
+
+          school-secure = {
+            connection = {
+              id = "school-secure";
+              type = "wifi";
+            };
+            wifi = {
+              ssid = "$SCHOOL_NETWORK_SSID";
+              mode = "infrastructure";
+            };
+            wifi-security = {
+              key-mgmt = "wpa-eap"; # WPA/WPA2 Enterprise
+            };
+            "802-1x" = {
+              eap = "peap"; # EAP(PEAP)
+              identity = "$EDUROAM_IDENTITY"; # e.g., yourid@uh.edu
+              anonymous-identity = "anon";
+              password = "$SCHOOL_NETWORK_PASSWORD"; # e.g., yourid@uh.edu
+              phase2-auth = "mschapv2"; # Inner auth
+
+              # PEAP version: automatic (0 -> auto in wpa_supplicant)
+              phase1-peapver = 0;
+
+              # No CA certificate
+              system-ca-certs = false;
+              ca-cert = "";
+
+              # Require the RADIUS server’s cert CN/SAN to end with uh.edu
+              # domain-suffix-match = "uh.edu";
+              domain-suffix-match = "$SCHOOL_NETWORK_DOMAIN";
+            };
+            ipv4.method = "auto";
+            ipv6.method = "auto";
+          };
         };
       };
     };
