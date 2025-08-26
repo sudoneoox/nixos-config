@@ -31,7 +31,7 @@ rec {
     ENABLE_LIBVIRT = true;
     ENABLE_GAMING = false;
     ENABLE_PRINTING = false;
-    ENABLE_BLUETOOTH = true;
+    ENABLE_BLUETOOTH = false;
     ENABLE_FLATPAK = false;
     ENABLE_RESILIO_SYNC = true;
     ENABLE_UDISKIE = true;
