@@ -41,6 +41,7 @@ rec {
     ENABLE_QBITTORRENT = false;
     # specifically for wayland->hyprland
     ENABLE_HDR = false;
+    ENABLE_CIDER = false;
   };
 
   #INFO: --- Theming / UX --- #

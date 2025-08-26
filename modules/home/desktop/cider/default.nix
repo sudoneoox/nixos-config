@@ -1,4 +1,9 @@
 #NOTE: defined in pkgs/cider-latest.nix
-{pkgs, ...}: {
-  home.packages = [pkgs.ciderLatest];
+{
+  pkgs,
+  lib,
+  custom_vars,
+  ...
+}: {
+  home.packages = lib.mkIf custom_vars.FEATURES.ENABLE_CIDER [pkgs.ciderLatest];
 }
