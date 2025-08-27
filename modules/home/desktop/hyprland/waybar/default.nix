@@ -221,7 +221,7 @@ in {
             ];
           };
           on-click-right = "pavucontrol -t 3";
-          on-click = "pactl -- set-sink-mute 0 toggle";
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           tooltip = true;
           tooltip-format = "Current volume: {volume}%";
         };

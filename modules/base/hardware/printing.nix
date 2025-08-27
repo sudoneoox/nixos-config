@@ -43,7 +43,6 @@
         # OR mDNS (comment the other one out):
         # deviceUri = "ipp://BRW485F99CA99E6.local/ipp/print";
 
-        # If your printer also supports TLS, you can use ipps:// .../ipp/print instead.
         model = "everywhere";
         location = "Home";
         description = "Brother MFC-J805DW (IPP Everywhere)";
