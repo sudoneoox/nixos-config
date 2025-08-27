@@ -6,5 +6,6 @@
     ./oh-my-posh
     ./nvf
     ./zed
+    ./R-Studio
   ];
 }

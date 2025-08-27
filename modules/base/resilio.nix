@@ -10,6 +10,8 @@ in {
   systemd.tmpfiles.rules = [
     #INFO: mode 2775 = g+w and setgid so new files inherit group "rslsync"
     "d ${syncRoot} 2775 rslsync rslsync -"
+    #NOTE: sync subdir
+    "d ${syncRoot}/sync 2775 rslsync rslsync -"
   ];
 
   ####INFO: Resilio configuration (declarative, no Web UI).
