@@ -1,10 +1,10 @@
 {
-  custom_vars,
+  X0,
   config,
   lib,
   ...
 }: {
-  config = lib.mkIf custom_vars.FEATURES.ENABLE_SSH {
+  config = lib.mkIf X0.FEATURES.ENABLE_SSH {
     services = {
       openssh = {
         enable = true;
@@ -19,7 +19,7 @@
           MaxSessions = 2;
           ClientAliveInterval = 300;
           ClientAliveCountMax = 0;
-          AllowUsers = ["${custom_vars.USERNAME}" "root"];
+          AllowUsers = ["${X0.USERNAME}" "root"];
           TCPKeepAlive = false;
           AllowTcpForwarding = false;
           AllowAgentForwarding = false;

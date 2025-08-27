@@ -1,5 +1,5 @@
 {
-  custom_vars,
+  X0,
   lib,
   ...
 }: {
@@ -9,6 +9,6 @@
       ./rofi
       ./dunst
     ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_UDISKIE [./udiskie]
-    ++ lib.optionals (custom_vars.COLOR_SCHEME == "wallust") [./wallust];
+    ++ lib.optionals X0.FEATURES.ENABLE_UDISKIE [./udiskie]
+    ++ lib.optionals (X0.COLOR_SCHEME == "wallust") [./wallust];
 }

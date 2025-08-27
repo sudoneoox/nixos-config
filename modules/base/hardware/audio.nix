@@ -1,9 +1,9 @@
 {
-  custom_vars,
+  X0,
   lib,
   ...
 }: {
-  config = lib.mkIf custom_vars.FEATURES.ENABLE_AUDIO {
+  config = lib.mkIf X0.FEATURES.ENABLE_AUDIO {
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -11,6 +11,6 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-    users.users.${custom_vars.USERNAME}.extraGroups = ["audio"];
+    users.users.${X0.USERNAME}.extraGroups = ["audio"];
   };
 }

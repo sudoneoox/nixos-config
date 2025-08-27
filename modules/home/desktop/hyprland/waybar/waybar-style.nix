@@ -1,6 +1,6 @@
-{custom_vars, ...}: {
+{X0, ...}: {
   programs.waybar.style = ''
-    @import url("file://${custom_vars.CACHE_PATH}/wallust/colors-waybar.css");
+    @import url("file://${X0.CACHE_PATH}/wallust/colors-waybar.css");
 
     * {
       font-family: "JetBrainsMono Nerd Font";

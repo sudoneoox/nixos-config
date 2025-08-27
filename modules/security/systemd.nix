@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.systemd {
+  config = lib.mkIf X0.SYSTEM.SECURITY.systemd {
     users.groups.netdev = {};
     services = {
       dbus.implementation = "broker";

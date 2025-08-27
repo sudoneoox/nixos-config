@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.boot {
+  config = lib.mkIf X0.SYSTEM.SECURITY.boot {
     # https://madaidans-insecurities.github.io/guides/linux-hardening.html#boot-parameters
     boot.kernelParams = [
       # enables zeroing of memory during allocation and free time

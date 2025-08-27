@@ -1,6 +1,6 @@
 {
   lib,
-  custom_vars,
+  X0,
   pkgs,
   ...
 }: {
@@ -30,13 +30,13 @@
     '';
 
     settings = let
-      terminal = custom_vars.TERMINAL;
-      filemanager = custom_vars.FILE_MANAGER;
+      terminal = X0.TERMINAL;
+      filemanager = X0.FILE_MANAGER;
       shadow_color = "rgba(1a1a1aee)";
     in {
       input = {
         follow_mouse = 1;
-        kb_layout = custom_vars.KEYBOARD_LAYOUT;
+        kb_layout = X0.KEYBOARD_LAYOUT;
       };
 
       general = {
@@ -55,7 +55,7 @@
       };
 
       experimental = {
-        xx_color_management_v4 = custom_vars.FEATURES.ENABLE_HDR;
+        xx_color_management_v4 = X0.FEATURES.ENABLE_HDR;
       };
 
       ecosystem = {
@@ -287,7 +287,7 @@
       ];
 
       exec = [
-        "hyprshade on /home/${custom_vars.USERNAME}/.config/hypr/shaders/vibrance"
+        "hyprshade on /home/${X0.USERNAME}/.config/hypr/shaders/vibrance"
       ];
 
       env = [
@@ -310,6 +310,6 @@
       ./hyprpaper
       ./hyprshade
     ]
-    ++ lib.optional (custom_vars.SYSTEM.MONITORS == "single") ./monitors/single.nix
-    ++ lib.optional (custom_vars.SYSTEM.MONITORS == "multi") ./monitors/multi.nix;
+    ++ lib.optional (X0.SYSTEM.MONITORS == "single") ./monitors/single.nix
+    ++ lib.optional (X0.SYSTEM.MONITORS == "multi") ./monitors/multi.nix;
 }

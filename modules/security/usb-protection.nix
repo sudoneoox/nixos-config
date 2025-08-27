@@ -1,13 +1,13 @@
 {
   pkgs,
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.usbguard {
+  config = lib.mkIf X0.SYSTEM.SECURITY.usbguard {
     services.usbguard = {
       enable = true;
-      IPCAllowedUsers = ["root" "${custom_vars.USERNAME}"];
+      IPCAllowedUsers = ["root" "${X0.USERNAME}"];
       # presentDevicePolicy refers to how to treat USB devices that are already connected when the daemon starts
       presentDevicePolicy = "allow";
 

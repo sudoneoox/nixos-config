@@ -1,6 +1,6 @@
 {
   pkgs,
-  custom_vars,
+  X0,
   ...
 }: {
   # Imports specific to single-monitor setups (usually laptops)
@@ -11,10 +11,10 @@
   wayland.windowManager.hyprland = {
     settings = {
       monitor = let
-        scale = toString custom_vars.SYSTEM.SCALE;
-        base = "${custom_vars.SYSTEM.PRIMARY_MONITOR},preferred,auto,${scale}";
+        scale = toString X0.SYSTEM.SCALE;
+        base = "${X0.SYSTEM.PRIMARY_MONITOR},preferred,auto,${scale}";
         hdr =
-          if (custom_vars.FEATURES.ENABLE_HDR or false)
+          if (X0.FEATURES.ENABLE_HDR or false)
           then ",bitdepth,10,cm,hdr"
           else "";
       in [

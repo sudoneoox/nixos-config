@@ -1,6 +1,6 @@
 {
   pkgs,
-  custom_vars,
+  X0,
   lib,
   ...
 }: {
@@ -34,7 +34,7 @@
     package = pkgs.flameshot.override {enableWlrSupport = true;};
     settings = {
       General = {
-        useGrimAdapter = lib.mkIf (custom_vars.DE == "hyprland") true;
+        useGrimAdapter = lib.mkIf (X0.DE == "hyprland") true;
         startupLaunch = false;
         autoCloseIdleDaemon = true;
         allowMultipleGuiInstances = false;

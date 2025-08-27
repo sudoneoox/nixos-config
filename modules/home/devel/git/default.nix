@@ -1,10 +1,10 @@
-{custom_vars, ...}: {
+{X0, ...}: {
   programs.git = {
     enable = true;
-    userName = "${custom_vars.USERNAME}";
-    userEmail = "${custom_vars.EMAIL}";
+    userName = "${X0.USERNAME}";
+    userEmail = "${X0.EMAIL}";
     signing = {
-      key = "${custom_vars.SSH_KEY_PATH}";
+      key = "${X0.SSH_KEY_PATH}";
       signByDefault = true;
     };
     extraConfig = {

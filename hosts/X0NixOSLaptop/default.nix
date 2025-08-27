@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  custom_vars,
+  X0,
   ...
 }: {
   imports = [
@@ -42,7 +42,7 @@
     };
   };
 
-  home-manager.users.${custom_vars.USERNAME} = {
+  home-manager.users.${X0.USERNAME} = {
     imports = [
       ./home.nix
     ];

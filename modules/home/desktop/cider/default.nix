@@ -2,8 +2,8 @@
 {
   pkgs,
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  home.packages = lib.mkIf custom_vars.FEATURES.ENABLE_CIDER [pkgs.ciderLatest];
+  home.packages = lib.mkIf X0.FEATURES.ENABLE_CIDER [pkgs.ciderLatest];
 }

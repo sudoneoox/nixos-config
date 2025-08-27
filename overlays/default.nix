@@ -1,6 +1,6 @@
 {
   inputs,
-  custom_vars,
+  X0,
   ...
 }: {
   modifications = final: prev: {
@@ -14,7 +14,7 @@
   additions = final: _prev:
     import ../pkgs {
       pkgs = final;
-      inherit custom_vars;
+      inherit X0;
     };
 
   #INFO: When applied, the stable nixpkgs set (declared in the flake inputs) will

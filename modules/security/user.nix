@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.user {
+  config = lib.mkIf X0.SYSTEM.SECURITY.user {
     systemd.services."user@".serviceConfig = {
       ProtectSystem = "strict";
       ProtectClock = true;

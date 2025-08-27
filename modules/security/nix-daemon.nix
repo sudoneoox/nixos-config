@@ -3,10 +3,10 @@
 # nix run
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.nix-daemon {
+  config = lib.mkIf X0.SYSTEM.SECURITY.nix-daemon {
     systemd.services.nix-daemon.serviceConfig = {
       NoNewPrivileges = true;
       ProtectControlGroups = true;

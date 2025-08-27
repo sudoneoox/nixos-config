@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.reload-systemd-vconsole-setup {
+  config = lib.mkIf X0.SYSTEM.SECURITY.reload-systemd-vconsole-setup {
     systemd.services.reload-systemd-vconsole-setup.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

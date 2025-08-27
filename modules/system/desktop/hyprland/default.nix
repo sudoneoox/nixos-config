@@ -1,6 +1,6 @@
 {
   pkgs,
-  custom_vars,
+  X0,
   lib,
   ...
 }: {
@@ -9,7 +9,7 @@
     settings = {
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "${custom_vars.USERNAME}";
+        user = "${X0.USERNAME}";
       };
     };
   };
@@ -41,7 +41,7 @@
       hyprshade
       copyq
     ]
-    ++ lib.optionals (custom_vars.SYSTEM.MONITORS == "multi") [
+    ++ lib.optionals (X0.SYSTEM.MONITORS == "multi") [
       # In overlays/default.nix
       hyprland-smw
     ];

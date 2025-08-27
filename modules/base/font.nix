@@ -1,12 +1,12 @@
-# Installs the packages within custom_vars.FONT
+# Installs the packages within X0.FONT
 {
   lib,
-  custom_vars,
+  X0,
   pkgs,
   ...
 }: let
   toPkg = path: lib.getAttrFromPath (lib.splitString "." path) pkgs;
-  fontPkgs = builtins.map toPkg custom_vars.FONT_PKGS;
+  fontPkgs = builtins.map toPkg X0.FONT_PKGS;
 in {
   fonts = {
     packages = fontPkgs;

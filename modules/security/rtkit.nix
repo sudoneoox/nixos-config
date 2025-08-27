@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.rtkit {
+  config = lib.mkIf X0.SYSTEM.SECURITY.rtkit {
     security.rtkit.enable = true;
     systemd.services.rtkit-daemon.serviceConfig = {
       NoNewPrivileges = true;

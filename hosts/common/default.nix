@@ -1,7 +1,7 @@
 {
   outputs,
   inputs,
-  custom_vars,
+  X0,
   lib,
   ...
 }: {
@@ -23,7 +23,7 @@
       ../../modules/system/desktop/hyprland
       ../../modules/system/virtualisation
     ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_GAMING [
+    ++ lib.optionals X0.FEATURES.ENABLE_GAMING [
       ../../modules/system/gaming
     ];
 
@@ -41,10 +41,10 @@
       inherit
         inputs
         outputs
-        custom_vars
+        X0
         ;
     };
-    users.${custom_vars.USERNAME} = {
+    users.${X0.USERNAME} = {
       imports = [
         ./home.nix
       ];

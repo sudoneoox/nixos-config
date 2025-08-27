@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  custom_vars,
+  X0,
   ...
 }: {
   nix = {
@@ -18,8 +18,8 @@
 
     settings = {
       auto-optimise-store = true;
-      allowed-users = ["${custom_vars.USERNAME}"];
-      trusted-users = ["${custom_vars.USERNAME}"];
+      allowed-users = ["${X0.USERNAME}"];
+      trusted-users = ["${X0.USERNAME}"];
       experimental-features = "nix-command flakes";
       keep-going = true;
       warn-dirty = false;

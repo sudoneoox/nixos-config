@@ -1,12 +1,12 @@
 {
-  custom_vars,
+  X0,
   lib,
   ...
 }: {
   # stock NixOS powermanagement tool which allows for managing hibernate and suspend states
   # other power management tools may overwrite this setting
 
-  config = lib.mkIf custom_vars.SYSTEM.POWER_MANAGEMENT {
+  config = lib.mkIf X0.SYSTEM.POWER_MANAGEMENT {
     powerManagement = {
       enable = true;
     };

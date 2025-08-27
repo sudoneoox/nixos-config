@@ -4,9 +4,9 @@
 # nix hash to-sri --type sha256 <output-from-previous>
 {
   pkgs,
-  custom_vars,
+  X0,
 }: let
-  ciderAppImageDir = builtins.toString "/home/${custom_vars.USERNAME}/Desktop";
+  ciderAppImageDir = builtins.toString "/home/${X0.USERNAME}/Desktop";
 in
   pkgs.appimageTools.wrapType2 rec {
     pname = "cider";

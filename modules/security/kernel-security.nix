@@ -1,10 +1,10 @@
 {
   lib,
-  custom_vars,
+  X0,
   config,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.kernel {
+  config = lib.mkIf X0.SYSTEM.SECURITY.kernel {
     security = {
       protectKernelImage = true;
       lockKernelModules = false; # breaks iptables, wireguard, and virtd

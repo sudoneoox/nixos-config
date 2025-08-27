@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.SSH {
+  config = lib.mkIf X0.SYSTEM.SECURITY.SSH {
     systemd.services.sshd.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

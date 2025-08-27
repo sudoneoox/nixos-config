@@ -1,12 +1,12 @@
-{custom_vars, ...}: {
+{X0, ...}: {
   programs.fish.shellAliases = {
     publicip = "wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1";
     diffs = "diff --side-by-side --suppress-common-lines";
     ccat = "pygmentize -g";
 
     # push input flakes to cachix repo
-    cachix-push-inputs = "cd ${custom_vars.NIXOS_CONF_PATH} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push nixossudnox";
-    cachix-push-outputs = "cd ${custom_vars.NIXOS_CONF_PATH} && nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake . | cachix push nixossudnox";
+    cachix-push-inputs = "cd ${X0.NIXOS_CONF_PATH} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push nixossudnox";
+    cachix-push-outputs = "cd ${X0.NIXOS_CONF_PATH} && nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake . | cachix push nixossudnox";
 
     clip = "kitten clipboard";
     # create backups to external hd

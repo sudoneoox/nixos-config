@@ -1,10 +1,10 @@
 {
   config,
-  custom_vars,
+  X0,
   pkgs,
   ...
 }: let
-  rofiFont = "${custom_vars.FONT} Bold 10";
+  rofiFont = "${X0.FONT} Bold 10";
   rofiTerminal = "${pkgs.kitty}/bin/kitty";
   themeName = "style.rasi";
   themePath = "${config.xdg.configHome}/rofi/${themeName}";
@@ -76,7 +76,7 @@ in {
     img {
       border-radius:              15px;
       background-color:           transparent;
-      background-image:           url("${custom_vars.CACHE_PATH}/current_wallpaper", height);
+      background-image:           url("${X0.CACHE_PATH}/current_wallpaper", height);
     }
 
     /* Listbox ----------------------------------------- */

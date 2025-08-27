@@ -1,11 +1,11 @@
 {
-  custom_vars,
+  X0,
   pkgs,
   lib,
   ...
 }: {
-  config = lib.mkIf custom_vars.FEATURES.ENABLE_PRINTING {
-    users.users.${custom_vars.USERNAME}.extraGroups = ["scanner" "lp"];
+  config = lib.mkIf X0.FEATURES.ENABLE_PRINTING {
+    users.users.${X0.USERNAME}.extraGroups = ["scanner" "lp"];
 
     environment.systemPackages = with pkgs; [
       gscan2pdf

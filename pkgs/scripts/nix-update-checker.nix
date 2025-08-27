@@ -2,12 +2,12 @@
 # Utilized by waybar
 {
   pkgs,
-  custom_vars,
+  X0,
 }: let
   UPDATE_INTERVAL_SECONDS = 3600; # 1 hour
-  NIXOS_CONFIG_PATH = custom_vars.NIXOS_CONF_PATH;
-  CACHE_DIR = custom_vars.CACHE_PATH;
-  ICON_PATH = "${custom_vars.NIXOS_ASSETS_PATH}/Icons/waybar/nixos-updates";
+  NIXOS_CONFIG_PATH = X0.NIXOS_CONF_PATH;
+  CACHE_DIR = X0.CACHE_PATH;
+  ICON_PATH = "${X0.NIXOS_ASSETS_PATH}/Icons/waybar/nixos-updates";
 
   #INFO: The grace period prevents the update checker from running immediately after:
   # 1. First boot - when the system has just started up

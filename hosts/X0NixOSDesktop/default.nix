@@ -1,6 +1,6 @@
 {
   inputs,
-  custom_vars,
+  X0,
   ...
 }: {
   imports = [
@@ -24,7 +24,7 @@
     cpu.amd.updateMicrocode = true;
   };
 
-  home-manager.users.${custom_vars.USERNAME} = {
+  home-manager.users.${X0.USERNAME} = {
     imports = [
       ./home.nix
     ];

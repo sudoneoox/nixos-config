@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.FEATURES.ENABLE_QBITTORRENT {
+  config = lib.mkIf X0.FEATURES.ENABLE_QBITTORRENT {
     environment.systemPackages = with pkgs; [
       qbittorrent-enhanced
     ];

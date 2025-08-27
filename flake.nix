@@ -74,7 +74,7 @@
     inherit (self) outputs;
     inherit (nixpkgs.lib) nixosSystem;
 
-    custom_vars = import ./custom_vars.nix;
+    X0 = import ./custom_vars.nix;
 
     forallSystems = nixpkgs.lib.genAttrs [
       "x86_64-linux"
@@ -87,13 +87,13 @@
           inputs
           outputs
           host
-          custom_vars
+          X0
           ;
       };
       modules = [./hosts/${host}];
     };
   in {
-    overlays = import ./overlays {inherit inputs custom_vars;};
+    overlays = import ./overlays {inherit inputs X0;};
     formatter = forallSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosConfigurations = {

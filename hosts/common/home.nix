@@ -1,6 +1,6 @@
 {
   outputs,
-  custom_vars,
+  X0,
   inputs,
   ...
 }: {
@@ -29,8 +29,8 @@
   };
 
   home = {
-    username = "${custom_vars.USERNAME}";
-    homeDirectory = "/home/${custom_vars.USERNAME}";
+    username = "${X0.USERNAME}";
+    homeDirectory = "/home/${X0.USERNAME}";
   };
 
   programs = {

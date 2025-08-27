@@ -1,9 +1,9 @@
 {
   lib,
-  custom_vars,
+  X0,
   ...
 }: {
-  config = lib.mkIf custom_vars.SYSTEM.SECURITY.acipd {
+  config = lib.mkIf X0.SYSTEM.SECURITY.acipd {
     systemd.services.acpid.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";
