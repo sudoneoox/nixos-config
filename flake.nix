@@ -8,8 +8,6 @@
       url = "github:nixos/nixos-hardware";
     };
 
-    #NOTE: For LUKS encryption
-    #TODO: Set up LUKS Encryption
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";

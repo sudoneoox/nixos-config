@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   custom_vars,
   ...
 }: {
@@ -14,18 +13,12 @@
     "${inputs.nixos-hardware}/common/hidpi.nix"
 
     ./hardware.nix
+    ./disk-config.nix
+    ./boot.nix
     ../common
-
     ../../modules/system/desktop/file-manager
     ../../modules/system/desktop/qbittorrent
   ];
-
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = ["ntfs"];
-  };
 
   hardware = {
     cpu.amd.updateMicrocode = true;
