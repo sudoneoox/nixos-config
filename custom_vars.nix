@@ -62,6 +62,7 @@ rec {
     ENABLE_HDR = false;
     ENABLE_CIDER = false;
     ENABLE_ZRAM = true;
+    ENABLE_RSTUDIO = true;
   };
 
   #INFO: --- Theming / UX --- #
