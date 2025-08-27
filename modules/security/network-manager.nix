@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.network-manager;
-in {
-  options.X0.security.network-manager = {
-    enable = lib.mkEnableOption "network-manager";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.network-manager {
     systemd.services.NetworkManager.serviceConfig = {
       NoNewPrivileges = true;
       ProtectHome = true;

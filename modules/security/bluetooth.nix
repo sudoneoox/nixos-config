@@ -1,16 +1,10 @@
 # https://github.com/wallago/nix-system-services-hardened/blob/main/services/bluetooth.nix
 {
   lib,
-  config,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.bluetooth;
-in {
-  options.X0.security.bluetooth = {
-    enable = lib.mkEnableOption "bluetooth";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.bluetooth {
     systemd.services.bluetooth.serviceConfig = {
       ProtectKernelTunables = lib.mkForce true;
       ProtectKernelModules = lib.mkForce true;

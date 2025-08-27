@@ -1,10 +1,16 @@
-{custom_vars, ...}: {
-  services.pipewire = {
-    enable = custom_vars.FEATURES.ENABLE_AUDIO;
-    alsa.enable = custom_vars.FEATURES.ENABLE_AUDIO;
-    alsa.support32Bit = custom_vars.FEATURES.ENABLE_AUDIO;
-    pulse.enable = custom_vars.FEATURES.ENABLE_AUDIO;
-    wireplumber.enable = custom_vars.FEATURES.ENABLE_AUDIO;
+{
+  custom_vars,
+  lib,
+  ...
+}: {
+  config = lib.mkIf custom_vars.FEATURES.ENABLE_AUDIO {
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+    users.users.${custom_vars.USERNAME}.extraGroups = ["audio"];
   };
-  users.users.${custom_vars.USERNAME}.extraGroups = ["audio"];
 }

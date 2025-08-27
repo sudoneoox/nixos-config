@@ -1,17 +1,9 @@
 {
   lib,
-  config,
   custom_vars,
   ...
-}: let
-  cfg = config.X0.security.doas;
-in {
-  # https://search.nixos.org/options?channel=unstable&show=security.doas.extraRules.*.persist&from=0&size=50&sort=relevance&type=packages&query=security.doas
-  options.X0.security.doas = {
-    enable = lib.mkEnableOption "doas";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.doas {
     # Disable sudo
     # I had issues with disabling this you might have better luck
     security.sudo.enable = true;

@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.blacklistedModules;
-in {
-  options.X0.security.blacklistedModules = {
-    enable = lib.mkEnableOption "blacklistedModules";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.blacklistedModules {
     boot.blacklistedKernelModules = [
       # Obscure networking protocols
       "dccp" # Datagram Congestion Control Protocol

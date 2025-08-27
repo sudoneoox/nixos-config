@@ -1,15 +1,10 @@
 {
-  config,
   lib,
+  custom_vars,
+  config,
   ...
-}: let
-  cfg = config.X0.security.kernel;
-in {
-  options.X0.security.kernel = {
-    enable = lib.mkEnableOption "kernel";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.kernel {
     security = {
       protectKernelImage = true;
       lockKernelModules = false; # breaks iptables, wireguard, and virtd

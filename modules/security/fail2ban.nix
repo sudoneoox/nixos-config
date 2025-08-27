@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.fail2ban;
-in {
-  options.X0.security.fail2ban = {
-    enable = lib.mkEnableOption "fail2ban";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.fail2ban {
     services.fail2ban = {
       enable = true;
       maxretry = 5;

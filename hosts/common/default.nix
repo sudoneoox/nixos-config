@@ -27,35 +27,6 @@
       ../../modules/system/gaming
     ];
 
-  X0.security = {
-    acipd.enable = true;
-    blacklistedModules.enable = true;
-    bluetooth.enable = custom_vars.FEATURES.ENABLE_BLUETOOTH;
-    boot.enable = true;
-    cups.enable = custom_vars.FEATURES.ENABLE_PRINTING;
-    dbus.enable = true;
-    doas.enable = true;
-    fail2ban.enable = custom_vars.FEATURES.ENABLE_SSH;
-    getty.enable = true;
-    kernel.enable = true;
-    network-manager.enable = true;
-    network-manager-dispatcher.enable = true;
-    #WARN: nix-daemon.enable = true
-    # Gives issues with: (you might have better luck)
-    # nh os switch
-    # nix run
-    nix-daemon.enable = false;
-    reload-systemd-vconsole-setup.enable = true;
-    rtkit.enable = true;
-    ssh.enable = custom_vars.FEATURES.ENABLE_SSH;
-    systemd-ask-password-console.enable = true;
-    systemd.enable = true;
-    tor.enable = custom_vars.FEATURES.ENABLE_TOR;
-    usbguard.enable = true;
-    user.enable = true;
-    wpa-supplicant.enable = true;
-  };
-
   programs = {
     # System wide
     zsh.enable = true;

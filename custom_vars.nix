@@ -1,20 +1,24 @@
 rec {
+  #NOTE: Derive once, reuse everywhere (don't use "~" — Nix won't expand it)
+  HOME_DIR = "/home/${USERNAME}";
+
   #INFO: --- Identity --- #
   USERNAME = "diego";
   FULL_NAME = "Diego Coronado";
   EMAIL = "diegoa2992@proton.me";
   GITHUB = "sudoneoox";
-  SSH_KEY_PATH = "/home/${USERNAME}/.ssh/id_ed25519.pub";
+  SSH_KEY_PATH = "${HOME_DIR}/.ssh/id_ed25519.pub";
 
-  #NOTE: Derive once, reuse everywhere (don't use "~" — Nix won't expand it)
-  HOME_DIR = "/home/${USERNAME}";
-
-  #--#INFO: --- Host / Profile --- #
+  ##INFO: --- Host / Profile --- #
   SYSTEM = {
     # laptop | desktop
     HOST_PROFILE = "laptop";
+
     # nvidia
     GPU_VENDOR = "nvidia";
+
+    # true | fa\se
+    POWER_MANAGEMENT = SYSTEM.HOST_PROFILE == "laptop";
 
     # intel | amd
     CPU_VENDOR =
@@ -28,15 +32,45 @@ rec {
       then "single"
       else "multi";
 
+    # Hyprland Scale
     SCALE = "1.00";
 
     PRIMARY_MONITOR =
       if (SYSTEM.HOST_PROFILE == "laptop")
       then "eDP-1"
       else null;
+
+    SECURITY = {
+      acipd = true;
+      blacklistedModules = true;
+      bluetooth = FEATURES.ENABLE_BLUETOOTH;
+      boot = true;
+      cups = FEATURES.ENABLE_PRINTING;
+      dbus = true;
+      doas = true;
+      fail2ban = FEATURES.ENABLE_SSH;
+      getty = true;
+      kernel = true;
+      network-manager = true;
+      network-manager-dispatcher = true;
+      #WARN: nix-daemon = true
+      # Gives issues with: (you might have better luck)
+      # nh os switch
+      # nix run
+      nix-daemon = false;
+      reload-systemd-vconsole-setup = true;
+      rtkit = true;
+      ssh = FEATURES.ENABLE_SSH;
+      systemd-ask-password-console = true;
+      systemd = true;
+      tor = FEATURES.ENABLE_TOR;
+      usbguard = true;
+      user = true;
+      wpa-supplicant = true;
+    };
   };
 
-  #INFO: --- Feature flags (System Toggles) --- #
+  #INFO: --- Feature flags (System Toggles; true | false) --- #
   FEATURES = {
     ENABLE_CACHIX = true;
     ENABLE_DOCKER = false;

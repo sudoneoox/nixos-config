@@ -1,14 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.systemd;
-in {
-  options.X0.security.systemd = {
-    enable = lib.mkEnableOption "systemd";
-  };
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.systemd {
     users.groups.netdev = {};
     services = {
       dbus.implementation = "broker";

@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.reload-systemd-vconsole-setup;
-in {
-  options.X0.security.reload-systemd-vconsole-setup = {
-    enable = lib.mkEnableOption "reload-systemd-vconsole-setup";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.reload-systemd-vconsole-setup {
     systemd.services.reload-systemd-vconsole-setup.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

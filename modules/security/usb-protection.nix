@@ -1,17 +1,10 @@
 {
-  config,
   pkgs,
   lib,
   custom_vars,
   ...
-}: let
-  cfg = config.X0.security.usbguard;
-in {
-  options.X0.security.usbguard = {
-    enable = lib.mkEnableOption "usbguard";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.usbguard {
     services.usbguard = {
       enable = true;
       IPCAllowedUsers = ["root" "${custom_vars.USERNAME}"];

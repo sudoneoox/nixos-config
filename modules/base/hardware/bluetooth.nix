@@ -1,9 +1,15 @@
-{custom_vars, ...}: {
-  hardware.bluetooth = {
-    enable = custom_vars.FEATURES.ENABLE_BLUETOOTH;
-    powerOnBoot = custom_vars.FEATURES.ENABLE_BLUETOOTH;
-    settings.General.Experimental = custom_vars.FEATURES.ENABLE_BLUETOOTH;
+{
+  custom_vars,
+  lib,
+  ...
+}: {
+  config = lib.mkIf custom_vars.FEATURES.ENABLE_BLUETOOTH {
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings.General.Experimental = true;
+    };
   };
-  # I personally like to use bluetoothctl so the gui applet i leave disabled
+  #WARN: I personally like to use bluetoothctl so the gui applet I leave disabled
   # services.blueman.enable = custom_vars.FEATURES.ENABLE_BLUETOOTH;
 }

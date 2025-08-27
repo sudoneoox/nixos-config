@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.user;
-in {
-  options.X0.security.user = {
-    enable = lib.mkEnableOption "user";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.user {
     systemd.services."user@".serviceConfig = {
       ProtectSystem = "strict";
       ProtectClock = true;

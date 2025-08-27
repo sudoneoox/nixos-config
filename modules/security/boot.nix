@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.boot;
-in {
-  options.X0.security.boot = {
-    enable = lib.mkEnableOption "boot";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.boot {
     # https://madaidans-insecurities.github.io/guides/linux-hardening.html#boot-parameters
     boot.kernelParams = [
       # enables zeroing of memory during allocation and free time

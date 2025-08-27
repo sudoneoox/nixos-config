@@ -1,45 +1,16 @@
 {
-  lib,
-  custom_vars,
-  ...
-}: {
-  imports =
-    [
-      ./font.nix
-      ./nh.nix
-      ./nix.nix
-      ./nixpkgs.nix
-      ./overlays.nix
-      ./sops.nix
-      ./substituters.nix
-      ./system.nix
-      ./user.nix
-      ./hardware/fstrim.nix
-      ./hardware/thermald.nix
-      ./hardware/locale.nix
-      ./hardware/zram.nix
-    ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_BLUETOOTH [
-      ./hardware/bluetooth.nix
-    ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_UDISKIE [
-      ./hardware/udisks.nix
-    ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_AUDIO [
-      ./hardware/audio.nix
-    ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_PRINTING
-    [
-      ./hardware/printing.nix
-    ]
-    ++ lib.optionals (custom_vars.SYSTEM.HOST_PROFILE == "laptop") [
-      ./hardware/libinput.nix
-      ./hardware/powerManagement.nix
-    ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_RESILIO_SYNC [
-      ./resilio.nix
-    ]
-    ++ lib.optionals custom_vars.FEATURES.ENABLE_SSH [
-      ./hardware/ssh.nix
-    ];
+  imports = [
+    ./env-vars.nix
+    ./font.nix
+    ./nh.nix
+    ./nix.nix
+    ./nixpkgs.nix
+    ./overlays.nix
+    ./sops.nix
+    ./substituters.nix
+    ./system.nix
+    ./user.nix
+    ./resilio.nix
+    ./hardware
+  ];
 }

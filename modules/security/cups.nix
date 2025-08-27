@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.cups;
-in {
-  options.X0.security.cups = {
-    enable = lib.mkEnableOption "cups";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.cups {
     systemd.services.cups.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "full";

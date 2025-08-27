@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.network-manager-dispatcher;
-in {
-  options.X0.security.network-manager-dispatcher = {
-    enable = lib.mkEnableOption "network-manager-dispatcher";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.network-manager-dispatcher {
     systemd.services.NetworkManager-dispatcher.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

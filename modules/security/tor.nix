@@ -1,16 +1,10 @@
 {
-  config,
   lib,
+  custom_vars,
   pkgs,
   ...
-}: let
-  cfg = config.X0.security.tor;
-in {
-  options.X0.security.tor = {
-    enable = lib.mkEnableOption "tor";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.tor {
     services.tor = {
       enable = true;
       enableGeoIP = false;

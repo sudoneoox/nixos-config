@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.systemd-ask-password-console;
-in {
-  options.X0.security.systemd-ask-password-console = {
-    enable = lib.mkEnableOption "systemd-ask-password-console";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.systemd-ask-password-console {
     systemd.services.systemd-ask-password-console.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

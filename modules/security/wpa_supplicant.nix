@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.wpa-supplicant;
-in {
-  options.X0.security.wpa-supplicant = {
-    enable = lib.mkEnableOption "wpa-supplicant";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.wpa-supplicant {
     systemd.services.wpa_supplicant.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

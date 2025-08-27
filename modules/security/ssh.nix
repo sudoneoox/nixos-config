@@ -1,14 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.ssh;
-in {
-  options.X0.security.ssh = {
-    enable = lib.mkEnableOption "ssh";
-  };
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.SSH {
     systemd.services.sshd.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

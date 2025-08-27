@@ -1,15 +1,12 @@
+# WARN: might give issues with commands like
+# nh os switch
+# nix run
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.nix-daemon;
-in {
-  options.X0.security.nix-daemon = {
-    enable = lib.mkEnableOption "nix-daemon";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.nix-daemon {
     systemd.services.nix-daemon.serviceConfig = {
       NoNewPrivileges = true;
       ProtectControlGroups = true;

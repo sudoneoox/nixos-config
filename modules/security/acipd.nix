@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.acipd;
-in {
-  options.X0.security.acipd = {
-    enable = lib.mkEnableOption "acipd";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.acipd {
     systemd.services.acpid.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

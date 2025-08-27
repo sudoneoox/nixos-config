@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.dbus;
-in {
-  options.X0.security.dbus = {
-    enable = lib.mkEnableOption "dbus";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.dbus {
     systemd.services.dbus.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "stric";

@@ -1,15 +1,9 @@
 {
-  config,
   lib,
+  custom_vars,
   ...
-}: let
-  cfg = config.X0.security.getty;
-in {
-  options.X0.security.getty = {
-    enable = lib.mkEnableOption "getty";
-  };
-
-  config = lib.mkIf cfg.enable {
+}: {
+  config = lib.mkIf custom_vars.SYSTEM.SECURITY.getty {
     systemd.services."getty@".serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "stric";
