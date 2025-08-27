@@ -32,21 +32,29 @@ in {
         position = "top";
         height = 17;
         spacing = 0;
-        modules-left = [
-          "hyprland/workspaces"
-          "custom/lock"
-          "custom/reboot"
-          "custom/power"
-        ];
+        modules-left =
+          [
+            "hyprland/workspaces"
+            "custom/lock"
+            "custom/reboot"
+          ]
+          ++ lib.optionals (custom_vars.SYSTEM.HOST_PROFILE == "laptop") [
+            "custom/power"
+          ];
         modules-center = ["hyprland/window"];
-        modules-right = [
-          # "custom/nix-updates"
-          "disk"
-          "bluetooth"
-          "custom/temperature"
-          "memory"
-          "cpu"
-        ];
+        modules-right =
+          [
+            # "custom/nix-updates"
+            "disk"
+          ]
+          ++ lib.optionals custom_vars.FEATURES.ENABLE_BLUETOOTH [
+            "bluetooth"
+          ]
+          ++ [
+            "custom/temperature"
+            "memory"
+            "cpu"
+          ];
 
         "hyprland/workspaces" = {
           disable-scroll = false;
@@ -62,24 +70,6 @@ in {
             "active" = "󱙧";
           };
         };
-
-        # "custom/nix-updates" = {
-        #   # Defined in pkgs/scripts
-        #   "exec" = "nix-update-checker";
-        #   "signal" = 12;
-        #   "on-click" = "pkill -x -RTMIN+12 .waybar-wrapped"; # refresh on click
-        #   "on-click-right" = "rm ~/.cache/nix-update-last-run"; # force an update
-        #   "interval" = 3600; # refresh every hour
-        #   "tooltip" = true;
-        #   "return-type" = "json";
-        #   "format" = "{} {icon}";
-        #   "format-icons" = {
-        #     "has-updates" = "󰚰"; # icon when updates needed
-        #     "updating" = ""; # icon when updating
-        #     "updated" = ""; # icon when all packages updated
-        #     "error" = ""; # icon when errot occurs
-        #   };
-        # };
 
         "custom/lock" = {
           format = "  ";
