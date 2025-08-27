@@ -62,9 +62,8 @@
     "ctrl+a>k" = "neighboring_window up";
     "ctrl+a>j" = "neighboring_window down";
 
-    #INFO: zoom + themes kitten
+    #INFO: zoom
     "ctrl+a>z" = "kitten zoom_toggle.py";
-    "ctrl+a>t" = "kitten themes";
 
     #INFO: quick tab switching
     "ctrl+a>q" = "focus_visible_window";
