@@ -43,14 +43,9 @@ rec {
     ENABLE_WINE = false;
     ENABLE_LIBVIRT = false;
     ENABLE_GAMING = false;
-    ENABLE_PRINTING =
-      if (SYSTEM.HOST_PROFILE == "laptop")
-      then false
-      else true;
-    ENABLE_BLUETOOTH =
-      if (SYSTEM.HOST_PROFILE == "laptop")
-      then false
-      else true;
+    ENABLE_PRINTING = SYSTEM.HOST_PROFILE == "desktop";
+    ENABLE_BLUETOOTH = SYSTEM.HOST_PROFILE == "desktop";
+
     ENABLE_FLATPAK = false;
     ENABLE_RESILIO_SYNC = true;
     ENABLE_UDISKIE = true;
@@ -63,6 +58,8 @@ rec {
     ENABLE_CIDER = false;
     ENABLE_ZRAM = true;
     ENABLE_RSTUDIO = true;
+    ENABLE_TYPST = true;
+    ENABLE_ZED = false;
   };
 
   #INFO: --- Theming / UX --- #

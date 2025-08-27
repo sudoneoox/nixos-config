@@ -7,5 +7,6 @@
     ./nvf
     ./zed
     ./R-Studio
+    ./typst
   ];
 }
