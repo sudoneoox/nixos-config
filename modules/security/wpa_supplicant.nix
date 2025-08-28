@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.wpa-supplicant {
+  config = lib.mkIf config.x0.system.security.wpa-supplicant {
     systemd.services.wpa_supplicant.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

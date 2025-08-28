@@ -1,11 +1,11 @@
 {
-  X0,
+  config,
   pkgs,
   lib,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_PRINTING {
-    users.users.${X0.USERNAME}.extraGroups = ["scanner" "lp"];
+  config = lib.mkIf config.x0.features.enablePrinting {
+    users.users.${config.USERNAME}.extraGroups = ["scanner" "lp"];
 
     environment.systemPackages = with pkgs; [
       gscan2pdf

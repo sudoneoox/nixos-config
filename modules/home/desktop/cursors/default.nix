@@ -1,13 +1,13 @@
 {
   pkgs,
-  X0,
+  config,
   ...
 }: {
   home.pointerCursor = {
     dotIcons.enable = true;
     hyprcursor.enable = true;
     name = "macOS";
-    size = X0.CURSOR_SIZE;
+    size = config.x0.cursorSize;
     package = pkgs.apple-cursor;
     gtk.enable = true;
   };

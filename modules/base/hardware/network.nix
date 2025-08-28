@@ -2,7 +2,7 @@
   host,
   pkgs,
   config,
-  X0,
+  config,
   ...
 }: {
   networking = {
@@ -110,7 +110,7 @@
     firewall.enable = true;
   };
 
-  users.users.${X0.USERNAME}.extraGroups = ["networkmanager"];
+  users.users.${config.x0.username}.extraGroups = ["networkmanager"];
 
   environment.systemPackages = with pkgs; [networkmanagerapplet];
 }

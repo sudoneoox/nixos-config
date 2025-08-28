@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.acipd {
+  config = lib.mkIf config.x0.system.security.acipd {
     systemd.services.acpid.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

@@ -1,11 +1,11 @@
 {
-  X0,
+  config,
   pkgs,
   ...
 }: let
-  wp_path = "${X0.CACHE_PATH}/current_wallpaper";
-  font = X0.FONT;
-  profile_photo = "${X0.NIXOS_ASSETS_PATH}/Icons/hyprlock/face.jpg";
+  wp_path = "${config.x0.cachePath}/current_wallpaper";
+  font = config.x0.font;
+  profile_photo = "${config.x0.nixosAssetsPath}/Icons/hyprlock/face.jpg";
   greeting_text = "Welcome!";
   hyprlock_conf_path = "$HOME/.config/hyprlock";
 in {

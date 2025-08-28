@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.dbus {
+  config = lib.mkIf config.x0.system.security.dbus {
     systemd.services.dbus.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "stric";

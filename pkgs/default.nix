@@ -1,6 +1,6 @@
 {
   pkgs,
-  X0,
+  config,
   ...
 }: {
   lowBatteryNotifier = pkgs.callPackage ./scripts/low-battery-notifier.nix {};

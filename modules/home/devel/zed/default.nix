@@ -1,10 +1,10 @@
 {
-  X0,
+  config,
   pkgs,
   lib,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_ZED {
+  config = lib.mkIf config.x0.features.enableZed {
     programs.zed-editor = {
       enable = true;
       extensions = [
@@ -24,7 +24,7 @@
         vim.enable_vim_sneak = true;
         theme = "Dracula";
         # had to force here due to conflicts
-        ui_font_size = lib.mkForce X0.FONT_SIZE;
+        ui_font_size = lib.mkForce config.FONT_SIZE;
         buffer_font_size = lib.mkForce 14;
         relative_line_numbers = true;
         file_finder = {
@@ -95,9 +95,9 @@
           };
           env = {
             EDITOR = "zed --wait";
-            TERM = X0.TERMINAL;
+            TERM = config.TERMINAL;
           };
-          font_family = X0.FONT;
+          font_family = config.FONT;
           font_features = null;
           line_height = "comfortable";
           option_as_meta = false;

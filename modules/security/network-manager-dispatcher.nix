@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.network-manager-dispatcher {
+  config = lib.mkIf config.x0.system.security.network-manager-dispatcher {
     systemd.services.NetworkManager-dispatcher.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

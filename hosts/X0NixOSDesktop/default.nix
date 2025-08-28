@@ -1,6 +1,6 @@
 {
   inputs,
-  X0,
+  config,
   ...
 }: {
   imports = [
@@ -24,7 +24,7 @@
     cpu.amd.updateMicrocode = true;
   };
 
-  home-manager.users.${X0.USERNAME} = {
+  home-manager.users.${config.x0.username} = {
     imports = [
       ./home.nix
     ];

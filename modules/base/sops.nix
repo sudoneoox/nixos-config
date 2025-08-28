@@ -3,18 +3,18 @@
   inputs,
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: let
-  SOPS_PUBLIC_KEY = X0.SOPS_PUBLIC_KEY;
-  SOPS_KEY_FILE = "${X0.SOPS_PATH}/key.txt";
-  SOPS_SECRETS_PATH = "${X0.SOPS_PATH}/secrets";
+  SOPS_PUBLIC_KEY = config.SOPS_PUBLIC_KEY;
+  SOPS_KEY_FILE = "${config.SOPS_PATH}/key.txt";
+  SOPS_SECRETS_PATH = "${config.SOPS_PATH}/secrets";
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   #INFO: Ensure the secrets dir exists with strict perms
   systemd.tmpfiles.rules = [
-    "d ${X0.SOPS_PATH} 0700 root root -"
+    "d ${config.SOPS_PATH} 0700 root root -"
     "d ${SOPS_SECRETS_PATH} 0700 root root -"
   ];
 
@@ -51,7 +51,7 @@ in {
     SOPS_AGE_RECIPIENTS = SOPS_PUBLIC_KEY;
   };
 
-  programs.ssh.knownHosts.github = lib.mkIf X0.FEATURES.ENABLE_SSH {
+  programs.ssh.knownHosts.github = lib.mkIf config.x0.features.enableSsh {
     hostNames = ["github.com"];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
   };

@@ -1,10 +1,10 @@
 {
   lib,
-  X0,
+  config,
   pkgs,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.tor {
+  config = lib.mkIf config.x0.system.security.tor {
     services.tor = {
       enable = true;
       enableGeoIP = false;

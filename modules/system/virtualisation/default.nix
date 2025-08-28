@@ -1,18 +1,18 @@
 {
-  X0,
+  config,
   lib,
   ...
 }: {
   imports =
     [
     ]
-    ++ lib.optionals X0.FEATURES.ENABLE_DOCKER [
+    ++ lib.optionals config.x0.features.enableDocker [
       ./docker.nix
     ]
-    ++ lib.optionals X0.FEATURES.ENABLE_WINE [
+    ++ lib.optionals config.x0.features.enableWine [
       ./wine.nix
     ]
-    ++ lib.optionals X0.FEATURES.ENABLE_LIBVIRT
+    ++ lib.optionals config.x0.features.enableLibvirt
     [
       ./qemu.nix
     ];

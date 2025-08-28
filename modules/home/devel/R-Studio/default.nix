@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_RSTUDIO {
+  config = lib.mkIf config.x0.features.enableRstudio {
     home.packages = with pkgs; [
       (rWrapper.override {
         packages = with rPackages; [

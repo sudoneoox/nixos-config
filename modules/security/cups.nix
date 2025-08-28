@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.cups {
+  config = lib.mkIf config.x0.system.security.cups {
     systemd.services.cups.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "full";

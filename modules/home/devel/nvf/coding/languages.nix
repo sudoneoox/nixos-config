@@ -1,5 +1,5 @@
 # ── Languages (Treesitter/LSP toggles) ───────────────────────────────────── languages = {
-{X0, ...}: {
+{config, ...}: {
   programs.nvf.settings.vim.languages = {
     enableFormat = true;
     enableDAP = false;
@@ -23,16 +23,16 @@
     lua.enable = true;
     bash.enable = true;
     r = {
-      enable = X0.FEATURES.ENABLE_RSTUDIO;
-      format.enable = X0.FEATURES.ENABLE_RSTUDIO;
-      lsp.enable = X0.FEATURES.ENABLE_RSTUDIO;
-      treesitter.enable = X0.FEATURES.ENABLE_RSTUDIO;
+      enable = config.x0.features.enableRstudio;
+      format.enable = config.x0.features.enableRstudio;
+      lsp.enable = config.x0.features.enableRstudio;
+      treesitter.enable = config.x0.features.enableRstudio;
     };
     typst = {
-      enable = X0.FEATURES.ENABLE_TYPST;
-      format.enable = X0.FEATURES.ENABLE_TYPST;
-      lsp.enable = X0.FEATURES.ENABLE_TYPST;
-      treesitter.enable = X0.FEATURES.ENABLE_TYPST;
+      enable = config.x0.features.enableTypst;
+      format.enable = config.x0.features.enableTypst;
+      lsp.enable = config.x0.features.enableTypst;
+      treesitter.enable = config.x0.features.enableTypst;
     };
   };
 }

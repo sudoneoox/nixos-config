@@ -1,5 +1,5 @@
 {
-  X0,
+  config,
   lib,
   ...
 }: {
@@ -9,6 +9,6 @@
       ./rofi
       ./dunst
     ]
-    ++ lib.optionals X0.FEATURES.ENABLE_UDISKIE [./udiskie]
-    ++ lib.optionals (X0.COLOR_SCHEME == "wallust") [./wallust];
+    ++ lib.optionals config.x0.features.enableUdiskie [./udiskie]
+    ++ lib.optionals (config.COLOR_SCHEME == "wallust") [./wallust];
 }

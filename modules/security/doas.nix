@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.doas {
+  config = lib.mkIf config.x0.system.security.doas {
     # Disable sudo
     # I had issues with disabling this you might have better luck
     security.sudo.enable = true;
@@ -14,7 +14,7 @@
       extraRules = [
         {
           # Grant doas access specifically to your user
-          users = ["${X0.USERNAME}"];
+          users = ["${config.USERNAME}"];
           # Convenient but less secure 'if true' do not ask for a password again for some time after th euser succesfully authenticates
 
           persist = true;

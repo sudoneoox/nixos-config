@@ -1,10 +1,10 @@
-{X0, ...}: {
+{config, ...}: {
   programs.git = {
     enable = true;
-    userName = "${X0.USERNAME}";
-    userEmail = "${X0.EMAIL}";
+    userName = "${config.x0.username}";
+    userEmail = "${config.x0.email}";
     signing = {
-      key = "${X0.SSH_KEY_PATH}";
+      key = "${config.xo.sshKeyPath}";
       signByDefault = true;
     };
     extraConfig = {

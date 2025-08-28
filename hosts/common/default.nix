@@ -1,7 +1,7 @@
 {
   outputs,
   inputs,
-  X0,
+  config,
   pkgs,
   ...
 }: {
@@ -10,7 +10,7 @@
     #INFO: Base System and Nix configurations
     ../../modules/base
 
-    #INFO: Defines X0.security options
+    #INFO: Defines config.security options
     ../../modules/security
 
     #INFO: For scripts used throughout configuration files and systemd-units
@@ -36,10 +36,10 @@
       inherit
         inputs
         outputs
-        X0
+        config
         ;
     };
-    users.${X0.USERNAME} = {
+    users.${config.x0.username} = {
       imports = [
         ./home.nix
       ];

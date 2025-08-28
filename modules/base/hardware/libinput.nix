@@ -1,9 +1,9 @@
 {
-  X0,
+  config,
   lib,
   ...
 }: {
-  config = lib.mkIf (X0.SYSTEM.HOST_PROFILE == "laptop") {
+  config = lib.mkIf (config.x0.system.hostProfile == "laptop") {
     services = {
       libinput = {
         enable = true;

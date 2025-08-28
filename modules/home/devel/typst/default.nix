@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_TYPST {
+  config = lib.mkIf config.x0.features.enableTypst {
     home.packages = with pkgs; [typst];
     programs.zathura = {
       enable = lib.mkDefault true;

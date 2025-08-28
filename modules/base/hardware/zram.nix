@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_ZRAM {
+  config = lib.mkIf config.x0.features.enableZram {
     zramSwap = {
       enable = true;
       algorithm = "zstd";

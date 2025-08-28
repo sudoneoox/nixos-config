@@ -1,6 +1,6 @@
 {
   pkgs,
-  X0,
+  config,
   ...
 }: {
   services.spice-vdagentd.enable = true;
@@ -30,7 +30,7 @@
   programs.virt-manager.enable = true;
   security.polkit.enable = true;
 
-  users.users.${X0.USERNAME}.extraGroups = ["libvirtd"];
+  users.users.${config.x0.username}.extraGroups = ["libvirtd"];
 
   environment.systemPackages = with pkgs; [
     qemu

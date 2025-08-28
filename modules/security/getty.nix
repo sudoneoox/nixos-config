@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.getty {
+  config = lib.mkIf config.x0.system.security.getty {
     systemd.services."getty@".serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "stric";

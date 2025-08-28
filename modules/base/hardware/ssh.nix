@@ -1,10 +1,10 @@
 {
-  X0,
+  config,
   config,
   lib,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_SSH {
+  config = lib.mkIf config.x0.features.enableSsh {
     services = {
       openssh = {
         enable = true;
@@ -19,7 +19,7 @@
           MaxSessions = 2;
           ClientAliveInterval = 300;
           ClientAliveCountMax = 0;
-          AllowUsers = ["${X0.USERNAME}" "root"];
+          AllowUsers = ["${config.USERNAME}" "root"];
           TCPKeepAlive = false;
           AllowTcpForwarding = false;
           AllowAgentForwarding = false;

@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.fail2ban {
+  config = lib.mkIf config.x0.system.security.fail2ban {
     services.fail2ban = {
       enable = true;
       maxretry = 5;

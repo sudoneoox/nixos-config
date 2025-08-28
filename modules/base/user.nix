@@ -1,16 +1,16 @@
 {
   pkgs,
-  X0,
+  config,
   config,
   ...
 }: {
   users = {
     defaultUserShell = pkgs.fish;
     mutableUsers = false;
-    users.${X0.USERNAME} = {
+    users.${config.x0.username} = {
       hashedPasswordFile = config.sops.secrets."system-password".path;
       isNormalUser = true;
-      description = "${X0.USERNAME}";
+      description = "${config.x0.username}";
       extraGroups = [
         "wheel"
         "video"

@@ -6,10 +6,10 @@
 {
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_CACHIX {
+  config = lib.mkIf config.x0.features.enableCachix {
     environment.systemPackages = with pkgs; [cachix];
     nix.settings = {
       substituters =
@@ -24,7 +24,7 @@
           #NOTE: My own cachix
           "https://nixossudnox.cachix.org"
         ]
-        ++ lib.optionals X0.FEATURES.ENABLE_RSTUDIO [
+        ++ lib.optionals config.x0.features.enableRstudio [
           "https://rstats-on-nix.cachix.org"
         ];
       trusted-public-keys =
@@ -38,7 +38,7 @@
           #NOTE: My own cachix
           "nixossudnox.cachix.org-1:ZwKSBOS8npDqpdX9cg7kMvEx5dOSYq05O69qm5O0mLg="
         ]
-        ++ lib.optionals X0.FEATURES.ENABLE_RSTUDIO [
+        ++ lib.optionals config.x0.features.enableRstudio [
           "rstats-on-nix.cachix.org-1:vdiiVgocg6WeJrODIqdprZRUrhi1JzhBnXv7aWI6+F0="
         ];
     };

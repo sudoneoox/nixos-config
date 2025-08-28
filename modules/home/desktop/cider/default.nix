@@ -2,8 +2,8 @@
 {
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: {
-  home.packages = lib.mkIf X0.FEATURES.ENABLE_CIDER [pkgs.ciderLatest];
+  home.packages = lib.mkIf config.x0.features.enableCider [pkgs.ciderLatest];
 }

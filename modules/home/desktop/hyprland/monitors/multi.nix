@@ -1,6 +1,6 @@
 {
   pkgs,
-  X0,
+  config,
   ...
 }: {
   wayland.windowManager.hyprland = {
@@ -11,9 +11,9 @@
 
     settings = {
       monitor = [
-        "DP-6,preferred,0x0,${X0.SYSTEM.SCALE}"
+        "DP-6,preferred,0x0,${config.x0.system.scale}"
 
-        "DP-4,preferred,1920x0,${X0.SYSTEM.SCALE}"
+        "DP-4,preferred,1920x0,${config.x0.system.scale}"
       ];
 
       plugin = {

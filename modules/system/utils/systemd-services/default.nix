@@ -1,16 +1,16 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
   imports =
     [
       ./sops-secrets-sync.nix
     ]
-    ++ lib.optionals (X0.COLOR_SCHEME == "wallust") [
+    ++ lib.optionals (config.x0.colorScheme == "wallust") [
       ./wallust-apply-current.nix
     ]
-    ++ lib.optionals (X0.SYSTEM.HOST_PROFILE == "laptop") [
+    ++ lib.optionals (config.x0.system.hostProfile == "laptop") [
       ./low-battery-notifier.nix
     ];
 }

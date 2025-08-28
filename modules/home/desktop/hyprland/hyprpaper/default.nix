@@ -1,9 +1,9 @@
-{X0, ...}:
+{config, ...}:
 # TODO: run script to change wallpaper theme before loading
 # https://github.com/arrowpc/palettum
 let
-  wallpaperDir = "${X0.NIXOS_ASSETS_PATH}/Wallpapers";
-  wp = X0.WALLPAPER;
+  wallpaperDir = "${config.x0.nixosAssetsPath}/Wallpapers";
+  wp = config.x0.wallpaper;
 in {
   services.hyprpaper = {
     enable = true;

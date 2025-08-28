@@ -1,9 +1,9 @@
 {
-  X0,
+  config,
   lib,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_BLUETOOTH {
+  config = lib.mkIf config.x0.features.enableBluetooth {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -11,5 +11,5 @@
     };
   };
   #WARN: I personally like to use bluetoothctl so the gui applet I leave disabled
-  # services.blueman.enable = X0.FEATURES.ENABLE_BLUETOOTH;
+  # services.blueman.enable = config.x0.features.enableBluetooth;
 }

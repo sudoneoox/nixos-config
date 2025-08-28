@@ -1,6 +1,6 @@
 {
   config,
-  X0,
+  config,
   ...
 }: {
   programs.nh = {
@@ -11,6 +11,6 @@
       extraArgs = "--keep 10";
     };
 
-    flake = X0.NIXOS_CONF_PATH;
+    flake = config.x0.nixosConfPath;
   };
 }

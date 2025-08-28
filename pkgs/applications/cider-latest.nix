@@ -4,9 +4,9 @@
 # nix hash to-sri --type sha256 <output-from-previous>
 {
   pkgs,
-  X0,
+  config,
 }: let
-  ciderAppImageDir = builtins.toString "/home/${X0.USERNAME}/Desktop";
+  ciderAppImageDir = builtins.toString "/home/${config.x0.username}/Desktop";
 in
   pkgs.appimageTools.wrapType2 rec {
     pname = "cider";
@@ -14,7 +14,7 @@ in
 
     src = builtins.fetchurl {
       url = "file://${ciderAppImageDir}/${pname}-v${version}-linux-x64.AppImage";
-      sha256 = "sha256-vjwfpKm02f8jePWMnhlPN/OIhB3UUjnon8LUjBWMX0Q=";
+      sha256 = "sha256-vjwfpKm02f8jePWMnhlPN/OIhB3UUjnon8LUjBWMconfigQ=";
     };
 
     extraInstallCommands = let

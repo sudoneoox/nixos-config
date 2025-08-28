@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.FEATURES.ENABLE_GAMING {
+  config = lib.mkIf config.x0.features.enableGaming {
     environment.systemPackages = with pkgs; [
       protonup
     ];

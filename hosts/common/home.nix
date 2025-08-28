@@ -1,6 +1,6 @@
 {
   outputs,
-  X0,
+  config,
   inputs,
   ...
 }: {
@@ -29,8 +29,8 @@
   };
 
   home = {
-    username = "${X0.USERNAME}";
-    homeDirectory = "/home/${X0.USERNAME}";
+    username = "${config.x0.username}";
+    homeDirectory = "/home/${config.x0.username}";
   };
 
   programs = {

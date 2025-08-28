@@ -1,10 +1,10 @@
 {
   lib,
-  X0,
+  config,
   config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.kernel {
+  config = lib.mkIf config.x0.system.security.kernel {
     security = {
       protectKernelImage = true;
       lockKernelModules = false; # breaks iptables, wireguard, and virtd

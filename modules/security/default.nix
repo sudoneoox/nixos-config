@@ -1,6 +1,6 @@
 {
   # All have enable options except packages.nix e.g.:
-  # X0.security.blacklistedModules.enable = true
+  # config.x0.system.security.<module>.enable ?=
   imports = [
     ./acipd.nix
     ./blacklistedModules.nix

@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.systemd-ask-password-console {
+  config = lib.mkIf config.x0.system.security.systemd-ask-password-console {
     systemd.services.systemd-ask-password-console.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

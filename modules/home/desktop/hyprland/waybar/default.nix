@@ -1,14 +1,14 @@
 {
   pkgs,
   lib,
-  X0,
+  config,
   ...
 }: let
-  isLaptop = X0.SYSTEM.HOST_PROFILE == "laptop";
+  isLaptop = config.SYSTEM.HOST_PROFILE == "laptop";
 
   # WARN: obviously not a good conditional but i'm not passing anything to distinct
   # different CPU manufacturers. I only have two systems so this isn't an issue for me
-  isIntelCPU = X0.SYSTEM.CPU_VENDOR == "intel";
+  isIntelCPU = config.SYSTEM.CPU_VENDOR == "intel";
 in {
   home.packages = with pkgs; [
     lm_sensors
@@ -38,7 +38,7 @@ in {
             "custom/lock"
             "custom/reboot"
           ]
-          ++ lib.optionals (X0.SYSTEM.HOST_PROFILE == "laptop") [
+          ++ lib.optionals (config.SYSTEM.HOST_PROFILE == "laptop") [
             "custom/power"
           ];
         modules-center = ["hyprland/window"];
@@ -47,7 +47,7 @@ in {
             # "custom/nix-updates"
             "disk"
           ]
-          ++ lib.optionals X0.FEATURES.ENABLE_BLUETOOTH [
+          ++ lib.optionals config.x0.features.enableBluetooth [
             "bluetooth"
           ]
           ++ [

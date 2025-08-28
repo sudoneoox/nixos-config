@@ -1,9 +1,9 @@
 {
   lib,
-  X0,
+  config,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.reload-systemd-vconsole-setup {
+  config = lib.mkIf config.x0.system.security.reload-systemd-vconsole-setup {
     systemd.services.reload-systemd-vconsole-setup.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";
