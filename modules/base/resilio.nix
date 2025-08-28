@@ -1,13 +1,14 @@
 {
   lib,
   host,
-  X0,
+  config,
   ...
 }: let
   #INFO: Where you want the synced data on each machine (same path everywhere).
+  x = config.x0;
   syncRoot = "/media/resilio/truenas";
 in {
-  config = lib.mkIf X0.FEATURES.ENABLE_RESILIO_SYNC {
+  config = lib.mkIf x.features.enableResilioSync {
     ####INFO: Directory for your synced files; owned by rslsync so the service can write.
     systemd.tmpfiles.rules = [
       #INFO: mode 2775 = g+w and setgid so new files inherit group "rslsync"
@@ -22,7 +23,7 @@ in {
       downloadLimit = 0;
       uploadLimit = 0;
       enable = true;
-      httpLogin = X0.USERNAME;
+      httpLogin = x.username;
       httpPass = "abcde";
       checkForUpdates = false;
       enableWebUI = true;
@@ -33,6 +34,6 @@ in {
     };
 
     ####INFO: Optional: make your login user able to write into the synced folder.
-    users.users.${X0.USERNAME}.extraGroups = ["rslsync"];
+    users.users.${x.username}.extraGroups = ["rslsync"];
   };
 }

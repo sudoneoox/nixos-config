@@ -90,7 +90,10 @@
           X0
           ;
       };
-      modules = [./hosts/${host}];
+      modules = [
+        ./modules/x0/default.nix
+        ./hosts/${host}
+      ];
     };
   in {
     overlays = import ./overlays {inherit inputs X0;};

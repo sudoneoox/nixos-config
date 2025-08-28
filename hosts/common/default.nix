@@ -2,30 +2,24 @@
   outputs,
   inputs,
   X0,
-  lib,
+  pkgs,
   ...
 }: {
-  imports =
-    [
-      inputs.home-manager.nixosModules.home-manager
-      #INFO: Base System and Nix configurations
-      ../../modules/base
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    #INFO: Base System and Nix configurations
+    ../../modules/base
 
-      #INFO: Defines X0.security options
-      ../../modules/security
+    #INFO: Defines X0.security options
+    ../../modules/security
 
-      #INFO: For scripts used throughout configuration files and systemd-units
-      ../../modules/system/utils
+    #INFO: For scripts used throughout configuration files and systemd-units
+    ../../modules/system/utils
 
-      #INFO: Network conf
-      ../../modules/system/network
-
-      ../../modules/system/desktop/hyprland
-      ../../modules/system/virtualisation
-    ]
-    ++ lib.optionals X0.FEATURES.ENABLE_GAMING [
-      ../../modules/system/gaming
-    ];
+    ../../modules/system/desktop/hyprland
+    ../../modules/system/virtualisation
+    ../../modules/system/gaming
+  ];
 
   programs = {
     # System wide
@@ -33,6 +27,7 @@
     git.enable = true;
     fish.enable = true;
   };
+  environment.systemPackages = with pkgs; [jq];
 
   home-manager = {
     backupFileExtension = "hm-backup";

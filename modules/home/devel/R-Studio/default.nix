@@ -15,6 +15,7 @@
           GGally
           readr
           dplyr
+          knitr
         ];
       })
       rstudio

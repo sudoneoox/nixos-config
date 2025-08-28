@@ -1,9 +1,16 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    protonup
-  ];
+{
+  pkgs,
+  lib,
+  X0,
+  ...
+}: {
+  config = lib.mkIf X0.FEATURES.ENABLE_GAMING {
+    environment.systemPackages = with pkgs; [
+      protonup
+    ];
 
-  environment.variables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    environment.variables = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    };
   };
 }

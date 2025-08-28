@@ -91,7 +91,7 @@ rec {
     ENABLE_HDR = false;
     ENABLE_CIDER = false;
     ENABLE_ZRAM = true;
-    ENABLE_RSTUDIO = true;
+    ENABLE_RSTUDIO = false;
     ENABLE_TYPST = true;
     ENABLE_ZED = false;
   };
