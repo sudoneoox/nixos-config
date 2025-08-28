@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.system.security.user {
     systemd.services."user@".serviceConfig = {
       ProtectSystem = "strict";

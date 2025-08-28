@@ -3,7 +3,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   nix = {
     optimise.automatic = true;
     package = pkgs.lixPackageSets.latest.lix;

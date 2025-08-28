@@ -4,7 +4,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     #INFO: Base System and Nix configurations

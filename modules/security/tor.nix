@@ -3,7 +3,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.system.security.tor {
     services.tor = {
       enable = true;

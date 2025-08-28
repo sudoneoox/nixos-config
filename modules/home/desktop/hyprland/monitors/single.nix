@@ -2,7 +2,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   # Imports specific to single-monitor setups (usually laptops)
   imports = [
     ../hypridle

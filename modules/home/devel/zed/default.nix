@@ -3,7 +3,9 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.features.enableZed {
     programs.zed-editor = {
       enable = true;

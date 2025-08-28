@@ -1,4 +1,6 @@
-{config, ...}: {
+{config, ...}: let
+  x = config.x0;
+in {
   programs.git = {
     enable = true;
     userName = "${config.x0.username}";

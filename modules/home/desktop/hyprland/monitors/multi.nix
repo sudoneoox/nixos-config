@@ -2,7 +2,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   wayland.windowManager.hyprland = {
     # Specific Plugins to multi monitor setup
     plugins = with pkgs; [

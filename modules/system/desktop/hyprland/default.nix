@@ -3,7 +3,9 @@
   config,
   lib,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   services.greetd = {
     enable = true;
     settings = {

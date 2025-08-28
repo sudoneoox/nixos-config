@@ -2,7 +2,9 @@
   config,
   lib,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   imports =
     [
     ]

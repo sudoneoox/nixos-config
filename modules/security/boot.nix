@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.system.security.boot {
     # https://madaidans-insecurities.github.io/guides/linux-hardening.html#boot-parameters
     boot.kernelParams = [

@@ -2,7 +2,9 @@
   inputs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   imports = [
     "${inputs.nixos-hardware}/common/cpu/amd/zenpower.nix"
     "${inputs.nixos-hardware}/common/cpu/amd/pstate.nix"

@@ -2,7 +2,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   home.pointerCursor = {
     dotIcons.enable = true;
     hyprcursor.enable = true;

@@ -3,7 +3,9 @@
   config,
   lib,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   imports = [
     ../../modules/home/desktop/vesktop
     ../../modules/home/desktop/cider

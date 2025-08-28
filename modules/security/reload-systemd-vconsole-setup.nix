@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.system.security.reload-systemd-vconsole-setup {
     systemd.services.reload-systemd-vconsole-setup.serviceConfig = {
       NoNewPrivileges = true;

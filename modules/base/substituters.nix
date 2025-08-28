@@ -8,7 +8,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.features.enableCachix {
     environment.systemPackages = with pkgs; [cachix];
     nix.settings = {

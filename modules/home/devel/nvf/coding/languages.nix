@@ -1,5 +1,7 @@
 # ── Languages (Treesitter/LSP toggles) ───────────────────────────────────── languages = {
-{config, ...}: {
+{config, ...}: let
+  x = config.x0;
+in {
   programs.nvf.settings.vim.languages = {
     enableFormat = true;
     enableDAP = false;

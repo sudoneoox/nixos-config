@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.system.security.fail2ban {
     services.fail2ban = {
       enable = true;

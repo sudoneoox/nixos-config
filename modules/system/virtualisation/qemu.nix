@@ -2,7 +2,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   services.spice-vdagentd.enable = true;
   virtualisation = {
     libvirtd = {

@@ -3,7 +3,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   # Assets that plugins or scripts use
   services = {
     gnome-keyring = {

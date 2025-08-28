@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   config = lib.mkIf config.x0.system.security.network-manager-dispatcher {
     systemd.services.NetworkManager-dispatcher.serviceConfig = {
       NoNewPrivileges = true;

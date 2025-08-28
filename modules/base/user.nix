@@ -3,7 +3,9 @@
   config,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   users = {
     defaultUserShell = pkgs.fish;
     mutableUsers = false;

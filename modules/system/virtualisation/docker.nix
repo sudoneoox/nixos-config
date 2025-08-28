@@ -2,7 +2,9 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   virtualisation = {
     docker.enable = true;
     oci-containers.backend = "docker";

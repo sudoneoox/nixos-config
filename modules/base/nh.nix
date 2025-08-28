@@ -2,7 +2,9 @@
   config,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   programs.nh = {
     enable = true;
     clean = {

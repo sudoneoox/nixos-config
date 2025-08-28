@@ -2,7 +2,9 @@
   inputs,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   imports = [
     #INFO: NixOS-hardware input
     "${inputs.nixos-hardware}/common/cpu/intel/meteor-lake"

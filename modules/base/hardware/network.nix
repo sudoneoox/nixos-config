@@ -4,7 +4,9 @@
   config,
   config,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   networking = {
     networkmanager = {
       enable = true;

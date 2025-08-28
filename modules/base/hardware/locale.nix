@@ -1,4 +1,6 @@
-{config, ...}: {
+{config, ...}: let
+  x = config.x0;
+in {
   time.timeZone = config.x0.timezone;
 
   i18n.defaultLocale = config.x0.locale;
