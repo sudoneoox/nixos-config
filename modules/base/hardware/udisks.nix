@@ -3,7 +3,7 @@
   lib,
   ...
 }: {
-  config = lib.mkIf X0.X0.FEATURES.ENABLE_UDISKIE {
+  config = lib.mkIf X0.FEATURES.ENABLE_UDISKIE {
     services.udisks2 = {
       enable = true;
     };

@@ -3,7 +3,7 @@
   X0,
   ...
 }: {
-  config = lib.mkIf X0.SYSTEM.SECURITY.SSH {
+  config = lib.mkIf X0.SYSTEM.SECURITY.ssh {
     systemd.services.sshd.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";
