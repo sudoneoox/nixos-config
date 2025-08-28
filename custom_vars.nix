@@ -12,7 +12,7 @@ rec {
   ##INFO: --- Host / Profile --- #
   SYSTEM = {
     # laptop | desktop
-    HOST_PROFILE = "laptop";
+    HOST_PROFILE = "desktop";
 
     # nvidia
     GPU_VENDOR = "nvidia";

@@ -1,5 +1,8 @@
-{X0, ...}: {
+{X0, ...}: let
+  currentSemester = "2025Fall";
+in {
   programs.fish.shellAliases = {
+    school = "cd /media/resilio/truenas/sync/PROBE/LEARN/SCHOOL/${currentSemester}";
     publicip = "wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1";
     diffs = "diff --side-by-side --suppress-common-lines";
     ccat = "pygmentize -g";
@@ -14,7 +17,7 @@
     compress = "tar -cJf folder.tar.xz";
     decompress = "tar -xJf";
     nv = "nvim";
-    zen = "zen-browser-twilight";
+    zen = "zen-twilight";
     ":q" = "exit";
     #  * Create missing directories in path when calling `mkdir`
     mkdir = "mkdir -pv";
