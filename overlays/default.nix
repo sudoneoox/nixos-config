@@ -1,8 +1,4 @@
-{
-  inputs,
-  X0,
-  ...
-}: {
+{inputs, ...}: {
   modifications = final: prev: {
     hyprland-git = inputs.hyprland.packages.${prev.system};
     hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system};
@@ -14,7 +10,6 @@
   additions = final: _prev:
     import ../pkgs {
       pkgs = final;
-      inherit X0;
     };
 
   #INFO: When applied, the stable nixpkgs set (declared in the flake inputs) will

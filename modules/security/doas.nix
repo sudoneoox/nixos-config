@@ -16,7 +16,7 @@ in {
       extraRules = [
         {
           # Grant doas access specifically to your user
-          users = ["${config.USERNAME}"];
+          users = ["${x.username}"];
           # Convenient but less secure 'if true' do not ask for a password again for some time after th euser succesfully authenticates
 
           persist = true;

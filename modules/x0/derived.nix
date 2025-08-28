@@ -2,7 +2,6 @@
   x = config.x0;
   isLaptop = x.system.hostProfile == "laptop";
   isDesktop = x.system.hostProfile == "desktop";
-
   cpuVendorEff =
     if isLaptop
     then "intel"

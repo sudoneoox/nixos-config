@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  x = config.x0;
+  x = x;
 in {
   # Assets that plugins or scripts use
   services = {
@@ -32,13 +32,13 @@ in {
     '';
 
     settings = let
-      terminal = config.TERMINAL;
-      filemanager = config.FILE_MANAGER;
+      terminal = x.terminal;
+      filemanager = x.fileManager;
       shadow_color = "rgba(1a1a1aee)";
     in {
       input = {
         follow_mouse = 1;
-        kb_layout = config.KEYBOARD_LAYOUT;
+        kb_layout = x.keyboardLayout;
       };
 
       general = {
@@ -289,7 +289,7 @@ in {
       ];
 
       exec = [
-        "hyprshade on /home/${config.USERNAME}/.config/hypr/shaders/vibrance"
+        "hyprshade on /home/${x.username}/.config/hypr/shaders/vibrance"
       ];
 
       env = [
@@ -312,6 +312,8 @@ in {
       ./hyprpaper
       ./hyprshade
     ]
-    ++ lib.optional (config.SYSTEM.MONITORS == "single") ./monitors/single.nix
-    ++ lib.optional (config.SYSTEM.MONITORS == "multi") ./monitors/multi.nix;
+    lib.optional (x.derived.monitorsEff == "single")
+    [./monitors/single.nix]
+    ++ lib.optional (x.derived.monitorsEff == "multi")
+    [./monitors/multi.nix];
 }

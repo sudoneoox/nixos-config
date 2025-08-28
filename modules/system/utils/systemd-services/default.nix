@@ -12,7 +12,7 @@ in {
     ++ lib.optionals (x.colorScheme == "wallust") [
       ./wallust-apply-current.nix
     ]
-    ++ lib.optionals (x.system.hostProfile == "laptop") [
+    ++ lib.optionals x.derived.isLaptop [
       ./low-battery-notifier.nix
     ];
 }

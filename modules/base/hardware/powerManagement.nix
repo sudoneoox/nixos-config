@@ -2,11 +2,13 @@
   config,
   lib,
   ...
-}: {
+}: let
+  x = config.x0;
+in {
   # stock NixOS powermanagement tool which allows for managing hibernate and suspend states
   # other power management tools may overwrite this setting
 
-  config = lib.mkIf config.system.powerManagement {
+  config = lib.mkIf x.derived.powerMgmtEff {
     powerManagement = {
       enable = true;
     };

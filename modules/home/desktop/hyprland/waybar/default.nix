@@ -4,11 +4,7 @@
   config,
   ...
 }: let
-  isLaptop = config.SYSTEM.HOST_PROFILE == "laptop";
-
-  # WARN: obviously not a good conditional but i'm not passing anything to distinct
-  # different CPU manufacturers. I only have two systems so this isn't an issue for me
-  isIntelCPU = config.SYSTEM.CPU_VENDOR == "intel";
+  x = config.x0;
 in {
   home.packages = with pkgs; [
     lm_sensors
@@ -38,7 +34,7 @@ in {
             "custom/lock"
             "custom/reboot"
           ]
-          ++ lib.optionals (config.SYSTEM.HOST_PROFILE == "laptop") [
+          ++ lib.optionals x.derived.isLaptop [
             "custom/power"
           ];
         modules-center = ["hyprland/window"];
@@ -61,7 +57,7 @@ in {
           all-outputs = false;
           format = "{icon}";
           on-click = "activate";
-          persistent-workspaces."*" = lib.mkIf isLaptop [1 2 3 4];
+          persistent-workspaces."*" = lib.mkIf (x.derived.monitorsEff == "single") [1 2 3 4];
           format-icons = {
             "1" = "";
             "2" = "";
@@ -94,7 +90,7 @@ in {
 
         "custom/temperature" = {
           exec =
-            if isIntelCPU
+            if x.derived.cpuVendorEff == "intel"
             then "sensors | awk '/^Package id 0:/ {print int($4)}'"
             # way to fetch amd cpu temp
             else "sensors | awk '/^Tctl:/ {print int($2)}' || sensors | awk '/^Tdie:/ {print int($2)}'";
@@ -144,7 +140,7 @@ in {
         modules-center = ["wlr/taskbar"];
         modules-right = ["network" "pulseaudio" "backlight" "custom/wl-gammarelay-temperature" "tray"];
         modules-left =
-          if isLaptop
+          if x.derived.isLaptop
           then ["clock" "battery"]
           else ["clock"];
 
@@ -211,7 +207,7 @@ in {
             ];
           };
           on-click-right = "pavucontrol -t 3";
-          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && notify-send -u 'Audio Mute Toggled'";
           tooltip = true;
           tooltip-format = "Current volume: {volume}%";
         };

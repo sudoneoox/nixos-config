@@ -6,15 +6,16 @@
   config,
   ...
 }: let
-  SOPS_PUBLIC_KEY = config.SOPS_PUBLIC_KEY;
-  SOPS_KEY_FILE = "${config.SOPS_PATH}/key.txt";
-  SOPS_SECRETS_PATH = "${config.SOPS_PATH}/secrets";
+  x = config.x0;
+  SOPS_PUBLIC_KEY = x.sopsPublicKey;
+  SOPS_KEY_FILE = "${x.sopsPath}/key.txt";
+  SOPS_SECRETS_PATH = "${x.sopsPath}/secrets";
 in {
   imports = [inputs.sops-nix.nixosModules.sops];
 
   #INFO: Ensure the secrets dir exists with strict perms
   systemd.tmpfiles.rules = [
-    "d ${config.SOPS_PATH} 0700 root root -"
+    "d ${x.sopsPath} 0700 root root -"
     "d ${SOPS_SECRETS_PATH} 0700 root root -"
   ];
 

@@ -43,7 +43,7 @@ in {
       hyprshade
       copyq
     ]
-    ++ lib.optionals (config.SYSTEM.MONITORS == "multi") [
+    ++ lib.optionals (x.derived.monitorsEff == "multi") [
       # In overlays/default.nix
       hyprland-smw
     ];

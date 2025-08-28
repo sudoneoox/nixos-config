@@ -1,6 +1,12 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   dunstIconPath = "${config.x0.nixosAssetsPath}/Icons/dunst";
 in {
+  home.packages = with pkgs; [notify-send];
+
   services.dunst = {
     enable = true;
     settings = {
@@ -32,7 +38,7 @@ in {
         alignment = "center";
         show_indicators = true;
         separator_height = 2;
-        format = "<b>󰁕 %a</b>\n%s\n<i>%b</i>";
+        format = "" "<b>󰁕 %a</b>\n%s\n<i>%b</i>" "";
         markup = "full";
         icon_position = "left";
         min_icon_size = 32;

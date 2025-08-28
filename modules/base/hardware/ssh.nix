@@ -21,7 +21,7 @@ in {
           MaxSessions = 2;
           ClientAliveInterval = 300;
           ClientAliveCountMax = 0;
-          AllowUsers = ["${config.USERNAME}" "root"];
+          AllowUsers = ["${x.username}" "root"];
           TCPKeepAlive = false;
           AllowTcpForwarding = false;
           AllowAgentForwarding = false;

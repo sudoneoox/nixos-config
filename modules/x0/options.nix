@@ -314,7 +314,7 @@ with lib; {
       default = "nordic.png";
     };
     colorScheme = mkOption {
-      type = types.enum ["wallust" "catppuccin"];
+      type = types.enum ["wallust"];
       default = "wallust";
     };
     de = mkOption {

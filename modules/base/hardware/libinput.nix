@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf (x.system.hostProfile == "laptop") {
+  config = lib.mkIf x.derived.isLaptop {
     services = {
       libinput = {
         enable = true;

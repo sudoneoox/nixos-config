@@ -13,6 +13,6 @@ in {
       pulse.enable = true;
       wireplumber.enable = true;
     };
-    users.users.${config.USERNAME}.extraGroups = ["audio"];
+    users.users.${x.username}.extraGroups = ["audio"];
   };
 }

@@ -9,6 +9,10 @@
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+
+    #INFO: Configuration Defaults
+    ../../modules/x0
+
     #INFO: Base System and Nix configurations
     ../../modules/base
 
