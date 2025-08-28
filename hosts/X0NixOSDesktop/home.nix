@@ -36,7 +36,7 @@ in {
     package = pkgs.flameshot.override {enableWlrSupport = true;};
     settings = {
       General = {
-        useGrimAdapter = lib.mkIf (x.de == "hyprland") true;
+        useGrimAdapter = lib.mkIf (x.ux.de == "hyprland") true;
         startupLaunch = false;
         autoCloseIdleDaemon = true;
         allowMultipleGuiInstances = false;

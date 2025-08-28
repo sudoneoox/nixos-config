@@ -31,8 +31,8 @@ in {
   };
 
   home = {
-    username = "${x.username}";
-    homeDirectory = "/home/${x.username}";
+    username = "${x.identity.username}";
+    homeDirectory = "/home/${x.identity.username}";
   };
 
   programs = {

@@ -2,26 +2,28 @@
 with lib; {
   options.x0 = {
     ###INFO: --- Identity ----
-    username = mkOption {
-      type = types.str;
-      description = "Primary username";
-    };
-    fullName = mkOption {
-      type = types.str;
-      default = "";
-    };
-    email = mkOption {
-      type = types.str;
-      default = "";
-    };
-    github = mkOption {
-      type = types.str;
-      default = "";
-    };
-    sshKeyPath = mkOption {
-      type = types.str;
-      default = "";
-      description = "Path to SSH key (pub or private).";
+    identitiy = {
+      username = mkOption {
+        type = types.str;
+        description = "Primary username";
+      };
+      fullName = mkOption {
+        type = types.str;
+        default = "";
+      };
+      email = mkOption {
+        type = types.str;
+        default = "";
+      };
+      github = mkOption {
+        type = types.str;
+        default = "";
+      };
+      sshKeyPath = mkOption {
+        type = types.str;
+        default = "";
+        description = "Path to SSH key (pub or private).";
+      };
     };
 
     ###INFO: --- Derived basics (filled in derived.nix) ----
@@ -272,54 +274,56 @@ with lib; {
     };
 
     ###INFO: --- Theming / UX ----
-    font = mkOption {
-      type = types.str;
-      default = "JetbrainsMono Nerd Font";
-    };
-    defaultFont = mkOption {
-      type = types.str;
-      default = "nerd-fonts.jetbrains-mono";
-    };
-    fontPkgs = mkOption {
-      type = types.listOf types.str;
-      default = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
-    };
+    ux = {
+      font = mkOption {
+        type = types.str;
+        default = "JetbrainsMono Nerd Font";
+      };
+      defaultFont = mkOption {
+        type = types.str;
+        default = "nerd-fonts.jetbrains-mono";
+      };
+      fontPkgs = mkOption {
+        type = types.listOf types.str;
+        default = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
+      };
 
-    fontSize = mkOption {
-      type = types.number;
-      default = 11.0;
-    };
-    cursorTheme = mkOption {
-      type = types.str;
-      default = "macOS";
-    };
-    cursorSize = mkOption {
-      type = types.int;
-      default = 24;
-    };
-    gtkTheme = mkOption {
-      type = types.str;
-      default = "Materia-dark";
-    };
-    iconTheme = mkOption {
-      type = types.str;
-      default = "Tela-black";
-    };
-    qtStyle = mkOption {
-      type = types.str;
-      default = "adwaita-dark";
-    };
-    wallpaper = mkOption {
-      type = types.str;
-      default = "nordic.png";
-    };
-    colorScheme = mkOption {
-      type = types.enum ["wallust"];
-      default = "wallust";
-    };
-    de = mkOption {
-      type = types.enum ["hyprland"];
-      default = "hyprland";
+      fontSize = mkOption {
+        type = types.number;
+        default = 11.0;
+      };
+      cursorTheme = mkOption {
+        type = types.str;
+        default = "macOS";
+      };
+      cursorSize = mkOption {
+        type = types.int;
+        default = 24;
+      };
+      gtkTheme = mkOption {
+        type = types.str;
+        default = "Materia-dark";
+      };
+      iconTheme = mkOption {
+        type = types.str;
+        default = "Tela-black";
+      };
+      qtStyle = mkOption {
+        type = types.str;
+        default = "adwaita-dark";
+      };
+      wallpaper = mkOption {
+        type = types.str;
+        default = "nordic.png";
+      };
+      colorScheme = mkOption {
+        type = types.enum ["wallust"];
+        default = "wallust";
+      };
+      de = mkOption {
+        type = types.enum ["hyprland"];
+        default = "hyprland";
+      };
     };
 
     ###INFO: --- Paths / keys ----
@@ -345,25 +349,27 @@ with lib; {
     };
 
     ###INFO: --- Default Apps ----
-    terminal = mkOption {
-      type = types.str;
-      default = "kitty";
-    };
-    ide = mkOption {
-      type = types.str;
-      default = "zed";
-    };
-    browser = mkOption {
-      type = types.str;
-      default = "zen-browser-twilight";
-    };
-    fileManager = mkOption {
-      type = types.str;
-      default = "thunar";
-    };
-    editor = mkOption {
-      type = types.str;
-      default = "nvim";
+    apps = {
+      terminal = mkOption {
+        type = types.str;
+        default = "kitty";
+      };
+      ide = mkOption {
+        type = types.str;
+        default = "zed";
+      };
+      browser = mkOption {
+        type = types.str;
+        default = "zen-browser-twilight";
+      };
+      fileManager = mkOption {
+        type = types.str;
+        default = "thunar";
+      };
+      editor = mkOption {
+        type = types.str;
+        default = "nvim";
+      };
     };
 
     ###INFO: --- Locale / Input ----

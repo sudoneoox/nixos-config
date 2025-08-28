@@ -7,7 +7,7 @@
   x = config.x0;
 in {
   config = lib.mkIf x.features.enablePrinting {
-    users.users.${x.username}.extraGroups = ["scanner" "lp"];
+    users.users.${x.identity.username}.extraGroups = ["scanner" "lp"];
 
     environment.systemPackages = with pkgs; [
       gscan2pdf

@@ -5,9 +5,10 @@
   config,
 }: let
   UPDATE_INTERVAL_SECONDS = 3600; # 1 hour
-  NIXOS_CONFIG_PATH = config.x0.nixosConfPath;
-  CACHE_DIR = config.x0.cachePath;
-  ICON_PATH = "${config.x0.nixosAssetsPath}/Icons/waybar/nixos-updates";
+  x = config.x0;
+  NIXOS_CONFIG_PATH = x.nixosConfPath;
+  CACHE_DIR = x.cachePath;
+  ICON_PATH = "${x.nixosAssetsPath}/Icons/waybar/nixos-updates";
 
   #INFO: The grace period prevents the update checker from running immediately after:
   # 1. First boot - when the system has just started up

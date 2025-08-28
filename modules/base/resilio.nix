@@ -23,7 +23,7 @@ in {
       downloadLimit = 0;
       uploadLimit = 0;
       enable = true;
-      httpLogin = x.username;
+      httpLogin = x.identity.username;
       httpPass = "abcde";
       checkForUpdates = false;
       enableWebUI = true;
@@ -34,6 +34,6 @@ in {
     };
 
     ####INFO: Optional: make your login user able to write into the synced folder.
-    users.users.${x.username}.extraGroups = ["rslsync"];
+    users.users.${x.identity.username}.extraGroups = ["rslsync"];
   };
 }

@@ -3,10 +3,10 @@
 in {
   programs.git = {
     enable = true;
-    userName = "${x.username}";
-    userEmail = "${x.email}";
+    userName = "${x.identity.username}";
+    userEmail = "${x.identity.email}";
     signing = {
-      key = "${config.xo.sshKeyPath}";
+      key = "${x.identity.sshKeyPath}";
       signByDefault = true;
     };
     extraConfig = {

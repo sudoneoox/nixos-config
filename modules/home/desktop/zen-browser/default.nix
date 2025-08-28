@@ -11,7 +11,7 @@ in {
     inputs.zen-browser.homeModules.twilight
   ];
 
-  home.packages = lib.mkIf (x.colorScheme == "wallust") [
+  home.packages = lib.mkIf (x.ux.colorScheme == "wallust") [
     pkgs.pywalfox-native
   ];
 

@@ -43,7 +43,7 @@ in {
             # "custom/nix-updates"
             "disk"
           ]
-          ++ lib.optionals config.x0.features.enableBluetooth [
+          ++ lib.optionals x.features.enableBluetooth [
             "bluetooth"
           ]
           ++ [

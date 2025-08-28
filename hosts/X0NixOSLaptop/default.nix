@@ -37,7 +37,7 @@ in {
     };
   };
 
-  home-manager.users.${x.username} = {
+  home-manager.users.${x.identity.username} = {
     imports = [
       ./home.nix
     ];

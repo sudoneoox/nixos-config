@@ -5,8 +5,9 @@
   pkgs,
   ...
 }: let
+  x = config.x0;
   toPkg = path: lib.getAttrFromPath (lib.splitString "." path) pkgs;
-  fontPkgs = builtins.map toPkg config.x0.fontPkgs;
+  fontPkgs = builtins.map toPkg x.ux.fontPkgs;
 in {
   fonts = {
     packages = fontPkgs;

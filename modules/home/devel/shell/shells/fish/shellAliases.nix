@@ -1,4 +1,5 @@
 {config, ...}: let
+  x = config.x0;
   currentSemester = "2025Fall";
 in {
   programs.fish.shellAliases = {
@@ -8,8 +9,8 @@ in {
     ccat = "pygmentize -g";
 
     # push input flakes to cachix repo
-    cachix-push-inputs = "cd ${config.x0.nixosConfPath} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push nixossudnox";
-    cachix-push-outputs = "cd ${config.x0.nixosConfPath} && nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake . | cachix push nixossudnox";
+    cachix-push-inputs = "cd ${x.nixosConfPath} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push nixossudnox";
+    cachix-push-outputs = "cd ${x.nixosConfPath} && nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake . | cachix push nixossudnox";
 
     clip = "kitten clipboard";
     # create backups to external hd

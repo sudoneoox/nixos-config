@@ -3,8 +3,9 @@
   pkgs,
   ...
 }: let
-  rofiFont = "${config.x0.font} Bold 10";
-  rofiTerminal = "${pkgs.kitty}/bin/kitty";
+  x = config.x0;
+  rofiFont = "${x.ux.font} Bold 10";
+  rofiTerminal = "${pkgs.${x.apps.terminal}}/bin/${x.apps.terminal}";
   themeName = "style.rasi";
   themePath = "${config.xdg.configHome}/rofi/${themeName}";
   rofiConfDir = "~/.config/rofi";
@@ -75,7 +76,7 @@ in {
     img {
       border-radius:              15px;
       background-color:           transparent;
-      background-image:           url("${config.x0.cachePath}/current_wallpaper", height);
+      background-image:           url("${x.cachePath}/current_wallpaper", height);
     }
 
     /* Listbox ----------------------------------------- */

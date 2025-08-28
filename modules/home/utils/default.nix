@@ -12,5 +12,5 @@ in {
       ./dunst
     ]
     ++ lib.optionals x.features.enableUdiskie [./udiskie]
-    ++ lib.optionals (x.colorScheme == "wallust") [./wallust];
+    ++ lib.optionals (x.ux.colorScheme == "wallust") [./wallust];
 }

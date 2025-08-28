@@ -6,7 +6,8 @@
   pkgs,
   config,
 }: let
-  ciderAppImageDir = builtins.toString "/home/${config.x0.username}/Desktop";
+  x = config.x0;
+  ciderAppImageDir = builtins.toString "/home/${x.identity.username}/Desktop";
 in
   pkgs.appimageTools.wrapType2 rec {
     pname = "cider";

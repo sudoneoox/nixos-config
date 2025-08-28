@@ -2,8 +2,9 @@
   pkgs,
   config,
 }: let
-  WALLPAPER_PATH = "${config.x0.nixosAssetsPath}/Wallpapers/${config.x0.wallpaper}";
-  CACHE_DIR = "${config.x0.cachePath}";
+  x = config.x0;
+  WALLPAPER_PATH = "${x.nixosAssetsPath}/Wallpapers/${x.ux.wallpaper}";
+  CACHE_DIR = "${config.x.cachePath}";
 in
   pkgs.writeShellApplication {
     name = "wallust-apply-current";

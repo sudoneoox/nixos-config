@@ -20,8 +20,8 @@ in {
 
     settings = {
       auto-optimise-store = true;
-      allowed-users = ["${x.username}"];
-      trusted-users = ["${x.username}"];
+      allowed-users = ["${x.identity.username}"];
+      trusted-users = ["${x.identity.username}"];
       experimental-features = "nix-command flakes";
       keep-going = true;
       warn-dirty = false;

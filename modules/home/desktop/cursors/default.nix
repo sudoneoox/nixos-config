@@ -8,8 +8,8 @@ in {
   home.pointerCursor = {
     dotIcons.enable = true;
     hyprcursor.enable = true;
-    name = "macOS";
-    size = x.cursorSize;
+    name = x.ux.cursorTheme;
+    size = x.ux.cursorSize;
     package = pkgs.apple-cursor;
     gtk.enable = true;
   };

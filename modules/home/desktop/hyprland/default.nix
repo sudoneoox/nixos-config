@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  x = x;
+  x = config.x0;
 in {
   # Assets that plugins or scripts use
   services = {
@@ -32,8 +32,8 @@ in {
     '';
 
     settings = let
-      terminal = x.terminal;
-      filemanager = x.fileManager;
+      terminal = x.apps.terminal;
+      filemanager = x.apps.fileManager;
       shadow_color = "rgba(1a1a1aee)";
     in {
       input = {
@@ -151,7 +151,7 @@ in {
           bar_precedence_over_border = true;
           col.text = "rgb(dedede)";
           bar_text_size = 10;
-          bar_text_font = "JetBrainsMono Nerd Font Mono";
+          bar_text_font = "${x.ux.font} Mono";
           bar_button_padding = 10;
           bar_padding = 6;
           hyprbars-button = [
@@ -182,7 +182,7 @@ in {
             border_width = 2;
             render_text = true;
             text_center = true;
-            text_font = "JetBrainsMono Nerd Font";
+            text_font = x.ux.font;
             text_height = 8;
             text_padding = 3;
             "col.active" = "rgba(33ccff40)";
@@ -262,7 +262,7 @@ in {
         "SUPER, V, exec, copyq --start-server show"
 
         #INFO: Wallust Wallpaper Changes
-        "SUPER, W, exec, kitty --class fzfwallpicker --title 'Pick Wallpaper' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.wallustPick}/bin/wallust-pick"
+        "SUPER, W, exec, ${x.apps.terminal} --class fzfwallpicker --title 'Pick Wallpaper' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.wallustPick}/bin/wallust-pick"
       ];
 
       bindm = [
@@ -289,7 +289,7 @@ in {
       ];
 
       exec = [
-        "hyprshade on /home/${x.username}/.config/hypr/shaders/vibrance"
+        "hyprshade on /home/${x.identity.username}/.config/hypr/shaders/vibrance"
       ];
 
       env = [

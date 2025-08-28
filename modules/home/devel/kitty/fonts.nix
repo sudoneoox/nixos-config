@@ -6,9 +6,9 @@
   x = config.x0;
 in {
   programs.kitty.font = {
-    # JetBrainsMono Nerd Font as in your conf
+    #TODO: change to x.ux.defaultFont need a lib wrapper
     package = pkgs.nerd-fonts.jetbrains-mono;
-    name = "JetBrainsMono Nerd Font";
-    size = x.fontSize;
+    name = x.ux.font;
+    size = x.ux.fontSize;
   };
 }

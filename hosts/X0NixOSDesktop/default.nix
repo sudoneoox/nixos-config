@@ -26,7 +26,7 @@ in {
     cpu.amd.updateMicrocode = true;
   };
 
-  home-manager.users.${x.username} = {
+  home-manager.users.${x.identity.username} = {
     imports = [
       ./home.nix
     ];

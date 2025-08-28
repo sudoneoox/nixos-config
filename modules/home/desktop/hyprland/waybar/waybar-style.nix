@@ -5,7 +5,7 @@ in {
     @import url("file://${x.cachePath}/wallust/colors-waybar.css");
 
     * {
-      font-family: "JetBrainsMono Nerd Font";
+      font-family: "${x.ux.font}";
       font-size: 10.5px;
       font-weight: 600;
       border-radius: 6px;

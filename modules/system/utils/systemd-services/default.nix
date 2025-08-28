@@ -9,7 +9,7 @@ in {
     [
       ./sops-secrets-sync.nix
     ]
-    ++ lib.optionals (x.colorScheme == "wallust") [
+    ++ lib.optionals (x.ux.colorScheme == "wallust") [
       ./wallust-apply-current.nix
     ]
     ++ lib.optionals x.derived.isLaptop [

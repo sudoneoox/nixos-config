@@ -3,9 +3,10 @@
   pkgs,
   ...
 }: let
-  wp_path = "${config.x0.cachePath}/current_wallpaper";
-  font = config.x0.font;
-  profile_photo = "${config.x0.nixosAssetsPath}/Icons/hyprlock/face.jpg";
+  x = config.x0;
+  wp_path = "${x.cachePath}/current_wallpaper";
+  font = x.font;
+  profile_photo = "${x.nixosAssetsPath}/Icons/hyprlock/face.jpg";
   greeting_text = "Welcome!";
   hyprlock_conf_path = "$HOME/.config/hyprlock";
 in {

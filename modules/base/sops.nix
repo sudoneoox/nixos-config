@@ -52,7 +52,7 @@ in {
     SOPS_AGE_RECIPIENTS = SOPS_PUBLIC_KEY;
   };
 
-  programs.ssh.knownHosts.github = lib.mkIf config.x0.features.enableSsh {
+  programs.ssh.knownHosts.github = lib.mkIf x.features.enableSsh {
     hostNames = ["github.com"];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
   };

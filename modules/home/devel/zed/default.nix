@@ -26,7 +26,7 @@ in {
         vim.enable_vim_sneak = true;
         theme = "Dracula";
         # had to force here due to conflicts
-        ui_font_size = lib.mkForce x.fontSize;
+        ui_font_size = lib.mkForce x.ux.fontSize;
         buffer_font_size = lib.mkForce 14;
         relative_line_numbers = true;
         file_finder = {
@@ -97,9 +97,9 @@ in {
           };
           env = {
             EDITOR = "zed --wait";
-            TERM = x.terminal;
+            TERM = x.apps.terminal;
           };
-          font_family = x.font;
+          font_family = x.ux.font;
           font_features = null;
           line_height = "comfortable";
           option_as_meta = false;

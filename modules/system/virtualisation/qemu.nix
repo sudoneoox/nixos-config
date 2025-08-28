@@ -32,7 +32,7 @@ in {
   programs.virt-manager.enable = true;
   security.polkit.enable = true;
 
-  users.users.${x.username}.extraGroups = ["libvirtd"];
+  users.users.${x.identity.username}.extraGroups = ["libvirtd"];
 
   environment.systemPackages = with pkgs; [
     qemu

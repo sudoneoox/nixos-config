@@ -9,10 +9,10 @@ in {
   users = {
     defaultUserShell = pkgs.fish;
     mutableUsers = false;
-    users.${x.username} = {
+    users.${x.identity.username} = {
       hashedPasswordFile = config.sops.secrets."system-password".path;
       isNormalUser = true;
-      description = "${x.username}";
+      description = "${x.identity.username}";
       extraGroups = [
         "wheel"
         "video"

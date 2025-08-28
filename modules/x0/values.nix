@@ -1,12 +1,18 @@
-{
-  # identity
+{lib, ...}: rec {
+  #INFO: identity
   username = "diego";
-  fullName = "Diego Coronado";
-  email = "diegoa2992@proton.me";
-  github = "sudoneoox";
-  sshKeyPath = "/home/diego/.ssh/id_ed25519.pub";
+  homePath = "/home/${username}";
 
-  # system/profile (raw knobs; derived.nix computes the *Eff flags)
+  identity = {
+    username = "diego";
+    fullName = "Diego Coronado";
+    email = "diegoa2992@proton.me";
+    github = "sudoneoox";
+    sshKeyPath = "${homePath}/.ssh/id_ed25519.pub";
+  };
+
+  #INFO: system/profile (raw knobs; derived.nix computes the *Eff flags)
+  #INFO: these are esentially the default values
   system = {
     hostProfile = "desktop"; # "laptop" | "desktop"
     gpuVendor = "nvidia"; # "intel" | "amd" | "nvidia"
@@ -17,12 +23,12 @@
     security = {
       acipd = true;
       blacklistedModules = true;
-      bluetooth = true; # pairs with features.enableBluetooth
+      bluetooth = features.enableBluetooth;
       boot = true;
-      cups = true; # pairs with features.enablePrinting
+      cups = features.enablePrinting;
       dbus = true;
       doas = true;
-      fail2ban = true; # pairs with features.enableSSH
+      fail2ban = features.enableSSh;
       getty = true;
       kernel = true;
       network-manager = true;
@@ -30,25 +36,25 @@
       nix-daemon = false;
       reload-systemd-vconsole-setup = true;
       rtkit = true;
-      ssh = true; # pairs with features.enableSSH
+      ssh = features.enableSSH;
       systemd-ask-password-console = true;
       systemd = true;
-      tor = false; # pairs with features.enableTor
+      tor = features.enableSSH;
       usbguard = true;
       user = true;
       wpa-supplicant = true;
     };
   };
 
-  # features
+  #INFO: features
   features = {
     enableCachix = true;
     enableDocker = false;
     enableWine = false;
     enableLibvirt = false;
     enableGaming = false;
-    enablePrinting = true; # desktop default
-    enableBluetooth = true; # desktop default
+    enablePrinting = lib.mkIf system.hostProfile == "desktop"; # desktop default = true
+    enableBluetooth = true;
 
     enableFlatpak = false;
     enableResilioSync = true;
@@ -65,35 +71,40 @@
     enableZed = false;
   };
 
-  # theming / UX
-  font = "JetbrainsMono Nerd Font";
-  defaultFont = "nerd-fonts.jetbrains-mono";
-  fontPkgs = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
-  fontSize = 11.0;
-  cursorTheme = "macOS";
-  cursorSize = 24;
-  gtkTheme = "Materia-dark";
-  iconTheme = "Tela-black";
-  qtStyle = "adwaita-dark";
-  wallpaper = "nordic.png";
-  colorScheme = "wallust";
-  de = "hyprland";
+  #INFO: theming / UX
+  ux = {
+    font = "JetbrainsMono Nerd Font";
+    defaultFont = "nerd-fonts.jetbrains-mono";
+    fontPkgs = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
+    fontSize = 11.0;
+    cursorTheme = "macOS";
+    cursorSize = 24;
+    # TODO: Add these to conf
+    gtkTheme = "Materia-dark";
+    iconTheme = "Tela-black";
+    qtStyle = "adwaita-dark";
+    wallpaper = "nordic.png";
+    colorScheme = "wallust";
+    de = "hyprland";
+  };
 
-  # paths / keys
-  nixosConfPath = "/home/diego/Projects/nixos-config";
-  nixosAssetsPath = "/home/diego/Assets/nixos-config";
-  cachePath = "/home/diego/.cache";
+  #INFO: paths / keys
+  nixosConfPath = "${homePath}/Projects/nixos-config";
+  nixosAssetsPath = "${homePath}/Assets/nixos-config";
+  cachePath = "${homePath}/.cache";
   sopsPath = "/var/lib/sops-nix";
   sopsPublicKey = "age1cm02yeux0zpgryunwdsf2dya0penm30vj3vcftf698nqsey7yqzsdnt6v2";
 
-  # apps
-  terminal = "kitty";
-  ide = "zed";
-  browser = "zen-browser-twilight";
-  fileManager = "thunar";
-  editor = "nvim";
+  #INFO: apps
+  apps = {
+    terminal = "kitty";
+    ide = "zed";
+    browser = "zen-twilight";
+    fileManager = "thunar";
+    editor = "nvim";
+  };
 
-  # locale
+  #INFO: locale
   timezone = "America/Chicago";
   locale = "en_US.UTF-8";
   keyboardLayout = "us";

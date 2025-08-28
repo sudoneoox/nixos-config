@@ -9,7 +9,7 @@ in {
   config = lib.mkIf x.system.security.usbguard {
     services.usbguard = {
       enable = true;
-      IPCAllowedUsers = ["root" "${x.username}"];
+      IPCAllowedUsers = ["root" "${x.identity.username}"];
       # presentDevicePolicy refers to how to treat USB devices that are already connected when the daemon starts
       presentDevicePolicy = "allow";
 

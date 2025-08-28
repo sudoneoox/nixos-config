@@ -112,7 +112,7 @@ in {
     firewall.enable = true;
   };
 
-  users.users.${x.username}.extraGroups = ["networkmanager"];
+  users.users.${x.identity.username}.extraGroups = ["networkmanager"];
 
   environment.systemPackages = with pkgs; [networkmanagerapplet];
 }

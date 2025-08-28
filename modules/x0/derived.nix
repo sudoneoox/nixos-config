@@ -20,7 +20,7 @@
     else null;
 in {
   x.derived = {
-    homeDir = "/home/${x.username}";
+    homeDir = "/home/${x.identity.username}";
     isLaptop = isLaptop;
     isDesktop = isDesktop;
     cpuVendorEff = cpuVendorEff;

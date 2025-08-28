@@ -3,7 +3,8 @@
   pkgs,
   ...
 }: let
-  dunstIconPath = "${config.x0.nixosAssetsPath}/Icons/dunst";
+  x = config.x0;
+  dunstIconPath = "${x.nixosAssetsPath}/Icons/dunst";
 in {
   home.packages = with pkgs; [notify-send];
 
@@ -12,7 +13,7 @@ in {
     settings = {
       global = {
         monitor = 1;
-        font = "JetBrainsMono Nerd Font 10";
+        font = "${x.ux.font} 10";
         frame_width = 2;
         frame_color = "#b4befe";
         separator_color = "frame";
