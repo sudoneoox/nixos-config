@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  config,
   ...
 }: let
   x = config.x0;

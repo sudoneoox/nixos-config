@@ -6,6 +6,11 @@
   ...
 }: let
   x = config.x0;
+  ciderLatest = pkgs.callPackage ../../../../pkgs/applications/cider-latest.nix {
+    username = x.identity.username;
+  };
 in {
-  home.packages = lib.mkIf x.features.enableCider [pkgs.ciderLatest];
+  config = lib.mkIf x.features.enableCider {
+    home.packages = [ciderLatest];
+  };
 }

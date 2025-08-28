@@ -1,4 +1,3 @@
-# x0/default.nix
 {
   imports = [
     ./options.nix

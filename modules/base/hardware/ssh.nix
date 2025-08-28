@@ -1,12 +1,11 @@
 {
   config,
-  config,
   lib,
   ...
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf x.features.enableSsh {
+  config = lib.mkIf x.features.enableSSH {
     services = {
       openssh = {
         enable = true;

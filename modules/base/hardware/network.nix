@@ -2,7 +2,6 @@
   host,
   pkgs,
   config,
-  config,
   ...
 }: let
   x = config.x0;

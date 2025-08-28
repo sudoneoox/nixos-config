@@ -1,26 +1,25 @@
 {config, ...}: let
-  x = config.x0;
-  isLaptop = x.system.hostProfile == "laptop";
-  isDesktop = x.system.hostProfile == "desktop";
+  isLaptop = config.x0.system.hostProfile == "laptop";
+  isDesktop = config.x0.system.hostProfile == "desktop";
   cpuVendorEff =
     if isLaptop
     then "intel"
-    else x.system.cpuVendor;
+    else config.x0.system.cpuVendor;
   monitorsEff =
     if isLaptop
     then "single"
-    else x.system.monitors;
+    else config.x0.system.monitors;
   powerMgmtEff =
     if isLaptop
     then true
-    else x.system.powerManagement;
+    else config.x0.system.powerManagement;
   primaryMonitor =
     if isLaptop
     then "eDP-1"
     else null;
 in {
-  x.derived = {
-    homeDir = "/home/${x.identity.username}";
+  config.x0.derived = {
+    homeDir = "/home/${config.x0.identity.username}";
     isLaptop = isLaptop;
     isDesktop = isDesktop;
     cpuVendorEff = cpuVendorEff;

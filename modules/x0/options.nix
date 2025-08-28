@@ -1,8 +1,18 @@
 {lib, ...}:
 with lib; {
   options.x0 = {
+    username = mkOption {
+      type = types.str;
+      description = "recursive attribute do not use; use x0.identity.username";
+    };
+
+    homePath = mkOption {
+      type = types.str;
+      description = "recursive attribute do not use; use x0.derived.homeDir";
+    };
+
     ###INFO: --- Identity ----
-    identitiy = {
+    identity = {
       username = mkOption {
         type = types.str;
         description = "Primary username";

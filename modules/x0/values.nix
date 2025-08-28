@@ -1,4 +1,4 @@
-{lib, ...}: rec {
+rec {
   #INFO: identity
   username = "diego";
   homePath = "/home/${username}";
@@ -28,7 +28,7 @@
       cups = features.enablePrinting;
       dbus = true;
       doas = true;
-      fail2ban = features.enableSSh;
+      fail2ban = features.enableSSH;
       getty = true;
       kernel = true;
       network-manager = true;
@@ -39,7 +39,7 @@
       ssh = features.enableSSH;
       systemd-ask-password-console = true;
       systemd = true;
-      tor = features.enableSSH;
+      tor = features.enableTor;
       usbguard = true;
       user = true;
       wpa-supplicant = true;
@@ -53,7 +53,7 @@
     enableWine = false;
     enableLibvirt = false;
     enableGaming = false;
-    enablePrinting = lib.mkIf system.hostProfile == "desktop"; # desktop default = true
+    enablePrinting = system.hostProfile == "desktop"; # desktop default = true
     enableBluetooth = true;
 
     enableFlatpak = false;

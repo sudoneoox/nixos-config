@@ -1,8 +1,4 @@
-{
-  config,
-  config,
-  ...
-}: let
+{config, ...}: let
   x = config.x0;
 in {
   programs.nh = {

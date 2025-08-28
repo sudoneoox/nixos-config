@@ -305,15 +305,12 @@ in {
     };
   };
 
-  imports =
-    [
-      ./waybar
-      ./hyprlock
-      ./hyprpaper
-      ./hyprshade
-    ]
-    lib.optional (x.derived.monitorsEff == "single")
-    [./monitors/single.nix]
-    ++ lib.optional (x.derived.monitorsEff == "multi")
-    [./monitors/multi.nix];
+  imports = [
+    ./waybar
+    ./hyprlock
+    ./hyprpaper
+    ./hyprshade
+    ./monitors/single.nix
+    ./monitors/multi.nix
+  ];
 }
