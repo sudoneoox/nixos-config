@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableUdiskie {
+  config = lib.mkIf x.features.enableUdiskie {
     services.udisks2 = {
       enable = true;
     };

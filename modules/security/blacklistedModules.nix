@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.blacklistedModules {
+  config = lib.mkIf x.system.security.blacklistedModules {
     boot.blacklistedKernelModules = [
       # Obscure networking protocols
       "dccp" # Datagram Congestion Control Protocol

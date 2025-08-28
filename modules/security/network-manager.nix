@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.network-manager {
+  config = lib.mkIf x.system.security.network-manager {
     systemd.services.NetworkManager.serviceConfig = {
       NoNewPrivileges = true;
       ProtectHome = true;

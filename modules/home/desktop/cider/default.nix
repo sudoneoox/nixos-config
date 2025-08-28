@@ -7,5 +7,5 @@
 }: let
   x = config.x0;
 in {
-  home.packages = lib.mkIf config.x0.features.enableCider [pkgs.ciderLatest];
+  home.packages = lib.mkIf x.features.enableCider [pkgs.ciderLatest];
 }

@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.dbus {
+  config = lib.mkIf x.system.security.dbus {
     systemd.services.dbus.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "stric";

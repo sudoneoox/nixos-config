@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.acipd {
+  config = lib.mkIf x.system.security.acipd {
     systemd.services.acpid.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

@@ -9,10 +9,10 @@ in {
     [
       ./sops-secrets-sync.nix
     ]
-    ++ lib.optionals (config.x0.colorScheme == "wallust") [
+    ++ lib.optionals (x.colorScheme == "wallust") [
       ./wallust-apply-current.nix
     ]
-    ++ lib.optionals (config.x0.system.hostProfile == "laptop") [
+    ++ lib.optionals (x.system.hostProfile == "laptop") [
       ./low-battery-notifier.nix
     ];
 }

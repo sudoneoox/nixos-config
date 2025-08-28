@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.cups {
+  config = lib.mkIf x.system.security.cups {
     systemd.services.cups.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "full";

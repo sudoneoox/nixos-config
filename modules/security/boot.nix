@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.boot {
+  config = lib.mkIf x.system.security.boot {
     # https://madaidans-insecurities.github.io/guides/linux-hardening.html#boot-parameters
     boot.kernelParams = [
       # enables zeroing of memory during allocation and free time

@@ -1,19 +1,19 @@
 {config, ...}: let
   x = config.x0;
 in {
-  time.timeZone = config.x0.timezone;
+  time.timeZone = x.timezone;
 
-  i18n.defaultLocale = config.x0.locale;
+  i18n.defaultLocale = x.locale;
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = config.x0.locale;
-    LC_IDENTIFICATION = config.x0.locale;
-    LC_MEASUREMENT = config.x0.locale;
-    LC_MONETARY = config.x0.locale;
-    LC_NAME = config.x0.locale;
-    LC_NUMERIC = config.x0.locale;
-    LC_PAPER = config.x0.locale;
-    LC_TELEPHONE = config.x0.locale;
-    LC_TIME = config.x0.locale;
+    LC_ADDRESS = x.locale;
+    LC_IDENTIFICATION = x.locale;
+    LC_MEASUREMENT = x.locale;
+    LC_MONETARY = x.locale;
+    LC_NAME = x.locale;
+    LC_NUMERIC = x.locale;
+    LC_PAPER = x.locale;
+    LC_TELEPHONE = x.locale;
+    LC_TIME = x.locale;
   };
 }

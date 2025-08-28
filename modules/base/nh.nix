@@ -13,6 +13,6 @@ in {
       extraArgs = "--keep 10";
     };
 
-    flake = config.x0.nixosConfPath;
+    flake = x.nixosConfPath;
   };
 }

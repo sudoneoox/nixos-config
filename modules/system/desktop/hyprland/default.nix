@@ -11,7 +11,7 @@ in {
     settings = {
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-        user = "${config.x0.username}";
+        user = "${x.username}";
       };
     };
   };

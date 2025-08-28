@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableRstudio {
+  config = lib.mkIf x.features.enableRstudio {
     home.packages = with pkgs; [
       (rWrapper.override {
         packages = with rPackages; [

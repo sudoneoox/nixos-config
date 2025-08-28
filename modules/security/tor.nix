@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.tor {
+  config = lib.mkIf x.system.security.tor {
     services.tor = {
       enable = true;
       enableGeoIP = false;

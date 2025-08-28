@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.systemd {
+  config = lib.mkIf x.system.security.systemd {
     users.groups.netdev = {};
     services = {
       dbus.implementation = "broker";

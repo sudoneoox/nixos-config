@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableQbittorrent {
+  config = lib.mkIf x.features.enableQbittorrent {
     environment.systemPackages = with pkgs; [
       qbittorrent-enhanced
     ];

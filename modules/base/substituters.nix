@@ -11,7 +11,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableCachix {
+  config = lib.mkIf x.features.enableCachix {
     environment.systemPackages = with pkgs; [cachix];
     nix.settings = {
       substituters =
@@ -26,7 +26,7 @@ in {
           #NOTE: My own cachix
           "https://nixossudnox.cachix.org"
         ]
-        ++ lib.optionals config.x0.features.enableRstudio [
+        ++ lib.optionals x.features.enableRstudio [
           "https://rstats-on-nix.cachix.org"
         ];
       trusted-public-keys =
@@ -40,7 +40,7 @@ in {
           #NOTE: My own cachix
           "nixossudnox.cachix.org-1:ZwKSBOS8npDqpdX9cg7kMvEx5dOSYq05O69qm5O0mLg="
         ]
-        ++ lib.optionals config.x0.features.enableRstudio [
+        ++ lib.optionals x.features.enableRstudio [
           "rstats-on-nix.cachix.org-1:vdiiVgocg6WeJrODIqdprZRUrhi1JzhBnXv7aWI6+F0="
         ];
     };

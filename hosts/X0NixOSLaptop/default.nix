@@ -37,7 +37,7 @@ in {
     };
   };
 
-  home-manager.users.${config.x0.username} = {
+  home-manager.users.${x.username} = {
     imports = [
       ./home.nix
     ];

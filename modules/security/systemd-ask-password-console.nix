@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.systemd-ask-password-console {
+  config = lib.mkIf x.system.security.systemd-ask-password-console {
     systemd.services.systemd-ask-password-console.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

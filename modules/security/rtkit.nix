@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.rtkit {
+  config = lib.mkIf x.system.security.rtkit {
     security.rtkit.enable = true;
     systemd.services.rtkit-daemon.serviceConfig = {
       NoNewPrivileges = true;

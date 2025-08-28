@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.kernel {
+  config = lib.mkIf x.system.security.kernel {
     security = {
       protectKernelImage = true;
       lockKernelModules = false; # breaks iptables, wireguard, and virtd

@@ -8,7 +8,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.nix-daemon {
+  config = lib.mkIf x.system.security.nix-daemon {
     systemd.services.nix-daemon.serviceConfig = {
       NoNewPrivileges = true;
       ProtectControlGroups = true;

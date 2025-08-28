@@ -3,8 +3,8 @@
 in {
   programs.git = {
     enable = true;
-    userName = "${config.x0.username}";
-    userEmail = "${config.x0.email}";
+    userName = "${x.username}";
+    userEmail = "${x.email}";
     signing = {
       key = "${config.xo.sshKeyPath}";
       signByDefault = true;

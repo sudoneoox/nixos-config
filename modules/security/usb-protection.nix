@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.usbguard {
+  config = lib.mkIf x.system.security.usbguard {
     services.usbguard = {
       enable = true;
       IPCAllowedUsers = ["root" "${config.USERNAME}"];

@@ -41,7 +41,7 @@ in {
         config
         ;
     };
-    users.${config.x0.username} = {
+    users.${x.username} = {
       imports = [
         ./home.nix
       ];

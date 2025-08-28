@@ -8,13 +8,13 @@ in {
   imports =
     [
     ]
-    ++ lib.optionals config.x0.features.enableDocker [
+    ++ lib.optionals x.features.enableDocker [
       ./docker.nix
     ]
-    ++ lib.optionals config.x0.features.enableWine [
+    ++ lib.optionals x.features.enableWine [
       ./wine.nix
     ]
-    ++ lib.optionals config.x0.features.enableLibvirt
+    ++ lib.optionals x.features.enableLibvirt
     [
       ./qemu.nix
     ];

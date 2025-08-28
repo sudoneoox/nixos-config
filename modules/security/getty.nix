@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.getty {
+  config = lib.mkIf x.system.security.getty {
     systemd.services."getty@".serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "stric";

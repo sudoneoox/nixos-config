@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.fail2ban {
+  config = lib.mkIf x.system.security.fail2ban {
     services.fail2ban = {
       enable = true;
       maxretry = 5;

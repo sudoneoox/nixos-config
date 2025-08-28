@@ -57,7 +57,7 @@ in {
       };
 
       experimental = {
-        xx_color_management_v4 = config.x0.features.enableHdr;
+        xx_color_management_v4 = x.features.enableHdr;
       };
 
       ecosystem = {

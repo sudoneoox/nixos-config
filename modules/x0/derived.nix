@@ -20,7 +20,7 @@
     then "eDP-1"
     else null;
 in {
-  config.x0.derived = {
+  x.derived = {
     homeDir = "/home/${x.username}";
     isLaptop = isLaptop;
     isDesktop = isDesktop;

@@ -2,7 +2,7 @@
   x = config.x0;
 in {
   programs.waybar.style = ''
-    @import url("file://${config.x0.cachePath}/wallust/colors-waybar.css");
+    @import url("file://${x.cachePath}/wallust/colors-waybar.css");
 
     * {
       font-family: "JetBrainsMono Nerd Font";

@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableTypst {
+  config = lib.mkIf x.features.enableTypst {
     home.packages = with pkgs; [typst];
     programs.zathura = {
       enable = lib.mkDefault true;

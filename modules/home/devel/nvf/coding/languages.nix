@@ -25,16 +25,16 @@ in {
     lua.enable = true;
     bash.enable = true;
     r = {
-      enable = config.x0.features.enableRstudio;
-      format.enable = config.x0.features.enableRstudio;
-      lsp.enable = config.x0.features.enableRstudio;
-      treesitter.enable = config.x0.features.enableRstudio;
+      enable = x.features.enableRstudio;
+      format.enable = x.features.enableRstudio;
+      lsp.enable = x.features.enableRstudio;
+      treesitter.enable = x.features.enableRstudio;
     };
     typst = {
-      enable = config.x0.features.enableTypst;
-      format.enable = config.x0.features.enableTypst;
-      lsp.enable = config.x0.features.enableTypst;
-      treesitter.enable = config.x0.features.enableTypst;
+      enable = x.features.enableTypst;
+      format.enable = x.features.enableTypst;
+      lsp.enable = x.features.enableTypst;
+      treesitter.enable = x.features.enableTypst;
     };
   };
 }

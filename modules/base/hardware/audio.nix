@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableAudio {
+  config = lib.mkIf x.features.enableAudio {
     services.pipewire = {
       enable = true;
       alsa.enable = true;

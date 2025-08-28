@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enableBluetooth {
+  config = lib.mkIf x.features.enableBluetooth {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -13,5 +13,5 @@ in {
     };
   };
   #WARN: I personally like to use bluetoothctl so the gui applet I leave disabled
-  # services.blueman.enable = config.x0.features.enableBluetooth;
+  # services.blueman.enable = x.features.enableBluetooth;
 }

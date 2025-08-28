@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.bluetooth {
+  config = lib.mkIf x.system.security.bluetooth {
     systemd.services.bluetooth.serviceConfig = {
       ProtectKernelTunables = lib.mkForce true;
       ProtectKernelModules = lib.mkForce true;

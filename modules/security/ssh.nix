@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.ssh {
+  config = lib.mkIf x.system.security.ssh {
     systemd.services.sshd.serviceConfig = {
       NoNewPrivileges = true;
       ProtectSystem = "strict";

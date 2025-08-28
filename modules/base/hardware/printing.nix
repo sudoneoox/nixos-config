@@ -6,7 +6,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.features.enablePrinting {
+  config = lib.mkIf x.features.enablePrinting {
     users.users.${config.USERNAME}.extraGroups = ["scanner" "lp"];
 
     environment.systemPackages = with pkgs; [

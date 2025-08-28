@@ -16,7 +16,7 @@ in {
         scale = toString config.SYSTEM.SCALE;
         base = "${config.SYSTEM.PRIMARY_MONITOR},preferred,auto,${scale}";
         hdr =
-          if (config.x0.features.enableHdr or false)
+          if (x.features.enableHdr or false)
           then ",bitdepth,10,cm,hdr"
           else "";
       in [

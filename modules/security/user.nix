@@ -5,7 +5,7 @@
 }: let
   x = config.x0;
 in {
-  config = lib.mkIf config.x0.system.security.user {
+  config = lib.mkIf x.system.security.user {
     systemd.services."user@".serviceConfig = {
       ProtectSystem = "strict";
       ProtectClock = true;
