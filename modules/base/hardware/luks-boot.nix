@@ -7,9 +7,9 @@
   x = custom.x0;
 in {
   config = {
-    assertations = [
+    assertions = [
       {
-        assertation = x.features.enableLuks;
+        assertion = x.features.enableLuks;
         message = ''
           You need to configure Luks and have it enabled in values.nix in order to use the luks-boot.nix.
           If you're not planning on using luks then unimport the luks-nix module from modules/base/hardware/default.nix and configure your own boot options

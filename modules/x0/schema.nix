@@ -215,6 +215,11 @@ with lib; {
         type = types.bool;
         default = true;
       };
+      enableLuks = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
       enableCachix = mkOption {
         type = types.bool;
         default = true;
