@@ -25,13 +25,14 @@ in {
     ../../modules/system/desktop/hyprland
     ../../modules/system/virtualisation
     ../../modules/system/gaming
+
+    ../../modules/shims/starship-compat.nix
   ];
 
   programs = {
     # System wide
     zsh.enable = true;
     git.enable = true;
-    fish.enable = true;
   };
   environment.systemPackages = with pkgs; [jq];
 

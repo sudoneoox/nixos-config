@@ -3,6 +3,8 @@ rec {
   username = "diego";
   homePath = "/home/${username}";
 
+  debug = true;
+
   identity = {
     username = "diego";
     fullName = "Diego Coronado";

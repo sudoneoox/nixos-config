@@ -30,6 +30,13 @@ in {
           };
         };
 
+        windowrulev2 = [
+          "float,class:^(flameshot)$"
+          "move 0 0,class:^(flameshot)$"
+          "pin,class:^(flameshot)$"
+          "noanim,class:^(flameshot)$"
+        ];
+
         bind = [
           # Volume Keybinds
           # Volume Up: Super + Ctrl + Up Arrow

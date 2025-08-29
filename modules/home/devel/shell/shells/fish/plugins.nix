@@ -27,10 +27,6 @@ in {
       src = fp.puffer.src;
     }
     {
-      name = "tide";
-      src = fp.tide.src;
-    }
-    {
       name = "autopair";
       src = fp.autopair.src;
     }

@@ -11,6 +11,11 @@ with lib; {
       description = "recursive attribute do not use; use x0.derived.homeDir";
     };
 
+    debug = mkOption {
+      type = types.bool;
+      description = "for allowing debug statements to run";
+    };
+
     ###INFO: --- Identity ----
     identity = {
       username = mkOption {
