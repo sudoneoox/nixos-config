@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanene = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
     };
@@ -45,7 +50,7 @@
     };
 
     hy3 = {
-      url = "github:outfoxxed/hy3";
+      url = "github:sudoneoox/hy3-nixos-tempfix";
       inputs.hyprland.follows = "hyprland";
     };
 
