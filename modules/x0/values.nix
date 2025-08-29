@@ -61,6 +61,7 @@ lib.fix (
 
       #INFO: Features (can depend on system.hostProfile)
       features = {
+        enableNixcord = true;
         enableCachix = true;
         enableDocker = false;
         enableWine = false;

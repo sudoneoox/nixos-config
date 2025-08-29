@@ -13,9 +13,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanene = {
+    impermanence = {
       url = "github:nix-community/impermanence";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-nightly-overlay = {
@@ -57,6 +56,10 @@
     split-monitor-workspaces = {
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
+    };
+
+    nixcord = {
+      url = "github:kaylorben/nixcord";
     };
 
     sops-nix = {

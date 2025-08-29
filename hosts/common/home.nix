@@ -11,6 +11,7 @@ in {
 
     ../../modules/home/devel
     ../../modules/home/desktop/zen-browser
+    ../../modules/home/desktop/nixcord
     ../../modules/home/desktop/hyprland
     ../../modules/home/desktop/cursors
     ../../modules/home/utils

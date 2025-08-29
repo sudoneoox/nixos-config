@@ -12,7 +12,7 @@
   # ID_SERIAL_SHORT
 in {
   # Template systemd unit: veracrypt-auto@<kernel-name>.service
-  systemd.services."veracrypt-auto@" = lib.mkif (x.system.security.veracrypt && x.featuers.enableUdiskie) {
+  systemd.services."veracrypt-auto@" = lib.mkIf (x.system.security.veracrypt && x.features.enableUdiskie) {
     description = "Auto-unlock and mount VeraCrypt device %I";
     after = ["local-fs.target"];
     serviceConfig = {

@@ -7,7 +7,6 @@
   x = custom.x0;
 in {
   imports = [
-    ../../modules/home/desktop/vesktop
     ../../modules/home/desktop/cider
     ../../modules/home/desktop/mpv
   ];

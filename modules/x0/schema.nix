@@ -211,6 +211,10 @@ with lib; {
 
     ####INFO: Features
     features = {
+      enableNixcord = mkOption {
+        type = types.bool;
+        default = true;
+      };
       enableCachix = mkOption {
         type = types.bool;
         default = true;
