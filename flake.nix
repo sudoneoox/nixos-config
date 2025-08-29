@@ -77,20 +77,31 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
 
-    forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
-
     customLib = import ./lib/custom-x0.nix {inherit lib pkgs system;};
 
-    # Load raw values (plain)
-    x0Values = import ./modules/x0/values.nix;
+    #NOTE: Produce default/base (desktop) values defined in modules/x0/values.nix
+    makeValues = overrides:
+      import ./modules/x0/values.nix {inherit lib overrides;};
 
-    # Type-check + derive in a sandbox; get a PLAIN attrset back
-    x0Checked = customLib.mkX0 x0Values;
+    #NOTE: per-host values
+    x0ValuesDesktop = makeValues {}; # keep default "desktop"
+    x0ValuesLaptop = makeValues {system.hostProfile = "laptop";};
+
+    #NOTE: type-check + derive in sandbox → plain attrsets
+    x0Desktop = customLib.mkX0 x0ValuesDesktop;
+    x0Laptop = customLib.mkX0 x0ValuesLaptop;
+
+    forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
 
     mkNixOSConfig = host: {
       system = "x86_64-linux";
       specialArgs = {
-        custom = {x0 = x0Checked;};
+        custom = {
+          x0 =
+            if host == "X0NixOSLaptop"
+            then x0Laptop
+            else x0Desktop;
+        };
         inherit inputs host self;
         outputs = self.outputs;
       };
@@ -105,6 +116,14 @@
     nixosConfigurations = {
       X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
       X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
+    };
+
+    #INFO: for sanity checks
+    # nix eval .#custom.x0Laptop.derived --json | jq
+    # nix eval .#custom.x0Laptop.features --json | jq
+    custom = {
+      x0Desktop = x0Desktop;
+      x0Laptop = x0Laptop;
     };
   };
 }
