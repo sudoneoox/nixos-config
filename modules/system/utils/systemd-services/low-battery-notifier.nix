@@ -1,8 +1,15 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  custom,
+  lib,
+  ...
+}: let
+  x = custom.x0;
+in {
   #NOTE:: Per-user systemd unit so notifications hit the session bus.
   #NOTE: This defines units for all users; they'll be available when the user session starts.
 
-  systemd.user.services.low-battery-notifier = {
+  systemd.user.services.low-battery-notifier = lib.mkIf x.derived.isLaptop {
     enable = true;
     description = "Low Battery Notifier";
     unitConfig = {

@@ -202,6 +202,10 @@ with lib; {
           type = types.bool;
           default = true;
         };
+        veracrypt = mkOption {
+          type = types.bool;
+          default = true;
+        };
       };
     };
 

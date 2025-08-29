@@ -54,6 +54,8 @@ lib.fix (
           usbguard = true;
           user = true;
           "wpa-supplicant" = true;
+          #TODO: Toggle on when finished with modules
+          veracrypt = false;
         };
       };
 

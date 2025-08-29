@@ -40,6 +40,12 @@ in {
         owner = "root";
         neededForUsers = true;
       };
+
+      "veracrypt-pass" = lib.mkIf x.system.security.veracrypt {
+        mode = 0400;
+        owner = "root";
+        group = "root";
+      };
     };
   };
 
