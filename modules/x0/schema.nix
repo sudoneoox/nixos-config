@@ -1,26 +1,30 @@
-{lib, ...}:
+{
+  lib,
+  config,
+  ...
+}:
 with lib; {
   options.x0 = {
-    username = mkOption {
-      type = types.str;
-      description = "recursive attribute do not use; use x0.identity.username";
-    };
+    # NOTE: `homePath` is kept but discouraged use derivation
 
     homePath = mkOption {
       type = types.str;
-      description = "recursive attribute do not use; use x0.derived.homeDir";
+      description = "recursive attribute; do not use; use x0.derived.homeDir";
+      default = "/home/unknown";
     };
 
     debug = mkOption {
       type = types.bool;
       description = "for allowing debug statements to run";
+      default = false;
     };
 
-    ###INFO: --- Identity ----
+    ####INFO: Identity
     identity = {
       username = mkOption {
         type = types.str;
         description = "Primary username";
+        default = "unknown";
       };
       fullName = mkOption {
         type = types.str;
@@ -41,7 +45,7 @@ with lib; {
       };
     };
 
-    ###INFO: --- Derived basics (filled in derived.nix) ----
+    ####INFO: Derived (filled by config below)
     derived = {
       homeDir = mkOption {
         type = types.str;
@@ -80,7 +84,7 @@ with lib; {
       };
     };
 
-    ###INFO: --- System / Profile ----
+    ####INFO: System / Profile
     system = {
       hostProfile = mkOption {
         type = types.enum ["laptop" "desktop"];
@@ -90,9 +94,6 @@ with lib; {
         type = types.enum ["intel" "amd" "nvidia"];
         default = "nvidia";
       };
-
-      # The following three in your original are derived from hostProfile.
-      # We still expose user-settable values; derived.nix will compute *Eff* versions.
       powerManagement = mkOption {
         type = types.bool;
         default = false;
@@ -105,18 +106,17 @@ with lib; {
         type = types.enum ["single" "multi"];
         default = "multi";
       };
-
       scale = mkOption {
         type = types.str;
         default = "1.00";
       };
 
+      #NOTE: hyphen keys must be quoted
       security = {
-        # keep every switch you had; default mirrors your original
         acipd = mkOption {
           type = types.bool;
           default = true;
-        }; # (kept your field name)
+        };
         blacklistedModules = mkOption {
           type = types.bool;
           default = true;
@@ -124,7 +124,7 @@ with lib; {
         bluetooth = mkOption {
           type = types.bool;
           default = true;
-        }; # was FEATURES.ENABLE_BLUETOOTH; resolved in derived too
+        };
         boot = mkOption {
           type = types.bool;
           default = true;
@@ -132,7 +132,7 @@ with lib; {
         cups = mkOption {
           type = types.bool;
           default = true;
-        }; # was FEATURES.ENABLE_PRINTING
+        };
         dbus = mkOption {
           type = types.bool;
           default = true;
@@ -144,7 +144,7 @@ with lib; {
         fail2ban = mkOption {
           type = types.bool;
           default = true;
-        }; # was FEATURES.ENABLE_SSH
+        };
         getty = mkOption {
           type = types.bool;
           default = true;
@@ -153,19 +153,19 @@ with lib; {
           type = types.bool;
           default = true;
         };
-        network-manager = mkOption {
+        "network-manager" = mkOption {
           type = types.bool;
           default = true;
         };
-        network-manager-dispatcher = mkOption {
+        "network-manager-dispatcher" = mkOption {
           type = types.bool;
           default = true;
         };
-        nix-daemon = mkOption {
+        "nix-daemon" = mkOption {
           type = types.bool;
           default = false;
         };
-        reload-systemd-vconsole-setup = mkOption {
+        "reload-systemd-vconsole-setup" = mkOption {
           type = types.bool;
           default = true;
         };
@@ -176,8 +176,8 @@ with lib; {
         ssh = mkOption {
           type = types.bool;
           default = true;
-        }; # was FEATURES.ENABLE_SSH
-        systemd-ask-password-console = mkOption {
+        };
+        "systemd-ask-password-console" = mkOption {
           type = types.bool;
           default = true;
         };
@@ -188,7 +188,7 @@ with lib; {
         tor = mkOption {
           type = types.bool;
           default = false;
-        }; # was FEATURES.ENABLE_TOR
+        };
         usbguard = mkOption {
           type = types.bool;
           default = true;
@@ -197,14 +197,14 @@ with lib; {
           type = types.bool;
           default = true;
         };
-        wpa-supplicant = mkOption {
+        "wpa-supplicant" = mkOption {
           type = types.bool;
           default = true;
         };
       };
     };
 
-    ###INFO: --- Feature flags ----
+    ####INFO: Features
     features = {
       enableCachix = mkOption {
         type = types.bool;
@@ -229,11 +229,11 @@ with lib; {
       enablePrinting = mkOption {
         type = types.bool;
         default = true;
-      }; # desktop default
+      };
       enableBluetooth = mkOption {
         type = types.bool;
         default = true;
-      }; # desktop default
+      };
       enableFlatpak = mkOption {
         type = types.bool;
         default = false;
@@ -288,7 +288,7 @@ with lib; {
       };
     };
 
-    ###INFO: --- Theming / UX ----
+    ####INFO: Theming / UX
     ux = {
       font = mkOption {
         type = types.str;
@@ -302,7 +302,6 @@ with lib; {
         type = types.listOf types.str;
         default = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
       };
-
       fontSize = mkOption {
         type = types.number;
         default = 11.0;
@@ -341,7 +340,7 @@ with lib; {
       };
     };
 
-    ###INFO: --- Paths / keys ----
+    ####INFO: Paths / keys
     nixosConfPath = mkOption {
       type = types.str;
       default = "/home/unknown/Projects/nixos-config";
@@ -363,7 +362,7 @@ with lib; {
       default = "";
     };
 
-    ###INFO: --- Default Apps ----
+    ####INFO: Default Apps
     apps = {
       terminal = mkOption {
         type = types.str;
@@ -375,7 +374,7 @@ with lib; {
       };
       browser = mkOption {
         type = types.str;
-        default = "zen-browser-twilight";
+        default = "zen-twilight";
       };
       fileManager = mkOption {
         type = types.str;
@@ -387,7 +386,7 @@ with lib; {
       };
     };
 
-    ###INFO: --- Locale / Input ----
+    ####INFO: Locale / Input
     timezone = mkOption {
       type = types.str;
       default = "America/Chicago";
@@ -399,6 +398,34 @@ with lib; {
     keyboardLayout = mkOption {
       type = types.str;
       default = "us";
+    };
+  };
+
+  #NOTE: ------- DERIVED -------
+  config = let
+    c = config.x0;
+    isLaptop = c.system.hostProfile == "laptop";
+    isDesktop = c.system.hostProfile == "desktop";
+    cpuVendorEff =
+      if isLaptop
+      then "intel"
+      else c.system.cpuVendor;
+    monitorsEff =
+      if isLaptop
+      then "single"
+      else c.system.monitors;
+    powerMgmtEff =
+      if isLaptop
+      then true
+      else c.system.powerManagement;
+    primaryMonitor =
+      if isLaptop
+      then "eDP-1"
+      else null;
+  in {
+    x0.derived = {
+      homeDir = "/home/${c.identity.username}";
+      inherit isLaptop isDesktop cpuVendorEff monitorsEff powerMgmtEff primaryMonitor;
     };
   };
 }

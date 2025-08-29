@@ -1,10 +1,10 @@
 # https://github.com/wallago/nix-system-services-hardened/blob/main/services/bluetooth.nix
 {
   lib,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   config = lib.mkIf x.system.security.bluetooth {
     systemd.services.bluetooth.serviceConfig = {

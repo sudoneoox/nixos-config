@@ -73,19 +73,26 @@
   } @ inputs: let
     inherit (self) outputs;
     inherit (nixpkgs.lib) nixosSystem;
+    lib = nixpkgs.lib;
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
 
-    forallSystems = nixpkgs.lib.genAttrs [
-      "x86_64-linux"
-    ];
+    forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
+
+    customLib = import ./lib/custom-x0.nix {inherit lib pkgs system;};
+
+    # Load raw values (plain)
+    x0Values = import ./modules/x0/values.nix;
+
+    # Type-check + derive in a sandbox; get a PLAIN attrset back
+    x0Checked = customLib.mkX0 x0Values;
 
     mkNixOSConfig = host: {
       system = "x86_64-linux";
       specialArgs = {
-        inherit
-          inputs
-          outputs
-          host
-          ;
+        custom = {x0 = x0Checked;};
+        inherit inputs host self;
+        outputs = self.outputs;
       };
       modules = [
         ./hosts/${host}

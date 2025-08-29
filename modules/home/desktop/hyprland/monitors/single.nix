@@ -1,16 +1,13 @@
 {
   pkgs,
-  config,
+  custom,
   lib,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   config = lib.mkIf (x.derived.monitorsEff == "single") {
     # Imports specific to single-monitor setups (usually laptops)
-    imports = [
-      ../hypridle
-    ];
 
     wayland.windowManager.hyprland = {
       settings = {

@@ -1,9 +1,9 @@
 {
   inputs,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   imports = [
     #INFO: NixOS-hardware input
@@ -38,9 +38,7 @@ in {
   };
 
   home-manager.users.${x.identity.username} = {
-    imports = [
-      ./home.nix
-    ];
+    imports = [./home.nix];
   };
 
   system.stateVersion = "25.05"; # Did you read the comment?

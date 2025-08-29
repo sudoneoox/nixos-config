@@ -2,10 +2,10 @@
 {
   pkgs,
   lib,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
   ciderLatest = pkgs.callPackage ../../../../pkgs/applications/cider-latest.nix {
     username = x.identity.username;
   };

@@ -1,11 +1,11 @@
-# Installs the packages within config.x0.font
+# Installs the packages within custom.x0.font
 {
   lib,
-  config,
+  custom,
   pkgs,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
   toPkg = path: lib.getAttrFromPath (lib.splitString "." path) pkgs;
   fontPkgs = builtins.map toPkg x.ux.fontPkgs;
 in {

@@ -1,13 +1,14 @@
 {
   outputs,
-  config,
+  custom,
   inputs,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   imports = [
     inputs.nvf.homeManagerModules.default
+
     ../../modules/home/devel
     ../../modules/home/desktop/zen-browser
     ../../modules/home/desktop/hyprland
@@ -31,8 +32,8 @@ in {
   };
 
   home = {
-    username = "${x.identity.username}";
-    homeDirectory = "/home/${x.identity.username}";
+    username = x.identity.username;
+    homeDirectory = x.derived.homeDir;
   };
 
   programs = {

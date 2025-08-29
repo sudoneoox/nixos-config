@@ -1,5 +1,5 @@
-{config, ...}: let
-  x = config.x0;
+{custom, ...}: let
+  x = custom.x0;
   currentSemester = "2025Fall";
 in {
   programs.fish.shellAliases = {

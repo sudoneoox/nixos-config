@@ -1,11 +1,11 @@
 {
   lib,
   host,
-  config,
+  custom,
   ...
 }: let
   #INFO: Where you want the synced data on each machine (same path everywhere).
-  x = config.x0;
+  x = custom.x0;
   syncRoot = "/media/resilio/truenas";
 in {
   config = lib.mkIf x.features.enableResilioSync {

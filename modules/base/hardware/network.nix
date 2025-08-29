@@ -1,10 +1,11 @@
 {
+  config,
   host,
   pkgs,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   networking = {
     networkmanager = {

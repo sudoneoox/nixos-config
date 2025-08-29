@@ -1,9 +1,9 @@
 {
-  config,
+  custom,
   lib,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   # stock NixOS powermanagement tool which allows for managing hibernate and suspend states
   # other power management tools may overwrite this setting

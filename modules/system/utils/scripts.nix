@@ -1,9 +1,9 @@
 {
   pkgs,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
   lowBatteryNotifier = pkgs.callPackage ../../../../pkgs/scripts/low-battery-notifier.nix {
     isLaptop = x.derived.isLaptop;
   };
@@ -11,7 +11,7 @@
     colorScheme = x.ux.colorScheme;
     nixosAssetsPath = x.nixosAssetsPath;
     wallpaper = x.ux.wallpaper;
-    cachePath = config.x.cachePath;
+    cachePath = x.cachePath;
   };
   wallustPick = pkgs.callPackage ../../../../pkgs/scripts/wallust-pick.nix {
     nixosAssetsPath = x.nixosAssetsPath;

@@ -1,10 +1,10 @@
 {
-  config,
+  custom,
   pkgs,
   lib,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   config = lib.mkIf x.features.enableDocker {
     virtualisation = {

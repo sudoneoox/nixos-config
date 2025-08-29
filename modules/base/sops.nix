@@ -3,10 +3,10 @@
   inputs,
   pkgs,
   lib,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
   SOPS_PUBLIC_KEY = x.sopsPublicKey;
   SOPS_KEY_FILE = "${x.sopsPath}/key.txt";
   SOPS_SECRETS_PATH = "${x.sopsPath}/secrets";
@@ -52,7 +52,7 @@ in {
     SOPS_AGE_RECIPIENTS = SOPS_PUBLIC_KEY;
   };
 
-  programs.ssh.knownHosts.github = lib.mkIf x.features.enableSsh {
+  programs.ssh.knownHosts.github = lib.mkIf x.features.enableSSH {
     hostNames = ["github.com"];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
   };

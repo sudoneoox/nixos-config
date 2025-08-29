@@ -1,9 +1,10 @@
 {
   config,
+  custom,
   pkgs,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
   rofiFont = "${x.ux.font} Bold 10";
   rofiTerminal = "${pkgs.${x.apps.terminal}}/bin/${x.apps.terminal}";
   themeName = "style.rasi";

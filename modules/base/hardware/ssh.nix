@@ -1,9 +1,10 @@
 {
-  config,
+  custom,
   lib,
+  config,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   config = lib.mkIf x.features.enableSSH {
     services = {

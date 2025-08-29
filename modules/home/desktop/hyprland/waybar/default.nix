@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   home.packages = with pkgs; [
     lm_sensors

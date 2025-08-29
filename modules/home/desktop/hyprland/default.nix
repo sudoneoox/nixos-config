@@ -1,9 +1,9 @@
 {
-  config,
+  custom,
   pkgs,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   # Assets that plugins or scripts use
   services = {
@@ -309,6 +309,7 @@ in {
     ./hyprlock
     ./hyprpaper
     ./hyprshade
+    ./hypridle
     ./monitors/single.nix
     ./monitors/multi.nix
   ];

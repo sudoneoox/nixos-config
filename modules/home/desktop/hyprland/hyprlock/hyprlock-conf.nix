@@ -1,9 +1,9 @@
 {
-  config,
+  custom,
   pkgs,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
   wp_path = "${x.cachePath}/current_wallpaper";
   font = x.font;
   profile_photo = "${x.nixosAssetsPath}/Icons/hyprlock/face.jpg";

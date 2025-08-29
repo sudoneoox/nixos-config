@@ -1,18 +1,14 @@
 {
   outputs,
   inputs,
-  config,
+  custom,
   pkgs,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-
-    #INFO: Configuration Defaults
-    ../../modules/x0
-
     #INFO: Base System and Nix configurations
     ../../modules/base
 
@@ -25,14 +21,13 @@ in {
     ../../modules/system/desktop/hyprland
     ../../modules/system/virtualisation
     ../../modules/system/gaming
-
-    ../../modules/shims/starship-compat.nix
   ];
 
   programs = {
     # System wide
     zsh.enable = true;
     git.enable = true;
+    fish.enable = true;
   };
   environment.systemPackages = with pkgs; [jq];
 
@@ -43,13 +38,11 @@ in {
       inherit
         inputs
         outputs
-        config
+        custom
         ;
     };
     users.${x.identity.username} = {
-      imports = [
-        ./home.nix
-      ];
+      imports = [./home.nix];
     };
   };
 }

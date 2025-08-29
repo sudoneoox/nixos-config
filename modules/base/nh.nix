@@ -1,5 +1,9 @@
-{config, ...}: let
-  x = config.x0;
+{
+  custom,
+  config,
+  ...
+}: let
+  x = custom.x0;
 in {
   programs.nh = {
     enable = true;

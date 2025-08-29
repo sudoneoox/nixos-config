@@ -1,9 +1,9 @@
 {
   inputs,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   imports = [
     "${inputs.nixos-hardware}/common/cpu/amd/zenpower.nix"
@@ -27,9 +27,7 @@ in {
   };
 
   home-manager.users.${x.identity.username} = {
-    imports = [
-      ./home.nix
-    ];
+    imports = [./home.nix];
   };
 
   system.stateVersion = "25.05"; # Did you read the comment?

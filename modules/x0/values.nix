@@ -1,24 +1,22 @@
+# NOTE:  (PLAIN ATTRSET — no config.*)
 rec {
   #INFO: identity
-  username = "diego";
-  homePath = "/home/${username}";
-
-  debug = true;
+  homePath = "/home/${identity.username}";
 
   identity = {
     username = "diego";
     fullName = "Diego Coronado";
     email = "diegoa2992@proton.me";
     github = "sudoneoox";
-    sshKeyPath = "${homePath}/.ssh/id_ed25519.pub";
+    sshKeyPath = "${identity.username}/.ssh/id_ed25519.pub";
   };
 
-  #INFO: system/profile (raw knobs; derived.nix computes the *Eff flags)
-  #INFO: these are esentially the default values
+  #INFO: system/profile (raw knobs; derived computes *Eff)
+  #NOTE: for derivations check out ./schema.nix
   system = {
     hostProfile = "desktop"; # "laptop" | "desktop"
     gpuVendor = "nvidia"; # "intel" | "amd" | "nvidia"
-    powerManagement = false; # laptop overrides it via derived
+    powerManagement = false; # laptop overrides via derived
     cpuVendor = "amd"; # laptop -> "intel" via derived
     monitors = "multi"; # laptop -> "single" via derived
     scale = "1.00";
@@ -33,18 +31,19 @@ rec {
       fail2ban = features.enableSSH;
       getty = true;
       kernel = true;
-      network-manager = true;
-      network-manager-dispatcher = true;
-      nix-daemon = false;
-      reload-systemd-vconsole-setup = true;
+      "network-manager" = true;
+      "network-manager-dispatcher" = true;
+      #WARN: Gives Issues with rebuilding
+      "nix-daemon" = false;
+      "reload-systemd-vconsole-setup" = true;
       rtkit = true;
       ssh = features.enableSSH;
-      systemd-ask-password-console = true;
+      "systemd-ask-password-console" = true;
       systemd = true;
       tor = features.enableTor;
       usbguard = true;
       user = true;
-      wpa-supplicant = true;
+      "wpa-supplicant" = true;
     };
   };
 
@@ -55,18 +54,17 @@ rec {
     enableWine = false;
     enableLibvirt = false;
     enableGaming = false;
-    enablePrinting = system.hostProfile == "desktop"; # desktop default = true
+    enablePrinting = system.hostProfile == "desktop";
     enableBluetooth = true;
-
     enableFlatpak = false;
     enableResilioSync = true;
     enableUdiskie = true;
     enableAudio = true;
     enableSSH = true;
-    enableTor = false;
+    enableTor = system.hostProfile == "desktop";
     enableQbittorrent = false;
     enableHDR = false;
-    enableCider = false;
+    enableCider = system.hostProfile == "desktop";
     enableZram = true;
     enableRStudio = false;
     enableTypst = true;
@@ -81,7 +79,6 @@ rec {
     fontSize = 11.0;
     cursorTheme = "macOS";
     cursorSize = 24;
-    # TODO: Add these to conf
     gtkTheme = "Materia-dark";
     iconTheme = "Tela-black";
     qtStyle = "adwaita-dark";
@@ -91,9 +88,9 @@ rec {
   };
 
   #INFO: paths / keys
-  nixosConfPath = "${homePath}/Projects/nixos-config";
-  nixosAssetsPath = "${homePath}/Assets/nixos-config";
-  cachePath = "${homePath}/.cache";
+  nixosConfPath = "${identity.username}/Projects/nixos-config";
+  nixosAssetsPath = "${identity.username}/Assets/nixos-config";
+  cachePath = "${identity.username}/.cache";
   sopsPath = "/var/lib/sops-nix";
   sopsPublicKey = "age1cm02yeux0zpgryunwdsf2dya0penm30vj3vcftf698nqsey7yqzsdnt6v2";
 

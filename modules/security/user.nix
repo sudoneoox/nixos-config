@@ -1,9 +1,9 @@
 {
   lib,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   config = lib.mkIf x.system.security.user {
     systemd.services."user@".serviceConfig = {

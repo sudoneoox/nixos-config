@@ -4,7 +4,6 @@
     hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system};
     hy3 = inputs.hy3.packages.${prev.system}.hy3;
     hyprland-smw = inputs.split-monitor-workspaces.packages.${prev.system}.split-monitor-workspaces;
-    zen-browser-twilight = inputs.zen-browser.packages.${prev.system}.specific.twilight;
   };
 
   additions = final: _prev:

@@ -1,5 +1,5 @@
-{config, ...}: let
-  x = config.x0;
+{custom, ...}: let
+  x = custom.x0;
 in {
   programs.waybar.style = ''
     @import url("file://${x.cachePath}/wallust/colors-waybar.css");

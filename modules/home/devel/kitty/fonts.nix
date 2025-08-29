@@ -1,9 +1,9 @@
 {
   pkgs,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   programs.kitty.font = {
     #TODO: change to x.ux.defaultFont need a lib wrapper

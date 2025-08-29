@@ -1,9 +1,9 @@
 {
   lib,
-  config,
+  custom,
   ...
 }: let
-  x = config.x0;
+  x = custom.x0;
 in {
   config = lib.mkIf x.system.security.boot {
     # https://madaidans-insecurities.github.io/guides/linux-hardening.html#boot-parameters
