@@ -2,6 +2,7 @@
 {
   lib,
   overrides ? {},
+  pkgs,
 }:
 lib.fix (
   self: let
@@ -84,7 +85,7 @@ lib.fix (
       ux = {
         font = "JetbrainsMono Nerd Font";
         defaultFont = "nerd-fonts.jetbrains-mono";
-        fontPkgs = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
+        fontPkgs = [pkgs.nerd-fonts.jetbrains-mono pkgs.source-code-pro];
         fontSize = 11.0;
         cursorTheme = "macOS";
         cursorSize = 24;

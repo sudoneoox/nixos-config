@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib; {
@@ -298,10 +299,29 @@ with lib; {
         type = types.str;
         default = "nerd-fonts.jetbrains-mono";
       };
-      fontPkgs = mkOption {
-        type = types.listOf types.str;
-        default = ["nerd-fonts.jetbrains-mono" "nerd-fonts.fira-code" "source-code-pro"];
+      fontPkgs = lib.mkOption {
+        type =
+          lib.types.coercedTo
+          (lib.types.listOf lib.types.str)
+          (
+            paths: let
+              toPkg = path: lib.getAttrFromPath (lib.splitString "." path) pkgs;
+            in
+              builtins.map toPkg paths
+          )
+          (lib.types.listOf lib.types.package);
+
+        # You can set default as real packages (nice and fast),
+        # but values.nix can still provide strings or packages — both work.
+        default = [
+          pkgs.nerd-fonts.jetbrains-mono
+          pkgs.nerd-fonts.fira-code
+          pkgs.source-code-pro
+        ];
+
+        description = "Font packages for installation.";
       };
+
       fontSize = mkOption {
         type = types.number;
         default = 11.0;

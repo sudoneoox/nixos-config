@@ -81,7 +81,7 @@
 
     #NOTE: Produce default/base (desktop) values defined in modules/x0/values.nix
     makeValues = overrides:
-      import ./modules/x0/values.nix {inherit lib overrides;};
+      import ./modules/x0/values.nix {inherit lib pkgs overrides;};
 
     #NOTE: per-host values
     x0ValuesDesktop = makeValues {}; # keep default "desktop"
@@ -92,6 +92,7 @@
     x0Laptop = customLib.mkX0 x0ValuesLaptop;
 
     forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
+    in
 
     mkNixOSConfig = host: {
       system = "x86_64-linux";
@@ -110,7 +111,13 @@
       ];
     };
   in {
-    overlays = import ./overlays {inherit inputs;};
+    #TODO: find a way to pass host for host specific overlays
+    overlays = import ./overlays {
+      inherit inputs;
+      custom = {
+        x0 = x0Desktop;
+      };
+    };
     formatter = forallSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     nixosConfigurations = {

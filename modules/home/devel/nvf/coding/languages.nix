@@ -25,7 +25,7 @@ in {
     lua.enable = true;
     bash.enable = true;
     r = {
-      enable = x.features.enableRstudio;
+      enable = x.features.enableRStudio;
       format.enable = x.features.enableRstudio;
       lsp.enable = x.features.enableRstudio;
       treesitter.enable = x.features.enableRstudio;

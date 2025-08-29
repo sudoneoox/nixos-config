@@ -1,10 +1,9 @@
 {
   pkgs,
-  nixosAssetsPath,
-  cachePath,
+  custom,
 }: let
-  WALLPAPER_DIR = "${nixosAssetsPath}/Wallpapers";
-  CACHE_DIR = "${cachePath}";
+  WALLPAPER_DIR = "${custom.x0.nixosAssetsPath}/Wallpapers";
+  CACHE_DIR = "${custom.x0.cachePath}";
 in
   pkgs.writeShellApplication {
     name = "wallust-pick";

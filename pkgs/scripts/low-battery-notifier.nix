@@ -1,10 +1,10 @@
 {
   pkgs,
   lib,
-  isLaptop,
+  custom,
   ...
 }:
-pkgs.writeShellApplication lib.mkIf isLaptop {
+pkgs.writeShellApplication lib.mkIf custom.x0.derived.isLaptop {
   name = "low-battery-notifier";
   runtimeInputs = [
     pkgs.acpi
