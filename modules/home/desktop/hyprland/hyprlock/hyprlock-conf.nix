@@ -5,7 +5,7 @@
 }: let
   x = custom.x0;
   wp_path = "${x.cachePath}/current_wallpaper";
-  font = x.font;
+  font = x.ux.font;
   profile_photo = "${x.nixosAssetsPath}/Icons/hyprlock/face.jpg";
   greeting_text = "Welcome!";
   hyprlock_conf_path = "$HOME/.config/hyprlock";

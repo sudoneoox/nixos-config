@@ -85,7 +85,7 @@ lib.fix (
       ux = {
         font = "JetbrainsMono Nerd Font";
         defaultFont = "nerd-fonts.jetbrains-mono";
-        fontPkgs = [pkgs.nerd-fonts.jetbrains-mono pkgs.source-code-pro];
+        fontPkgs = ["nerd-fonts.jetbrains-mono" "source-code-pro"];
         fontSize = 11.0;
         cursorTheme = "macOS";
         cursorSize = 24;

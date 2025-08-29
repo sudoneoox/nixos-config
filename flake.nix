@@ -92,7 +92,6 @@
     x0Laptop = customLib.mkX0 x0ValuesLaptop;
 
     forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
-    in
 
     mkNixOSConfig = host: {
       system = "x86_64-linux";

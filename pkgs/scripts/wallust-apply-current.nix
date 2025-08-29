@@ -1,12 +1,11 @@
 {
   pkgs,
-  lib,
   custom,
 }: let
   WALLPAPER_PATH = "${custom.x0.nixosAssetsPath}/Wallpapers/${custom.x0.ux.wallpaper}";
   CACHE_DIR = "${custom.x0.cachePath}";
 in
-  pkgs.writeShellApplication lib.mkIf (custom.x0.ux.colorScheme == "wallust") {
+  pkgs.writeShellApplication {
     name = "wallust-apply-current";
     runtimeInputs = [
       pkgs.coreutils
