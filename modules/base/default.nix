@@ -1,6 +1,5 @@
 {
   imports = [
-    ./env-vars.nix
     ./font.nix
     ./nh.nix
     ./nix.nix

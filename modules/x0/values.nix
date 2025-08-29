@@ -82,6 +82,9 @@ lib.fix (
         enableRStudio = false;
         enableTypst = true;
         enableZed = false;
+        #WARNING: This doesnt set up luks but rather the default boot.nix
+        # you still have to setup luks on your own
+        enableLuks = true;
       };
 
       #INFO: Theming / UX

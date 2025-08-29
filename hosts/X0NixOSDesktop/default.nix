@@ -16,7 +16,6 @@ in {
 
     ./hardware.nix
     ./disk-config.nix
-    ./boot.nix
     ../common
     ../../modules/system/desktop/file-manager
     ../../modules/system/desktop/qbittorrent

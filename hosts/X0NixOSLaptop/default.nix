@@ -15,7 +15,6 @@ in {
     "${inputs.nixos-hardware}/common/hidpi.nix"
 
     ./hardware.nix
-    ./boot.nix
     ./disk-config.nix
     ../common
     ../../modules/system/desktop/file-manager
