@@ -78,6 +78,12 @@ with lib; {
         internal = true;
         default = false;
       };
+      powerMgmtPerf = mkOption {
+        type = types.bool;
+        internal = true;
+        default = false;
+      };
+
       primaryMonitor = mkOption {
         type = types.nullOr types.str;
         internal = true;
@@ -451,6 +457,10 @@ with lib; {
       if isLaptop
       then true
       else c.system.powerManagement;
+    powerMgmtPerf =
+      if isDesktop
+      then true
+      else false;
     primaryMonitor =
       if isLaptop
       then "eDP-1"
@@ -458,7 +468,7 @@ with lib; {
   in {
     x0.derived = {
       homeDir = "/home/${c.identity.username}";
-      inherit isLaptop isDesktop cpuVendorEff monitorsEff powerMgmtEff primaryMonitor;
+      inherit isLaptop isDesktop cpuVendorEff monitorsEff powerMgmtEff powerMgmtPerf primaryMonitor;
     };
   };
 }
