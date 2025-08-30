@@ -69,7 +69,7 @@ in {
           # MINIMIZE WINDOW
           "SUPER, N, exec, hyprctl dispatch tag active:minimized && hyprctl dispatch split-movetoworkspacesilent +10"
 
-          "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.hyprRestoreWindow}/bin/hypr-restore-window"
+          "SUPER, M, exec, kitty --class fzfrestore --title 'Restore Hidden Window' --override background_opacity=0.92 -e /usr/bin/env bash ${pkgs.hyprRestoreWindow}/bin/hypr-restore-window split-"
 
           # toggle move workspace to other monitor
           "SUPER, O, exec, hyprctl dispatch split-changemonitor 1"
