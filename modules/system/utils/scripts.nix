@@ -17,5 +17,8 @@ in {
     ++ lib.optionals (x.ux.colorScheme == "wallust") [
       wallustPick
       wallustApplyCurrent
+    ]
+    ++ lib.optionals (x.system.security.veracrypt && x.features.enableUdiskie) [
+      veracrypt-mount
     ];
 }

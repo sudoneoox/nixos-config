@@ -9,4 +9,5 @@
   wallustApplyCurrent = pkgs.callPackage ./scripts/wallust-apply-current.nix {inherit custom;};
   playerctlLock = pkgs.callPackage ./scripts/playerctl-lock.nix {};
   ciderLatest = pkgs.callPackage ./applications/cider-latest.nix {};
+  veracrypt-mount = pkgs.callPackage ./scripts/veracrypt-mount-script.nix {};
 }

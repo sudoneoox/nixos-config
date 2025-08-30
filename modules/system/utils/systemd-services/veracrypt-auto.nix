@@ -1,55 +1,42 @@
 {
-  config,
-  custom,
   pkgs,
+  custom,
+  config,
   lib,
   ...
 }: let
-  # Mount Point for unencrypted drive
+  veracryptPartUUID = "bc726c0b-01"; # sda1 PARTUUID
   mntBase = "/media/veracrypt";
   x = custom.x0;
-  #WARN: run; udevadm info --atribute-walk --name /dev/<device> and copy and replace the value below
-  # ID_SERIAL_SHORT
 in {
-  # Template systemd unit: veracrypt-auto@<kernel-name>.service
   systemd.services."veracrypt-auto@" = lib.mkIf (x.system.security.veracrypt && x.features.enableUdiskie) {
     description = "Auto-unlock and mount VeraCrypt device %I";
     after = ["local-fs.target"];
+
     serviceConfig = {
       Type = "oneshot";
 
-      # Pass the sops secret to the unit as a systemd credential "vcpass"
-      LoadCredential = [
-        "vcpass:${config.sops.secrets."veracrypt-pass".path}"
+      # Provide the pass via systemd-credentials
+      LoadCredential = ["vcpass:${config.sops.secrets."veracrypt-pass".path}"];
+
+      Environment = [
+        "VC_PARTUUID=${veracryptPartUUID}"
+        "VC_MNT_BASE=${mntBase}"
+        "VC_DEBUG=1"
+        "SYSTEMD_LOG_LEVEL=debug"
       ];
 
-      ExecStart = pkgs.writeShellScript "veracrypt-auto" ''
-        set -eu
-        DEV="/dev/%I"
-        CRED_DIR="''${CREDENTIALS_DIRECTORY:-/run/credentials}"
-        PASSFILE="$CRED_DIR/''${SYSTEMD_UNIT##*/}.vcpass"  # systemd maps LoadCredential to a file here
+      # pass instance name into script (so it becomes $1 inside)
+      ExecStart = "${pkgs.veracrypt-mount}/bin/veracrypt-mount %i";
 
-        # Fallback if systemd's mapped filename differs:
-        [ ! -f "$PASSFILE" ] && PASSFILE="$CRED_DIR/vcpass"
-
-        # Mountpoint derived from device name
-        MP="${mntBase}-%I"
-        mkdir -p "$MP"
-
-        # Use stdin for the passphrase; non-interactive CLI
-        # (Avoids exposing the password via argv/env)
-        ${pkgs.veracrypt}/bin/veracrypt \
-          --text --non-interactive --stdin \
-          --mount "$DEV" "$MP" < "$PASSFILE"
-      '';
+      StandardOutput = "journal+console";
+      StandardError = "journal+console";
     };
   };
 
-  # Udev rule to start the template unit for your SSD partition.
-  # Replace the matcher with your device’s identifiers (see notes below).
   services.udev.extraRules = ''
-    # Example: trigger when /dev/sdX1 with a specific ID_SERIAL_SHORT appears
-    ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[0-9]", ENV{ID_SERIAL_SHORT}=="<YOUR_DRIVE_SERIAL>", \
+    ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*[0-9]", \
+      ENV{ID_PART_ENTRY_UUID}=="${veracryptPartUUID}", \
       TAG+="systemd", ENV{SYSTEMD_WANTS}="veracrypt-auto@%k.service"
   '';
 }

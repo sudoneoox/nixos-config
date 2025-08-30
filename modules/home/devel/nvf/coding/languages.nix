@@ -26,9 +26,9 @@ in {
     bash.enable = true;
     r = {
       enable = x.features.enableRStudio;
-      format.enable = x.features.enableRstudio;
-      lsp.enable = x.features.enableRstudio;
-      treesitter.enable = x.features.enableRstudio;
+      format.enable = x.features.enableRStudio;
+      lsp.enable = x.features.enableRStudio;
+      treesitter.enable = x.features.enableRStudio;
     };
     typst = {
       enable = x.features.enableTypst;

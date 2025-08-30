@@ -1,8 +1,8 @@
 #INFO: Defaults + host overrides without touching config.*
 {
   lib,
-  overrides ? {},
   pkgs,
+  overrides ? {},
 }:
 lib.fix (
   self: let
@@ -55,7 +55,7 @@ lib.fix (
           user = true;
           "wpa-supplicant" = true;
           #TODO: Toggle on when finished with modules
-          veracrypt = false;
+          veracrypt = true;
         };
       };
 
@@ -79,7 +79,7 @@ lib.fix (
         enableHDR = false;
         enableCider = self.system.hostProfile == "desktop";
         enableZram = true;
-        enableRStudio = false;
+        enableRStudio = self.system.hostProfile == "desktop";
         enableTypst = true;
         enableZed = false;
         #WARNING: This doesnt set up luks but rather the default boot.nix
