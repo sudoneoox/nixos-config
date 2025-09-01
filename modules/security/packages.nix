@@ -10,6 +10,7 @@ in {
     [
       lynis
       clamav
+      kpcli # Keepass CLI
       proton-pass # password manager
       protonvpn-gui # vpn
       # Encryption

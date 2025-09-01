@@ -11,6 +11,5 @@
     ueberzugpp
     # Snacks.image
     ghostscript
-    mermaid-cli
   ];
 }
