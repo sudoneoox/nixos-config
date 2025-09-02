@@ -8,7 +8,7 @@ palette = "dark16"          # v3 name (formerly filter)
 # Waybar colors: render from .hbs to your desired .css output path
 colors-waybar = { template = "colors-waybar.css.hbs", target = "~/.cache/wallust/colors-waybar.css", new_engine = true}
 kitty = { template="kitty.conf.hbs", target='~/.config/kitty/colors.conf', new_engine = true}
-neopywal = { template = "colors_neopywal.vim.hbs", target = "~/.cache/wallust/colors_neopywal.vim", new_engine = true }
+neopywal = { template = "colors_neopywal.vim.hbs", target = "~/.cache/wal/colors-wal.vim", new_engine = true }
 hypr = { template = "hyprland-colors.conf.hbs", target = "~/.config/hypr/colors.conf", new_engine = true}
 rofi = { template = "rofi-colors.rasi.hbs", target = "~/.config/rofi/rofi-colors.rasi", new_engine = true}
 rofi-transparent = { template = "rofi-colors-transparent.rasi.hbs", target = "~/.config/rofi/rofi-colors-transparent.rasi", new_engine = true}

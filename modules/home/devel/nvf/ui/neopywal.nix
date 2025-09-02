@@ -34,7 +34,7 @@ in {
 
       setup = ''
         -- Only apply neopywal if the wallust-generated template exists
-        local neopywalPath = vim.env.HOME .. "/.cache/wallust/colors_neopywal.vim"
+        local neopywalPath = vim.env.HOME .. "/.cache/wal/colors-wal.vim"
         local f = io.open(neopywalPath, "r")
         if f then
           f:close()
@@ -48,12 +48,8 @@ in {
                 scope_color = "",
               },
 
-              -- Use wallust template at ~/.cache/wallust/colors_neopywal.vim
+              -- Use wallust template at ~/.cache/wal/colors-wal.vim
               use_wallust = true,
-
-              -- Optional alternatives (empty -> unused)
-              colorscheme_file = "",
-              use_palette = "",
 
               transparent_background = true,
               custom_colors = {},
