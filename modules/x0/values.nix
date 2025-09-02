@@ -101,7 +101,8 @@ lib.fix (
         gtkTheme = "Materia-dark";
         iconTheme = "Tela-black";
         qtStyle = "adwaita-dark";
-        wallpaper = "nordic.png";
+        #NOTE: See modules/home/utils/Assets/wallpapers for options
+        wallpaper = "cat_spectrum1.png";
         colorScheme = "wallust";
         de = "hyprland";
       };

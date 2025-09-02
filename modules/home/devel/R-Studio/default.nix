@@ -5,36 +5,39 @@
   ...
 }: let
   x = custom.x0;
+
+  # single source of truth for packages
+  rPkgs = with pkgs.rPackages; [
+    ggplot2
+    rmarkdown
+    lattice
+    vioplot
+    GGally
+    readr
+    dplyr
+    knitr
+  ];
+
+  myR = pkgs.rWrapper.override {packages = rPkgs;}; # terminal R
+  myRStudio = pkgs.rstudioWrapper.override {packages = rPkgs;}; # RStudio
 in {
   config = lib.mkIf x.features.enableRStudio {
-    home.packages = with pkgs; [
-      (rWrapper.override {
-        packages = with rPackages; [
-          ggplot2
-          rmarkdown
-          lattice
-          vioplot
-          GGally
-          readr
-          dplyr
-          knitr
-        ];
-      })
-      rstudio
-      pandoc
-      quarto
-
-      (texlive.combine {
+    home.packages = [
+      myR
+      myRStudio
+      pkgs.pandoc
+      pkgs.quarto
+      (pkgs.texlive.combine {
         inherit
-          (texlive)
+          (pkgs.texlive)
           scheme-small
           latexmk
           xetex
-          collection-latexextra # <- brings framed/fvextra/mdframed/tcolorbox/etc.
+          collection-latexextra
           collection-fontsrecommended
           fontspec
           hyperref
-          ; # (safe to list explicitly)
+          ;
       })
     ];
   };
