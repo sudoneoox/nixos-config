@@ -83,7 +83,10 @@
     inherit (nixpkgs.lib) nixosSystem;
     lib = nixpkgs.lib;
     system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
 
     customLib = import ./lib/custom-x0.nix {inherit lib pkgs system;};
 

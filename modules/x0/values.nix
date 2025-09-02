@@ -95,8 +95,8 @@ lib.fix (
         defaultFont = "nerd-fonts.jetbrains-mono";
         fontPkgs = ["nerd-fonts.jetbrains-mono" "source-code-pro"];
         fontSize = 11.0;
-        cursorTheme = "macOS";
-        cursorPkg = "apple-cursor";
+        cursorTheme = "Posy_Cursor";
+        cursorPkg = "posy-cursors";
         cursorSize = 24;
         gtkTheme = "Materia-dark";
         iconTheme = "Tela-black";
