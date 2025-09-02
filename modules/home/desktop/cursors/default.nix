@@ -1,8 +1,4 @@
-{
-  pkgs,
-  custom,
-  ...
-}: let
+{custom, ...}: let
   x = custom.x0;
 in {
   home.pointerCursor = {
@@ -10,7 +6,7 @@ in {
     hyprcursor.enable = true;
     name = x.ux.cursorTheme;
     size = x.ux.cursorSize;
-    package = pkgs.apple-cursor;
+    package = x.ux.cursorPkg;
     gtk.enable = true;
   };
 }

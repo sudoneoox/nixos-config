@@ -11,7 +11,5 @@ in {
       wineWowPackages.staging
       winetricks
     ];
-
-    services.flatpak.enable = true;
   };
 }

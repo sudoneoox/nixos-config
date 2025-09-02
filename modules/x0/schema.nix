@@ -172,6 +172,10 @@ with lib; {
           type = types.bool;
           default = false;
         };
+        proton = mkOption {
+          type = types.bool;
+          default = false;
+        };
         "reload-systemd-vconsole-setup" = mkOption {
           type = types.bool;
           default = true;
@@ -349,6 +353,27 @@ with lib; {
         type = types.str;
         default = "macOS";
       };
+      cursorPkg = lib.mkOption {
+        type =
+          lib.types.coercedTo
+          (lib.types.listOf lib.types.str)
+          (
+            paths: let
+              toPkg = path: lib.getAttrFromPath (lib.splitString "." path) pkgs;
+            in
+              builtins.map toPkg paths
+          )
+          (lib.types.listOf lib.types.package);
+
+        # You can set default as real packages (nice and fast),
+        # but values.nix can still provide strings or packages — both work.
+        default = [
+          pkgs.apple-cursor
+        ];
+
+        description = "Packages for cursor.";
+      };
+
       cursorSize = mkOption {
         type = types.int;
         default = 24;

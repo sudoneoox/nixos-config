@@ -45,6 +45,8 @@ lib.fix (
           "network-manager-dispatcher" = true;
           #WARN: nix-daemon causes issues with nixos-rebuild
           "nix-daemon" = false;
+          # Adds proton-pass and proton-vpn packages
+          proton = true;
           "reload-systemd-vconsole-setup" = true;
           rtkit = true;
           ssh = self.features.enableSSH;
@@ -67,9 +69,9 @@ lib.fix (
         enableWine = false;
         enableLibvirt = false;
         enableGaming = false;
-        enablePrinting = self.system.hostProfile == "desktop";
+        enablePrinting = true;
         enableBluetooth = true;
-        enableFlatpak = false;
+        enableFlatpak = true;
         enableResilioSync = true;
         enableUdiskie = true;
         enableAudio = true;
@@ -79,7 +81,7 @@ lib.fix (
         enableHDR = false;
         enableCider = self.system.hostProfile == "desktop";
         enableZram = true;
-        enableRStudio = self.system.hostProfile == "desktop";
+        enableRStudio = true;
         enableTypst = true;
         enableZed = false;
         #WARNING: This doesnt set up luks but rather the default boot.nix
@@ -94,6 +96,7 @@ lib.fix (
         fontPkgs = ["nerd-fonts.jetbrains-mono" "source-code-pro"];
         fontSize = 11.0;
         cursorTheme = "macOS";
+        cursorPkg = "apple-cursor";
         cursorSize = 24;
         gtkTheme = "Materia-dark";
         iconTheme = "Tela-black";

@@ -11,12 +11,14 @@ in {
       lynis
       clamav
       kpcli # Keepass CLI
-      proton-pass # password manager
-      protonvpn-gui # vpn
       # Encryption
       age
     ]
     ++ lib.optionals x.system.security.veracrypt [
       veracrypt
+    ]
+    ++ lib.optionals x.system.security.proton [
+      proton-pass # password manager
+      protonvpn-gui # vpn
     ];
 }

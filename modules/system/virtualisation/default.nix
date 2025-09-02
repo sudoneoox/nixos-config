@@ -1,7 +1,8 @@
 {
   imports = [
     ./docker.nix
-    ./wine.nix
+    ./flatpak.nix
     ./qemu.nix
+    ./wine.nix
   ];
 }
