@@ -4,7 +4,7 @@
     fzf
     git
     ripgrep
-    uutils-findutils
+    fd
     # fzf-lua [optional: media]
     viu
     chafa

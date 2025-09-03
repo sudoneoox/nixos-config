@@ -1,8 +1,10 @@
+{config, ...}:
 # ── LSP helpers & docs (maximal) ──────────────────────────────────────────
 {
   programs.nvf.settings.vim.lsp = {
     enable = true;
-    formatOnSave = true;
+    # Conform handles this
+    formatOnSave = !config.programs.nvf.settings.vim.formatter.conform-nvim.enable;
     lightbulb = {
       enable = true; # code action lightbulb
       setupOpts = {
@@ -20,8 +22,8 @@
     nvim-docs-view = {
       enable = true;
       setupOpts = {
-        position = "bottom";
-        width = 15;
+        position = "right";
+        width = 60;
         update_mode = "auto";
       };
     };

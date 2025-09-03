@@ -16,6 +16,7 @@
     readr
     dplyr
     knitr
+    reshape2
   ];
 
   myR = pkgs.rWrapper.override {packages = rPkgs;}; # terminal R

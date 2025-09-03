@@ -12,7 +12,7 @@
     # NOTE: Skip known optional integrations that pull in other plugins
     nvimSkipModule = [
       "neopywal.theme.plugins.barbecue"
-      "neopywal.theme.plugins.lualine"
+      # "neopywal.theme.plugins.lualine"
       "neopywal.theme.plugins.bufferline"
       "neopywal.theme.plugins.lightline"
       "neopywal.theme.plugins.clap"
