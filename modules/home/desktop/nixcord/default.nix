@@ -37,7 +37,7 @@ in {
           anonymiseFileNames.enable = true;
           blurNSFW.enable = true;
           clearURLs.enable = true;
-          emoteCloner.enable = true;
+          expressionCloner.enable = true;
           experiments.enable = true;
           fakeNitro.enable = true;
           invisibleChat.enable = true;

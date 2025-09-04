@@ -474,7 +474,7 @@ with lib; {
     powerMgmtPerf =
       if isDesktop
       then true
-      else false;
+      else c.system.powerManagement;
     primaryMonitor =
       if isLaptop
       then "eDP-1"

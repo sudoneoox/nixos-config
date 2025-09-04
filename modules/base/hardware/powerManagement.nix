@@ -7,27 +7,39 @@ in {
     then {
       # stock NixOS powermanagement tool which allows for managing hibernate and suspend states
       # other power management tools may overwrite this setting
-      powerManagement = {
-        enable = true;
-      };
+
+      powerManagement.enable = true;
 
       services.thermald.enable = true;
 
       services.tlp = {
         enable = true;
         settings = {
-          CPU_SCALING_GOVERNER_ON_AC = "performance";
-          CPU_SCALING_GOVERNER_ON_BAT = "powersave";
-          CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
-          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-          PLATFORM_PROFILE_ON_AC = "performance";
-          PLATFORM_PROFILE_ON_BAT = "balance_power";
-          CPU_BOOST_ON_AC = 1;
+          # Governors
+          CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
+          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+          # HWP / Energy-Perf Policy (EPP)
+          # "balance_performance" keeps snappiness without crazy bursts
+          CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+          # Platform profile (firmware-side behavior)
+          PLATFORM_PROFILE_ON_AC = "balanced";
+          PLATFORM_PROFILE_ON_BAT = "power-saver";
+
+          # Turbo
+          # causes fans to ramp up on intel so I disabled it
+          CPU_BOOST_ON_AC = 0;
           CPU_HWP_DYN_BOOST_ON_AC = 1;
-          CPU_MIN_PERF_ON_AC = 0;
+
+          # Caps
+          CPU_MIN_PERF_ON_AC = 10;
           CPU_MAX_PERF_ON_AC = 100;
+
+          # Battery policy
+          CPU_BOOST_ON_BAT = 0;
           CPU_MIN_PERF_ON_BAT = 0;
-          CPU_MAX_PERF_ON_BAT = 20;
+          CPU_MAX_PERF_ON_BAT = 30;
           START_CHARGE_THRESH_BAT0 = 75;
           STOP_CHARGE_THRESH_BAT0 = 80;
         };
@@ -42,7 +54,7 @@ in {
           #NOTE: We only configure the _ON_AC settings, since this is a desktop.
 
           # prioritize clock speed
-          CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
 
           # Set the energy/performance policy to 'performance'.
           CPU_ENERGY_PERF_POLICY_ON_AC = "performance";

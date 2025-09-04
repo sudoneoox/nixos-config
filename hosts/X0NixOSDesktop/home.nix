@@ -37,7 +37,7 @@ in {
       General = {
         useGrimAdapter = lib.mkIf (x.ux.de == "hyprland") true;
         startupLaunch = false;
-        autoCloseIdleDaemon = true;
+        autoCloseIdleDaemon = false;
         allowMultipleGuiInstances = false;
         uploadWithoutConfirmation = false;
         copyPathAfterSave = true;
