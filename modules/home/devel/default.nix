@@ -9,5 +9,6 @@
     ./zed
     ./R-Studio
     ./typst
+    ./tmux
   ];
 }
