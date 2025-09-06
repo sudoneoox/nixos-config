@@ -10,6 +10,10 @@ in {
   networking = {
     networkmanager = {
       enable = true;
+      plugins = with pkgs; [
+        networkmanager-openconnect
+        networkmanager-openvpn
+      ];
 
       # Pull secrets (SSID/passwords/usernames) from sops
       ensureProfiles = {
