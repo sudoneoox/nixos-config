@@ -12,7 +12,24 @@ in {
       components = ["secrets"];
     };
     network-manager-applet.enable = true;
+    # Screenshot support
+    flameshot = {
+      enable = true;
+      package = pkgs.flameshot.override {enableWlrSupport = true;};
+      settings = {
+        General = {
+          useGrimAdapter = true;
+          startupLaunch = true;
+          autoCloseIdleDaemon = false;
+          allowMultipleGuiInstances = false;
+          uploadWithoutConfirmation = false;
+          copyPathAfterSave = true;
+        };
+      };
+    };
   };
+
+  # Screenshot support
 
   wayland.windowManager.hyprland = {
     plugins = [

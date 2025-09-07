@@ -32,22 +32,6 @@ in {
     };
   };
 
-  # Screenshot support
-  services.flameshot = {
-    enable = true;
-    package = pkgs.flameshot.override {enableWlrSupport = true;};
-    settings = {
-      General = {
-        useGrimAdapter = lib.mkIf (x.ux.de == "hyprland") true;
-        startupLaunch = false;
-        autoCloseIdleDaemon = false;
-        allowMultipleGuiInstances = false;
-        uploadWithoutConfirmation = false;
-        copyPathAfterSave = true;
-      };
-    };
-  };
-
   environment.systemPackages = with pkgs;
     [
       wl-clipboard
