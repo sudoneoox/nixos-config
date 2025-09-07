@@ -44,6 +44,14 @@ in {
           STOP_CHARGE_THRESH_BAT0 = 80;
         };
       };
+
+      # Suspend on lid close
+      services.logind.settings.Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchDocked = "ignore";
+      };
+
+      # ┏━ 2 Traces:
     }
     # Otherwise (on desktop) prefer performance
     else if x.derived.powerMgmtPerf

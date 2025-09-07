@@ -9,7 +9,7 @@ in {
     zramSwap = {
       enable = true;
       algorithm = "zstd";
-      priority = 5;
+      priority = 100;
       memoryPercent = 50;
     };
   };
