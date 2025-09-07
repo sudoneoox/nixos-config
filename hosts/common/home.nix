@@ -2,6 +2,8 @@
   outputs,
   custom,
   inputs,
+  pkgs,
+  lib,
   ...
 }: let
   x = custom.x0;
@@ -18,6 +20,25 @@ in {
   ];
 
   fonts.fontconfig.enable = true;
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+    };
+    iconTheme = {
+      package = pkgs.tela-icon-theme;
+      name = "Tela-black";
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+    style.package = pkgs.adwaita-qt;
+  };
 
   nixpkgs = {
     overlays = [

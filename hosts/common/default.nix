@@ -13,12 +13,15 @@ in {
     ../../modules/base
 
     #INFO: Defines config.security options
+    # Toggle able options in modules/x0/values.nix
     ../../modules/security
 
     #INFO: For scripts used throughout configuration files and systemd-units
     ../../modules/system/utils
 
     ../../modules/system/desktop/hyprland
+
+    # INFO: Only enabled if enabled in modules/x0/values.nix
     ../../modules/system/virtualisation
     ../../modules/system/gaming
   ];
