@@ -46,6 +46,14 @@ with lib; {
       };
     };
 
+    repos = {
+      schoolNotes = mkOption {
+        type = types.str;
+        default = "";
+        description = "Github repo to your school notes, see modules/system/utils/systemd/school-notes-sync";
+      };
+    };
+
     ####INFO: Derived (filled by config below)
     derived = {
       homeDir = mkOption {
@@ -405,6 +413,10 @@ with lib; {
     cachePath = mkOption {
       type = types.str;
       default = "/home/unknown/.cache";
+    };
+    currentSchoolSemester = mkOption {
+      type = types.str;
+      default = "";
     };
     sopsPath = mkOption {
       type = types.str;

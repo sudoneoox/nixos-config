@@ -329,16 +329,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1756483873,
-        "narHash": "sha256-OvWdvJFCo3th9MFDOigPOvkik6eGz0BoNcK1SaYsavY=",
-        "owner": "sudoneoox",
-        "repo": "hy3-nixos-tempfix",
-        "rev": "6851d6b0971a0fde2bb0bc9a12b8b6b2b4e4d72c",
+        "lastModified": 1757056725,
+        "narHash": "sha256-vQ98fvqZAVbT+WARDPSzLopABtLITtmGip2LFA38tbM=",
+        "owner": "outfoxxed",
+        "repo": "hy3",
+        "rev": "4c9b9bf72274fe2ce61c84e4d6223cf7d99a0654",
         "type": "github"
       },
       "original": {
-        "owner": "sudoneoox",
-        "repo": "hy3-nixos-tempfix",
+        "owner": "outfoxxed",
+        "repo": "hy3",
         "type": "github"
       }
     },

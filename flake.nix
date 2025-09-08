@@ -49,7 +49,7 @@
     };
 
     hy3 = {
-      url = "github:sudoneoox/hy3-nixos-tempfix";
+      url = "github:outfoxxed/hy3";
       inputs.hyprland.follows = "hyprland";
     };
 

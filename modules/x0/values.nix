@@ -16,11 +16,16 @@ lib.fix (
         sshKeyPath = "/home/${self.identity.username}/.ssh/id_ed25519.pub";
       };
 
+      repos = {
+        schoolNotes = "git@github.com:sudoneoox/2025FallUni";
+      };
+
       #INFO: Paths that depend on identity
       homePath = "/home/${self.identity.username}";
       nixosConfPath = "${self.homePath}/Projects/nixos-config";
       nixosAssetsPath = "${self.homePath}/Assets/nixos-config";
       cachePath = "${self.homePath}/.cache";
+      currentSchoolSemester = "2025FallUni";
 
       #INFO: System (raw knobs)
       system = {
