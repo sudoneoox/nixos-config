@@ -58,7 +58,7 @@ lib.fix (
           "systemd-ask-password-console" = true;
           systemd = true;
           tor = self.features.enableTor;
-          usbguard = true;
+          usbguard = self.system.hostProfile == "laptop";
           user = true;
           "wpa-supplicant" = true;
           #TODO: Toggle on when finished with modules
@@ -84,7 +84,7 @@ lib.fix (
         enableTor = self.system.hostProfile == "desktop";
         enableQbittorrent = false;
         enableHDR = false;
-        enableCider = self.system.hostProfile == "desktop";
+        enableCider = false;
         enableZram = true;
         enableRStudio = true;
         enableTypst = true;

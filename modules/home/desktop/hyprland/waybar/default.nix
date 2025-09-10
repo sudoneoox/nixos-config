@@ -28,15 +28,12 @@ in {
         position = "top";
         height = 17;
         spacing = 0;
-        modules-left =
-          [
-            "hyprland/workspaces"
-            "custom/lock"
-            "custom/reboot"
-          ]
-          ++ lib.optionals x.derived.isLaptop [
-            "custom/power"
-          ];
+        modules-left = [
+          "hyprland/workspaces"
+          "custom/lock"
+          "custom/reboot"
+          "custom/power"
+        ];
         modules-center = ["hyprland/window"];
         modules-right =
           [
@@ -46,8 +43,10 @@ in {
           ++ lib.optionals x.features.enableBluetooth [
             "bluetooth"
           ]
-          ++ [
+          ++ lib.optionals x.derived.isLaptop [
             "custom/temperature"
+          ]
+          ++ [
             "memory"
             "cpu"
           ];

@@ -17,6 +17,7 @@
     dplyr
     knitr
     reshape2
+    FactoMineR
   ];
 
   myR = pkgs.rWrapper.override {packages = rPkgs;}; # terminal R
