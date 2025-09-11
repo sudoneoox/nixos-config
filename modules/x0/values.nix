@@ -92,6 +92,7 @@ lib.fix (
         #WARNING: This doesnt set up luks but rather the default boot.nix
         # you still have to setup luks on your own
         enableLuks = true;
+        enableKDEConnect = self.system.hostProfile == "desktop";
       };
 
       #INFO: Theming / UX

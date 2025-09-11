@@ -233,6 +233,11 @@ with lib; {
         type = types.bool;
         default = true;
       };
+      enableKDEConnect = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
       enableLuks = mkOption {
         type = types.bool;
         default = false;

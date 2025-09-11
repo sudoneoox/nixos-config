@@ -10,6 +10,7 @@
     ./system.nix
     ./user.nix
     ./resilio.nix
+    ./kdeconnect.nix
     ./hardware
   ];
 }
