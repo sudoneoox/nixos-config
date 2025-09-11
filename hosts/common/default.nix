@@ -32,7 +32,11 @@ in {
     git.enable = true;
     fish.enable = true;
   };
-  environment.systemPackages = with pkgs; [jq];
+
+  environment.systemPackages = with pkgs; [
+    jq
+    localsend
+  ];
 
   home-manager = {
     backupFileExtension = "hm-backup";
