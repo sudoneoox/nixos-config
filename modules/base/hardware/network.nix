@@ -3,6 +3,7 @@
   host,
   pkgs,
   custom,
+  lib,
   ...
 }: let
   x = custom.x0;
@@ -16,7 +17,7 @@ in {
       ];
 
       # Pull secrets (SSID/passwords/usernames) from sops
-      ensureProfiles = {
+      ensureProfiles = lib.mkIf x.derived.isLaptop {
         environmentFiles = [config.sops.secrets."wireless.env".path];
         profiles = {
           HomeWiFi = {

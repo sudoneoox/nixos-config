@@ -16,6 +16,8 @@ in {
     # Toggle able options in modules/x0/values.nix
     ../../modules/security
 
+    ../../modules/system/android
+
     #INFO: For scripts used throughout configuration files and systemd-units
     ../../modules/system/utils
 

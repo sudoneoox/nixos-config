@@ -37,6 +37,7 @@ lib.fix (
         scale = "1.00";
         security = {
           acipd = true;
+          adguardHome = false;
           blacklistedModules = true;
           bluetooth = self.features.enableBluetooth;
           boot = true;

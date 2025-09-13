@@ -132,6 +132,11 @@ with lib; {
           type = types.bool;
           default = true;
         };
+        adguardHome = mkOption {
+          type = types.bool;
+          default = false;
+        };
+
         blacklistedModules = mkOption {
           type = types.bool;
           default = true;

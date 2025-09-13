@@ -1,6 +1,7 @@
 {
   custom,
   pkgs,
+  lib,
   ...
 }: let
   x = custom.x0;
@@ -295,14 +296,18 @@ in {
         disable_splash_rendering = true;
       };
 
-      "exec-once" = [
-        "dunst"
-        "copyq --start-server"
-        "sleep 1 && hyprctl dispatch layoutmsg hy3"
-        "waybar"
-        "hyprctl setcursor macOS 26"
-        "hypridle"
-      ];
+      "exec-once" =
+        [
+          "dunst"
+          "copyq --start-server"
+          "sleep 1 && hyprctl dispatch layoutmsg hy3"
+          "waybar"
+          "hyprctl setcursor macOS 26"
+          "hypridle"
+        ]
+        ++ lib.optionals x.system.security.proton [
+          "protonvpn-app"
+        ];
 
       exec = [
         "hyprshade on /home/${x.identity.username}/.config/hypr/shaders/vibrance"

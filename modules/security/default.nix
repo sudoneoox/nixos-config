@@ -3,6 +3,7 @@
   # custom.x0.system.security.<module>.enable ?=
   imports = [
     ./acipd.nix
+    ./adguardHome.nix
     ./blacklistedModules.nix
     ./bluetooth.nix
     ./boot.nix

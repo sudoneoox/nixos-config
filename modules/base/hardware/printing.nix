@@ -41,11 +41,11 @@ in {
       {
         name = "Brother-J805DW";
         # EITHER stable IP:
-        # deviceUri = "ipp://192.168.1.253/ipp/print";
+        deviceUri = "ipp://192.168.1.253/ipp/print";
         # OR mDNS (comment the other one out):
         # deviceUri = "ipp://BRW485F99CA99E6.local/ipp/print";
         # USB Connection
-        deviceUri = "usb://Brother/MFC-J805DW?serial=U65543D9H946045";
+        # deviceUri = "usb://Brother/MFC-J805DW?serial=U65543D9H946045";
         model = "everywhere";
         location = "Home";
         description = "Brother MFC-J805DW (IPP Everywhere)";
