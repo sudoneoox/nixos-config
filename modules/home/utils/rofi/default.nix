@@ -13,12 +13,12 @@
 in {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     font = rofiFont;
     terminal = rofiTerminal;
 
     modes = ["drun" "run" "filebrowser" "window" "emoji"];
-    plugins = [pkgs.rofi-emoji-wayland];
+    plugins = [pkgs.rofi-emoji];
 
     location = "center";
     cycle = true;

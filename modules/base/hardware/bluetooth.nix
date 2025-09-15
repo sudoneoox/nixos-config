@@ -11,7 +11,6 @@ in {
       powerOnBoot = true;
       settings.General.Experimental = true;
     };
+    services.blueman.enable = x.features.enableBluetooth;
   };
-  #WARN: I personally like to use bluetoothctl so the gui applet I leave disabled
-  # services.blueman.enable = x.features.enableBluetooth;
 }

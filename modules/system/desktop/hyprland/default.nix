@@ -37,7 +37,6 @@ in {
       wl-clipboard
       wl-gammarelay-rs
       dunst
-      rofi-wayland
       hyprpaper
       hyprlock
       hyprpicker
