@@ -8,7 +8,7 @@
 in {
   nix = {
     optimise.automatic = true;
-    package = pkgs.lixPackageSets.latest.lix;
+    package = pkgs.lixPackageSets.git.lix;
     registry.nixpkgs.flake = inputs.nixpkgs;
 
     gc = {

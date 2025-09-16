@@ -39,6 +39,7 @@ in {
     jq
     localsend
     libreoffice-fresh
+    google-chrome
   ];
 
   home-manager = {

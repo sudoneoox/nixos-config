@@ -75,7 +75,7 @@ lib.fix (
         enableWine = false;
         enableLibvirt = false;
         enableGaming = false;
-        enablePrinting = true;
+        enablePrinting = self.system.hostProfile == "desktop";
         enableBluetooth = true;
         enableFlatpak = true;
         enableResilioSync = true;
