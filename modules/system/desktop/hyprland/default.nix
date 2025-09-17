@@ -10,11 +10,13 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd '${pkgs.uwsm}/bin/uwsm start hyprland'";
         user = "${x.identity.username}";
       };
     };
   };
+
+  programs.uwsm.enable = true;
 
   programs.hyprland = {
     enable = true;
@@ -28,9 +30,16 @@ in {
     autostart.enable = true;
     portal = {
       enable = true;
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
     };
   };
+
+  services.gvfs.enable = true;
+  security.polkit.enable = true;
+
+  programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs;
     [

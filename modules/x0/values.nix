@@ -72,7 +72,7 @@ lib.fix (
         enableNixcord = true;
         enableCachix = true;
         enableDocker = false;
-        enableWine = false;
+        enableWine = true;
         enableLibvirt = false;
         enableGaming = false;
         enablePrinting = self.system.hostProfile == "desktop";
@@ -83,7 +83,7 @@ lib.fix (
         enableAudio = true;
         enableSSH = true;
         enableTor = self.system.hostProfile == "desktop";
-        enableQbittorrent = false;
+        enableQbittorrent = true;
         enableHDR = false;
         enableCider = false;
         enableZram = true;
