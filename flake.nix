@@ -120,6 +120,23 @@
         ./hosts/${host}
       ];
     };
+
+    # NOTE: Small Helper to build Home Manager standalone (Arch)
+    #
+  mkHomeConfig = { username ? x0Desktop.identity.username
+                , homeModules ? [ ./hosts/common/home-arch.nix ] # your HM entrypoint
+                , x0 ? x0Desktop
+                }:
+  inputs.home-manager.lib.homeManagerConfiguration {
+    inherit pkgs;
+    # expose the same knobs your modules expect
+    extraSpecialArgs = {
+      custom = { x0 = x0; };
+      inherit inputs self;
+      outputs = self.outputs;
+    };
+    modules = homeModules;
+  };   
   in {
     #TODO: find a way to pass host for host specific overlays
     overlays = import ./overlays {
@@ -133,6 +150,20 @@
     nixosConfigurations = {
       X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
       X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
+    };
+
+
+    # -------- NEW: Home Manager standalone for Arch (home-only) --------
+    # Uses common/x0 (i.e., modules/x0/values.nix via mkX0) for feature flags.
+    homeConfigurations = {
+      # Key name can be whatever; using user@arch is convenient:
+      "${x0Desktop.identity.username}@arch" = mkHomeConfig { x0 = x0Desktop; };
+
+      # For Laptop if migrate
+      # "${x0Laptop.identity.username}@arch-laptop" = mkHomeConfig {
+      #   x0 = x0Laptop;
+      #   homeModules = [ ./hosts/common/home.nix ];
+      # };
     };
 
     #INFO: for sanity checks
