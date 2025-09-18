@@ -123,20 +123,21 @@
 
     # NOTE: Small Helper to build Home Manager standalone (Arch)
     #
-  mkHomeConfig = { username ? x0Desktop.identity.username
-                , homeModules ? [ ./hosts/common/home-arch.nix ] # your HM entrypoint
-                , x0 ? x0Desktop
-                }:
-  inputs.home-manager.lib.homeManagerConfiguration {
-    inherit pkgs;
-    # expose the same knobs your modules expect
-    extraSpecialArgs = {
-      custom = { x0 = x0; };
-      inherit inputs self;
-      outputs = self.outputs;
-    };
-    modules = homeModules;
-  };   
+    mkHomeConfig = {
+      username ? x0Desktop.identity.username,
+      homeModules ? [./hosts/common/home-arch.nix], # your HM entrypoint
+      x0 ? x0Desktop,
+    }:
+      inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        # expose the same knobs your modules expect
+        extraSpecialArgs = {
+          custom = {x0 = x0;};
+          inherit inputs self;
+          outputs = self.outputs;
+        };
+        modules = homeModules;
+      };
   in {
     #TODO: find a way to pass host for host specific overlays
     overlays = import ./overlays {
@@ -152,25 +153,30 @@
       X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
     };
 
-
     # -------- NEW: Home Manager standalone for Arch (home-only) --------
     # Uses common/x0 (i.e., modules/x0/values.nix via mkX0) for feature flags.
+
     homeConfigurations = {
       # Key name can be whatever; using user@arch is convenient:
-    "${x0Desktop.identity.username}@arch" = inputs.home-manager.lib.homeManagerConfiguration {
+      "${x0Desktop.identity.username}@arch" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          custom = { x0 = x0Desktop; };
+          custom = {x0 = x0Desktop;};
           inherit inputs self;
           outputs = self.outputs;
         };
-        modules = [ ./hosts/common/home-arch.nix ];
+        modules = [./hosts/common/home-arch.nix];
       };
-      # For Laptop if migrate
-      # "${x0Laptop.identity.username}@arch-laptop" = mkHomeConfig {
-      #   x0 = x0Laptop;
-      #   homeModules = [ ./hosts/common/home.nix ];
-      # };
+
+      "${x0Desktop.identity.username}@arch-laptop" = inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          custom = {x0 = x0Laptop;};
+          inherit inputs self;
+          outputs = self.outputs;
+        };
+        modules = [./hosts/common/home-arch.nix];
+      };
     };
 
     #INFO: for sanity checks

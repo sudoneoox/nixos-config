@@ -1,4 +1,3 @@
-
 {
   outputs,
   custom,
@@ -64,9 +63,9 @@ in {
 
   # Home identity/paths (x.derived.homeDir is fine if it’s generic)
   home = {
-    username      = x.identity.username;
+    username = x.identity.username;
     homeDirectory = x.derived.homeDir; # or "/home/${x.identity.username}"
-    stateVersion  = "25.05";
+    stateVersion = "25.05";
   };
 
   # Let HM manage ~/.config and user services
@@ -76,7 +75,8 @@ in {
   nix = {
     package = pkgs.nixVersions.stable; # or pkgs.nix
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = ["root" "@wheel" x.identity.username];
+      experimental-features = ["nix-command" "flakes"];
       accept-flake-config = true;
 
       # Use all cores; parallelize builds
@@ -92,30 +92,28 @@ in {
       auto-optimise-store = true;
 
       # Substituters
-      substituters = 
-      [
-          "https://cache.nixos.org?priority=10"
-          "https://nix-community.cachix.org"
-          "https://nix-gaming.cachix.org"
-          "https://hyprland.cachix.org"
-          "https://nyx.chaotic.cx"
-          "https://nvf.cachix.org"
-          "https://neovim-nightly.cachix.org"
-          #NOTE: My own cachix
-          "https://nixossudnox.cachix.org"
-        ];
+      substituters = [
+        "https://cache.nixos.org?priority=10"
+        "https://nix-community.cachix.org"
+        "https://nix-gaming.cachix.org"
+        "https://hyprland.cachix.org"
+        "https://nyx.chaotic.cx"
+        "https://nvf.cachix.org"
+        "https://neovim-nightly.cachix.org"
+        #NOTE: My own cachix
+        "https://nixossudnox.cachix.org"
+      ];
 
-    trusted-public-keys =
-        [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-          "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
-          "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
-          "neovim-nightly.cachix.org-1:feIoInHRevVEplgdZvQDjhp11kYASYCE2NGY9hNrwxY="
-          #NOTE: My own cachix
-          "nixossudnox.cachix.org-1:ZwKSBOS8npDqpdX9cg7kMvEx5dOSYq05O69qm5O0mLg="
-        ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
+        "neovim-nightly.cachix.org-1:feIoInHRevVEplgdZvQDjhp11kYASYCE2NGY9hNrwxY="
+        #NOTE: My own cachix
+        "nixossudnox.cachix.org-1:ZwKSBOS8npDqpdX9cg7kMvEx5dOSYq05O69qm5O0mLg="
+      ];
 
       # Don’t die if a cache is missing a build
       fallback = true;
@@ -125,8 +123,33 @@ in {
 
   # Handy CLIs a bunch of your modules assume
   home.packages = with pkgs; [
-    ripgrep fd jq unzip
-    wl-clipboard xclip
+    ripgrep
+    fd
+    jq
+    unzip
+    wl-clipboard
+    xclip
+    hyprland-git.hyprland
+    wl-gammarelay-rs
+    hyprpaper
+    hyprshade
+    hyprpicker
+    hypridle
+    hyprlock
+    hyprland-smw
+    waybar
+    rofi
+    dunst
+    wl-clipboard
+    grim
+    slurp
+    swappy
+    brightnessctl
+    playerctl
+    pamixer
+    kitty
+    hyprland-git.xdg-desktop-portal-hyprland
+    hyprland-plugins.hyprbars
+    hy3
   ];
 }
-
