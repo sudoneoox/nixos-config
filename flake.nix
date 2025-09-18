@@ -157,8 +157,15 @@
     # Uses common/x0 (i.e., modules/x0/values.nix via mkX0) for feature flags.
     homeConfigurations = {
       # Key name can be whatever; using user@arch is convenient:
-      "${x0Desktop.identity.username}@arch" = mkHomeConfig { x0 = x0Desktop; };
-
+    "${x0Desktop.identity.username}@arch" = inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          custom = { x0 = x0Desktop; };
+          inherit inputs self;
+          outputs = self.outputs;
+        };
+        modules = [ ./hosts/common/home-arch.nix ];
+      };
       # For Laptop if migrate
       # "${x0Laptop.identity.username}@arch-laptop" = mkHomeConfig {
       #   x0 = x0Laptop;

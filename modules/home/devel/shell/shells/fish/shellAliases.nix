@@ -7,6 +7,8 @@ in {
     publicip = "wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1";
     diffs = "diff --side-by-side --suppress-common-lines";
     ccat = "pygmentize -g";
+    home-manager-arch = "nix run home-manager/master --";
+    home-manager-arch-switch = "nix run home-manager/master -- switch -b backup --flake";
 
     # push input flakes to cachix repo
     cachix-push-inputs = "cd ${x.nixosConfPath} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push nixossudnox";
