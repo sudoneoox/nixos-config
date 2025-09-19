@@ -140,6 +140,6 @@ in {
   home.packages = with pkgs; [
     wallustPick
     wallustApplyCurrent
-    nixgl.nixGLDefault
+    nixgl.nixGLIntel
   ];
 }

@@ -2,11 +2,13 @@
 {
   custom,
   pkgs,
+  lib,
   ...
 }: let
   x = custom.x0;
+  nixGL = lib.getExe pkgs.nixgl.nixGLIntel;
   wrappedKitty = pkgs.writeShellScriptBin "kitty" ''
-    exec ${pkgs.nixgl.nixGLDefault}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@"
+    exec ${nixGL} ${pkgs.kitty}/bin/kitty "$@"
   '';
 in {
   imports = [
@@ -22,7 +24,7 @@ in {
     enable = true;
     enableGitIntegration = true;
     package =
-      if x.identity.OS == "arch"
+      if x.derived.isArch
       then wrappedKitty
       else pkgs.kitty;
   };

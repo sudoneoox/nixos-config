@@ -45,7 +45,7 @@ with lib; {
         description = "Path to SSH key (pub or private).";
       };
 
-       OS = mkOption {
+      OS = mkOption {
         type = types.str;
         default = "nix";
         description = "Specified OS";
@@ -62,6 +62,10 @@ with lib; {
 
     ####INFO: Derived (filled by config below)
     derived = {
+      isArch = mkOption {
+        type = types.bool;
+        default = false;
+      };
       homeDir = mkOption {
         type = types.str;
         internal = true;
@@ -487,6 +491,7 @@ with lib; {
     c = config.x0;
     isLaptop = c.system.hostProfile == "laptop";
     isDesktop = c.system.hostProfile == "desktop";
+    isArch = c.identity.OS == "arch";
     cpuVendorEff =
       if isLaptop
       then "intel"
@@ -510,7 +515,7 @@ with lib; {
   in {
     x0.derived = {
       homeDir = "/home/${c.identity.username}";
-      inherit isLaptop isDesktop cpuVendorEff monitorsEff powerMgmtEff powerMgmtPerf primaryMonitor;
+      inherit isLaptop isDesktop isArch cpuVendorEff monitorsEff powerMgmtEff powerMgmtPerf primaryMonitor;
     };
   };
 }
