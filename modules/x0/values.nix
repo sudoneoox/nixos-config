@@ -14,7 +14,7 @@ lib.fix (
         email = "diegoa2992@proton.me";
         github = "sudoneoox";
         sshKeyPath = "/home/${self.identity.username}/.ssh/id_ed25519.pub";
-        OS = "nix";
+        OS = "arch";
       };
 
       repos = {
@@ -29,7 +29,7 @@ lib.fix (
       currentSchoolSemester = "2025FallUni";
 
       #INFO: System (raw knobs)
-      system =  lib.mkIf (self.identity.OS == "nix") {
+      system = lib.mkIf (self.identity.OS == "nix") {
         hostProfile = "desktop"; # "laptop" | "desktop"
         gpuVendor = "nvidia"; # "intel" | "amd" | "nvidia"
         powerManagement = false;

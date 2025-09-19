@@ -91,6 +91,11 @@ with lib; {
         internal = true;
         default = "single";
       };
+      deSelected = mkOption {
+        type = types.enum ["awesomewm" "hyprland"];
+        internal = true;
+        default = "hyprland";
+      };
       powerMgmtEff = mkOption {
         type = types.bool;
         internal = true;
@@ -492,6 +497,10 @@ with lib; {
     isLaptop = c.system.hostProfile == "laptop";
     isDesktop = c.system.hostProfile == "desktop";
     isArch = c.identity.OS == "arch";
+    deSelected =
+      if c.identity.OS == "arch"
+      then "awesomewm"
+      else "hyprland";
     cpuVendorEff =
       if isLaptop
       then "intel"
@@ -515,7 +524,7 @@ with lib; {
   in {
     x0.derived = {
       homeDir = "/home/${c.identity.username}";
-      inherit isLaptop isDesktop isArch cpuVendorEff monitorsEff powerMgmtEff powerMgmtPerf primaryMonitor;
+      inherit isLaptop isDesktop deSelected isArch cpuVendorEff monitorsEff powerMgmtEff powerMgmtPerf primaryMonitor;
     };
   };
 }
