@@ -1,7 +1,8 @@
 {
   outputs,
-  custom,
   inputs,
+  config,
+  custom,
   pkgs,
   lib,
   ...
@@ -9,22 +10,24 @@
   x = custom.x0;
 in {
   # Reuse the same HM module stack you use on NixOS
-  imports = [
-    inputs.nvf.homeManagerModules.default
-
-    ../../modules/home/devel/git
-    ../../modules/home/devel/kitty
-    ../../modules/home/devel/nvf
-    ../../modules/home/devel/oh-my-posh
-    ../../modules/home/devel/shell
-    ../../modules/home/devel/typst
-
-    ../../modules/home/desktop/zen-browser
-    ../../modules/home/desktop/nixcord
-    ../../modules/home/desktop/hyprland
-    ../../modules/home/desktop/cursors
-    ../../modules/home/utils
-  ];
+  imports =
+    [
+      ../../modules/home/devel/git
+      ../../modules/home/devel/kitty
+      ../../modules/home/devel/nvf
+      ../../modules/home/devel/oh-my-posh
+      ../../modules/home/devel/shell/shells/fish
+      ../../modules/home/devel/typst
+      ../../modules/home/desktop/zen-browser
+      ../../modules/home/desktop/nixcord
+      ../../modules/home/utils/rofi
+      ../../modules/home/utils/Assets
+      ../../modules/home/utils/udiskie
+    ]
+    ++ lib.optionals (x.ux.colorScheme == "wallust")
+    [
+      ../../modules/home/utils/wallust
+    ];
 
   # Same nixpkgs overlay setup (works fine in HM-standalone)
   nixpkgs = {
@@ -32,6 +35,7 @@ in {
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.additions
+      inputs.nixgl.overlay
     ];
     config = {
       allowUnfree = true;
@@ -64,7 +68,7 @@ in {
   # Home identity/paths (x.derived.homeDir is fine if it’s generic)
   home = {
     username = x.identity.username;
-    homeDirectory = x.derived.homeDir; # or "/home/${x.identity.username}"
+    homeDirectory = x.derived.homeDir;
     stateVersion = "25.05";
   };
 
@@ -72,8 +76,18 @@ in {
   xdg.enable = true;
   programs.home-manager.enable = true;
 
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = !config.nix.gc.automatic;
+      dates = "weekly";
+      extraArgs = "--keep 10";
+    };
+    flake = x.nixosConfPath;
+  };
+
   nix = {
-    package = pkgs.nixVersions.stable; # or pkgs.nix
+    package = pkgs.lixPackageSets.git.lix;
     settings = {
       trusted-users = ["root" "@wheel" x.identity.username];
       experimental-features = ["nix-command" "flakes"];
@@ -93,7 +107,7 @@ in {
 
       # Substituters
       substituters = [
-        "https://cache.nixos.org?priority=10"
+        "https://cache.nixos.org"
         "https://nix-community.cachix.org"
         "https://nix-gaming.cachix.org"
         "https://hyprland.cachix.org"
@@ -105,6 +119,7 @@ in {
       ];
 
       trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
@@ -123,33 +138,8 @@ in {
 
   # Handy CLIs a bunch of your modules assume
   home.packages = with pkgs; [
-    ripgrep
-    fd
-    jq
-    unzip
-    wl-clipboard
-    xclip
-    hyprland-git.hyprland
-    wl-gammarelay-rs
-    hyprpaper
-    hyprshade
-    hyprpicker
-    hypridle
-    hyprlock
-    hyprland-smw
-    waybar
-    rofi
-    dunst
-    wl-clipboard
-    grim
-    slurp
-    swappy
-    brightnessctl
-    playerctl
-    pamixer
-    kitty
-    hyprland-git.xdg-desktop-portal-hyprland
-    hyprland-plugins.hyprbars
-    hy3
+    wallustPick
+    wallustApplyCurrent
+    nixgl.nixGLDefault
   ];
 }

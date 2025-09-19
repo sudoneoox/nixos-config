@@ -26,6 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixgl.url = "github:nix-community/nixGL";
     vimPlugins-neopywal = {
       url = "github:RedsXDD/neopywal.nvim";
       flake = false;
@@ -97,10 +98,17 @@
     #NOTE: per-host values
     x0ValuesDesktop = makeValues {}; # keep default "desktop"
     x0ValuesLaptop = makeValues {system.hostProfile = "laptop";};
+    x0ValuesArchDesktop = makeValues {identity.OS = "arch";};
+    x0ValuesArchLaptop = makeValues {
+      system.hostProfile = "laptop";
+      identity.OS = "arch";
+    };
 
     #NOTE: type-check + derive in sandbox → plain attrsets
     x0Desktop = customLib.mkX0 x0ValuesDesktop;
     x0Laptop = customLib.mkX0 x0ValuesLaptop;
+    x0ArchLaptop = customLib.mkX0 x0ValuesArchLaptop;
+    x0ArchDesktop = customLib.mkX0 x0ValuesArchDesktop;
 
     forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
 
@@ -122,10 +130,9 @@
     };
 
     # NOTE: Small Helper to build Home Manager standalone (Arch)
-    #
     mkHomeConfig = {
       username ? x0Desktop.identity.username,
-      homeModules ? [./hosts/common/home-arch.nix], # your HM entrypoint
+      homeModules ? [./hosts/Arch-HM], # Entry Point
       x0 ? x0Desktop,
     }:
       inputs.home-manager.lib.homeManagerConfiguration {
@@ -153,29 +160,28 @@
       X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
     };
 
-    # -------- NEW: Home Manager standalone for Arch (home-only) --------
+    #INFO: -------- Home Manager standalone for Arch (home-only) --------
     # Uses common/x0 (i.e., modules/x0/values.nix via mkX0) for feature flags.
-
     homeConfigurations = {
-      # Key name can be whatever; using user@arch is convenient:
+      # Key name for rebuilding is user@arch{-laptop}
       "${x0Desktop.identity.username}@arch" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          custom = {x0 = x0Desktop;};
+          custom = {x0 = x0ArchDesktop;};
           inherit inputs self;
           outputs = self.outputs;
         };
-        modules = [./hosts/common/home-arch.nix];
+        modules = [./hosts/Arch-HM];
       };
 
       "${x0Desktop.identity.username}@arch-laptop" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          custom = {x0 = x0Laptop;};
+          custom = {x0 = x0ArchLaptop;};
           inherit inputs self;
           outputs = self.outputs;
         };
-        modules = [./hosts/common/home-arch.nix];
+        modules = [./hosts/Arch-HM];
       };
     };
 

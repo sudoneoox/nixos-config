@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    inputs.nvf.homeManagerModules.default
     ./coding
     ./core
     ./debugger

@@ -44,6 +44,12 @@ with lib; {
         default = "";
         description = "Path to SSH key (pub or private).";
       };
+
+       OS = mkOption {
+        type = types.str;
+        default = "nix";
+        description = "Specified OS";
+      };
     };
 
     repos = {
