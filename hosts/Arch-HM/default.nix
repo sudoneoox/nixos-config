@@ -137,9 +137,12 @@ in {
   systemd.user.startServices = "sd-switch";
 
   # Handy CLIs a bunch of your modules assume
-  home.packages = with pkgs; [
-    wallustPick
-    wallustApplyCurrent
-    nixgl.nixGLIntel
-  ];
+  home.packages = with pkgs;
+    [
+      nixgl.nixGLIntel
+    ]
+    ++ lib.optionals (x.ux.colorScheme == "wallust") [
+      wallustPick
+      wallustApplyCurrent
+    ];
 }
