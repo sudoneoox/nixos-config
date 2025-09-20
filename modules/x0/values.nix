@@ -29,6 +29,8 @@ lib.fix (
       currentSchoolSemester = "2025FallUni";
 
       #INFO: System (raw knobs)
+      # Cant handle system configuration files if not using NixOS
+      # So this is so that we get an error in case we try to do so on accident
       system = lib.mkIf (self.identity.OS == "nix") {
         hostProfile = "desktop"; # "laptop" | "desktop"
         gpuVendor = "nvidia"; # "intel" | "amd" | "nvidia"

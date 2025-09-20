@@ -132,7 +132,6 @@ in {
   };
   systemd.user.startServices = "sd-switch";
 
-  # Handy CLIs a bunch of your modules assume
   home.packages = with pkgs;
     [
       nixgl.nixGLIntel
