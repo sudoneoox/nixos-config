@@ -137,8 +137,8 @@ in {
       nixgl.nixGLIntel
 
       # fonts defined in x0/values.nix
-      x.ux.fontPkgs
     ]
+    ++ x.ux.fontPkgs
     ++ lib.optionals (x.ux.colorScheme == "wallust") [
       wallustPick
       wallustApplyCurrent

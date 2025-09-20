@@ -164,7 +164,7 @@
     # Uses common/x0 (i.e., modules/x0/values.nix via mkX0) for feature flags.
     homeConfigurations = {
       # Key name for rebuilding is user@arch{-laptop}
-      "${x0Desktop.identity.username}@arch" = inputs.home-manager.lib.homeManagerConfiguration {
+      "${x0Desktop.identity.username}@Arch" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           custom = {x0 = x0ArchDesktop;};
@@ -174,7 +174,7 @@
         modules = [./hosts/Arch-HM];
       };
 
-      "${x0Desktop.identity.username}@arch-laptop" = inputs.home-manager.lib.homeManagerConfiguration {
+      "${x0Desktop.identity.username}@ArchLaptop" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           custom = {x0 = x0ArchLaptop;};
