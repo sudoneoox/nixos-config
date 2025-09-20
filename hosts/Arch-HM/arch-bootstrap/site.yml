@@ -39,6 +39,7 @@ become: true
       - network-manager-applet
       - flameshot
       - lxappearance
+      - zathura
 
     # AUR helper builder (non-root to run makepkg)
     aur_builder: aur
@@ -51,6 +52,7 @@ become: true
       - clipmenu-rofi
       - localsend-bin
       - rofi
+      - zen-twilight-bin
 
     # systemd units to enable+start
     systemd_units:

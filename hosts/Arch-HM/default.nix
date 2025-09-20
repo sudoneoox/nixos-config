@@ -9,7 +9,6 @@
 }: let
   x = custom.x0;
 in {
-  # Reuse the same HM module stack you use on NixOS
   imports =
     [
       ../../modules/home/devel/git
@@ -18,7 +17,6 @@ in {
       ../../modules/home/devel/oh-my-posh
       ../../modules/home/devel/shell/shells/fish
       ../../modules/home/devel/typst
-      ../../modules/home/desktop/zen-browser
       ../../modules/home/desktop/nixcord
       ../../modules/home/utils/rofi
       ../../modules/home/utils/Assets
@@ -29,7 +27,6 @@ in {
       ../../modules/home/utils/wallust
     ];
 
-  # Same nixpkgs overlay setup (works fine in HM-standalone)
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
@@ -43,7 +40,6 @@ in {
     };
   };
 
-  # Fonts + theming (fine on Arch; ensure packages exist in nixpkgs)
   fonts.fontconfig.enable = true;
 
   gtk = {
@@ -140,6 +136,9 @@ in {
   home.packages = with pkgs;
     [
       nixgl.nixGLIntel
+
+      # fonts defined in x0/values.nix
+      x.ux.fontPkgs
     ]
     ++ lib.optionals (x.ux.colorScheme == "wallust") [
       wallustPick
