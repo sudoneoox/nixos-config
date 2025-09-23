@@ -1,8 +1,11 @@
+
 ---
 - name: Bootstrap of my Arch machine
-hosts: local
-become: true
+  hosts: local
+  become: true
 
+  collections:
+    - community.general
 
   vars:
     # system packages from official repos
@@ -24,7 +27,7 @@ become: true
       - xorg-xclock
       - xterm
       - ttf-jetbrains-mono-nerd
-      - polkit 
+      - polkit
       - polkit-gnome
       - alsa-utils
       - pavucontrol
@@ -33,26 +36,13 @@ become: true
       - nodejs
       - blueman
       - nitrogen
-      - fzf 
+      - fzf
       - tldr
       - wget
       - network-manager-applet
       - flameshot
       - lxappearance
       - zathura
-
-    # AUR helper builder (non-root to run makepkg)
-    aur_builder: aur
-
-    # AUR packages (examples)
-    aur_packages:
-      - yay-git
-      - visual-studio-code-bin
-      - awesome-luajit-git 
-      - clipmenu-rofi
-      - localsend-bin
-      - rofi
-      - zen-twilight-bin
 
     # systemd units to enable+start
     systemd_units:
@@ -72,37 +62,6 @@ become: true
         name: "{{ pacman_packages }}"
         state: present
 
-    - name: Ensure {{ aur_builder }} user exists (for AUR builds)
-      ansible.builtin.user:
-        name: "{{ aur_builder }}"
-        groups: wheel
-        create_home: true
-        shell: /bin/bash
-
-    - name: Allow {{ aur_builder }} to run pacman without password (needed by AUR installs)
-      ansible.builtin.copy:
-        dest: /etc/sudoers.d/90-aur-builder
-        mode: '0440'
-        content: |
-          {{ aur_builder }} ALL=(ALL) NOPASSWD: /usr/bin/pacman
-
-    # Install yay from AUR (first)
-    - name: Build/install yay-bin from AUR
-      become: true
-      become_user: "{{ aur_builder }}"
-      community.general.aur:
-        name: yay-bin
-        state: present
-        use: makepkg
-
-    # Use yay to install other AUR packages
-    - name: Install AUR packages
-      become: true
-      become_user: "{{ aur_builder }}"
-      community.general.aur:
-        name: "{{ aur_packages }}"
-        state: present
-        use: yay
     - name: Clone arc-icon-theme repo
       ansible.builtin.git:
         repo: https://github.com/horst3180/arc-icon-theme.git
@@ -116,7 +75,6 @@ become: true
         chdir: /tmp/arc-icon-theme
 
     - name: Make install arc-icon-theme
-      become: true
       ansible.builtin.command: make install
       args:
         chdir: /tmp/arc-icon-theme
@@ -124,21 +82,6 @@ become: true
     - name: Clean arc-icon-theme
       ansible.builtin.file:
         path: /tmp/arc-icon-theme
-        state: absent
-
-    - name: Download micromamba installer
-      ansible.builtin.get_url:
-        url: https://micro.mamba.pm/install.sh
-        dest: /tmp/micromamba-install.sh
-        mode: '0755'
-
-    - name: Run micromamba installer
-      become: true
-      ansible.builtin.shell: /tmp/micromamba-install.sh
-
-    - name: Remove micromamba installer
-      ansible.builtin.file:
-        path: /tmp/micromamba-install.sh
         state: absent
 
     - name: Enable & start services
@@ -154,3 +97,4 @@ become: true
       ansible.builtin.debug:
         var: svc_result.results | map(attribute='name') | list
       when: svc_result is defined
+
