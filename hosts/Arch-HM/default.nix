@@ -20,7 +20,6 @@ in {
       ../../modules/home/desktop/nixcord
       ../../modules/home/utils/rofi
       ../../modules/home/utils/Assets
-      ../../modules/home/utils/udiskie
     ]
     ++ lib.optionals (x.ux.colorScheme == "wallust")
     [
@@ -41,25 +40,6 @@ in {
   };
 
   fonts.fontconfig.enable = true;
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
-    };
-    iconTheme = {
-      package = pkgs.tela-icon-theme;
-      name = "Tela-black";
-    };
-  };
-
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
-    style.package = pkgs.adwaita-qt;
-  };
 
   # Home identity/paths (x.derived.homeDir is fine if it’s generic)
   home = {
@@ -135,8 +115,7 @@ in {
   home.packages = with pkgs;
     [
       nixgl.nixGLIntel
-
-      # fonts defined in x0/values.nix
+      nixgl.auto.nixGLNvidia
     ]
     ++ x.ux.fontPkgs
     ++ lib.optionals (x.ux.colorScheme == "wallust") [
