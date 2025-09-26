@@ -9,6 +9,7 @@ in {
     ccat = "pygmentize -g";
     home-manager-arch = "nix run home-manager/master --";
     home-manager-arch-switch = "nix run home-manager/master -- switch -b backup --flake";
+    ls = "lsd";
 
     # push input flakes to cachix repo
     cachix-push-inputs = "cd ${x.nixosConfPath} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push nixossudnox";
