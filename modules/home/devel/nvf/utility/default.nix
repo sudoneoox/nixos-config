@@ -1,4 +1,10 @@
 {
+  lib,
+  custom,
+  ...
+}: let
+  x = custom.x0;
+in {
   imports = [
     ./direnv.nix
     ./editing.nix

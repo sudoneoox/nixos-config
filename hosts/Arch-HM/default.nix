@@ -17,7 +17,6 @@ in {
       ../../modules/home/devel/oh-my-posh
       ../../modules/home/devel/shell/shells/fish
       ../../modules/home/devel/typst
-      ../../modules/home/desktop/nixcord
       ../../modules/home/utils/rofi
       ../../modules/home/utils/Assets
     ]

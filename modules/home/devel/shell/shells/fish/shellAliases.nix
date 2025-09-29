@@ -1,8 +1,13 @@
-{custom, ...}: let
+{
+  custom,
+  lib,
+  ...
+}: let
   x = custom.x0;
   currentSemester = "2025Fall";
 in {
   programs.fish.shellAliases = {
+    mamba = lib.mkIf (x.derived.isArch) "micromamba";
     school = "cd /media/resilio/truenas/sync/PROBE/LEARN/SCHOOL/${currentSemester}";
     publicip = "wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1";
     diffs = "diff --side-by-side --suppress-common-lines";

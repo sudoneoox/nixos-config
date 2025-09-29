@@ -141,6 +141,18 @@
               type = "text";
               style = "plain";
               foreground = "#a3e635";
+              template = "{{ if or .Env.CONDA_DEFAULT_ENV .Env.MAMBA_DEFAULT_ENV }}<#ffffff>(</>{{ if .Env.CONDA_DEFAULT_ENV }}conda{{ else }}mamba{{ end }}: {{ if .Env.CONDA_DEFAULT_ENV }}{{ .Env.CONDA_DEFAULT_ENV }}{{ else }}{{ .Env.MAMBA_DEFAULT_ENV }}{{ end }}<#ffffff>)</>{{ end }}";
+            }
+            {
+              type = "text";
+              style = "plain";
+              foreground = "#a3e635";
+              template = "{{ if or .Env.UV_ACTIVE .Env.UV_PROJECT_ENVIRONMENT .Env.UV_PYTHON .Env.VIRTUAL_ENV }}<#ffffff>(</>{{ if or .Env.UV_ACTIVE .Env.UV_PROJECT_ENVIRONMENT .Env.UV_PYTHON }}uv{{ else }}venv{{ end }}{{ if .Env.VIRTUAL_ENV }}: {{ .Env.VIRTUAL_ENV | base }}{{ end }}<#ffffff>)</>{{ end }}";
+            }
+            {
+              type = "text";
+              style = "plain";
+              foreground = "#a3e635";
               template = "{{ if .Env.DIRENV_DIR }}<#ffffff>(</>direnv: {{ .Env.DIRENV_DIR | base }}<#ffffff>)</>{{ end }}";
             }
             {
