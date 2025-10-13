@@ -110,8 +110,10 @@ in {
 
   home.packages = with pkgs;
     [
-      nixgl.nixGLIntel
       nixgl.auto.nixGLNvidia
+    ]
+    ++ lib.optionals x.derived.isLaptop [
+      nixgl.nixGLIntel
     ]
     ++ x.ux.fontPkgs
     ++ lib.optionals (x.ux.colorScheme == "wallust") [
