@@ -3,16 +3,18 @@
 in {
   programs.git = {
     enable = true;
-    userName = "${x.identity.username}";
-    userEmail = "${x.identity.email}";
-    signing = {
-      key = "${x.identity.sshKeyPath}";
-      signByDefault = true;
-    };
-    extraConfig = {
-      init.defaultBranch = "main";
-      commit.gpgSign = true;
-      gpg.format = "ssh";
+    settings = {
+      user.name = "${x.identity.username}";
+      user.email = "${x.identity.email}";
+      signing = {
+        key = "${x.identity.sshKeyPath}";
+        signByDefault = true;
+      };
+      extraConfig = {
+        init.defaultBranch = "main";
+        commit.gpgSign = true;
+        gpg.format = "ssh";
+      };
     };
   };
 }
