@@ -4,6 +4,8 @@
   ...
 }: {
   imports = [
+    # issues with ui/minimap and utility/editing/nvim-biscuits
+
     inputs.nvf.homeManagerModules.default
     ./coding
     ./core

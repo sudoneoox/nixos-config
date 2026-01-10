@@ -11,5 +11,7 @@
     ueberzugpp
     # Snacks.image
     ghostscript
+    # lua
+    lua
   ];
 }

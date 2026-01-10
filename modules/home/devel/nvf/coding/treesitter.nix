@@ -9,6 +9,5 @@
         multiline_threshold = 10;
       };
     };
-    highlight.disable = ["help" "vimdoc"];
   };
 }

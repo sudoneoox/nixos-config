@@ -8,8 +8,8 @@
   x = custom.x0;
   nixGL =
     if (x.system.hostProfile == "laptop")
-    then lib.getExe pkgs.nixgl.nixGLIntel
-    else lib.getExe pkgs.nixgl.auto.nixGLNvidia;
+    then lib.getExe pkgs.nixgl.auto.nixGLDefault
+    else lib.getExe pkgs.nixgl.auto.nixGLDefault;
   wrappedKitty = pkgs.writeShellScriptBin "kitty" ''
     exec ${nixGL} ${pkgs.kitty}/bin/kitty "$@"
   '';

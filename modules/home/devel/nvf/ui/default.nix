@@ -3,7 +3,7 @@
     ./dashboard.nix
     ./neopywal.nix
     ./lualine.nix
-    ./minimap.nix
+    # ./minimap.nix
     ./niceties.nix
     ./notify.nix
     ./projects.nix

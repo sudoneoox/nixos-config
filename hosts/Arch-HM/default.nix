@@ -110,7 +110,7 @@ in {
 
   home.packages = with pkgs;
     [
-      nixgl.auto.nixGLNvidia
+      nixgl.auto.nixGLDefault
     ]
     ++ lib.optionals x.derived.isLaptop [
       nixgl.nixGLIntel
