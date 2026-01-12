@@ -6,6 +6,18 @@
 }: let
   x = custom.x0;
 in {
+  # FIX: temporary port from the system side of hyprland
+  home.packages = with pkgs; [
+    wl-clipboard
+    wl-gammarelay-rs
+    dunst
+    hyprpaper
+    hyprlock
+    hyprpicker
+    hyprshade
+    copyq
+  ];
+
   # Assets that plugins or scripts use
   services = {
     gnome-keyring = {
@@ -39,8 +51,13 @@ in {
     ];
 
     enable = true;
-    package = null;
-    portalPackage = null;
+    #FIX: Temp fix
+    # package = null;
+    package = pkgs.hyprland-git.hyprland;
+    #FIX: Temp fix
+    # portalPackage = null;
+    portalPackage = pkgs.hyprland-git.xdg-desktop-portal-hyprland;
+
     xwayland.enable = true;
     systemd.variables = ["--all"];
 
@@ -61,7 +78,6 @@ in {
       general = {
         #WARN: Border colors are generated with wallust
         border_size = 2;
-        no_border_on_floating = false;
         gaps_in = 2;
         gaps_out = 6;
         float_gaps = 0;
@@ -71,10 +87,6 @@ in {
           enabled = true;
           window_gap = 10;
         };
-      };
-
-      experimental = {
-        xx_color_management_v4 = x.features.enableHDR;
       };
 
       ecosystem = {
@@ -139,27 +151,27 @@ in {
         ];
       };
 
-      windowrulev2 = [
-        "float, class:com.github.hluk.copyq"
-        "size 800 600, class:com.github.hluk.copyq"
-
-        "float, class:org.pulseaudio.pavucontrol"
-        "size 800, 600, class:com.pulseaudio.pavucontrol"
-
-        "float, class:fzfrestore"
-        "size 1700 900, class:fzfrestore"
-        "center, class:fzfrestore"
-        "stayfocused, class:fzfrestore"
-
-        "float, class:fzfwallpicker"
-        "size 1700 900, class:fzfwallpicker"
-        "center, class:fzfwallpicker"
-        "stayfocused, class:fzfwallpicker"
-
-        "dimaround, class:^(rofi)$" # dim background around rofi
-        "noanim, class:^(rofi)$" # snappier open/close
-        "opacity 0.96 0.92, class:^(rofi)$" # active/inactive opacity
-      ];
+      # windowrule = [
+      #   "float, class:com.github.hluk.copyq"
+      #   "size 800 600, class:com.github.hluk.copyq"
+      #
+      #   "float, class:org.pulseaudio.pavucontrol"
+      #   "size 800, 600, class:com.pulseaudio.pavucontrol"
+      #
+      #   "float, class:fzfrestore"
+      #   "size 1700 900, class:fzfrestore"
+      #   "center, class:fzfrestore"
+      #   "stayfocused, class:fzfrestore"
+      #
+      #   "float, class:fzfwallpicker"
+      #   "size 1700 900, class:fzfwallpicker"
+      #   "center, class:fzfwallpicker"
+      #   "stayfocused, class:fzfwallpicker"
+      #
+      #   "dimaround, class:^(rofi)$" # dim background around rofi
+      #   "noanim, class:^(rofi)$" # snappier open/close
+      #   "opacity 0.96 0.92, class:^(rofi)$" # active/inactive opacity
+      # ];
 
       plugin = {
         hyprbars = {

@@ -41,21 +41,23 @@ in {
 
   programs.dconf.enable = true;
 
-  environment.systemPackages = with pkgs;
-    [
-      wl-clipboard
-      wl-gammarelay-rs
-      dunst
-      hyprpaper
-      hyprlock
-      hyprpicker
-      hyprshade
-      copyq
-    ]
-    ++ lib.optionals (x.derived.monitorsEff == "multi") [
-      # In overlays/default.nix
-      hyprland-smw
-    ];
+  # FIX: temporary to see if these can be ported to the home manager section
+  # environment.systemPackages = with pkgs;
+  #   [
+  #     wl-clipboard
+  #     wl-gammarelay-rs
+  #     dunst
+  #     hyprpaper
+  #     hyprlock
+  #     hyprpicker
+  #     hyprshade
+  #     copyq
+  #   ]
+  #   ++ lib.optionals (x.derived.monitorsEff == "multi") [
+  #     # In overlays/default.nix
+  #     hyprland-smw
+  #   ];
+  #
 
   environment.variables = {
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";

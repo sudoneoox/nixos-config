@@ -11,6 +11,7 @@
 in {
   imports =
     [
+      # ../../modules/home/desktop/hyprland
       ../../modules/home/devel/git
       ../../modules/home/devel/kitty
       ../../modules/home/devel/nvf
