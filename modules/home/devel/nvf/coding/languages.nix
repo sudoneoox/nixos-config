@@ -36,5 +36,9 @@ in {
       lsp.enable = x.features.enableTypst;
       treesitter.enable = x.features.enableTypst;
     };
+    yaml = {
+      enable = true;
+      treesitter.enable = true;
+    };
   };
 }
