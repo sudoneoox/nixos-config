@@ -40,5 +40,10 @@ in {
       enable = true;
       treesitter.enable = true;
     };
+    terraform = {
+      enable = true;
+      lsp.enable = true;
+      treesitter.enable = true;
+    };
   };
 }
