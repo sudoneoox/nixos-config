@@ -204,6 +204,10 @@ with lib; {
           type = types.bool;
           default = false;
         };
+        "one-pass" = mkOption {
+          type = types.bool;
+          default = false;
+        };
         "reload-systemd-vconsole-setup" = mkOption {
           type = types.bool;
           default = true;

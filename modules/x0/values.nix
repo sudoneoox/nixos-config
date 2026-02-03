@@ -54,6 +54,9 @@ lib.fix (
           "nix-daemon" = false;
           # Adds proton-pass and proton-vpn packages
           proton = true;
+          # makes 1pass the default ssh agent
+          #TODO: add 1pass and 1pass-cli package and remove proton
+          "one-pass" = true;
           "reload-systemd-vconsole-setup" = true;
           rtkit = true;
           ssh = self.features.enableSSH;
