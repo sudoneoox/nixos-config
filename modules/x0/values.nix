@@ -52,11 +52,8 @@ lib.fix (
           "network-manager-dispatcher" = true;
           #WARN: nix-daemon causes issues with nixos-rebuild
           "nix-daemon" = false;
-          # Adds proton-pass and proton-vpn packages
-          proton = true;
-          # makes 1pass the default ssh agent
-          #TODO: add 1pass and 1pass-cli package and remove proton
-          "one-pass" = true;
+          #TODO: add 1pass and 1pass-cli package
+          "1password" = true;
           "reload-systemd-vconsole-setup" = true;
           rtkit = true;
           ssh = self.features.enableSSH;

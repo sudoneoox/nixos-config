@@ -6,18 +6,6 @@
 }: let
   x = custom.x0;
 in {
-  # FIX: temporary port from the system side of hyprland
-  home.packages = with pkgs; [
-    wl-clipboard
-    wl-gammarelay-rs
-    dunst
-    hyprpaper
-    hyprlock
-    hyprpicker
-    hyprshade
-    copyq
-  ];
-
   # Assets that plugins or scripts use
   services = {
     gnome-keyring = {
@@ -43,7 +31,6 @@ in {
   };
 
   # Screenshot support
-
   wayland.windowManager.hyprland = {
     plugins = [
       pkgs.hyprland-plugins.hyprbars
@@ -51,12 +38,8 @@ in {
     ];
 
     enable = true;
-    #FIX: Temp fix
-    # package = null;
-    package = pkgs.hyprland-git.hyprland;
-    #FIX: Temp fix
-    # portalPackage = null;
-    portalPackage = pkgs.hyprland-git.xdg-desktop-portal-hyprland;
+    package = null;
+    portalPackage = null;
 
     xwayland.enable = true;
     systemd.variables = ["--all"];
@@ -150,6 +133,9 @@ in {
           "specialWorkspace, 1, 3, md3_decel, slidevert"
         ];
       };
+
+      #FIX: migrate I believe it used to be windowrulev2 now they changed it back to windowrule
+      # which uses a different syntax?
 
       # windowrule = [
       #   "float, class:com.github.hluk.copyq"
@@ -308,18 +294,14 @@ in {
         disable_splash_rendering = true;
       };
 
-      "exec-once" =
-        [
-          "dunst"
-          "copyq --start-server"
-          "sleep 1 && hyprctl dispatch layoutmsg hy3"
-          "waybar"
-          "hyprctl setcursor macOS 26"
-          "hypridle"
-        ]
-        ++ lib.optionals x.system.security.proton [
-          "protonvpn-app"
-        ];
+      "exec-once" = [
+        "dunst"
+        "copyq --start-server"
+        "sleep 1 && hyprctl dispatch layoutmsg hy3"
+        "waybar"
+        "hyprctl setcursor macOS 26"
+        "hypridle"
+      ];
 
       exec = [
         "hyprshade on /home/${x.identity.username}/.config/hypr/shaders/vibrance"

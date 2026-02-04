@@ -5,11 +5,16 @@
   ...
 }: let
   x = custom.x0;
+  onePassPath = "~/.1password/agent.sock";
 in {
   config = lib.mkIf x.features.enableSSH {
     services = {
       openssh = {
         enable = true;
+        extraConfig = lib.mkIf x.system.security."1password" ''
+          Host *
+            IdentityAgent ${onePassPath}
+        '';
         settings = {
           PasswordAuthentication = false;
           PermitEmptyPasswords = false;
@@ -51,7 +56,7 @@ in {
             "umac-128@openssh.com"
           ];
         };
-        hostKeys = [
+        hostKeys = lib.mkIf (!x.system.security."1password") [
           {
             path = "/etc/ssh/ssh_host_ed25519_key";
             type = "ed25519";

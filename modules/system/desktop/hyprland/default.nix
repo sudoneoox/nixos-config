@@ -41,23 +41,22 @@ in {
 
   programs.dconf.enable = true;
 
-  # FIX: temporary to see if these can be ported to the home manager section
-  # environment.systemPackages = with pkgs;
-  #   [
-  #     wl-clipboard
-  #     wl-gammarelay-rs
-  #     dunst
-  #     hyprpaper
-  #     hyprlock
-  #     hyprpicker
-  #     hyprshade
-  #     copyq
-  #   ]
-  #   ++ lib.optionals (x.derived.monitorsEff == "multi") [
-  #     # In overlays/default.nix
-  #     hyprland-smw
-  #   ];
-  #
+  environment.systemPackages = with pkgs;
+    [
+      wl-clipboard
+      wl-gammarelay-rs
+      dunst
+      hyprpaper
+      hyprlock
+      hyprpicker
+      hyprshade
+      copyq
+    ]
+    ++ lib.optionals (x.derived.monitorsEff == "multi") [
+      # In overlays/default.nix
+      hyprland-smw
+    ];
+  
 
   environment.variables = {
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
@@ -66,7 +65,7 @@ in {
     # If your cursor becomes invisble
 
     WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wauland
+    # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
     # For Hyprland QT Support
     QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";

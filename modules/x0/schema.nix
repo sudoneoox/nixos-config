@@ -200,11 +200,7 @@ with lib; {
           type = types.bool;
           default = false;
         };
-        proton = mkOption {
-          type = types.bool;
-          default = false;
-        };
-        "one-pass" = mkOption {
+        "1password" = mkOption {
           type = types.bool;
           default = false;
         };

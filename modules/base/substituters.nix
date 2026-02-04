@@ -23,6 +23,7 @@ in {
           "https://nyx.chaotic.cx"
           "https://nvf.cachix.org"
           "https://neovim-nightly.cachix.org"
+          "https://cache.numtide.com"
           #NOTE: My own cachix
           "https://nixossudnox.cachix.org"
         ]
@@ -37,6 +38,7 @@ in {
           "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
           "nvf.cachix.org-1:GMQWiUhZ6ux9D5CvFFMwnc2nFrUHTeGaXRlVBXo+naI="
           "neovim-nightly.cachix.org-1:feIoInHRevVEplgdZvQDjhp11kYASYCE2NGY9hNrwxY="
+          "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
           #NOTE: My own cachix
           "nixossudnox.cachix.org-1:ZwKSBOS8npDqpdX9cg7kMvEx5dOSYq05O69qm5O0mLg="
         ]
