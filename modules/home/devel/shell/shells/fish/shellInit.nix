@@ -28,7 +28,7 @@ in {
       $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
       # <<< mamba initialize <<<
     ''
-    + (lib.optionals x.system.security."one-pass") ''
+    + (lib.optionals x.system.security."1password") ''
       set -Ux SSH_AUTH_SOCH /home/.1password/agent.sock
     '';
 }

@@ -8,6 +8,9 @@
       url = "github:nixos/nixos-hardware";
     };
 
+    # Allows the ability to manage system files in non-nixos systems
+    system-manager.url = "github:numtide/system-manager";
+
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -128,23 +131,6 @@
         ./hosts/${host}
       ];
     };
-
-    # NOTE: Small Helper to build Home Manager standalone (Arch)
-    mkHomeConfig = {
-      username ? x0Desktop.identity.username,
-      homeModules ? [./hosts/Arch-HM], # Entry Point
-      x0 ? x0Desktop,
-    }:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        # expose the same knobs your modules expect
-        extraSpecialArgs = {
-          custom = {x0 = x0;};
-          inherit inputs self;
-          outputs = self.outputs;
-        };
-        modules = homeModules;
-      };
   in {
     #TODO: find a way to pass host for host specific overlays
     overlays = import ./overlays {
