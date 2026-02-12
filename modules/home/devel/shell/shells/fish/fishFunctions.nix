@@ -1,5 +1,63 @@
 {
   programs.fish.functions = {
+    # ─────────────────────────────────────────
+    #INFO: 1Password + Age Encryption
+    #
+    # ─────────────────────────────────────────
+
+    _age_pubkey = {
+      description = "Fetch age public key from 1Password";
+      body = ''
+        op read "op://Development/age-identity/public-key"
+      '';
+    };
+
+    _age_privkey = {
+      description = "Fetch age private key from 1Password";
+      body = ''
+        op read "op://Development/age-identity/private-key"
+      '';
+    };
+
+    enc = {
+      description = "Encrypt a file using age (key from 1Password)";
+      body = ''
+        set input $argv[1]
+        set output (test -n "$argv[2]"; and echo $argv[2]; or echo "$input.age")
+        age --recipient (_age_pubkey) -o $output $input
+        and echo "✓ Encrypted → $output"
+      '';
+    };
+
+    dec = {
+      description = "Decrypt an age-encrypted file (key from 1Password)";
+      body = ''
+        set input $argv[1]
+        set output (test -n "$argv[2]"; and echo $argv[2]; or string replace -r '\.age$' "" $input)
+        _age_privkey | age --decrypt -i /dev/stdin -o $output $input
+        and echo "✓ Decrypted → $output"
+      '';
+    };
+
+    encdir = {
+      description = "Encrypt an entire folder into a .tar.age archive (key from 1Password)";
+      body = ''
+        set dir (string trim -r -c / $argv[1])
+        set output (test -n "$argv[2]"; and echo $argv[2]; or echo "$dir.tar.age")
+        tar -czf - $dir | age --recipient (_age_pubkey) -o $output -
+        and echo "✓ Encrypted folder → $output"
+      '';
+    };
+
+    decdir = {
+      description = "Decrypt a .tar.age folder archive (key from 1Password)";
+      body = ''
+        set input $argv[1]
+        set output_dir (test -n "$argv[2]"; and echo $argv[2]; or echo ".")
+        _age_privkey | age --decrypt -i /dev/stdin -o - $input | tar -xzf - -C $output_dir
+        and echo "✓ Decrypted → $output_dir"
+      '';
+    };
     git-revert-file = {
       description = "Revert single file in git";
       body = ''
