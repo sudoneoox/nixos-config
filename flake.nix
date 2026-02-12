@@ -150,7 +150,7 @@
     # Uses common/x0 (i.e., modules/x0/values.nix via mkX0) for feature flags.
     homeConfigurations = {
       # Key name for rebuilding is user@arch{-laptop}
-      "${x0Desktop.identity.username}@Arch" = inputs.home-manager.lib.homeManagerConfiguration {
+      "${x0Desktop.identity.username}@ArchDesktop" = inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           custom = {x0 = x0ArchDesktop;};
