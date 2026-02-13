@@ -1,5 +1,59 @@
-{
+let
+  op_vault = "op://Development";
+in {
   programs.fish.functions = {
+    #INFO: GPG Encrypt
+    gpgenc = {
+      description = "Encrypt a file or stdin/text using gpg, copy to clipboard";
+      body = ''
+        set recipient $argv[1]
+
+        # write passphrase to a secure temp file
+        set passfile (mktemp /dev/shm/gpgenc.XXXXXX)
+        chmod 600 $passfile
+        op item get n4nyqdxkr2gxw5jknz646qdkfu --reveal --fields label=password > $passfile
+        or begin
+          rm -f $passfile
+          echo "⚠ Failed to fetch passphrase from 1Password"
+          return 1
+        end
+
+        set gpg_opts --encrypt --sign --armor -r $recipient \
+          --batch --pinentry-mode loopback --passphrase-file $passfile \
+          --trust-model always
+
+        if test (count $argv) -ge 2
+          set file $argv[2]
+          if not test -f $file
+            rm -f $passfile
+            echo "⚠ File not found: $file"
+            return 1
+          end
+          gpg $gpg_opts $file
+          set -l enc_status $status
+          rm -f $passfile
+          test $enc_status -eq 0
+          and cat "$file".asc | clip
+          and rm "$file".asc
+          and echo "✓ Copied to clipboard (from file)"
+
+        else if not isatty stdin
+          gpg $gpg_opts -o - | clip
+          set -l enc_status $pipestatus[1]
+          rm -f $passfile
+          test $enc_status -eq 0
+          and echo "✓ Copied to clipboard (from pipe)"
+
+        else
+          rm -f $passfile
+          echo "Usage:"
+          echo "  gpgenc <recipient> <file>"
+          echo "  echo 'text' | gpgenc <recipient>"
+          return 1
+        end
+      '';
+    };
+
     # ─────────────────────────────────────────
     #INFO: 1Password + Age Encryption
     #
@@ -8,14 +62,14 @@
     _age_pubkey = {
       description = "Fetch age public key from 1Password";
       body = ''
-        op read "op://Development/age-identity/public-key"
+        op read "${op_vault}/age-identity/public-key"
       '';
     };
 
     _age_privkey = {
       description = "Fetch age private key from 1Password";
       body = ''
-        op read "op://Development/age-identity/private-key"
+        op read "${op_vault}/age-identity/private-key"
       '';
     };
 
@@ -56,6 +110,113 @@
         set output_dir (test -n "$argv[2]"; and echo $argv[2]; or echo ".")
         _age_privkey | age --decrypt -i /dev/stdin -o - $input | tar -xzf - -C $output_dir
         and echo "✓ Decrypted → $output_dir"
+      '';
+    };
+
+    mkcd = {
+      description = "Create directory and cd into it";
+      body = ''
+        mkdir -p $argv[1]
+        and cd $argv[1]
+      '';
+    };
+
+    port = {
+      description = "Show what's listening on a given port, or list all listening ports";
+      body = ''
+        if test (count $argv) -eq 0
+          ss -tlnp
+        else
+          lsof -i :$argv[1]
+        end
+      '';
+    };
+
+    take = {
+      description = "Extract any archive into a folder of the same name";
+      body = ''
+        set file $argv[1]
+        set dir (string replace -r '\.(tar\.gz|tgz|tar\.bz2|tbz2|tar\.xz|txz|tar\.zst|zip|rar|7z|tar)$' "" (basename $file))
+
+        mkdir -p $dir
+        or return 1
+
+        switch $file
+          case '*.tar.gz' '*.tgz'
+            tar -xzf $file -C $dir
+          case '*.tar.bz2' '*.tbz2'
+            tar -xjf $file -C $dir
+          case '*.tar.xz' '*.txz'
+            tar -xJf $file -C $dir
+          case '*.tar.zst'
+            tar --zstd -xf $file -C $dir
+          case '*.tar'
+            tar -xf $file -C $dir
+          case '*.zip'
+            unzip -o $file -d $dir
+          case '*.rar'
+            unrar x $file $dir/
+          case '*.7z'
+            7z x $file -o$dir
+          case '*'
+            echo "⚠ Unknown archive format: $file"
+            rm -d $dir
+            return 1
+        end
+
+        and echo "✓ Extracted → $dir"
+        and cd $dir
+      '';
+    };
+
+    dotenv = {
+      description = "Load .env file into current shell environment";
+      body = ''
+        set file (test -n "$argv[1]"; and echo $argv[1]; or echo ".env")
+
+        if not test -f $file
+          echo "⚠ File not found: $file"
+          return 1
+        end
+
+        for line in (cat $file)
+          # skip comments and blank lines
+          string match -q -r '^\s*(#|$)' $line; and continue
+
+          # strip 'export ' prefix if present
+          set line (string replace -r '^\s*export\s+' "" $line)
+
+          # split on first '='
+          set key (string split -m 1 '=' $line)[1]
+          set val (string split -m 1 '=' $line)[2]
+
+          # strip surrounding quotes from value
+          set val (string replace -r '^["\'](.*)["\']$' '$1' $val)
+
+          set -gx $key $val
+        end
+
+        echo "✓ Loaded env from $file"
+      '';
+    };
+
+    shred-rm = {
+      description = "Securely shred and remove file(s)";
+      body = ''
+        if test (count $argv) -eq 0
+          echo "Usage: shred-rm <file> [file...]"
+          return 1
+        end
+
+        for file in $argv
+          if not test -f $file
+            echo "⚠ Skipping (not a regular file): $file"
+            continue
+          end
+          shred -vfz -n 5 $file
+          and rm -f $file
+          and echo "✓ Shredded → $file"
+        end
       '';
     };
     git-revert-file = {
