@@ -144,6 +144,7 @@
     nixosConfigurations = {
       X0NixOSLaptop = nixosSystem (mkNixOSConfig "X0NixOSLaptop");
       X0NixOSDesktop = nixosSystem (mkNixOSConfig "X0NixOSDesktop");
+      InstallerISO = nixosSystem (mkNixOSConfig "InstallerISO");
     };
 
     #INFO: -------- Home Manager standalone for Arch (home-only) --------
