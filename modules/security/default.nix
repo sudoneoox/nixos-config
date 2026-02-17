@@ -2,7 +2,6 @@
   # All have enable options except packages.nix e.g.:
   # custom.x0.system.security.<module>.enable ?=
   imports = [
-    ./1password.nix
     ./acipd.nix
     ./adguardHome.nix
     ./blacklistedModules.nix

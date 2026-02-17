@@ -11,8 +11,6 @@
 in {
   imports =
     [
-      # ../../modules/home/desktop/hyprland
-      # ../../modules/home/devel/git
       ../../modules/home/devel/kitty
       ../../modules/home/devel/nvf
       ../../modules/home/devel/oh-my-posh

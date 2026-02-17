@@ -12,7 +12,7 @@ in {
     inputs.nvf.homeManagerModules.default
 
     ../../modules/home/devel
-    ../../modules/home/desktop/zen-browser
+    # ../../modules/home/desktop/zen-browser
     ../../modules/home/desktop/nixcord
     ../../modules/home/desktop/hyprland
     ../../modules/home/desktop/cursors
@@ -56,6 +56,7 @@ in {
   home = {
     username = x.identity.username;
     homeDirectory = x.derived.homeDir;
+    stateVersion = "25.05"; # Did you read the comment?
   };
 
   programs = {

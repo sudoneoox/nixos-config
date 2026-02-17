@@ -275,6 +275,10 @@ with lib; {
         type = types.bool;
         default = false;
       };
+      enableWinboat = mkOption {
+        type = types.bool;
+        default = false;
+      };
       enableLibvirt = mkOption {
         type = types.bool;
         default = false;

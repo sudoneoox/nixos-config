@@ -6,10 +6,12 @@
   ...
 }: let
   x = custom.x0;
+
   nixGL =
-    if (x.system.hostProfile == "laptop")
+    if x.derived.isArch
     then lib.getExe pkgs.nixgl.auto.nixGLDefault
-    else lib.getExe pkgs.nixgl.auto.nixGLDefault;
+    else null;
+
   wrappedKitty = pkgs.writeShellScriptBin "kitty" ''
     exec ${nixGL} ${pkgs.kitty}/bin/kitty "$@"
   '';
@@ -26,6 +28,7 @@ in {
   programs.kitty = {
     enable = true;
     enableGitIntegration = true;
+
     package =
       if x.derived.isArch
       then wrappedKitty

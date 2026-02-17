@@ -21,7 +21,7 @@ in {
     wantedBy = ["default.target"];
   };
 
-  systemd.user.timers.low-battery-notifier = {
+  systemd.user.timers.low-battery-notifier = lib.mkIf x.derived.isLaptop {
     description = "Run low-battery-notifier periodically";
     timerConfig = {
       OnBootSec = "1min";

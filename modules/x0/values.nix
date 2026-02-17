@@ -13,6 +13,7 @@ lib.fix (
         fullName = "Diego Coronado";
         email = "diegoa2992@proton.me";
         github = "sudoneoox";
+        #WARN: This should be managed by 1pass need to remove later
         sshKeyPath = "/home/${self.identity.username}/.ssh/id_ed25519.pub";
         OS = "arch";
       };
@@ -70,16 +71,17 @@ lib.fix (
 
       #INFO: Features (can depend on system.hostProfile)
       features = {
-        enableNixcord = true;
+        enableNixcord = false;
         enableCachix = true;
-        enableDocker = false;
-        enableWine = true;
+        enableDocker = true;
+        enableWinboat = true && self.features.enableDocker;
+        enableWine = false;
         enableLibvirt = false;
         enableGaming = false;
         enablePrinting = self.system.hostProfile == "desktop";
         enableBluetooth = true;
         enableFlatpak = true;
-        enableResilioSync = true;
+        enableResilioSync = false;
         enableUdiskie = true;
         enableAudio = true;
         enableSSH = true;
@@ -88,13 +90,15 @@ lib.fix (
         enableHDR = false;
         enableCider = false;
         enableZram = true;
-        enableRStudio = true;
-        enableTypst = true;
+        # Run RStudio in Winboat, way better experience
+        enableRStudio = false;
+        # Just use the typst web app
+        enableTypst = false;
         enableZed = false;
         #WARNING: This doesnt set up luks but rather the default boot.nix
         # you still have to setup luks on your own
-        enableLuks = true;
-        enableKDEConnect = self.system.hostProfile == "desktop";
+        enableLuks = false;
+        enableKDEConnect = false;
       };
 
       #INFO: Theming / UX
@@ -123,7 +127,7 @@ lib.fix (
       apps = {
         terminal = "kitty";
         ide = "zed";
-        browser = "zen-twilight";
+        browser = "google-chrome-stable";
         fileManager = "thunar";
         editor = "nvim";
       };

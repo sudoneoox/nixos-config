@@ -16,11 +16,8 @@ in {
 
       # Free Ctrl+C for copy in terminal settings
       stty intr \^C
-
     ''
-    + lib.optionals (x.identity.OS
-      == "arch")
-    ''
+    + lib.optionalString x.derived.isArch ''
       # >>> mamba initialize >>>
       # !! Contents within this block are managed by 'micromamba shell init' !!
       set -gx MAMBA_EXE "/home/${x.identity.username}/.local/bin/micromamba"
@@ -28,7 +25,7 @@ in {
       $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
       # <<< mamba initialize <<<
     ''
-    + (lib.optionals x.system.security."1password") ''
-      set -Ux SSH_AUTH_SOCH /home/.1password/agent.sock
+    + lib.optionalString (x.system.security."1password") ''
+      set -Ux SSH_AUTH_SOCK /home/.1password/agent.sock
     '';
 }

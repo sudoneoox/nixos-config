@@ -8,7 +8,7 @@ in {
   config = lib.mkIf x.system.security.dbus {
     systemd.services.dbus.serviceConfig = {
       NoNewPrivileges = true;
-      ProtectSystem = "stric";
+      ProtectSystem = "strict";
       ProtectControlGroups = true;
       ProtectHome = true;
       ProtectHostname = true;
