@@ -401,7 +401,7 @@ in {
     };
 
     bind_dollar = {
-      description = "Type `!\$` to get last command argument";
+      description = "Type '!\$' to get last command argument";
 
       body = ''
         switch (commandline -t)
