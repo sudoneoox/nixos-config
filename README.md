@@ -49,8 +49,11 @@ The nix requirement comes from `modules/base/sops.nix`.
 
 You must either:
 
-- Remove this module, **OR**
+- Remove this module, and edit the modules that depend on it **OR**
 - Properly configure sops for your system
+
+> **WARNING:** If you fail to configure sops-nix you won't be able to log in as
+> user.nix depends on a hashed keyfile that is decrypted by sops-nix
 
 ### 7) Create SOPS Keyfile (Required Before First Boot)
 
