@@ -8,7 +8,7 @@
 in {
   config = lib.mkIf x.system.security."1password" {
     home.packages = with pkgs; [
-      _1password
+      _1password-cli
       _1password-gui
     ];
   };

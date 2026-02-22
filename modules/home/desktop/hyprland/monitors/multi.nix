@@ -15,9 +15,18 @@ in {
 
       settings = {
         monitor = [
+          # Primary (center)
           "DP-6,preferred,0x0,${x.system.scale}"
 
-          "DP-4,preferred,1920x0,${x.system.scale}"
+          # Left of primary (LG)
+          "DP-4,preferred,-1920x0,${x.system.scale}"
+
+          # Right of primary (KTC)
+          "HDMI-A-2,preferred,1920x0,${x.system.scale}"
+
+          # Below primary (Acer PM161W is 1920x1200)
+          # Keep your known scale (1.50) for this panel:
+          "DP-5,1920x1200@60,0x1080,1.5"
         ];
 
         plugin = {
@@ -30,12 +39,13 @@ in {
           };
         };
 
-        windowrulev2 = [
-          "float,class:^(flameshot)$"
-          "move 0 0,class:^(flameshot)$"
-          "pin,class:^(flameshot)$"
-          "noanim,class:^(flameshot)$"
-        ];
+        # ERROR: need to migrate to windowrule
+        # windowrulev2 = [
+        #   "float,class:^(flameshot)$"
+        #   "move 0 0,class:^(flameshot)$"
+        #   "pin,class:^(flameshot)$"
+        #   "noanim,class:^(flameshot)$"
+        # ];
 
         bind = [
           # Volume Keybinds

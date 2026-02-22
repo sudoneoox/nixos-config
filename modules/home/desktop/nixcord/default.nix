@@ -35,12 +35,12 @@ in {
 
           alwaysAnimate.enable = true;
           anonymiseFileNames.enable = true;
-          blurNSFW.enable = true;
-          clearURLs.enable = true;
+          BlurNSFW.enable = true;
+          ClearURLs.enable = true;
           expressionCloner.enable = true;
           experiments.enable = true;
           fakeNitro.enable = true;
-          invisibleChat.enable = true;
+          #invisibleChat.enable = true;
           messageLogger = {
             enable = true;
             collapseDeleted = true;

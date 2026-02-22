@@ -7,8 +7,7 @@
   x = custom.x0;
 in {
   config =
-    lib.mkIf x.features.enableDocker
-    && x.features.enableWinboat {
+    lib.mkIf x.features.enableWinboat {
       environment.systemPackages = with pkgs; [winboat];
     };
 }

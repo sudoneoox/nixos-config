@@ -9,7 +9,7 @@
   x = custom.x0;
 in {
   imports = [
-    inputs.nvf.homeManagerModules.default
+    # inputs.nvf.homeManagerModules.default
 
     ../../modules/home/devel
     # ../../modules/home/desktop/zen-browser

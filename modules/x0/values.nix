@@ -15,7 +15,7 @@ lib.fix (
         github = "sudoneoox";
         #WARN: This should be managed by 1pass need to remove later
         sshKeyPath = "/home/${self.identity.username}/.ssh/id_ed25519.pub";
-        OS = "arch";
+        OS = "nix";
       };
 
       repos = {
@@ -65,7 +65,7 @@ lib.fix (
           user = true;
           "wpa-supplicant" = true;
           #TODO: Toggle on when finished with modules
-          veracrypt = true;
+          veracrypt = false;
         };
       };
 
@@ -97,7 +97,7 @@ lib.fix (
         enableZed = false;
         #WARNING: This doesnt set up luks but rather the default boot.nix
         # you still have to setup luks on your own
-        enableLuks = false;
+        enableLuks = true;
         enableKDEConnect = false;
       };
 

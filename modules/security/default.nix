@@ -1,4 +1,5 @@
 {
+  # ERROR: rtkit was giving issues check on later
   # All have enable options except packages.nix e.g.:
   # custom.x0.system.security.<module>.enable ?=
   imports = [
@@ -18,7 +19,7 @@
     ./nix-daemon.nix
     ./packages.nix
     ./reload-systemd-vconsole-setup.nix
-    ./rtkit.nix
+    #./rtkit.nix
     ./ssh.nix
     ./systemd-ask-password-console.nix
     ./systemd.nix

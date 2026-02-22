@@ -1,12 +1,12 @@
 {inputs, ...}: {
+  
   imports = [inputs.disko.nixosModules.disko];
-
-  disko.devices = {
+    disko.devices = {
     disk = {
-      nvme0n1 = {
+      nvme1n1 = {
         type = "disk";
         # Make sure this is correct with `lsblk`
-        device = "/dev/nvme0n1";
+        device = "/dev/nvme1n1";
         content = {
           type = "gpt";
           partitions = {
@@ -60,11 +60,6 @@
                     "/lib" = {
                       mountpoint = "/var/lib";
                       mountOptions = ["subvol=lib" "compress=zstd" "noatime"];
-                    };
-                    "/persist/swap" = {
-                      mountpoint = "/persist/swap";
-                      mountOptions = ["subvol=swap" "noatime" "nodatacow" "compress=no"];
-                      swap.swapfile.size = "30G";
                     };
                   };
                 };

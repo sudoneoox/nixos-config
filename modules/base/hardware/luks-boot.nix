@@ -31,7 +31,9 @@ in {
         };
         efi.canTouchEfiVariables = true;
       };
-      kernelPackages = pkgs.linuxPackages_latest;
+      kernelPackages = pkgs.linuxPackages_6_18;
+      # ERROR: Current issue with bitch ass nvidia on linux_6_19 so were going to fallback to 6_18 for the meantime
+      # kernelPackages = pkgs.linuxPackages_latest;
       supportedFilesystems = ["ntfs"];
       consoleLogLevel = 3;
       tmp = {

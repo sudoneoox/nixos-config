@@ -14,8 +14,7 @@ in {
     ccat = "pygmentize -g";
     home-manager-arch = "nix run home-manager/master --";
     home-manager-arch-switch = "nix run home-manager/master -- switch -b backup --flake";
-    ls = "lsd";
-
+    
     # push input flakes to cachix repo
     cachix-push-inputs = "cd ${x.nixosConfPath} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | nix run cachix push nixossudnox";
     cachix-push-outputs = "cd ${x.nixosConfPath} && nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake . | nix run cachix push nixossudnox";

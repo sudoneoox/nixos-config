@@ -5,6 +5,7 @@
     ./jj
     ./kitty
     ./shell
+    ./ssh
     ./oh-my-posh
     ./nvf
     ./zed
