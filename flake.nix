@@ -95,35 +95,22 @@
     customLib = import ./lib/custom-x0.nix {inherit lib pkgs system;};
 
     #NOTE: Produce default/base (desktop) values defined in modules/x0/values.nix
-    makeValues = overrides:
-      import ./modules/x0/values.nix {inherit lib pkgs overrides;};
+    loadX0 = host: customLib.mkX0 (import ./modules/x0/hosts/${host}.nix {inherit lib pkgs;});
 
     #NOTE: per-host values
-    x0ValuesDesktop = makeValues {}; # keep default "desktop"
-    x0ValuesLaptop = makeValues {system.hostProfile = "laptop";};
-    x0ValuesArchDesktop = makeValues {identity.OS = "arch";};
-    x0ValuesArchLaptop = makeValues {
-      system.hostProfile = "laptop";
-      identity.OS = "arch";
-    };
-
-    #NOTE: type-check + derive in sandbox → plain attrsets
-    x0Desktop = customLib.mkX0 x0ValuesDesktop;
-    x0Laptop = customLib.mkX0 x0ValuesLaptop;
-    x0ArchLaptop = customLib.mkX0 x0ValuesArchLaptop;
-    x0ArchDesktop = customLib.mkX0 x0ValuesArchDesktop;
+    x0Desktop = loadX0 "X0NixOSDesktop";
+    x0Laptop = loadX0 "X0NixOSLaptop";
+    x0ArchLaptop = loadX0 "X0ArchLaptop";
+    x0ArchDesktop = loadX0 "X0ArchDesktop";
 
     forallSystems = nixpkgs.lib.genAttrs ["x86_64-linux"];
 
-    mkNixOSConfig = host: {
+    mkNixOSConfig = host: let
+      x0 = loadX0 host;
+    in {
       system = "x86_64-linux";
       specialArgs = {
-        custom = {
-          x0 =
-            if host == "X0NixOSLaptop"
-            then x0Laptop
-            else x0Desktop;
-        };
+        custom = {inherit x0;};
         inherit inputs host self;
         outputs = self.outputs;
       };
@@ -176,8 +163,7 @@
     # nix eval .#custom.x0Laptop.derived --json | jq
     # nix eval .#custom.x0Laptop.features --json | jq
     custom = {
-      x0Desktop = x0Desktop;
-      x0Laptop = x0Laptop;
+      inherit x0Desktop x0Laptop;
     };
   };
 }

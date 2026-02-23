@@ -35,7 +35,7 @@ lib.fix (
         gpuVendor = "nvidia"; # "intel" | "amd" | "nvidia"
         powerManagement = false;
         cpuVendor = "amd";
-        monitors = "multi";
+        monitors = "multi"; # "single" | "multi"
         scale = "1.00";
         security = {
           acipd = true;
