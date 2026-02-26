@@ -14,12 +14,13 @@ in {
     ccat = "pygmentize -g";
     home-manager-arch = "nix run home-manager/master --";
     home-manager-arch-switch = "nix run home-manager/master -- switch -b backup --flake";
-    
+
     # push input flakes to cachix repo
     cachix-push-inputs = "cd ${x.nixosConfPath} && nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | nix run cachix push nixossudnox";
     cachix-push-outputs = "cd ${x.nixosConfPath} && nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake . | nix run cachix push nixossudnox";
 
     clip = "kitten clipboard";
+    ls = "lsd";
     # create backups to external hd
     syncall = "rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/$USER/disks/*' / ";
     compress = "tar -cJf folder.tar.xz";
