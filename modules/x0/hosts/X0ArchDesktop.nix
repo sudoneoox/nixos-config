@@ -1,7 +1,44 @@
-{ lib, pkgs }:
+{
+  lib,
+  pkgs,
+}:
 import ../values.nix {
   inherit lib pkgs;
   overrides = {
-    identity.OS = "arch";
+    system = {
+      hostProfile = "desktop";
+      gpuVendor = "nvidia";
+      cpuVendor = "amd";
+      monitors = "multi";
+    };
+    identity = {
+      OS = "arch";
+    };
+    features = {
+      enableNixcord = false;
+      enableCachix = false;
+      enableDocker = false;
+      enableWinboat = false;
+      enableWine = false;
+      enableLibvirt = false;
+      enableGaming = false;
+      enablePrinting = false;
+      enableBluetooth = false;
+      enableFlatpak = false;
+      enableResilioSync = false;
+      enableUdiskie = false;
+      enableAudio = false;
+      enableSSH = false;
+      enableTor = false;
+      enableQbittorrent = false;
+      enableHDR = false;
+      enableCider = false;
+      enableZram = false;
+      enableRStudio = false;
+      enableTypst = false;
+      enableZed = false;
+      enableLuks = false;
+      enableKDEConnect = false;
+    };
   };
 }
