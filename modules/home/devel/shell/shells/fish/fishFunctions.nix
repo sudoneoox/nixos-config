@@ -80,6 +80,8 @@ in {
         set output (test -n "$argv[2]"; and echo $argv[2]; or echo "$input.age")
         age --recipient (_age_pubkey) -o $output $input
         and echo "✓ Encrypted → $output"
+        and echo "History session cleared..."
+        and history clear-session
       '';
     };
 
@@ -90,6 +92,8 @@ in {
         set output (test -n "$argv[2]"; and echo $argv[2]; or string replace -r '\.age$' "" $input)
         _age_privkey | age --decrypt -i /dev/stdin -o $output $input
         and echo "✓ Decrypted → $output"
+        and echo "History session cleared..."
+        and history clear-session
       '';
     };
 
@@ -100,6 +104,8 @@ in {
         set output (test -n "$argv[2]"; and echo $argv[2]; or echo "$dir.tar.age")
         tar -czf - $dir | age --recipient (_age_pubkey) -o $output -
         and echo "✓ Encrypted folder → $output"
+        and echo "History session cleared..."
+        and history clear-session
       '';
     };
 
@@ -110,6 +116,8 @@ in {
         set output_dir (test -n "$argv[2]"; and echo $argv[2]; or echo ".")
         _age_privkey | age --decrypt -i /dev/stdin -o - $input | tar -xzf - -C $output_dir
         and echo "✓ Decrypted → $output_dir"
+        and echo "History session cleared..."
+        and history clear-session
       '';
     };
 
