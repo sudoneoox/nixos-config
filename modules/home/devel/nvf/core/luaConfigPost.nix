@@ -69,7 +69,7 @@
 
 
 
-    vim.lsp.inlay_hint.enable(true) -- on by default
+    vim.lsp.inlay_hint.enable(false) -- off by default
 
     Snacks.toggle
       .new({
