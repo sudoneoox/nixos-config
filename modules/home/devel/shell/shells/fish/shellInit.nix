@@ -8,7 +8,7 @@ in {
   programs.fish.shellInit =
     ''
       set -Ux PATH /home/${x.identity.username}/.local/bin $PATH
-
+      set -gx EDITOR ${x.apps.editor}
       set -gx SOPS_AGE_KEY_FILE ${x.sopsPath}/key.txt
       set -gx SOPS_AGE_RECIPIENTS ${x.sopsPublicKey}
 
