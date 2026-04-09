@@ -109,5 +109,6 @@
 
     neopywal_lualine.setup()
 
+
   '';
 }

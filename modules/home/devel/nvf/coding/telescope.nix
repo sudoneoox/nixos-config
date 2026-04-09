@@ -1,10 +1,10 @@
 # ── Fuzzy finder (Telescope) ──────────────────────────────────────────────
 {pkgs, ...}: {
   programs.nvf.settings.vim = {
-    fzf-lua = {
-      enable = true;
-      profile = "max-perf";
-    };
+    # fzf-lua = {
+    #   enable = true;
+    #   profile = "max-perf";
+    # };
     telescope = {
       enable = true;
       setupOpts = {

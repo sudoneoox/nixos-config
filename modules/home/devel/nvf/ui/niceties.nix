@@ -2,7 +2,10 @@
   programs.nvf.settings.vim.ui = {
     borders.enable = true;
     noice.enable = true;
-    colorizer.enable = true;
+    colorizer = {
+      enable = true;
+      setupOpts.filetypes = { "*" = {}; };
+    };
     illuminate.enable = true;
     breadcrumbs.enable = true;
     breadcrumbs.navbuddy.enable = true;
